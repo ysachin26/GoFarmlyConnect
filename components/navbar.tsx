@@ -2,13 +2,13 @@
 
 import { useState } from "react"
 import { Button } from "@/components/ui/button"
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
 import { Menu, X, ChevronDown, Users, Headphones, Play, Info, Globe } from "lucide-react"
 import Link from "next/link"
 import { useLanguage } from "@/contexts/LanguageContext"
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
-  const [isLanguageOpen, setIsLanguageOpen] = useState(false)
 
   const navItems = [
     { name: "About Us", href: "#about", icon: Info, hasDropdown: true },
@@ -72,66 +72,72 @@ export default function Navbar() {
             </Link>
 
             {/* Language Selector */}
-            <div className="relative">
-              <Button
-                variant="ghost"
-                className="text-white hover:text-emerald-300 hover:bg-white/10 rounded-xl transition-all duration-300 flex items-center space-x-2 transform hover:scale-105"
-                onClick={() => setIsLanguageOpen(!isLanguageOpen)}
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button
+                  variant="ghost"
+                  className="text-white hover:text-emerald-300 hover:bg-white/10 rounded-xl transition-all duration-300 flex items-center space-x-2 transform hover:scale-105"
+                >
+                  <Globe className="w-4 h-4" />
+                  <span className="hidden sm:inline">ENG</span>
+                  <ChevronDown className="w-4 h-4 transition-transform duration-300" />
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent 
+                align="end" 
+                side="bottom"
+                sideOffset={8}
+                avoidCollisions={true}
+                collisionPadding={10}
+                className="w-48 max-h-[300px] overflow-y-auto dropdown-scroll bg-white rounded-xl shadow-2xl border border-gray-200"
               >
-                <Globe className="w-4 h-4" />
-                <span className="hidden sm:inline">ENG</span>
-                <ChevronDown
-                  className={`w-4 h-4 transition-transform duration-300 ${isLanguageOpen ? "rotate-180" : ""}`}
-                />
-              </Button>
-
-              {isLanguageOpen && (
-                <div className="absolute right-0 mt-2 w-48 bg-white rounded-xl shadow-2xl border border-gray-200 py-2 z-50 animate-slideDown">
-                  {languages.map((lang) => (
-                    <button
-                      key={lang.code}
-                      className="w-full text-left px-4 py-2 text-gray-700 hover:bg-emerald-50 hover:text-emerald-600 transition-all duration-200 flex items-center space-x-2"
-                      onClick={() => setIsLanguageOpen(false)}
-                    >
-                      <span>{lang.name}</span>
-                    </button>
-                  ))}
-                </div>
-              )}
-            </div>
+                {languages.map((lang) => (
+                  <DropdownMenuItem
+                    key={lang.code}
+                    className="px-4 py-2 text-gray-700 hover:bg-emerald-50 hover:text-emerald-600 transition-all duration-200 cursor-pointer"
+                    onClick={() => console.log('Language selected:', lang.code)}
+                  >
+                    <span>{lang.name}</span>
+                  </DropdownMenuItem>
+                ))}
+              </DropdownMenuContent>
+            </DropdownMenu>
           </div>
 
           {/* Mobile Elements */}
           <div className="flex lg:hidden items-center space-x-3">
             {/* Language Selector for Mobile */}
-            <div className="relative">
-              <Button
-                variant="ghost"
-                size="sm"
-                className="text-white hover:text-emerald-300 hover:bg-white/10 rounded-xl transition-all duration-300 flex items-center space-x-1 transform hover:scale-105"
-                onClick={() => setIsLanguageOpen(!isLanguageOpen)}
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  className="text-white hover:text-emerald-300 hover:bg-white/10 rounded-xl transition-all duration-300 flex items-center space-x-1 transform hover:scale-105"
+                >
+                  <Globe className="w-4 h-4" />
+                  <span className="text-xs">ENG</span>
+                  <ChevronDown className="w-3 h-3 transition-transform duration-300" />
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent 
+                align="end" 
+                side="bottom"
+                sideOffset={8}
+                avoidCollisions={true}
+                collisionPadding={10}
+                className="w-40 max-h-[300px] overflow-y-auto dropdown-scroll bg-white rounded-xl shadow-2xl border border-gray-200"
               >
-                <Globe className="w-4 h-4" />
-                <span className="text-xs">ENG</span>
-                <ChevronDown
-                  className={`w-3 h-3 transition-transform duration-300 ${isLanguageOpen ? "rotate-180" : ""}`}
-                />
-              </Button>
-
-              {isLanguageOpen && (
-                <div className="absolute right-0 mt-2 w-40 bg-white rounded-xl shadow-2xl border border-gray-200 py-2 z-50 animate-slideDown">
-                  {languages.map((lang) => (
-                    <button
-                      key={lang.code}
-                      className="w-full text-left px-3 py-2 text-gray-700 hover:bg-emerald-50 hover:text-emerald-600 transition-all duration-200 flex items-center space-x-2 text-sm"
-                      onClick={() => setIsLanguageOpen(false)}
-                    >
-                      <span>{lang.name}</span>
-                    </button>
-                  ))}
-                </div>
-              )}
-            </div>
+                {languages.map((lang) => (
+                  <DropdownMenuItem
+                    key={lang.code}
+                    className="px-3 py-2 text-gray-700 hover:bg-emerald-50 hover:text-emerald-600 transition-all duration-200 cursor-pointer text-sm"
+                    onClick={() => console.log('Language selected:', lang.code)}
+                  >
+                    <span>{lang.name}</span>
+                  </DropdownMenuItem>
+                ))}
+              </DropdownMenuContent>
+            </DropdownMenu>
 
             {/* Mobile Menu Button */}
             <Button

@@ -166,7 +166,14 @@ export function TopNavbar() {
               )}
             </Button>
           </DropdownMenuTrigger>
-          <DropdownMenuContent align="end" className="w-80 max-h-96 overflow-y-auto">
+          <DropdownMenuContent 
+            align="end" 
+            side="bottom"
+            sideOffset={8}
+            avoidCollisions={true}
+            collisionPadding={10}
+            className="w-80 max-h-[400px] overflow-y-auto dropdown-scroll"
+          >
             {loading ? (
               <div className="p-4 text-center text-gray-500">Loading notifications...</div>
             ) : notifications.length === 0 ? (
@@ -219,7 +226,14 @@ export function TopNavbar() {
               <ChevronDown className="h-4 w-4" />
             </Button>
           </DropdownMenuTrigger>
-          <DropdownMenuContent align="end" className="w-48">
+          <DropdownMenuContent 
+            align="end" 
+            side="bottom"
+            sideOffset={8}
+            avoidCollisions={true}
+            collisionPadding={10}
+            className="w-48 max-h-[300px] overflow-y-auto dropdown-scroll"
+          >
             {languages.map((language) => (
               <DropdownMenuItem 
                 key={language.code} 
