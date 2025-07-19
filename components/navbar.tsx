@@ -9,12 +9,13 @@ import { useLanguage } from "@/contexts/LanguageContext"
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const { language, setLanguage, t } = useLanguage()
 
   const navItems = [
-    { name: "About Us", href: "#about", icon: Info, hasDropdown: true },
-    { name: "Services", href: "#services", icon: Users, hasDropdown: true },
-    { name: "Video Tutorial", href: "#tutorials", icon: Play, hasDropdown: true },
-    { name: "Support", href: "#support", icon: Headphones, hasDropdown: true },
+    { name: t('about_us'), href: "#about", icon: Info, hasDropdown: true },
+    { name: t('services'), href: "#services", icon: Users, hasDropdown: true },
+    { name: t('video_tutorial'), href: "#tutorials", icon: Play, hasDropdown: true },
+    { name: t('support'), href: "#support", icon: Headphones, hasDropdown: true },
   ]
 
   const languages = [
@@ -67,7 +68,7 @@ export default function Navbar() {
           <div className="hidden lg:flex items-center space-x-4 flex-shrink-0 min-w-fit">
             <Link href="/login" passHref>
               <Button className="bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-white px-6 py-2 rounded-xl font-medium transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl">
-              Login / Register
+              {t('login_register')}
             </Button>
             </Link>
 
@@ -79,7 +80,7 @@ export default function Navbar() {
                   className="text-white hover:text-emerald-300 hover:bg-white/10 rounded-xl transition-all duration-300 flex items-center space-x-2 transform hover:scale-105"
                 >
                   <Globe className="w-4 h-4" />
-                  <span className="hidden sm:inline">ENG</span>
+                  <span className="hidden sm:inline">{language === 'en' ? 'ENG' : language === 'hi' ? 'हिं' : 'मरा'}</span>
                   <ChevronDown className="w-4 h-4 transition-transform duration-300" />
                 </Button>
               </DropdownMenuTrigger>
@@ -95,7 +96,7 @@ export default function Navbar() {
                   <DropdownMenuItem
                     key={lang.code}
                     className="px-4 py-2 text-gray-700 hover:bg-emerald-50 hover:text-emerald-600 transition-all duration-200 cursor-pointer"
-                    onClick={() => console.log('Language selected:', lang.code)}
+                    onClick={() => setLanguage(lang.code)}
                   >
                     <span>{lang.name}</span>
                   </DropdownMenuItem>
@@ -115,7 +116,7 @@ export default function Navbar() {
                   className="text-white hover:text-emerald-300 hover:bg-white/10 rounded-xl transition-all duration-300 flex items-center space-x-1 transform hover:scale-105"
                 >
                   <Globe className="w-4 h-4" />
-                  <span className="text-xs">ENG</span>
+                  <span className="text-xs">{language === 'en' ? 'ENG' : language === 'hi' ? 'हिं' : 'मरा'}</span>
                   <ChevronDown className="w-3 h-3 transition-transform duration-300" />
                 </Button>
               </DropdownMenuTrigger>
@@ -131,7 +132,7 @@ export default function Navbar() {
                   <DropdownMenuItem
                     key={lang.code}
                     className="px-3 py-2 text-gray-700 hover:bg-emerald-50 hover:text-emerald-600 transition-all duration-200 cursor-pointer text-sm"
-                    onClick={() => console.log('Language selected:', lang.code)}
+                    onClick={() => setLanguage(lang.code)}
                   >
                     <span>{lang.name}</span>
                   </DropdownMenuItem>
@@ -177,7 +178,7 @@ export default function Navbar() {
                     className="w-full bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-white px-6 py-3 rounded-xl font-medium transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl"
                     onClick={() => setIsMenuOpen(false)}
                   >
-                    Login / Register
+                    {t('login_register')}
                   </Button>
                 </Link>
               </div>

@@ -9,6 +9,7 @@ import { Badge } from "@/components/ui/badge"
 import { ProfileCompletionModal } from "@/components/profile-completion-modal"
 import { getDashboardData, markNotificationAsRead } from "@/app/actions"
 import Link from "next/link"
+import { useLanguage } from '@/contexts/LanguageContext'
 import {
   Carousel,
   CarouselContent,
@@ -87,6 +88,7 @@ interface DashboardData {
 }
 
 export default function Dashboard() {
+  const { t } = useLanguage()
   const [showProfileModal, setShowProfileModal] = useState(false)
   const [dashboardData, setDashboardData] = useState<DashboardData | null>(null)
   const [loading, setLoading] = useState(true)
@@ -245,7 +247,7 @@ export default function Dashboard() {
         {/* Header */}
         <div className="flex flex-col gap-4 md:flex-row md:justify-between md:items-start">
           <div>
-            <h1 className="text-2xl md:text-3xl font-bold text-gray-900">Welcome, {user.fullName}</h1>
+            <h1 className="text-2xl md:text-3xl font-bold text-gray-900">{t('welcome')}, {user.fullName}</h1>
             <p className="text-gray-600 mt-1 text-sm md:text-base">
               {user.businessName} • Track your export registration progress and manage your documents
             </p>
@@ -265,9 +267,9 @@ export default function Dashboard() {
                 <div className="flex items-start gap-3">
                   <AlertCircle className="h-5 w-5 text-yellow-600 flex-shrink-0 mt-0.5" />
                   <div>
-                    <h3 className="font-medium text-yellow-900 text-sm md:text-base">Complete Your Profile</h3>
+                    <h3 className="font-medium text-yellow-900 text-sm md:text-base">{t('complete_profile')}</h3>
                     <p className="text-xs md:text-sm text-yellow-700">
-                      Complete your profile to unlock all features ({profileCompletion}% done)
+                      {t('complete_profile')} ({profileCompletion}% done)
                     </p>
                   </div>
                 </div>
@@ -276,7 +278,7 @@ export default function Dashboard() {
                   onClick={() => setShowProfileModal(true)}
                   className="bg-yellow-600 hover:bg-yellow-700 w-full md:w-auto"
                 >
-                  Complete Now
+                  {t('complete_profile')}
                 </Button>
               </div>
             </CardContent>
@@ -289,7 +291,7 @@ export default function Dashboard() {
             <CardContent className="p-4">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-sm font-medium text-gray-600">Profile</p>
+                  <p className="text-sm font-medium text-gray-600">{t('profile')}</p>
                   <p className="text-2xl font-bold text-gray-900">{profileCompletion}%</p>
                 </div>
                 <div className="h-8 w-8 bg-teal-100 rounded-full flex items-center justify-center">
@@ -303,7 +305,7 @@ export default function Dashboard() {
             <CardContent className="p-4">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-sm font-medium text-gray-600">Overall Progress</p>
+                  <p className="text-sm font-medium text-gray-600">{t('progress')}</p>
                   <p className="text-2xl font-bold text-gray-900">{overallProgress}%</p>
                 </div>
                 <div className="h-8 w-8 bg-green-100 rounded-full flex items-center justify-center">
@@ -317,7 +319,7 @@ export default function Dashboard() {
             <CardContent className="p-4">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-sm font-medium text-gray-600">Completed Steps</p>
+                  <p className="text-sm font-medium text-gray-600">{t('progress')}</p>
                   <p className="text-2xl font-bold text-gray-900">
                     {registrationSteps.filter((s) => s.status === "completed").length}/{registrationSteps.length}
                   </p>
@@ -333,7 +335,7 @@ export default function Dashboard() {
             <CardContent className="p-4">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-sm font-medium text-gray-600">Notifications</p>
+                  <p className="text-sm font-medium text-gray-600">{t('notifications')}</p>
                   <p className="text-2xl font-bold text-gray-900">{notifications.filter((n) => !n.read).length}</p>
                 </div>
                 <div className="h-8 w-8 bg-yellow-100 rounded-full flex items-center justify-center">

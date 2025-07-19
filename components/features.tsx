@@ -2,38 +2,40 @@
 
 import { CheckCircle, Zap, Shield, Users, TrendingUp, Clock } from "lucide-react"
 import Image from "next/image"
+import { useLanguage } from '@/contexts/LanguageContext'
 
 export default function Features() {
+  const { t } = useLanguage()
   const features = [
     {
       icon: Zap,
-      title: "Lightning Fast Processing",
-      description: "Process documents and applications in minutes, not hours or days",
+      title: t('lightning_fast'),
+      description: t('lightning_description'),
     },
     {
       icon: Shield,
-      title: "Bank-Grade Security",
-      description: "Your data is protected with enterprise-level encryption",
+      title: t('bank_grade_security'),
+      description: t('security_description'),
     },
     {
       icon: Users,
-      title: "Expert Support",
-      description: "24/7 customer support from agricultural experts",
+      title: t('expert_support'),
+      description: t('expert_description'),
     },
     {
       icon: TrendingUp,
-      title: "Proven Results",
-      description: "Average 40% increase in productivity for our users",
+      title: t('proven_results'),
+      description: t('results_description'),
     },
     {
       icon: Clock,
-      title: "Save Time",
-      description: "Reduce paperwork time by up to 80% with automation",
+      title: t('save_time'),
+      description: t('time_description'),
     },
     {
       icon: CheckCircle,
-      title: "100% Compliance",
-      description: "Stay compliant with all regulatory requirements",
+      title: t('compliance_100'),
+      description: t('compliance_description'),
     },
   ]
 
@@ -51,20 +53,19 @@ export default function Features() {
           <div className="animate-fadeInLeft space-y-6 sm:space-y-8">
             <div className="inline-block">
               <span className="bg-emerald-500/20 text-emerald-300 px-4 py-2 rounded-full text-sm font-medium border border-emerald-400/30">
-                Why Choose GoFarmlyConnect
+                {t('why_choose')}
               </span>
             </div>
 
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white leading-tight">
-              Built for Modern{" "}
+              {t('built_for_modern')}{" "}
               <span className="bg-gradient-to-r from-emerald-400 to-teal-400 bg-clip-text text-transparent">
-                Farmers
+                {t('farmers')}
               </span>
             </h2>
 
             <p className="text-emerald-100 text-base sm:text-lg leading-relaxed">
-              We understand the unique challenges farmers face. That's why we've built a platform that combines
-              cutting-edge technology with deep agricultural expertise.
+              {t('features_description')}
             </p>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
@@ -106,12 +107,12 @@ export default function Features() {
               {/* Floating Stats - Better positioned for mobile */}
               <div className="absolute -top-2 -right-2 sm:-top-4 sm:-right-4 bg-white rounded-xl sm:rounded-2xl p-2 sm:p-4 shadow-xl animate-float">
                 <div className="text-lg sm:text-2xl font-bold text-emerald-600">99.9%</div>
-                <div className="text-gray-600 text-xs sm:text-sm">Uptime</div>
+                <div className="text-gray-600 text-xs sm:text-sm">{t('uptime')}</div>
               </div>
 
               <div className="absolute -bottom-2 -left-2 sm:-bottom-4 sm:-left-4 bg-white rounded-xl sm:rounded-2xl p-2 sm:p-4 shadow-xl animate-float-delayed">
                 <div className="text-lg sm:text-2xl font-bold text-emerald-600">50K+</div>
-                <div className="text-gray-600 text-xs sm:text-sm">Happy Farmers</div>
+                <div className="text-gray-600 text-xs sm:text-sm">{t('happy_farmers')}</div>
               </div>
             </div>
           </div>

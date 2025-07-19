@@ -133,7 +133,12 @@ const translations: Record<string, Record<string, string>> = {
     "loading": "Loading...",
     "error": "Error",
     "failed_to_load": "Failed to load profile data",
-    "try_again": "Try Again"
+    "try_again": "Try Again",
+    
+    // Dashboard specific
+    "notifications": "Notifications",
+    "tutorials": "Tutorials",
+    "video_tutorials": "Video Tutorials"
   },
   hi: {
     // Navigation
@@ -256,7 +261,12 @@ const translations: Record<string, Record<string, string>> = {
     "loading": "लोड हो रहा है...",
     "error": "त्रुटि",
     "failed_to_load": "प्रोफाइल डेटा लोड करने में असफल",
-    "try_again": "पुनः प्रयास करें"
+    "try_again": "पुनः प्रयास करें",
+    
+    // Dashboard specific
+    "notifications": "सूचनाएं",
+    "tutorials": "ट्यूटोरियल",
+    "video_tutorials": "वीडियो ट्यूटोरियल"
   },
   mr: {
     // Navigation
@@ -379,7 +389,12 @@ const translations: Record<string, Record<string, string>> = {
     "loading": "लोड होत आहे...",
     "error": "त्रुटी",
     "failed_to_load": "प्रोफाइल डेटा लोड करण्यात अयशस्वी",
-    "try_again": "पुन्हा प्रयत्न करा"
+    "try_again": "पुन्हा प्रयत्न करा",
+    
+    // Dashboard specific
+    "notifications": "सूचना",
+    "tutorials": "ट्यूटोरियल",
+    "video_tutorials": "व्हिडिओ ट्यूटोरियल"
   }
 }
 

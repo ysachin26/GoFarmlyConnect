@@ -29,47 +29,51 @@ import {
 import { Progress } from "@/components/ui/progress"
 import { ProfileCompletionModal } from "./profile-completion-modal"
 import { getDashboardData, logout } from "@/app/actions"
+import { useLanguage } from '@/contexts/LanguageContext'
 
-const menuItems = [
-  {
-    title: "Dashboard",
-    url: "/dashboard",
-    icon: LayoutDashboard,
-  },
-  {
-    title: "Registration",
-    url: "/dashboard/registration",
-    icon: ClipboardList,
-  },
-  {
-    title: "Progress Tracker",
-    url: "/dashboard/progress",
-    icon: TrendingUp,
-  },
-  {
-    title: "My Document",
-    url: "/dashboard/documents",
-    icon: FileText,
-  },
-  {
-    title: "Help & Support",
-    url: "/dashboard/support",
-    icon: HelpCircle,
-  },
-]
 
-const footerItems = [
-  {
-    title: "Settings",
-    url: "/dashboard/settings",
-    icon: Settings,
-  },
-]
 
 export function AppSidebar() {
+  const { t } = useLanguage()
   const pathname = usePathname()
   const [isProfileModalOpen, setIsProfileModalOpen] = useState(false)
   const [profileCompletion, setProfileCompletion] = useState(0)
+
+  const menuItems = [
+    {
+      title: t('dashboard'),
+      url: "/dashboard",
+      icon: LayoutDashboard,
+    },
+    {
+      title: t('registration'),
+      url: "/dashboard/registration",
+      icon: ClipboardList,
+    },
+    {
+      title: t('progress'),
+      url: "/dashboard/progress",
+      icon: TrendingUp,
+    },
+    {
+      title: t('documents'),
+      url: "/dashboard/documents",
+      icon: FileText,
+    },
+    {
+      title: t('support'),
+      url: "/dashboard/support",
+      icon: HelpCircle,
+    },
+  ]
+
+  const footerItems = [
+    {
+      title: t('settings'),
+      url: "/dashboard/settings",
+      icon: Settings,
+    },
+  ]
 
   const fetchProfileCompletion = async () => {
     try {
@@ -119,11 +123,11 @@ export function AppSidebar() {
         >
           <div className="flex items-center gap-3 mb-3">
             <User className="h-4 w-4 text-gray-600" />
-            <span className="font-medium text-gray-900">My Profile</span>
+            <span className="font-medium text-gray-900">{t('profile')}</span>
           </div>
           <div className="space-y-2">
             <div className="flex items-center justify-between">
-              <span className="text-xs font-medium text-gray-600">Complete your profile</span>
+              <span className="text-xs font-medium text-gray-600">{t('complete_profile')}</span>
               <span className="text-xs text-gray-500">{profileCompletion}%</span>
             </div>
             <Progress value={profileCompletion} className="h-2" />
@@ -166,7 +170,7 @@ export function AppSidebar() {
             <SidebarMenuButton asChild>
               <button onClick={handleLogout} className="w-full flex items-center">
                 <LogOut className="h-4 w-4" />
-                <span>Logout</span>
+                <span>{t('logout')}</span>
               </button>
             </SidebarMenuButton>
           </SidebarMenuItem>

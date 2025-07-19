@@ -3,61 +3,63 @@
 import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { ReceiptText, FileText, Fingerprint, Globe, Banknote, ArrowRight, CheckCircle } from "lucide-react"
+import { useLanguage } from '@/contexts/LanguageContext'
 
 export default function Services() {
+  const { t } = useLanguage()
   const [activeService, setActiveService] = useState(0)
 
   const services = [
     {
       icon: ReceiptText,
-      title: "GST Filing",
-      description: "Simplify your Goods and Services Tax (GST) compliance with easy online filing.",
-      features: ["Automated GST Returns", "Input Tax Credit Management", "Reconciliation Tools", "Audit Support"],
+      title: t('gst_filing'),
+      description: t('gst_description'),
+      features: [t('automated_gst_returns'), t('input_tax_credit'), t('reconciliation_tools'), t('audit_support')],
       color: "from-emerald-500 to-teal-600",
       bgColor: "bg-emerald-50",
       textColor: "text-emerald-600",
     },
     {
       icon: FileText,
-      title: "IEC Registration",
-      description: "Obtain your Import Export Code (IEC) quickly and hassle-free for international trade.",
-      features: ["New IEC Application", "IEC Modification", "IEC Renewal", "Consultation Services"],
+      title: t('iec_registration'),
+      description: t('iec_description'),
+      features: [t('new_iec_application'), t('iec_modification'), t('iec_renewal'), t('consultation_services')],
       color: "from-teal-500 to-emerald-600",
       bgColor: "bg-teal-50",
       textColor: "text-teal-600",
     },
     {
       icon: Fingerprint,
-      title: "DSC Procurement",
-      description: "Secure your Digital Signature Certificate (DSC) for online document authentication.",
-      features: ["Class 3 DSC", "Organization DSC", "Individual DSC", "Renewal Services"],
+      title: t('dsc_procurement'),
+      description: t('dsc_description'),
+      features: [t('class3_dsc'), t('organization_dsc'), t('individual_dsc'), t('renewal_services')],
       color: "from-green-500 to-emerald-600",
       bgColor: "bg-green-50",
       textColor: "text-green-600",
     },
     {
       icon: Globe,
-      title: "ICEGATE Services",
-      description: "Seamlessly interact with ICEGATE for customs clearance and trade-related services.",
-      features: ["Bill of Entry Filing", "Shipping Bill Processing", "Duty Payment", "Status Tracking"],
+      title: t('icegate_services'),
+      description: t('icegate_description'),
+      features: [t('bill_of_entry'), t('shipping_bill'), t('duty_payment'), t('status_tracking')],
       color: "from-blue-500 to-cyan-600",
       bgColor: "bg-blue-50",
       textColor: "text-blue-600",
     },
     {
       icon: Banknote,
-      title: "AD Code Registration",
-      description: "Register your Authorized Dealer (AD) Code for smooth export transactions.",
-      features: ["AD Code Registration", "Bank Linkage", "Export Incentives", "Compliance Checks"],
+      title: t('adcode_registration'),
+      description: t('adcode_description'),
+      features: [t('adcode_reg'), t('bank_linkage'), t('export_incentives'), t('compliance_checks')],
       color: "from-purple-500 to-fuchsia-600",
       bgColor: "bg-purple-50",
       textColor: "text-purple-600",
     },
     {
       icon: FileText,
-      title: "Other Document Filing",
-      description: "Comprehensive support for various other import-export related document filings.",
-      features: ["RCMC Application", "MEIS/SEIS Claims", "EPCG License", "Advance Authorization"],
+      title: t('other_documents'),
+      description: t('other_documents_description'),
+      features: [t('rcmc_application'), t('meis_seis_claims'), t('epcg_license'), t('advance_authorization')],
       color: "from-orange-500 to-yellow-600",
       bgColor: "bg-orange-50",
       textColor: "text-orange-600",
@@ -76,14 +78,14 @@ export default function Services() {
         <div className="text-center mb-16">
           <div className="inline-block mb-4">
             <span className="bg-gradient-to-r from-emerald-500 to-teal-600 text-white px-4 py-2 rounded-full text-sm font-medium">
-              Our Services
+              {t('our_services')}
             </span>
           </div>
           <h2 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-emerald-800 to-teal-700 bg-clip-text text-transparent mb-6 animate-fadeInUp">
-            Comprehensive Import Export Solutions
+            {t('comprehensive_solutions')}
           </h2>
           <p className="text-gray-600 max-w-3xl mx-auto text-lg leading-relaxed animate-fadeInUp animation-delay-200">
-            Everything you need to streamline your international trade operations and ensure compliance
+            {t('services_description')}
           </p>
         </div>
 
@@ -133,7 +135,7 @@ export default function Services() {
                   <Button
                     className={`w-full bg-gradient-to-r ${service.color} hover:shadow-lg transform hover:scale-105 transition-all duration-300 group`}
                   >
-                    Learn More
+                    {t('learn_more')}
                     <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform duration-300" />
                   </Button>
 
@@ -154,12 +156,12 @@ export default function Services() {
           <div className="bg-gradient-to-r from-emerald-500 to-teal-600 rounded-2xl p-8 text-white relative overflow-hidden">
             <div className="absolute inset-0 bg-black/10"></div>
             <div className="relative z-10">
-              <h3 className="text-2xl font-bold mb-4">Ready to Streamline Your Trade Operations?</h3>
+              <h3 className="text-2xl font-bold mb-4">{t('ready_to_streamline')}</h3>
               <p className="text-emerald-100 mb-6 max-w-2xl mx-auto">
-                Join thousands of importers and exporters who have digitized their operations with GoFarmlyConnect
+                {t('join_thousands')}
               </p>
               <Button className="bg-white text-emerald-600 hover:bg-gray-100 px-8 py-3 rounded-xl font-semibold transform hover:scale-105 transition-all duration-300">
-                Get Started Today
+                {t('get_started_today')}
               </Button>
             </div>
           </div>

@@ -9,6 +9,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { SidebarTrigger } from "@/components/ui/sidebar"
 import { getDashboardData, markNotificationAsRead, logout } from "@/app/actions"
 import Link from "next/link"
+import { useLanguage } from "@/contexts/LanguageContext"
 
 const languages = [
   { code: "en", name: "English", flag: "🇺🇸" },
@@ -100,16 +101,14 @@ function UserProfileDisplay() {
 export function TopNavbar() {
   const [notifications, setNotifications] = useState<Notification[]>([])
   const [loading, setLoading] = useState(true)
-  const [selectedLanguage, setSelectedLanguage] = useState<string>("en")
+  const { language, setLanguage, t } = useLanguage()
 
   useEffect(() => {
     const fetchNotifications = async () => {
       try {
         const data = await getDashboardData()
         setNotifications(data.notifications || [])
-        // Load saved language preference
-        const savedLanguage = localStorage.getItem('preferredLanguage') || 'en'
-        setSelectedLanguage(savedLanguage)
+        // Language is already managed by LanguageContext
       } catch (error) {
         console.error("Failed to fetch notifications:", error)
       } finally {
@@ -134,16 +133,8 @@ export function TopNavbar() {
 
   const unreadCount = notifications.filter(notif => !notif.read).length
   
-  const handleLanguageSelect = (languageCode: string) => {
-    setSelectedLanguage(languageCode)
-    localStorage.setItem('preferredLanguage', languageCode)
-    
-    // Trigger a page reload to apply new language
-    window.location.reload()
-  }
-  
   const getCurrentLanguage = () => {
-    return languages.find(lang => lang.code === selectedLanguage) || languages[0]
+    return languages.find(lang => lang.code === language) || languages[0]
   }
 
   return (
@@ -234,16 +225,16 @@ export function TopNavbar() {
             collisionPadding={10}
             className="w-48 max-h-[300px] overflow-y-auto dropdown-scroll"
           >
-            {languages.map((language) => (
+            {languages.map((lang) => (
               <DropdownMenuItem 
-                key={language.code} 
+                key={lang.code} 
                 className={`flex items-center gap-3 cursor-pointer ${
-                  selectedLanguage === language.code ? 'bg-blue-50 text-blue-700' : ''
+                  language === lang.code ? 'bg-blue-50 text-blue-700' : ''
                 }`}
-                onClick={() => handleLanguageSelect(language.code)}
+                onClick={() => setLanguage(lang.code)}
               >
-                <span className="text-base">{language.flag}</span>
-                <span className="text-sm">{language.name}</span>
+                <span className="text-base">{lang.flag}</span>
+                <span className="text-sm">{lang.name}</span>
               </DropdownMenuItem>
             ))}
           </DropdownMenuContent>

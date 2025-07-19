@@ -1,8 +1,12 @@
+"use client"
+
 import { Button } from "@/components/ui/button"
 import { ArrowRight, Play, TrendingUp } from "lucide-react"
 import Image from "next/image"
+import { useLanguage } from '@/contexts/LanguageContext'
 
 export default function HeroContentSection() {
+  const { t } = useLanguage()
   return (
     <section className="py-20 bg-gradient-to-br from-gray-50 via-white to-emerald-50 relative overflow-hidden">
       {/* Animated Elements */}
@@ -18,7 +22,7 @@ export default function HeroContentSection() {
             <div className="space-y-6">
               <div className="inline-flex items-center space-x-2 bg-emerald-500/20 backdrop-blur-sm px-4 py-2 rounded-full border border-emerald-400/30">
                 <TrendingUp className="w-4 h-4 text-emerald-600" />
-                <span className="text-emerald-700 text-sm font-medium">Revolutionizing Agriculture</span>
+                <span className="text-emerald-700 text-sm font-medium">{t('revolutionizing_agriculture')}</span>
               </div>
 
               <h1 className="text-3xl md:text-5xl lg:text-7xl font-bold text-gray-800 leading-tight">
@@ -35,7 +39,7 @@ export default function HeroContentSection() {
 
             <div className="flex flex-col sm:flex-row gap-4">
               <Button className="bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-white px-8 py-4 rounded-xl font-semibold text-lg transform hover:scale-105 transition-all duration-300 shadow-xl hover:shadow-2xl group">
-                Get Started Free
+                {t('get_started_free')}
                 <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform duration-300" />
               </Button>
 
@@ -44,22 +48,22 @@ export default function HeroContentSection() {
                 className="border-2 border-emerald-400 text-emerald-600 hover:bg-emerald-400 hover:text-emerald-900 px-8 py-4 rounded-xl font-semibold text-lg transform hover:scale-105 transition-all duration-300 group"
               >
                 <Play className="w-5 h-5 mr-2 group-hover:scale-110 transition-transform duration-300" />
-                Watch Demo
+                {t('watch_demo')}
               </Button>
             </div>
 
             <div className="flex flex-wrap items-center justify-center sm:justify-start gap-4 sm:gap-8 pt-4">
               <div className="text-center">
                 <div className="text-2xl md:text-3xl font-bold text-emerald-600">50K+</div>
-                <div className="text-gray-600 text-xs md:text-sm">Active Farmers</div>
+                <div className="text-gray-600 text-xs md:text-sm">{t('active_farmers')}</div>
               </div>
               <div className="text-center">
                 <div className="text-2xl md:text-3xl font-bold text-emerald-600">₹500Cr+</div>
-                <div className="text-gray-600 text-xs md:text-sm">Trade Volume</div>
+                <div className="text-gray-600 text-xs md:text-sm">{t('trade_volume')}</div>
               </div>
               <div className="text-center">
                 <div className="text-2xl md:text-3xl font-bold text-emerald-600">99.9%</div>
-                <div className="text-gray-600 text-xs md:text-sm">Uptime</div>
+                <div className="text-gray-600 text-xs md:text-sm">{t('uptime')}</div>
               </div>
             </div>
           </div>

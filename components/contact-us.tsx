@@ -1,9 +1,13 @@
+"use client"
+
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Phone, Mail, MapPin, Clock, MessageCircle } from "lucide-react"
+import { useLanguage } from '@/contexts/LanguageContext'
 
 export default function ContactUs() {
+  const { t } = useLanguage()
   return (
     <section className="py-20 bg-gradient-to-br from-emerald-800 via-teal-700 to-emerald-800 text-white relative overflow-hidden">
       {/* Animated background elements */}
