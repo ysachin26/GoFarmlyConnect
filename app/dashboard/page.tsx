@@ -94,6 +94,7 @@ export default function Dashboard() {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
   const [hasMounted, setHasMounted] = useState(false)
+  const [lastRefresh, setLastRefresh] = useState(Date.now())
 
   // Carousel state
   const [api, setApi] = useState<CarouselApi>()
@@ -176,6 +177,14 @@ export default function Dashboard() {
   useEffect(() => {
     setHasMounted(true)
     fetchDashboardData()
+
+    // Set up periodic refresh every 30 seconds
+    const refreshInterval = setInterval(() => {
+      fetchDashboardData()
+      setLastRefresh(Date.now())
+    }, 30000)
+
+    return () => clearInterval(refreshInterval)
   }, [])
 
   const handleNotificationClick = async (notificationId: string) => {
@@ -249,7 +258,7 @@ export default function Dashboard() {
           <div>
             <h1 className="text-2xl md:text-3xl font-bold text-gray-900">{t('welcome')}, {user.fullName}</h1>
             <p className="text-gray-600 mt-1 text-sm md:text-base">
-              {user.businessName} • Track your export registration progress and manage your documents
+              {user.businessName} • {t('track_progress_description')}
             </p>
           </div>
           <div className="flex items-center gap-2">
@@ -350,12 +359,12 @@ export default function Dashboard() {
           <Card className="border-2 border-dashed border-gray-300 bg-gray-50">
             <CardContent className="flex flex-col items-center justify-center py-12">
               <FileText className="h-16 w-16 text-gray-400 mb-4" />
-              <h3 className="text-xl font-semibold text-gray-900 mb-2">Get Started with GoFarmlyConnect</h3>
+              <h3 className="text-xl font-semibold text-gray-900 mb-2">{t('get_started_title')}</h3>
               <p className="text-gray-600 text-center mb-6 max-w-md">
-                Begin your export registration journey. Complete all required registrations to become export-ready.
+                {t('get_started_description')}
               </p>
               <Button size="lg" className="bg-primary hover:bg-primary/90">
-                Start Your Registration Process
+                {t('start_registration_process')}
               </Button>
             </CardContent>
           </Card>
@@ -366,8 +375,8 @@ export default function Dashboard() {
               <CardHeader>
                 <div className="flex justify-between items-start">
                   <div>
-                    <CardTitle>Overall Registration Progress</CardTitle>
-                    <CardDescription>Your journey to becoming an export-ready business</CardDescription>
+                    <CardTitle>{t('overall_registration_progress')}</CardTitle>
+                    <CardDescription>{t('export_ready_journey')}</CardDescription>
                   </div>
                   <Link href="/dashboard/progress">
                     <Button
@@ -375,7 +384,7 @@ export default function Dashboard() {
                       size="sm"
                       className="bg-teal-50 text-teal-700 border-teal-200 hover:bg-teal-100"
                     >
-                      Track Your Progress
+                      {t('track_your_progress')}
                     </Button>
                   </Link>
                 </div>
@@ -383,7 +392,7 @@ export default function Dashboard() {
               <CardContent>
                 <div className="space-y-4">
                   <div className="flex items-center justify-between">
-                    <span className="text-sm font-medium">Overall Progress</span>
+                    <span className="text-sm font-medium">{t('overall_progress')}</span>
                     <span className="text-sm text-gray-600">{overallProgress}%</span>
                   </div>
                   <Progress value={overallProgress} className="h-2" />
@@ -395,10 +404,10 @@ export default function Dashboard() {
             <Card className="bg-gray-50 border-gray-200">
               <CardHeader className="pb-3 md:pb-4">
                 <CardTitle className="text-base md:text-lg font-semibold text-gray-800">
-                  📚 Learn How to Become an Exporter
+                  📚 {t('learn_exporter_title')}
                 </CardTitle>
                 <CardDescription className="text-gray-600 text-sm">
-                  Watch our step-by-step tutorials to understand the export registration process
+                  {t('tutorial_description')}
                 </CardDescription>
               </CardHeader>
               <CardContent className="px-3 md:px-6">
@@ -455,7 +464,7 @@ export default function Dashboard() {
                       variant="outline"
                       className="text-gray-700 border-gray-300 hover:bg-gray-100 bg-transparent"
                     >
-                      View All Video Tutorials
+                      {t('view_all_tutorials')}
                     </Button>
                   </Link>
                 </div>

@@ -143,7 +143,9 @@ const translations: Record<string, Record<string, string>> = {
     // Services/Import Export
     "simplify_import_export": "Simplify Your Import Export",
     "import_export_solutions": "Import Export Solutions",
-    
+    "simplify_your": "Simplify Your",
+    "import_export": "Import & Export",
+    "hero_content_description": "Complete digital platform for import-export documentation, customs clearance, and trade compliance. Process your shipments 70% faster with our automated filing system.",
     // Partners & Integrations
     "trusted_partners": "Trusted Partners",
     "our_partners_integrations": "Our Partners & Integrations",
@@ -169,6 +171,39 @@ const translations: Record<string, Record<string, string>> = {
     "view_all_tutorials": "View All Tutorials",
     "watch_now": "Watch Now",
     "views": "views",
+    
+    // Tutorial titles
+    "farm_registration_title": "Complete Farm Registration Process",
+    "crop_management_title": "Advanced Crop Management Techniques",
+    "financial_planning_title": "Financial Planning for Farmers",
+    "market_analysis_title": "Market Analysis and Price Trends",
+    "digital_transformation_title": "Digital Transformation in Agriculture",
+    
+    // Export Registration Tutorial
+    "overall_registration_progress": "Overall Registration Progress",
+    "journey_to_export_ready": "Your journey to becoming an export-ready business",
+    "overall_progress": "Overall Progress",
+    "track_your_progress": "Track Your Progress",
+    "learn_how_to_become_exporter": "Learn How to Become an Exporter",
+    "watch_step_by_step_tutorials": "Watch our step-by-step tutorials to understand the export registration process",
+    "getting_started": "Getting Started",
+    "introduction_export_basics": "Introduction to export business basics",
+    "min_watch": "min watch",
+    "complete_registration_guide": "Complete Registration Guide",
+    "step_by_step_registration": "Step-by-step registration process walkthrough",
+    "featured": "Featured",
+    "document_preparation": "Document Preparation",
+    "required_documents_preparation": "Required documents and how to prepare them",
+    "view_all_video_tutorials": "View All Video Tutorials",
+    "progress_remaining": "remaining to complete your export registration",
+    "registration_complete": "🎉 Registration complete! Ready to start exporting.",
+    
+    // Tutorial categories
+    "getting_started_category": "Getting Started",
+    "management_category": "Management",
+    "analytics_category": "Analytics",
+    "finance_category": "Finance",
+    "logistics_category": "Logistics",
     
     // FAQ
     "got_questions": "Got Questions?",
@@ -373,6 +408,9 @@ const translations: Record<string, Record<string, string>> = {
     // Services/Import Export
     "simplify_import_export": "अपने आयात निर्यात को सरल बनाएं",
     "import_export_solutions": "आयात निर्यात समाधान",
+     "simplify_your": "अपने आयात निर्यात",
+    "import_export": " को सरल बनाएं",
+    "hero_content_description": "आयात-निर्यात दस्तावेज़ीकरण, सीमा शुल्क निकासी और व्यापार अनुपालन के लिए एक संपूर्ण डिजिटल प्लेटफ़ॉर्म। हमारे स्वचालित फ़ाइलिंग सिस्टम से अपने शिपमेंट को 70% तेज़ी से प्रोसेस करें।",
     
     // Partners & Integrations
     "trusted_partners": "विश्वसनीय भागीदार",
@@ -399,6 +437,39 @@ const translations: Record<string, Record<string, string>> = {
     "view_all_tutorials": "सभी ट्यूटोरियल देखें",
     "watch_now": "अभी देखें",
     "views": "व्यूज",
+    
+    // Tutorial titles
+    "farm_registration_title": "संपूर्ण फार्म पंजीकरण प्रक्रिया",
+    "crop_management_title": "उन्नत फसल प्रबंधन तकनीकें",
+    "financial_planning_title": "किसानों के लिए वित्तीय योजना",
+    "market_analysis_title": "बाजार विश्लेषण और मूल्य रुझान",
+    "digital_transformation_title": "कृषि में डिजिटल परिवर्तन",
+    
+    // Export Registration Tutorial - Hindi
+    "overall_registration_progress": "समग्र पंजीकरण प्रगति",
+    "journey_to_export_ready": "निर्यात-तैयार व्यवसाय बनने की आपकी यात्रा",
+    "overall_progress": "समग्र प्रगति",
+    "track_your_progress": "अपनी प्रगति ट्रैक करें",
+    "learn_how_to_become_exporter": "निर्यातक कैसे बनें सीखें",
+    "watch_step_by_step_tutorials": "निर्यात पंजीकरण प्रक्रिया को समझने के लिए हमारे चरणबद्ध ट्यूटोरियल देखें",
+    "getting_started": "शुरुआत करना",
+    "introduction_export_basics": "निर्यात व्यवसाय की मूल बातें परिचय",
+    "min_watch": "मिनट देखें",
+    "complete_registration_guide": "संपूर्ण पंजीकरण गाइड",
+    "step_by_step_registration": "चरणबद्ध पंजीकरण प्रक्रिया वॉकथ्रू",
+    "featured": "फीचर्ड",
+    "document_preparation": "दस्तावेज़ तैयारी",
+    "required_documents_preparation": "आवश्यक दस्तावेज़ और उन्हें कैसे तैयार करें",
+    "view_all_video_tutorials": "सभी वीडियो ट्यूटोरियल देखें",
+    "progress_remaining": "आपका निर्यात पंजीकरण पूरा करने के लिए शेष",
+    "registration_complete": "🎉 पंजीकरण पूर्ण! निर्यात शुरू करने के लिए तैयार।",
+    
+    // Tutorial categories
+    "getting_started_category": "शुरुआत करना",
+    "management_category": "प्रबंधन",
+    "analytics_category": "विश्लेषण",
+    "finance_category": "वित्त",
+    "logistics_category": "रसद",
     
     // FAQ
     "got_questions": "प्रश्न हैं?",
@@ -585,6 +656,9 @@ const translations: Record<string, Record<string, string>> = {
     // Services/Import Export
     "simplify_import_export": "तुमचा आयात निर्यात सरल करा",
     "import_export_solutions": "आयात निर्यात उपाय",
+    "hero_content_description": "आयात-निर्यात दस्तऐवजीकरण, सीमाशुल्क मंजुरी आणि व्यापार अनुपालनासाठी संपूर्ण डिजिटल प्लॅटफॉर्म. आमच्या स्वयंचलित फाइलिंग सिस्टमसह तुमच्या शिपमेंटची प्रक्रिया ७०% जलद करा.",
+    "simplify_your": "आपले सोपे करा",
+    "import_export": "आयात आणि निर्यात",
     
     // Partners & Integrations
     "trusted_partners": "विश्वसनीय भागीदार",
@@ -611,6 +685,39 @@ const translations: Record<string, Record<string, string>> = {
     "view_all_tutorials": "सर्व ट्यूटोरियल पहा",
     "watch_now": "आता पहा",
     "views": "दृश्ये",
+    
+    // Tutorial titles
+    "farm_registration_title": "संपूर्ण शेत नोंदणी प्रक्रिया",
+    "crop_management_title": "प्रगत पीक व्यवस्थापन तंत्रे",
+    "financial_planning_title": "शेतकऱ्यांसाठी वित्तीय योजना",
+    "market_analysis_title": "बाजार विश्लेषण आणि किंमतीचे कल",
+    "digital_transformation_title": "शेतीमध्ये डिजिटल परिवर्तन",
+    
+    // Export Registration Tutorial - Marathi
+    "overall_registration_progress": "एकूण नोंदणी प्रगती",
+    "journey_to_export_ready": "निर्यात-तैयार व्यवसाय बनण्याचा तुमचा प्रवास",
+    "overall_progress": "एकूण प्रगती",
+    "track_your_progress": "तुमची प्रगती ट्रॅक करा",
+    "learn_how_to_become_exporter": "निर्यातदार कसे बनावे ते शिका",
+    "watch_step_by_step_tutorials": "निर्यात नोंदणी प्रक्रिया समजून घेण्यासाठी आमचे चरणबद्ध ट्यूटोरियल पहा",
+    "getting_started": "सुरुवात करणे",
+    "introduction_export_basics": "निर्यात व्यवसायाच्या मूलभूत गोष्टींचा परिचय",
+    "min_watch": "मिनिट पहा",
+    "complete_registration_guide": "संपूर्ण नोंदणी मार्गदर्शक",
+    "step_by_step_registration": "चरणबद्ध नोंदणी प्रक्रिया वॉकथ्रू",
+    "featured": "फीचर्ड",
+    "document_preparation": "दस्तऐवज तयारी",
+    "required_documents_preparation": "आवश्यक दस्तऐवज आणि ते कसे तयार करावे",
+    "view_all_video_tutorials": "सर्व व्हिडिओ ट्यूटोरियल पहा",
+    "progress_remaining": "तुमचे निर्यात नोंदणी पूर्ण करण्यासाठी शिल्लक",
+    "registration_complete": "🎉 नोंदणी पूर्ण! निर्यात सुरू करण्यासाठी तयार।",
+    
+    // Tutorial categories
+    "getting_started_category": "सुरुवात करणे",
+    "management_category": "व्यवस्थापन",
+    "analytics_category": "विश्लेषण",
+    "finance_category": "वित्त",
+    "logistics_category": "रसद",
     
     // FAQ
     "got_questions": "प्रश्न आहेत?",

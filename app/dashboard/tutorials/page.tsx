@@ -5,33 +5,35 @@ import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import Link from "next/link"
 import { ArrowLeft } from "lucide-react"
+import { useLanguage } from '@/contexts/LanguageContext'
 
 export default function VideoTutorialsPage() {
+  const { t } = useLanguage()
   const videos = [
     {
-      title: "Getting Started",
-      description: "Introduction to export business basics",
-      duration: "5 min watch",
+      title: t('getting_started'),
+      description: t('introduction_export_basics'),
+      duration: `5 ${t('min_watch')}`,
       src: "/public1/haifam-video.mp4",
       poster: "/public1/modern-farming.png",
-      category: "Beginner Guides",
+      category: t('getting_started_category'),
     },
     {
-      title: "Complete Registration Guide",
-      description: "Step-by-step registration process walkthrough",
-      duration: "12 min watch",
+      title: t('complete_registration_guide'),
+      description: t('step_by_step_registration'),
+      duration: `12 ${t('min_watch')}`,
       src: "/public1/haifam-video.mp4",
       poster: "/public1/modern-farming.png",
       featured: true,
-      category: "Registration Steps",
+      category: t('getting_started_category'),
     },
     {
-      title: "Document Preparation",
-      description: "Required documents and how to prepare them",
-      duration: "8 min watch",
+      title: t('document_preparation'),
+      description: t('required_documents_preparation'),
+      duration: `8 ${t('min_watch')}`,
       src: "/public1/haifam-video.mp4",
       poster: "/public1/modern-farming.png",
-      category: "Registration Steps",
+      category: t('getting_started_category'),
     },
     {
       title: "Understanding Regulations",
@@ -98,8 +100,8 @@ export default function VideoTutorialsPage() {
           </Button>
         </Link>
         <div>
-          <h1 className="text-3xl font-bold text-gray-900">All Video Tutorials</h1>
-          <p className="text-gray-600 mt-1">Explore our full library of guides to master the export process.</p>
+          <h1 className="text-3xl font-bold text-gray-900">{t('view_all_video_tutorials')}</h1>
+          <p className="text-gray-600 mt-1">{t('watch_step_by_step_tutorials')}</p>
         </div>
       </div>
 
@@ -119,7 +121,7 @@ export default function VideoTutorialsPage() {
                   {video.featured && (
                     <div className="absolute top-2 left-2">
                       <Badge variant="secondary" className="bg-teal-100 text-teal-700">
-                        Featured
+                        {t('featured')}
                       </Badge>
                     </div>
                   )}

@@ -12,39 +12,39 @@ export default function LearnWithUs() {
 
   const tutorials = [
     {
-      title: "Farm Registration & Setup",
+      title: t('farm_registration_title'),
       thumbnail: "/placeholder.svg?height=200&width=300",
       duration: "5:30",
       views: "12.5K",
-      category: "Getting Started",
+      category: t('getting_started_category'),
     },
     {
-      title: "Crop Management System",
+      title: t('crop_management_title'),
       thumbnail: "/placeholder.svg?height=200&width=300",
       duration: "8:45",
       views: "8.2K",
-      category: "Management",
+      category: t('management_category'),
     },
     {
-      title: "Market Price Analytics",
+      title: t('market_price_title'),
       thumbnail: "/placeholder.svg?height=200&width=300",
       duration: "6:20",
       views: "15.1K",
-      category: "Analytics",
+      category: t('analytics_category'),
     },
     {
-      title: "Digital Payment Solutions",
+      title: t('digital_payment_title'),
       thumbnail: "/placeholder.svg?height=200&width=300",
       duration: "4:15",
       views: "9.8K",
-      category: "Finance",
+      category: t('finance_category'),
     },
     {
-      title: "Supply Chain Tracking",
+      title: t('supply_chain_title'),
       thumbnail: "/placeholder.svg?height=200&width=300",
       duration: "7:30",
       views: "11.3K",
-      category: "Logistics",
+      category: t('logistics_category'),
     },
   ]
 

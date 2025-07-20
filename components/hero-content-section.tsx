@@ -26,14 +26,14 @@ export default function HeroContentSection() {
               </div>
 
               <h1 className="text-3xl md:text-5xl lg:text-7xl font-bold text-gray-800 leading-tight">
-                 Simplify Your{" "}
+                {t('simplify_your')}{" "}
                 <span className="bg-gradient-to-r from-emerald-600 to-teal-700 bg-clip-text text-transparent">
-                  Import Export
+                  {t('import_export')}
                 </span>
               </h1>
 
               <p className="text-lg md:text-xl text-gray-600 leading-relaxed max-w-2xl">
-                Complete digital platform for import-export documentation, customs clearance, and trade compliance. Process your shipments 70% faster with our automated filing system.
+                {t('hero_content_description')}
               </p>
             </div>
 
