@@ -4,8 +4,10 @@ import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { ChevronLeft, ChevronRight, Play, Clock, Users } from "lucide-react"
 import Image from "next/image"
+import { useLanguage } from '@/contexts/LanguageContext'
 
 export default function LearnWithUs() {
+  const { t } = useLanguage()
   const [currentSlide, setCurrentSlide] = useState(0)
 
   const tutorials = [
@@ -68,18 +70,17 @@ export default function LearnWithUs() {
           {/* Tag moved to top */}
           <div className="inline-block mb-4">
             <span className="bg-gradient-to-r from-emerald-500 to-teal-600 text-white px-4 py-2 rounded-full text-sm font-medium">
-              Learning Resources
+              {t('learning_resources')}
             </span>
           </div>
           <div className="inline-block">
             <h2 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-emerald-800 via-teal-700 to-emerald-800 bg-clip-text text-transparent mb-8 animate-fadeInUp hover:scale-105 transition-transform duration-500">
-              Learn With GoFarmlyConnect
+              {t('learn_with_gofarmly')}
             </h2>
             <div className="h-1 bg-gradient-to-r from-emerald-400 to-teal-400 rounded-full transform scale-x-0 animate-scaleX animation-delay-500"></div>
           </div>
           <p className="text-gray-600 max-w-3xl mx-auto text-lg leading-relaxed animate-fadeInUp animation-delay-300 hover:text-gray-800 transition-colors duration-300 mt-6">
-            Master modern agricultural techniques and digital farming solutions with our comprehensive video tutorials
-            and expert guidance
+            {t('learn_description')}
           </p>
         </div>
 
@@ -140,10 +141,10 @@ export default function LearnWithUs() {
                     <div className="flex items-center justify-between text-sm text-gray-500">
                       <div className="flex items-center space-x-1">
                         <Users className="w-4 h-4" />
-                        <span>{tutorial.views} views</span>
+                        <span>{tutorial.views} {t('views')}</span>
                       </div>
                       <div className="text-emerald-500 font-medium group-hover:text-emerald-600 transition-colors duration-300">
-                        Watch Now →
+                        {t('watch_now')} →
                       </div>
                     </div>
                   </div>
@@ -168,7 +169,7 @@ export default function LearnWithUs() {
 
           <div className="flex justify-center mt-12">
             <Button className="bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-white px-8 py-3 rounded-xl font-semibold transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-2xl group">
-              <span className="mr-2">View All Tutorials</span>
+              <span className="mr-2">{t('view_all_tutorials')}</span>
               <Play className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
             </Button>
           </div>

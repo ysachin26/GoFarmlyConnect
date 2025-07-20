@@ -138,7 +138,109 @@ const translations: Record<string, Record<string, string>> = {
     // Dashboard specific
     "notifications": "Notifications",
     "tutorials": "Tutorials",
-    "video_tutorials": "Video Tutorials"
+    "video_tutorials": "Video Tutorials",
+    
+    // Services/Import Export
+    "simplify_import_export": "Simplify Your Import Export",
+    "import_export_solutions": "Import Export Solutions",
+    
+    // Partners & Integrations
+    "trusted_partners": "Trusted Partners",
+    "our_partners_integrations": "Our Partners & Integrations",
+    "partners_description": "Working with leading government bodies, financial institutions, and technology partners to create a comprehensive agricultural ecosystem",
+    "government_partners": "Government Partners",
+    "banking_partners": "Banking Partners",
+    "tech_integrations": "Tech Integrations",
+    "compliance_rate": "Compliance Rate",
+    
+    // Testimonials  
+    "success_stories": "Success Stories",
+    "what_farmers_say": "What Farmers Say About Us",
+    "testimonials_description": "Join thousands of satisfied farmers who have transformed their agricultural operations with GoFarmlyConnect",
+    "average_rating": "Average Rating",
+    "happy_farmers_count": "Happy Farmers",
+    "satisfaction_rate": "Satisfaction Rate",
+    "support_available": "Support Available",
+    
+    // Learn with us
+    "learning_resources": "Learning Resources",
+    "learn_with_gofarmly": "Learn With GoFarmlyConnect",
+    "learn_description": "Master modern agricultural techniques and digital farming solutions with our comprehensive video tutorials and expert guidance",
+    "view_all_tutorials": "View All Tutorials",
+    "watch_now": "Watch Now",
+    "views": "views",
+    
+    // FAQ
+    "got_questions": "Got Questions?",
+    "frequently_asked_questions": "Frequently Asked Questions",
+    "faq_description": "Find answers to common questions about GoFarmlyConnect's features, pricing, and how to get started",
+    "still_have_questions": "Still have questions?",
+    "support_team_help": "Can't find the answer you're looking for? Our support team is here to help you 24/7",
+    "contact_support": "Contact Support",
+    "schedule_call": "Schedule a Call",
+    
+    // Contact Us
+    "get_in_touch": "Get In Touch",
+    "contact_us": "Contact Us",
+    "contact_description": "Ready to transform your farming operations? Get in touch with our agricultural experts for personalized guidance",
+    "helpdesk_24x7": "24x7 Helpdesk",
+    "toll_free": "(Toll Free)",
+    "available_round_clock": "Available round the clock",
+    "email_support": "Email Support",
+    "response_within_2hours": "Response within 2 hours",
+    "whatsapp_support": "WhatsApp Support",
+    "quick_assistance_chat": "Quick assistance via chat",
+    "head_office": "Head Office",
+    "support_hours": "Support Hours",
+    "always_here": "Always here when you need us",
+    "send_message": "Send us a Message",
+    "first_name": "First Name",
+    "last_name": "Last Name",
+    "enter_first_name": "Enter your first name",
+    "enter_last_name": "Enter your last name",
+    "email_address": "Email Address",
+    "enter_email_address": "Enter your email address",
+    "phone_number": "Phone Number",
+    "enter_phone_number": "Enter your phone number",
+    "subject": "Subject",
+    "what_can_we_help": "What can we help you with?",
+    "message": "Message",
+    "tell_us_requirements": "Tell us more about your requirements...",
+    "send_message_button": "Send Message",
+    
+    // Footer
+    "legal": "Legal",
+    "terms_conditions": "Terms & Conditions",
+    "privacy_policy": "Privacy Policy",
+    "contact_us_footer": "Contact Us",
+    "follow_us": "Follow Us",
+    "facebook": "Facebook",
+    "twitter": "Twitter",
+    "instagram": "Instagram",
+    "linkedin": "LinkedIn",
+    "copyright_text": "© 2025 GoFarmlyConnect - Transforming Agriculture Through Technology. All rights reserved.",
+    "made_with_love": "Made with ❤️ for Farmers",
+    "proudly_indian": "🇮🇳 Proudly Indian",
+    "serving_farmers": "Serving farmers across India",
+    "empowering_farmers": "Empowering farmers with cutting-edge digital solutions for modern agriculture. Join the farming revolution today.",
+    
+    // FAQ Questions and Answers
+    "faq_q1": "How do I register my farm on GoFarmlyConnect?",
+    "faq_a1": "Registration is simple and free. Click on 'Get Started', fill in your basic farm details, upload required documents, and verify your mobile number. Our team will review and activate your account within 24 hours.",
+    "faq_q2": "What documents can I file through the platform?",
+    "faq_a2": "You can file all major agricultural documents including crop insurance applications, subsidy forms, loan applications, land records, soil health cards, and compliance certificates. Our system supports over 50+ document types.",
+    "faq_q3": "Is my data secure on GoFarmlyConnect?",
+    "faq_a3": "Absolutely. We use bank-grade encryption and follow strict data protection protocols. Your information is stored securely and never shared with third parties without your consent. We're also compliant with all government data protection regulations.",
+    "faq_q4": "How accurate are the crop yield predictions?",
+    "faq_a4": "Our AI-powered predictions have an accuracy rate of 85-90%. We use satellite imagery, weather data, soil conditions, and historical patterns to provide reliable forecasts. However, predictions should be used as guidance alongside your farming expertise.",
+    "faq_q5": "Can I access GoFarmlyConnect offline?",
+    "faq_a5": "Yes, our mobile app has offline capabilities. You can view your data, fill forms, and access tutorials without internet. Once you're back online, all changes sync automatically to the cloud.",
+    "faq_q6": "What are the costs involved?",
+    "faq_a6": "Basic features are completely free for all farmers. Premium features like advanced analytics, priority support, and additional storage are available through affordable subscription plans starting at ₹99/month.",
+    "faq_q7": "How do I get technical support?",
+    "faq_a7": "We offer 24/7 support through multiple channels - phone (1800-3010-1000), email, live chat, and WhatsApp. Our agricultural experts are always ready to help you with any technical or farming-related queries.",
+    "faq_q8": "Can I integrate GoFarmlyConnect with other farming tools?",
+    "faq_a8": "Yes, GoFarmlyConnect integrates with popular farming equipment, weather stations, and financial services. We have APIs available for custom integrations and partnerships with major agricultural technology providers."
   },
   hi: {
     // Navigation
@@ -266,7 +368,91 @@ const translations: Record<string, Record<string, string>> = {
     // Dashboard specific
     "notifications": "सूचनाएं",
     "tutorials": "ट्यूटोरियल",
-    "video_tutorials": "वीडियो ट्यूटोरियल"
+    "video_tutorials": "वीडियो ट्यूटोरियल",
+    
+    // Services/Import Export
+    "simplify_import_export": "अपने आयात निर्यात को सरल बनाएं",
+    "import_export_solutions": "आयात निर्यात समाधान",
+    
+    // Partners & Integrations
+    "trusted_partners": "विश्वसनीय भागीदार",
+    "our_partners_integrations": "हमारे भागीदार और एकीकरण",
+    "partners_description": "एक व्यापक कृषि पारिस्थितिकी तंत्र बनाने के लिए प्रमुख सरकारी निकायों, वित्तीय संस्थानों और प्रौद्योगिकी भागीदारों के साथ काम करना",
+    "government_partners": "सरकारी भागीदार",
+    "banking_partners": "बैंकिंग भागीदार",
+    "tech_integrations": "तकनीकी एकीकरण",
+    "compliance_rate": "अनुपालन दर",
+    
+    // Testimonials  
+    "success_stories": "सफलता की कहानियां",
+    "what_farmers_say": "किसान हमारे बारे में क्या कहते हैं",
+    "testimonials_description": "हजारों संतुष्ट किसानों से जुड़ें जिन्होंने गोफार्मलीकनेक्ट के साथ अपने कृषि संचालन को बदल दिया है",
+    "average_rating": "औसत रेटिंग",
+    "happy_farmers_count": "खुश किसान",
+    "satisfaction_rate": "संतुष्टि दर",
+    "support_available": "सहायता उपलब्ध",
+    
+    // Learn with us
+    "learning_resources": "शिक्षण संसाधन",
+    "learn_with_gofarmly": "गोफार्मलीकनेक्ट के साथ सीखें",
+    "learn_description": "हमारे व्यापक वीडियो ट्यूटोरियल और विशेषज्ञ मार्गदर्शन के साथ आधुनिक कृषि तकनीकों और डिजिटल कृषि समाधानों में महारत हासिल करें",
+    "view_all_tutorials": "सभी ट्यूटोरियल देखें",
+    "watch_now": "अभी देखें",
+    "views": "व्यूज",
+    
+    // FAQ
+    "got_questions": "प्रश्न हैं?",
+    "frequently_asked_questions": "अक्सर पूछे जाने वाले प्रश्न",
+    "faq_description": "गोफार्मलीकनेक्ट की सुविधाओं, मूल्य निर्धारण और शुरुआत करने के तरीके के बारे में सामान्य प्रश्नों के उत्तर खोजें",
+    "still_have_questions": "अभी भी प्रश्न हैं?",
+    "support_team_help": "आपकी तलाश का उत्तर नहीं मिल रहा? हमारी सहायता टीम 24/7 आपकी सहायता के लिए यहां है",
+    "contact_support": "सहायता से संपर्क करें",
+    "schedule_call": "कॉल शेड्यूल करें",
+    
+    // Contact Us
+    "get_in_touch": "संपर्क में रहें",
+    "contact_us": "हमसे संपर्क करें",
+    "contact_description": "अपने कृषि संचालन को बदलने के लिए तैयार? व्यक्तिगत मार्गदर्शन के लिए हमारे कृषि विशेषज्ञों से संपर्क करें",
+    "helpdesk_24x7": "24x7 हेल्पडेस्क",
+    "toll_free": "(टोल फ्री)",
+    "available_round_clock": "चौबीसों घंटे उपलब्ध",
+    "email_support": "ईमेल सहायता",
+    "response_within_2hours": "2 घंटे के भीतर प्रतिक्रिया",
+    "whatsapp_support": "व्हाट्सएप सहायता",
+    "quick_assistance_chat": "चैट के माध्यम से त्वरित सहायता",
+    "head_office": "मुख्य कार्यालय",
+    "support_hours": "सहायता घंटे",
+    "always_here": "जब आपको हमारी जरूरत हो तो हमेशा यहां",
+    "send_message": "हमें संदेश भेजें",
+    "first_name": "पहला नाम",
+    "last_name": "अंतिम नाम",
+    "enter_first_name": "अपना पहला नाम दर्ज करें",
+    "enter_last_name": "अपना अंतिम नाम दर्ज करें",
+    "email_address": "ईमेल पता",
+    "enter_email_address": "अपना ईमेल पता दर्ज करें",
+    "phone_number": "फोन नंबर",
+    "enter_phone_number": "अपना फोन नंबर दर्ज करें",
+    "subject": "विषय",
+    "what_can_we_help": "हम आपकी कैसे सहायता कर सकते हैं?",
+    "message": "संदेश",
+    "tell_us_requirements": "अपनी आवश्यकताओं के बारे में हमें बताएं...",
+    "send_message_button": "संदेश भेजें",
+    
+    // Footer
+    "legal": "कानूनी",
+    "terms_conditions": "नियम और शर्तें",
+    "privacy_policy": "गोपनीयता नीति",
+    "contact_us_footer": "हमसे संपर्क करें",
+    "follow_us": "हमें फॉलो करें",
+    "facebook": "फेसबुक",
+    "twitter": "ट्विटर",
+    "instagram": "इंस्टाग्राम",
+    "linkedin": "लिंक्डइन",
+    "copyright_text": "© 2025 गोफार्मलीकनेक्ट - प्रौद्योगिकी के माध्यम से कृषि को बदलना। सर्वाधिकार सुरक्षित।",
+    "made_with_love": "किसानों के लिए ❤️ के साथ बनाया गया",
+    "proudly_indian": "🇮🇳 गर्व से भारतीय",
+    "serving_farmers": "पूरे भारत में किसानों की सेवा",
+    "empowering_farmers": "आधुनिक कृषि के लिए अत्याधुनिक डिजिटल समाधानों के साथ किसानों को सशक्त बनाना। आज ही कृषि क्रांति में शामिल हों।"
   },
   mr: {
     // Navigation
@@ -394,7 +580,91 @@ const translations: Record<string, Record<string, string>> = {
     // Dashboard specific
     "notifications": "सूचना",
     "tutorials": "ट्यूटोरियल",
-    "video_tutorials": "व्हिडिओ ट्यूटोरियल"
+    "video_tutorials": "व्हिडिओ ट्यूटोरियल",
+    
+    // Services/Import Export
+    "simplify_import_export": "तुमचा आयात निर्यात सरल करा",
+    "import_export_solutions": "आयात निर्यात उपाय",
+    
+    // Partners & Integrations
+    "trusted_partners": "विश्वसनीय भागीदार",
+    "our_partners_integrations": "आमचे भागीदार आणि एकीकरण",
+    "partners_description": "व्यापक कृषी इकोसिस्टम तयार करण्यासाठी आघाडीच्या सरकारी संस्था, वित्तीय संस्था आणि तंत्रज्ञान भागीदारांसह काम करणे",
+    "government_partners": "सरकारी भागीदार",
+    "banking_partners": "बँकिंग भागीदार",
+    "tech_integrations": "तंत्रज्ञान एकीकरण",
+    "compliance_rate": "अनुपालन दर",
+    
+    // Testimonials  
+    "success_stories": "यशाच्या कथा",
+    "what_farmers_say": "शेतकरी आमच्याबद्दल काय म्हणतात",
+    "testimonials_description": "हजारो समाधानी शेतकऱ्यांसह सामील व्हा ज्यांनी गोफार्मलीकनेक्टसह त्यांच्या कृषी कामकाजाचे रूपांतर केले आहे",
+    "average_rating": "सरासरी रेटिंग",
+    "happy_farmers_count": "आनंदी शेतकरी",
+    "satisfaction_rate": "समाधान दर",
+    "support_available": "सहाय्य उपलब्ध",
+    
+    // Learn with us
+    "learning_resources": "शिक्षण संसाधने",
+    "learn_with_gofarmly": "गोफार्मलीकनेक्टसह शिका",
+    "learn_description": "आमच्या व्यापक व्हिडिओ ट्यूटोरियल आणि तज्ञ मार्गदर्शनासह आधुनिक कृषी तंत्रे आणि डिजिटल शेती उपायांवर प्रभुत्व मिळवा",
+    "view_all_tutorials": "सर्व ट्यूटोरियल पहा",
+    "watch_now": "आता पहा",
+    "views": "दृश्ये",
+    
+    // FAQ
+    "got_questions": "प्रश्न आहेत?",
+    "frequently_asked_questions": "वारंवार विचारले जाणारे प्रश्न",
+    "faq_description": "गोफार्मलीकनेक्टच्या वैशिष्ट्यांबद्दल, किंमतीबद्दल आणि कसे सुरुवात करावी याबद्दल सामान्य प्रश्नांची उत्तरे शोधा",
+    "still_have_questions": "अजूनही प्रश्न आहेत?",
+    "support_team_help": "तुम्हाला शोधत असलेले उत्तर सापडत नाही? आमची सहाय्य टीम तुमच्या मदतीसाठी 24/7 येथे आहे",
+    "contact_support": "सहाय्याशी संपर्क साधा",
+    "schedule_call": "कॉल शेड्यूल करा",
+    
+    // Contact Us
+    "get_in_touch": "संपर्कात रहा",
+    "contact_us": "आमच्याशी संपर्क साधा",
+    "contact_description": "तुमच्या शेती कामकाजाचे रूपांतर करण्यास तयार आहात? वैयक्तिक मार्गदर्शनासाठी आमच्या कृषी तज्ञांशी संपर्क साधा",
+    "helpdesk_24x7": "24x7 हेल्पडेस्क",
+    "toll_free": "(टोल फ्री)",
+    "available_round_clock": "चोवीस तास उपलब्ध",
+    "email_support": "ईमेल सहाय्य",
+    "response_within_2hours": "2 तासांत प्रतिसाद",
+    "whatsapp_support": "व्हाट्सअप सहाय्य",
+    "quick_assistance_chat": "चॅटद्वारे त्वरित मदत",
+    "head_office": "मुख्य कार्यालय",
+    "support_hours": "सहाय्य तास",
+    "always_here": "तुम्हाला गरज असताना नेहमी येथे",
+    "send_message": "आम्हाला संदेश पाठवा",
+    "first_name": "पहिले नाव",
+    "last_name": "आडनाव",
+    "enter_first_name": "तुमचे पहिले नाव प्रविष्ट करा",
+    "enter_last_name": "तुमचे आडनाव प्रविष्ट करा",
+    "email_address": "ईमेल पत्ता",
+    "enter_email_address": "तुमचा ईमेल पत्ता प्रविष्ट करा",
+    "phone_number": "फोन नंबर",
+    "enter_phone_number": "तुमचा फोन नंबर प्रविष्ट करा",
+    "subject": "विषय",
+    "what_can_we_help": "आम्ही तुमची कशी मदत करू शकतो?",
+    "message": "संदेश",
+    "tell_us_requirements": "तुमच्या गरजांबद्दल आम्हाला सांगा...",
+    "send_message_button": "संदेश पाठवा",
+    
+    // Footer
+    "legal": "कायदेशीर",
+    "terms_conditions": "अटी आणि शर्ती",
+    "privacy_policy": "गोपनीयता धोरण",
+    "contact_us_footer": "आमच्याशी संपर्क साधा",
+    "follow_us": "आम्हाला फॉलो करा",
+    "facebook": "फेसबुक",
+    "twitter": "ट्विटर",
+    "instagram": "इंस्टाग्राम",
+    "linkedin": "लिंक्डइन",
+    "copyright_text": "© 2025 गोफार्मलीकनेक्ट - तंत्रज्ञानाद्वारे कृषीचे रूपांतर. सर्व हक्क राखीव.",
+    "made_with_love": "शेतकऱ्यांसाठी ❤️ सह तयार केले",
+    "proudly_indian": "🇮🇳 अभिमानाने भारतीय",
+    "serving_farmers": "संपूर्ण भारतातील शेतकऱ्यांची सेवा",
+    "empowering_farmers": "आधुनिक कृषीसाठी अत्याधुनिक डिजिटल समाधानांसह शेतकऱ्यांना सक्षम बनवणे. आजच शेती क्रांतीत सामील व्हा."
   }
 }
 

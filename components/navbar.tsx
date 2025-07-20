@@ -21,9 +21,6 @@ export default function Navbar() {
   const languages = [
     { code: "en", name: "English" },
     { code: "hi", name: "हिन्दी" },
-    { code: "te", name: "తెలుగు" },
-    { code: "bn", name: "বাংলা" },
-    { code: "ta", name: "தமிழ்" },
     { code: "mr", name: "मराठी" },
   ]
 
@@ -80,7 +77,7 @@ export default function Navbar() {
                   className="text-white hover:text-emerald-300 hover:bg-white/10 rounded-xl transition-all duration-300 flex items-center space-x-2 transform hover:scale-105"
                 >
                   <Globe className="w-4 h-4" />
-                  <span className="hidden sm:inline">{language === 'en' ? 'ENG' : language === 'hi' ? 'हिं' : 'मरा'}</span>
+                  <span className="hidden sm:inline">{language === 'en' ? 'ENG' : language === 'hi' ? 'हिं' : language === 'mr' ? 'मरा' : 'ENG'}</span>
                   <ChevronDown className="w-4 h-4 transition-transform duration-300" />
                 </Button>
               </DropdownMenuTrigger>
@@ -116,7 +113,7 @@ export default function Navbar() {
                   className="text-white hover:text-emerald-300 hover:bg-white/10 rounded-xl transition-all duration-300 flex items-center space-x-1 transform hover:scale-105"
                 >
                   <Globe className="w-4 h-4" />
-                  <span className="text-xs">{language === 'en' ? 'ENG' : language === 'hi' ? 'हिं' : 'मरा'}</span>
+                  <span className="text-xs">{language === 'en' ? 'ENG' : language === 'hi' ? 'हिं' : language === 'mr' ? 'मरा' : 'ENG'}</span>
                   <ChevronDown className="w-3 h-3 transition-transform duration-300" />
                 </Button>
               </DropdownMenuTrigger>

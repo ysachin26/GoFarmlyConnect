@@ -1,7 +1,12 @@
+"use client"
+
 import Link from "next/link"
 import { Facebook, Twitter, Instagram, Linkedin, Phone, Mail, FileText, Shield, MapPin } from "lucide-react"
+import { useLanguage } from "../contexts/LanguageContext"
 
 export default function Footer() {
+  const { t } = useLanguage()
+  
   return (
     <footer className="bg-black text-white relative overflow-hidden">
       {/* Animated background elements */}
@@ -23,37 +28,36 @@ export default function Footer() {
               </div>
             </div>
             <p className="text-gray-400 text-sm mb-6 leading-relaxed">
-              Empowering farmers with cutting-edge digital solutions for modern agriculture. Join the farming revolution
-              today.
+              {t('footer.description')}
             </p>
             <div className="flex items-center space-x-2 text-gray-400 text-sm">
               <MapPin className="w-4 h-4 text-emerald-400" />
-              <span>Serving farmers across India</span>
+              <span>{t('footer.location')}</span>
             </div>
           </div>
 
           {/* Legal */}
           <div className="space-y-4 animate-fadeInUp animation-delay-200">
-            <h3 className="font-bold text-emerald-400 text-lg mb-6">Legal</h3>
+            <h3 className="font-bold text-emerald-400 text-lg mb-6">{t('footer.legal')}</h3>
             <Link
               href="#"
               className="flex items-center space-x-3 text-gray-400 hover:text-white hover:bg-white/5 transition-all duration-300 p-3 rounded-xl group transform hover:scale-105 hover:shadow-lg"
             >
               <FileText className="w-5 h-5 text-emerald-400 group-hover:scale-110 transition-transform duration-300" />
-              <span className="group-hover:translate-x-1 transition-transform duration-300">Terms & Conditions</span>
+              <span className="group-hover:translate-x-1 transition-transform duration-300">{t('footer.terms')}</span>
             </Link>
             <Link
               href="#"
               className="flex items-center space-x-3 text-gray-400 hover:text-white hover:bg-white/5 transition-all duration-300 p-3 rounded-xl group transform hover:scale-105 hover:shadow-lg"
             >
               <Shield className="w-5 h-5 text-emerald-400 group-hover:scale-110 transition-transform duration-300" />
-              <span className="group-hover:translate-x-1 transition-transform duration-300">Privacy Policy</span>
+              <span className="group-hover:translate-x-1 transition-transform duration-300">{t('footer.privacy')}</span>
             </Link>
           </div>
 
           {/* Contact Us */}
           <div className="space-y-4 animate-fadeInUp animation-delay-400">
-            <h3 className="font-bold text-emerald-400 text-lg mb-6">Contact Us</h3>
+            <h3 className="font-bold text-emerald-400 text-lg mb-6">{t('footer.contactUs')}</h3>
             <div className="flex items-center space-x-3 text-gray-400 hover:text-white transition-colors duration-300 p-3 rounded-xl hover:bg-white/5 group transform hover:scale-105">
               <Phone className="w-5 h-5 text-emerald-400 group-hover:scale-110 transition-transform duration-300" />
               <span>1800-3010-1000</span>
@@ -66,35 +70,35 @@ export default function Footer() {
 
           {/* Follow Us */}
           <div className="space-y-4 animate-fadeInUp animation-delay-600">
-            <h3 className="font-bold text-emerald-400 text-lg mb-6">Follow Us</h3>
+            <h3 className="font-bold text-emerald-400 text-lg mb-6">{t('footer.followUs')}</h3>
             <div className="flex flex-col space-y-3">
               <Link
                 href="#"
                 className="flex items-center space-x-3 text-gray-400 hover:text-blue-400 transition-all duration-300 p-3 rounded-xl hover:bg-white/5 group transform hover:scale-105 hover:shadow-lg"
               >
                 <Facebook className="w-5 h-5 group-hover:scale-110 transition-transform duration-300" />
-                <span className="group-hover:translate-x-1 transition-transform duration-300">Facebook</span>
+                <span className="group-hover:translate-x-1 transition-transform duration-300">{t('footer.facebook')}</span>
               </Link>
               <Link
                 href="#"
                 className="flex items-center space-x-3 text-gray-400 hover:text-blue-400 transition-all duration-300 p-3 rounded-xl hover:bg-white/5 group transform hover:scale-105 hover:shadow-lg"
               >
                 <Twitter className="w-5 h-5 group-hover:scale-110 transition-transform duration-300" />
-                <span className="group-hover:translate-x-1 transition-transform duration-300">Twitter</span>
+                <span className="group-hover:translate-x-1 transition-transform duration-300">{t('footer.twitter')}</span>
               </Link>
               <Link
                 href="#"
                 className="flex items-center space-x-3 text-gray-400 hover:text-pink-400 transition-all duration-300 p-3 rounded-xl hover:bg-white/5 group transform hover:scale-105 hover:shadow-lg"
               >
                 <Instagram className="w-5 h-5 group-hover:scale-110 transition-transform duration-300" />
-                <span className="group-hover:translate-x-1 transition-transform duration-300">Instagram</span>
+                <span className="group-hover:translate-x-1 transition-transform duration-300">{t('footer.instagram')}</span>
               </Link>
               <Link
                 href="#"
                 className="flex items-center space-x-3 text-gray-400 hover:text-blue-600 transition-all duration-300 p-3 rounded-xl hover:bg-white/5 group transform hover:scale-105 hover:shadow-lg"
               >
                 <Linkedin className="w-5 h-5 group-hover:scale-110 transition-transform duration-300" />
-                <span className="group-hover:translate-x-1 transition-transform duration-300">LinkedIn</span>
+                <span className="group-hover:translate-x-1 transition-transform duration-300">{t('footer.linkedin')}</span>
               </Link>
             </div>
           </div>
@@ -103,12 +107,12 @@ export default function Footer() {
         <div className="border-t border-gray-800 mt-16 pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
             <div className="text-gray-400 text-sm animate-fadeInUp">
-              © 2025 GoFarmlyConnect - Transforming Agriculture Through Technology. All rights reserved.
+              {t('footer.copyright')}
             </div>
             <div className="flex items-center space-x-6 text-sm text-gray-400 animate-fadeInUp animation-delay-200">
-              <span>Made with ❤️ for Farmers</span>
+              <span>{t('footer.madeWithLove')}</span>
               <span>|</span>
-              <span>🇮🇳 Proudly Indian</span>
+              <span>{t('footer.proudlyIndian')}</span>
             </div>
           </div>
         </div>

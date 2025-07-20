@@ -2,50 +2,44 @@
 
 import { useState } from "react"
 import { ChevronDown, HelpCircle } from "lucide-react"
+import { useLanguage } from '@/contexts/LanguageContext'
 
 export default function FAQ() {
+  const { t } = useLanguage()
   const [openFAQ, setOpenFAQ] = useState(0)
 
   const faqs = [
     {
-      question: "How do I register my farm on GoFarmlyConnect?",
-      answer:
-        "Registration is simple and free. Click on 'Get Started', fill in your basic farm details, upload required documents, and verify your mobile number. Our team will review and activate your account within 24 hours.",
+      question: t('faq_q1'),
+      answer: t('faq_a1'),
     },
     {
-      question: "What documents can I file through the platform?",
-      answer:
-        "You can file all major agricultural documents including crop insurance applications, subsidy forms, loan applications, land records, soil health cards, and compliance certificates. Our system supports over 50+ document types.",
+      question: t('faq_q2'),
+      answer: t('faq_a2'),
     },
     {
-      question: "Is my data secure on GoFarmlyConnect?",
-      answer:
-        "Absolutely. We use bank-grade encryption and follow strict data protection protocols. Your information is stored securely and never shared with third parties without your consent. We're also compliant with all government data protection regulations.",
+      question: t('faq_q3'),
+      answer: t('faq_a3'),
     },
     {
-      question: "How accurate are the crop yield predictions?",
-      answer:
-        "Our AI-powered predictions have an accuracy rate of 85-90%. We use satellite imagery, weather data, soil conditions, and historical patterns to provide reliable forecasts. However, predictions should be used as guidance alongside your farming expertise.",
+      question: t('faq_q4'),
+      answer: t('faq_a4'),
     },
     {
-      question: "Can I access GoFarmlyConnect offline?",
-      answer:
-        "Yes, our mobile app has offline capabilities. You can view your data, fill forms, and access tutorials without internet. Once you're back online, all changes sync automatically to the cloud.",
+      question: t('faq_q5'),
+      answer: t('faq_a5'),
     },
     {
-      question: "What are the costs involved?",
-      answer:
-        "Basic features are completely free for all farmers. Premium features like advanced analytics, priority support, and additional storage are available through affordable subscription plans starting at ₹99/month.",
+      question: t('faq_q6'),
+      answer: t('faq_a6'),
     },
     {
-      question: "How do I get technical support?",
-      answer:
-        "We offer 24/7 support through multiple channels - phone (1800-3010-1000), email, live chat, and WhatsApp. Our agricultural experts are always ready to help you with any technical or farming-related queries.",
+      question: t('faq_q7'),
+      answer: t('faq_a7'),
     },
     {
-      question: "Can I integrate GoFarmlyConnect with other farming tools?",
-      answer:
-        "Yes, GoFarmlyConnect integrates with popular farming equipment, weather stations, and financial services. We have APIs available for custom integrations and partnerships with major agricultural technology providers.",
+      question: t('faq_q8'),
+      answer: t('faq_a8'),
     },
   ]
 
@@ -61,14 +55,14 @@ export default function FAQ() {
         <div className="text-center mb-16">
           <div className="inline-block mb-4">
             <span className="bg-gradient-to-r from-emerald-500 to-teal-600 text-white px-4 py-2 rounded-full text-sm font-medium">
-              Got Questions?
+              {t('got_questions')}
             </span>
           </div>
           <h2 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-emerald-800 to-teal-700 bg-clip-text text-transparent mb-6 animate-fadeInUp">
-            Frequently Asked Questions
+            {t('frequently_asked_questions')}
           </h2>
           <p className="text-gray-600 max-w-3xl mx-auto text-lg leading-relaxed animate-fadeInUp animation-delay-200">
-            Find answers to common questions about GoFarmlyConnect's features, pricing, and how to get started
+            {t('faq_description')}
           </p>
         </div>
 
@@ -119,16 +113,16 @@ export default function FAQ() {
             <div className="bg-gradient-to-r from-emerald-500 to-teal-600 rounded-2xl p-8 text-white relative overflow-hidden">
               <div className="absolute inset-0 bg-black/10"></div>
               <div className="relative z-10">
-                <h3 className="text-2xl font-bold mb-4">Still have questions?</h3>
+                <h3 className="text-2xl font-bold mb-4">{t('still_have_questions')}</h3>
                 <p className="text-emerald-100 mb-6 max-w-2xl mx-auto">
-                  Can't find the answer you're looking for? Our support team is here to help you 24/7
+                  {t('support_team_help')}
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4 justify-center">
                   <button className="bg-white text-emerald-600 hover:bg-gray-100 px-6 py-3 rounded-xl font-semibold transform hover:scale-105 transition-all duration-300">
-                    Contact Support
+                    {t('contact_support')}
                   </button>
                   <button className="border-2 border-white text-white hover:bg-white hover:text-emerald-600 px-6 py-3 rounded-xl font-semibold transform hover:scale-105 transition-all duration-300">
-                    Schedule a Call
+                    {t('schedule_call')}
                   </button>
                 </div>
               </div>

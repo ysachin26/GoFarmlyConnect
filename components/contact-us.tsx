@@ -20,13 +20,12 @@ export default function ContactUs() {
         <div className="text-center mb-16">
           <div className="inline-block mb-4">
             <span className="bg-emerald-500/20 text-emerald-300 px-4 py-2 rounded-full text-sm font-medium border border-emerald-400/30">
-              Get In Touch
+              {t('get_in_touch')}
             </span>
           </div>
-          <h2 className="text-4xl md:text-5xl font-bold mb-6 animate-fadeInUp">Contact Us</h2>
+          <h2 className="text-4xl md:text-5xl font-bold mb-6 animate-fadeInUp">{t('contact_us')}</h2>
           <p className="text-emerald-100 max-w-3xl mx-auto text-lg leading-relaxed animate-fadeInUp animation-delay-200">
-            Ready to transform your farming operations? Get in touch with our agricultural experts for personalized
-            guidance
+            {t('contact_description')}
           </p>
         </div>
 
@@ -34,16 +33,16 @@ export default function ContactUs() {
           {/* Contact Information */}
           <div className="space-y-8 animate-fadeInLeft">
             <div>
-              <h3 className="text-2xl font-bold mb-8 text-emerald-300">Get in Touch</h3>
+              <h3 className="text-2xl font-bold mb-8 text-emerald-300">{t('get_in_touch')}</h3>
               <div className="space-y-6">
                 <div className="flex items-start space-x-4 group">
                   <div className="bg-emerald-500/20 p-4 rounded-2xl group-hover:bg-emerald-500/30 transition-all duration-300 transform group-hover:scale-110 border border-emerald-400/30">
                     <Phone className="w-6 h-6 text-emerald-400" />
                   </div>
                   <div>
-                    <p className="font-semibold text-lg text-emerald-300">24x7 Helpdesk</p>
-                    <p className="text-emerald-100">1800-3010-1000 (Toll Free)</p>
-                    <p className="text-emerald-200 text-sm">Available round the clock</p>
+                    <p className="font-semibold text-lg text-emerald-300">{t('helpdesk_24x7')}</p>
+                    <p className="text-emerald-100">1800-3010-1000 {t('toll_free')}</p>
+                    <p className="text-emerald-200 text-sm">{t('available_round_clock')}</p>
                   </div>
                 </div>
 

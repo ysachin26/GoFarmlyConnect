@@ -1,6 +1,9 @@
 "use client"
 
+import { useLanguage } from '@/contexts/LanguageContext'
+
 export default function CompanyTieup() {
+  const { t } = useLanguage()
   const partners = [
     { name: "Ministry of Agriculture", logo: "🏛️", category: "Government" },
     { name: "NABARD", logo: "🏦", category: "Banking" },
@@ -26,15 +29,14 @@ export default function CompanyTieup() {
         <div className="text-center mb-16">
           <div className="inline-block mb-4">
             <span className="bg-gradient-to-r from-emerald-500 to-teal-600 text-white px-4 py-2 rounded-full text-sm font-medium">
-              Trusted Partners
+              {t('trusted_partners')}
             </span>
           </div>
           <h2 className="text-2xl md:text-4xl lg:text-5xl font-bold bg-gradient-to-r from-emerald-800 to-teal-700 bg-clip-text text-transparent mb-6 animate-fadeInUp">
-            Our Partners & Integrations
+            {t('our_partners_integrations')}
           </h2>
           <p className="text-gray-600 max-w-3xl mx-auto text-base md:text-lg leading-relaxed animate-fadeInUp animation-delay-200">
-            Working with leading government bodies, financial institutions, and technology partners to create a
-            comprehensive agricultural ecosystem
+            {t('partners_description')}
           </p>
         </div>
 
@@ -72,25 +74,25 @@ export default function CompanyTieup() {
             <div className="text-3xl font-bold text-emerald-600 group-hover:scale-110 transition-transform duration-300">
               25+
             </div>
-            <div className="text-gray-600 font-medium">Government Partners</div>
+            <div className="text-gray-600 font-medium">{t('government_partners')}</div>
           </div>
           <div className="text-center group">
             <div className="text-3xl font-bold text-emerald-600 group-hover:scale-110 transition-transform duration-300">
               15+
             </div>
-            <div className="text-gray-600 font-medium">Banking Partners</div>
+            <div className="text-gray-600 font-medium">{t('banking_partners')}</div>
           </div>
           <div className="text-center group">
             <div className="text-3xl font-bold text-emerald-600 group-hover:scale-110 transition-transform duration-300">
               50+
             </div>
-            <div className="text-gray-600 font-medium">Tech Integrations</div>
+            <div className="text-gray-600 font-medium">{t('tech_integrations')}</div>
           </div>
           <div className="text-center group">
             <div className="text-3xl font-bold text-emerald-600 group-hover:scale-110 transition-transform duration-300">
               100%
             </div>
-            <div className="text-gray-600 font-medium">Compliance Rate</div>
+            <div className="text-gray-600 font-medium">{t('compliance_rate')}</div>
           </div>
         </div>
       </div>

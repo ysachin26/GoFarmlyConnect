@@ -4,8 +4,10 @@ import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { ChevronLeft, ChevronRight, Star, Quote } from "lucide-react"
 import Image from "next/image"
+import { useLanguage } from '@/contexts/LanguageContext'
 
 export default function Testimonials() {
+  const { t } = useLanguage()
   const [currentTestimonial, setCurrentTestimonial] = useState(0)
 
   const testimonials = [
@@ -71,14 +73,14 @@ export default function Testimonials() {
         <div className="text-center mb-16">
           <div className="inline-block mb-4">
             <span className="bg-gradient-to-r from-emerald-500 to-teal-600 text-white px-4 py-2 rounded-full text-sm font-medium">
-              Success Stories
+              {t('success_stories')}
             </span>
           </div>
           <h2 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-emerald-800 to-teal-700 bg-clip-text text-transparent mb-6 animate-fadeInUp">
-            What Farmers Say About Us
+            {t('what_farmers_say')}
           </h2>
           <p className="text-gray-600 max-w-3xl mx-auto text-lg leading-relaxed animate-fadeInUp animation-delay-200">
-            Join thousands of satisfied farmers who have transformed their agricultural operations with GoFarmlyConnect
+            {t('testimonials_description')}
           </p>
         </div>
 
@@ -166,25 +168,25 @@ export default function Testimonials() {
               <div className="text-3xl font-bold text-emerald-600 group-hover:scale-110 transition-transform duration-300">
                 4.9/5
               </div>
-              <div className="text-gray-600 font-medium">Average Rating</div>
+              <div className="text-gray-600 font-medium">{t('average_rating')}</div>
             </div>
             <div className="text-center group">
               <div className="text-3xl font-bold text-emerald-600 group-hover:scale-110 transition-transform duration-300">
                 50K+
               </div>
-              <div className="text-gray-600 font-medium">Happy Farmers</div>
+              <div className="text-gray-600 font-medium">{t('happy_farmers_count')}</div>
             </div>
             <div className="text-center group">
               <div className="text-3xl font-bold text-emerald-600 group-hover:scale-110 transition-transform duration-300">
                 98%
               </div>
-              <div className="text-gray-600 font-medium">Satisfaction Rate</div>
+              <div className="text-gray-600 font-medium">{t('satisfaction_rate')}</div>
             </div>
             <div className="text-center group">
               <div className="text-3xl font-bold text-emerald-600 group-hover:scale-110 transition-transform duration-300">
                 24/7
               </div>
-              <div className="text-gray-600 font-medium">Support Available</div>
+              <div className="text-gray-600 font-medium">{t('support_available')}</div>
             </div>
           </div>
         </div>
