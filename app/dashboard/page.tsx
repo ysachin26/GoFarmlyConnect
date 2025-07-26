@@ -111,34 +111,34 @@ export default function Dashboard() {
 
   const videos = [
     {
-      title: "Getting Started",
-      description: "Introduction to export business basics",
-      duration: "5 min watch",
+      title: t('getting_started'),
+      description: t('introduction_export_basics'),
+      duration: `5 ${t('min_watch')}`,
       src: "/public1/haifam-video.mp4",
       poster: "/public1/modern-farming.png",
-      category: "Beginner Guides",
+      category: t('getting_started_category'),
     },
     {
-      title: "Complete Registration Guide",
-      description: "Step-by-step registration process walkthrough",
-      duration: "12 min watch",
+      title: t('complete_registration_guide'),
+      description: t('step_by_step_registration'),
+      duration: `12 ${t('min_watch')}`,
       src: "/public1/haifam-video.mp4",
       poster: "/public1/modern-farming.png",
       featured: true,
-      category: "Registration Steps",
+      category: t('getting_started_category'),
     },
     {
-      title: "Document Preparation",
-      description: "Required documents and how to prepare them",
-      duration: "8 min watch",
+      title: t('document_preparation'),
+      description: t('required_documents_preparation'),
+      duration: `8 ${t('min_watch')}`,
       src: "/public1/haifam-video.mp4",
       poster: "/public1/modern-farming.png",
-      category: "Registration Steps",
+      category: t('getting_started_category'),
     },
     {
       title: "Understanding Regulations",
       description: "Key export regulations and compliance",
-      duration: "10 min watch",
+      duration: `10 ${t('min_watch')}`,
       src: "/public1/haifam-video.mp4",
       poster: "/placeholder.svg?height=225&width=400",
       category: "Advanced Topics",
@@ -146,7 +146,7 @@ export default function Dashboard() {
     {
       title: "Shipping & Logistics",
       description: "Navigating international shipping",
-      duration: "7 min watch",
+      duration: `7 ${t('min_watch')}`,
       src: "/public1/haifam-video.mp4",
       poster: "/placeholder.svg?height=225&width=400",
       category: "Advanced Topics",
@@ -227,7 +227,7 @@ export default function Dashboard() {
     return (
       <div className="p-6 text-center">
         <div className="text-red-600 mb-4">{error}</div>
-        <Button onClick={fetchDashboardData}>Try Again</Button>
+        <Button onClick={fetchDashboardData}>{t('try_again')}</Button>
       </div>
     )
   }
@@ -235,7 +235,7 @@ export default function Dashboard() {
   if (!dashboardData) {
     return (
       <div className="p-6 text-gray-600 text-center">
-        <p>No dashboard data available.</p>
+        <p>{t('no_dashboard_data')}</p>
       </div>
     )
   }
@@ -446,7 +446,7 @@ export default function Dashboard() {
                             <span className="text-xs text-gray-500">{video.duration}</span>
                             {video.featured && (
                               <Badge variant="secondary" className="ml-2 bg-teal-100 text-teal-700 text-xs">
-                                Featured
+                                {t('featured')}
                               </Badge>
                             )}
                           </div>

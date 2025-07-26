@@ -7,6 +7,7 @@ import { Badge } from "@/components/ui/badge"
 import Link from "next/link"
 import { useEffect, useState } from "react"
 import { getDashboardData } from "@/app/actions"
+import { useLanguage } from "@/contexts/LanguageContext"
 
 interface RegistrationStep {
   id: number
@@ -70,50 +71,51 @@ interface DashboardData {
   isProfileComplete: boolean
 }
 
-const registrations = [
+const getRegistrations = (t: (key: string) => string) => [
   {
     id: "gst",
     stepId: 2,
-    title: "GST Registration",
-    description: "Goods and Services Tax registration for businesses",
+    title: t("gst_registration"),
+    description: t("gst_description"),
     required: true,
     href: "/dashboard/registration/gst",
   },
   {
     id: "iec",
     stepId: 3,
-    title: "IEC Registration",
-    description: "Import Export Code for international trade",
+    title: t("iec_registration"),
+    description: t("iec_description"),
     required: true,
     href: "/dashboard/registration/iec",
   },
   {
     id: "dsc",
     stepId: 4,
-    title: "DSC Registration",
-    description: "Digital Signature Certificate for online transactions",
+    title: t("dsc_registration"),
+    description: t("dsc_description"),
     required: true,
     href: "/dashboard/registration/dsc",
   },
   {
     id: "icegate",
     stepId: 5,
-    title: "ICE Gate Registration",
-    description: "Indian Customs EDI Gateway for customs clearance",
+    title: t("icegate_registration"),
+    description: t("icegate_description"),
     required: true,
     href: "/dashboard/registration/icegate",
   },
   {
     id: "adcode",
     stepId: 6,
-    title: "AD Code Registration",
-    description: "Authorized Dealer Code for foreign exchange transactions",
+    title: t("adcode_registration"),
+    description: t("adcode_description"),
     required: true,
     href: "/dashboard/registration/adcode",
   },
 ]
 
 export default function Registration() {
+  const { t } = useLanguage()
   const [dashboardData, setDashboardData] = useState<DashboardData | null>(null)
   const [loading, setLoading] = useState(true)
 
@@ -133,41 +135,41 @@ export default function Registration() {
 
   const getRegistrationStatus = (stepId: number) => {
     const step = dashboardData?.registrationSteps?.find((s) => s.id === stepId)
-    let status = "Not Started"
-    let statusText = "Not started yet"
+    let status = t("not_started")
+    let statusText = t("not_started_text")
     let badgeVariant: "default" | "secondary" | "destructive" | "outline" | null | undefined = "secondary"
     let badgeColorClass = "bg-gray-100 text-gray-600"
 
     if (step) {
       switch (step.status) {
         case "in-progress": // Fixed: using hyphen instead of underscore
-          status = "In Progress"
-          statusText = "Application in progress"
+          status = t("in_progress")
+          statusText = t("in_progress_text")
           badgeVariant = "default"
           badgeColorClass = "bg-blue-100 text-blue-700"
           break
         case "completed":
-          status = "Completed"
-          statusText = "Application completed"
+          status = t("completed")
+          statusText = t("completed_text")
           badgeVariant = "default"
           badgeColorClass = "bg-green-100 text-green-700"
           break
         case "pending":
-          status = "Pending Review"
-          statusText = "Awaiting document verification"
+          status = t("pending_review")
+          statusText = t("pending_review_text")
           badgeVariant = "default"
           badgeColorClass = "bg-yellow-100 text-yellow-700"
           break
         case "rejected":
-          status = "Rejected"
-          statusText = "Application rejected"
+          status = t("rejected")
+          statusText = t("rejected_text")
           badgeVariant = "destructive"
           badgeColorClass = "bg-red-100 text-red-700"
           break
         case "pending":
         default:
-          status = "Not Started"
-          statusText = "Not started yet"
+          status = t("not_started")
+          statusText = t("not_started_text")
           badgeVariant = "secondary"
           badgeColorClass = "bg-gray-100 text-gray-600"
           break
@@ -176,15 +178,17 @@ export default function Registration() {
     return { status, statusText, badgeVariant, badgeColorClass }
   }
 
+  const registrations = getRegistrations(t)
+
   if (loading) {
     return (
       <div className="p-6 space-y-6">
         <div className="flex items-center justify-between">
           <div>
-            <h1 className="text-3xl font-bold text-gray-900">Registration Applications</h1>
-            <p className="text-gray-600 mt-1">Manage and track all your export-related registration applications</p>
+            <h1 className="text-3xl font-bold text-gray-900">{t("registration_applications")}</h1>
+            <p className="text-gray-600 mt-1">{t("manage_track_applications")}</p>
           </div>
-          <Button className="bg-blue-600 hover:bg-blue-700">Get Started</Button>
+          <Button className="bg-blue-600 hover:bg-blue-700">{t("get_started")}</Button>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {registrations.map((_, index) => (
@@ -213,10 +217,10 @@ export default function Registration() {
     <div className="p-6 space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-3xl font-bold text-gray-900">Registration Applications</h1>
-          <p className="text-gray-600 mt-1">Manage and track all your export-related registration applications</p>
+          <h1 className="text-3xl font-bold text-gray-900">{t("registration_applications")}</h1>
+          <p className="text-gray-600 mt-1">{t("manage_track_applications")}</p>
         </div>
-        <Button className="bg-blue-600 hover:bg-blue-700">Get Started</Button>
+        <Button className="bg-blue-600 hover:bg-blue-700">{t("get_started")}</Button>
       </div>
 
       <Card className="bg-blue-50 border-blue-200">
@@ -226,10 +230,9 @@ export default function Registration() {
               <FileText className="h-6 w-6 text-white" />
             </div>
             <div className="flex-1">
-              <h3 className="font-semibold text-blue-900">Required Registrations to Become an Exporter</h3>
+              <h3 className="font-semibold text-blue-900">{t("required_registrations_title")}</h3>
               <p className="text-blue-700 text-sm mt-1">
-                Complete all 5 registrations below to become export-ready. Start with any registration that suits your
-                business needs.
+                {t("required_registrations_description")}
               </p>
             </div>
           </div>
@@ -260,11 +263,11 @@ export default function Registration() {
                   </div>
                   <Button variant="outline" size="sm" className="flex items-center gap-2 bg-transparent" asChild>
                     <Link href={registration.href}>
-                      {status === "Completed"
-                        ? "View Application"
-                        : status === "In Progress"
-                          ? "View Application"
-                          : "Start Application"}
+                      {status === t("completed")
+                        ? t("view_application")
+                        : status === t("in_progress")
+                          ? t("view_application")
+                          : t("start_application")}
                       <ArrowRight className="h-4 w-4" />
                     </Link>
                   </Button>
