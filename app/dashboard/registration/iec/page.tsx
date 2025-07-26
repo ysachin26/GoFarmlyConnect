@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useCallback } from "react"
 import type React from "react"
+import { useLanguage } from "@/contexts/LanguageContext"
 import {
   ArrowLeft,
   Check,
@@ -113,28 +114,28 @@ const DocumentUploadSection = ({
       return (
         <div className="flex items-center gap-1 text-red-600 text-xs">
           <XCircle className="h-3 w-3" />
-          <span>Rejected, Re-upload required</span>
+          <span>{t('rejected_reupload_required')}</span>
         </div>
       )
     } else if (hasTemp) {
       return (
         <div className="flex items-center gap-1 text-amber-600 text-xs">
           <Clock className="h-3 w-3" />
-          <span>Ready for Upload</span>
+          <span>{t('ready_for_upload')}</span>
         </div>
       )
     } else if (status === "uploaded" || status === "verified") {
       return (
         <div className="flex items-center gap-1 text-green-600 text-xs">
           <Check className="h-3 w-3" />
-          <span>Uploaded & Pending Verification</span>
+          <span>{t('uploaded_pending_verification')}</span>
         </div>
       )
     } else {
       return (
         <div className="flex items-center gap-1 text-gray-500 text-xs">
           <Clock className="h-3 w-3" />
-          <span>Not Uploaded</span>
+          <span>{t('not_uploaded')}</span>
         </div>
       )
     }
@@ -173,7 +174,7 @@ const DocumentUploadSection = ({
             {currentDocState.url && !hasTempFile && currentDocState.status !== "rejected" && (
               <div className="flex items-center gap-1 text-blue-600 text-xs">
                 <Check className="h-3 w-3" />
-                <span>Shared from previous registration</span>
+                <span>{t('shared_from_previous_registration')}</span>
               </div>
             )}
             {displayUrl && (
@@ -185,7 +186,7 @@ const DocumentUploadSection = ({
                   window.open(displayUrl, "_blank")
                 }}
               >
-                <Eye className="h-3 w-3 mr-1" /> View
+                <Eye className="h-3 w-3 mr-1" /> {t('view')}
               </Button>
             )}
             {(registrationStatus === "pending" || registrationStatus === "rejected" || currentDocState.status === "rejected" || hasTempFile || !currentDocState.url) && (
@@ -195,7 +196,7 @@ const DocumentUploadSection = ({
                 onClick={handleButtonClick}
               >
                 <Upload className="h-3 w-3 mr-1" /> 
-                {(registrationStatus === "pending" || registrationStatus === "rejected" || currentDocState.status === "rejected") ? "Re-upload" : "Change / Re-upload"}
+                {(registrationStatus === "pending" || registrationStatus === "rejected" || currentDocState.status === "rejected") ? t('re_upload') : t('change_re_upload')}
               </Button>
             )}
           </div>
@@ -203,7 +204,7 @@ const DocumentUploadSection = ({
           <div className="space-y-2">
             <Upload className={`h-8 w-8 text-${colorClass}-400 mx-auto`} />
             <div className="text-sm text-gray-600">
-              <span className={`text-${colorClass}-600`}>Click to upload</span>
+              <span className={`text-${colorClass}-600`}>{t('click_to_upload')}</span>
             </div>
             <p className="text-xs text-gray-500">{description}</p>
           </div>
@@ -214,6 +215,7 @@ const DocumentUploadSection = ({
 }
 
 export default function IECRegistration() {
+  const { t } = useLanguage()
   const [profileData, setProfileData] = useState<ProfileData>({
     id: "",
     dashboardId: "",
@@ -552,7 +554,7 @@ export default function IECRegistration() {
 
   const handleSubmitApplication = async () => {
     if (progress < 100) {
-      alert("Please complete all required fields and upload all necessary documents.")
+      alert(t('complete_all_required_fields'))
       return
     }
 
@@ -610,7 +612,7 @@ export default function IECRegistration() {
       alert(result.message)
       router.push("/dashboard/progress") // Redirect to progress page
     } else {
-      alert(`Submission failed: ${result.message}`)
+      alert(t('submission_failed', { message: result.message }))
     }
   }
 
@@ -626,8 +628,8 @@ export default function IECRegistration() {
           </Button>
         </Link>
         <div>
-          <h1 className="text-3xl font-bold text-gray-900">IEC Registration</h1>
-          <p className="text-gray-600 mt-1">Import Export Code registration</p>
+          <h1 className="text-3xl font-bold text-gray-900">{t('iec_registration')}</h1>
+          <p className="text-gray-600 mt-1">{t('import_export_code_registration')}</p>
         </div>
       </div>
 
@@ -635,12 +637,12 @@ export default function IECRegistration() {
       <Card className="bg-blue-50 border-blue-200">
         <CardContent className="p-6">
           <div className="flex items-center justify-between mb-4">
-            <h3 className="font-semibold text-blue-900">Registration Progress</h3>
+            <h3 className="font-semibold text-blue-900">{t('registration_progress')}</h3>
             <span className="text-blue-600 font-bold">{progress}%</span>
           </div>
           <Progress value={progress} className="h-3" />
           <p className="text-blue-700 text-sm mt-2">
-            Complete all required sections below to proceed with your IEC registration
+            {t('complete_all_required_sections')}
           </p>
         </CardContent>
       </Card>
@@ -650,19 +652,19 @@ export default function IECRegistration() {
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
             <Building className="h-5 w-5 text-blue-600" />
-            Business Information
+            {t('business_information')}
           </CardTitle>
-          <CardDescription>Information from your profile</CardDescription>
+          <CardDescription>{t('information_from_your_profile')}</CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
           <div className="bg-blue-50 p-4 rounded-lg border border-blue-200">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="space-y-2">
-                <Label>Business Type</Label>
+                <Label>{t('business_type')}</Label>
                 <Input value={profileData.businessType} disabled className="bg-gray-50" />
               </div>
               <div className="space-y-2">
-                <Label>Business Name</Label>
+                <Label>{t('business_name')}</Label>
                 <Input value={profileData.businessName} disabled className="bg-gray-50" />
               </div>
             </div>
@@ -676,29 +678,29 @@ export default function IECRegistration() {
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
               <Award className="h-5 w-5 text-emerald-600" />
-              Available Certificates from Other Registrations
+              {t('available_certificates_from_other_registrations')}
             </CardTitle>
-            <CardDescription>Certificates you've obtained from other registration processes</CardDescription>
+            <CardDescription>{t('certificates_from_other_processes')}</CardDescription>
           </CardHeader>
           <CardContent className="space-y-4">
             <div className="bg-emerald-50 p-4 rounded-lg border border-emerald-200">
-              <h4 className="font-medium text-emerald-900 mb-3">📜 Available Certificates:</h4>
+              <h4 className="font-medium text-emerald-900 mb-3">📜 {t('available_certificates')}:</h4>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                 {profileData.gstCertificate && (
                   <div className="flex items-center gap-3 p-3 bg-white rounded-lg border">
                     <Award className="h-4 w-4 text-green-600" />
                     <div className="flex-1">
-                      <div className="text-sm font-medium">GST Certificate</div>
+                      <div className="text-sm font-medium">{t('gst_certificate')}</div>
                       <div className="flex items-center gap-1 text-green-600 text-xs">
                         <Check className="h-3 w-3" />
-                        <span>From GST Registration</span>
+                        <span>{t('from_gst_registration')}</span>
                       </div>
                       <Button
                         variant="link"
                         className="p-0 h-auto text-primary text-xs mt-1"
                         onClick={() => window.open(profileData.gstCertificate, "_blank")}
                       >
-                        <Eye className="h-3 w-3 mr-1" /> View
+                        <Eye className="h-3 w-3 mr-1" /> {t('view')}
                       </Button>
                     </div>
                   </div>
@@ -708,17 +710,17 @@ export default function IECRegistration() {
                   <div className="flex items-center gap-3 p-3 bg-white rounded-lg border">
                     <Shield className="h-4 w-4 text-indigo-600" />
                     <div className="flex-1">
-                      <div className="text-sm font-medium">DSC Certificate</div>
+                      <div className="text-sm font-medium">{t('dsc_certificate')}</div>
                       <div className="flex items-center gap-1 text-indigo-600 text-xs">
                         <Check className="h-3 w-3" />
-                        <span>From DSC Registration</span>
+                        <span>{t('from_dsc_registration')}</span>
                       </div>
                       <Button
                         variant="link"
                         className="p-0 h-auto text-primary text-xs mt-1"
                         onClick={() => window.open(profileData.dscCertificate, "_blank")}
                       >
-                        <Eye className="h-3 w-3 mr-1" /> View
+                        <Eye className="h-3 w-3 mr-1" /> {t('view')}
                       </Button>
                     </div>
                   </div>
@@ -728,17 +730,17 @@ export default function IECRegistration() {
                   <div className="flex items-center gap-3 p-3 bg-white rounded-lg border">
                     <CreditCard className="h-4 w-4 text-blue-600" />
                     <div className="flex-1">
-                      <div className="text-sm font-medium">AD Code Letter</div>
+                      <div className="text-sm font-medium">{t('ad_code_letter')}</div>
                       <div className="flex items-center gap-1 text-blue-600 text-xs">
                         <Check className="h-3 w-3" />
-                        <span>From AD Code Registration</span>
+                        <span>{t('from_ad_code_registration')}</span>
                       </div>
                       <Button
                         variant="link"
                         className="p-0 h-auto text-primary text-xs mt-1"
                         onClick={() => window.open(profileData.adCodeLetterFromBankUrl, "_blank")}
                       >
-                        <Eye className="h-3 w-3 mr-1" /> View
+                        <Eye className="h-3 w-3 mr-1" /> {t('view')}
                       </Button>
                     </div>
                   </div>
@@ -754,54 +756,54 @@ export default function IECRegistration() {
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
             <Check className="h-5 w-5 text-green-600" />
-            Basic Details Required <span className="text-red-500">*</span>
+            {t('basic_details_required')} <span className="text-red-500">*</span>
           </CardTitle>
-          <CardDescription>Information fetched from your profile</CardDescription>
+          <CardDescription>{t('information_fetched_from_profile')}</CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
           <div className="bg-green-50 p-4 rounded-lg border border-green-200">
-            <h4 className="font-medium text-green-900 mb-3">✅ Auto-filled from your profile:</h4>
+            <h4 className="font-medium text-green-900 mb-3">✅ {t('auto_filled_from_profile')}:</h4>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="space-y-2">
                 <Label>
-                  Full Name <span className="text-red-500">*</span>
+                  {t('full_name')} <span className="text-red-500">*</span>
                 </Label>
                 <Input value={profileData.fullName} disabled className="bg-gray-50" />
                 <div className="flex items-center gap-1 text-green-600 text-xs">
                   <Check className="h-3 w-3" />
-                  <span>Fetched from profile</span>
+                  <span>{t('fetched_from_profile')}</span>
                 </div>
               </div>
               <div className="space-y-2">
                 <Label>
-                  Mobile Number <span className="text-red-500">*</span>
+                  {t('mobile_number')} <span className="text-red-500">*</span>
                 </Label>
                 <Input value={profileData.mobile} disabled className="bg-gray-50" />
                 <div className="flex items-center gap-1 text-green-600 text-xs">
                   <Check className="h-3 w-3" />
-                  <span>Fetched from profile</span>
+                  <span>{t('fetched_from_profile')}</span>
                 </div>
               </div>
               <div className="space-y-2">
                 <Label>
-                  Email Address <span className="text-red-500">*</span>
+                  {t('email_address')} <span className="text-red-500">*</span>
                 </Label>
                 <Input value={profileData.email} disabled className="bg-gray-50" />
                 <div className="flex items-center gap-1 text-green-600 text-xs">
                   <Check className="h-3 w-3" />
-                  <span>Fetched from profile</span>
+                  <span>{t('fetched_from_profile')}</span>
                 </div>
               </div>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mt-4">
               {[
-                { key: "panCardUrl", label: "PAN Card", icon: FileText, completed: !!profileData.panCardUrl },
-                { key: "aadharCardUrl", label: "Aadhaar Card", icon: FileText, completed: !!profileData.aadharCardUrl },
-                { key: "photographUrl", label: "Photograph", icon: User, completed: !!profileData.photographUrl },
+                { key: "panCardUrl", label: t('pan_card'), icon: FileText, completed: !!profileData.panCardUrl },
+                { key: "aadharCardUrl", label: t('aadhaar_card'), icon: FileText, completed: !!profileData.aadharCardUrl },
+                { key: "photographUrl", label: t('photograph'), icon: User, completed: !!profileData.photographUrl },
                 {
                   key: "proofOfAddressUrl",
-                  label: "Proof of Address",
+                  label: t('proof_of_address'),
                   icon: MapPin,
                   completed: !!profileData.proofOfAddressUrl,
                 },
@@ -816,7 +818,7 @@ export default function IECRegistration() {
                       className={`flex items-center gap-1 text-xs ${doc.completed ? "text-green-600" : "text-gray-500"}`}
                     >
                       {doc.completed ? <Check className="h-3 w-3" /> : <Clock className="h-3 w-3" />}
-                      <span>{doc.completed ? "Uploaded in profile" : "Pending in profile"}</span>
+                      <span>{doc.completed ? t('uploaded_in_profile') : t('pending_in_profile')}</span>
                     </div>
                   </div>
                 </div>
@@ -831,35 +833,35 @@ export default function IECRegistration() {
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
             <Building className="h-5 w-5 text-purple-600" />
-            Business Details <span className="text-red-500">*</span>
+            {t('business_details')} <span className="text-red-500">*</span>
           </CardTitle>
-          <CardDescription>Provide your business information for IEC registration</CardDescription>
+          <CardDescription>{t('provide_business_information')}</CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
           <div className="space-y-2">
             <Label htmlFor="businessAddress">
-              Business Address <span className="text-red-500">*</span>
+              {t('business_address')} <span className="text-red-500">*</span>
             </Label>
             <Input
               id="businessAddress"
-              placeholder="Enter complete business address"
+              placeholder={t('enter_complete_business_address')}
               value={businessDetails.businessAddress}
               onChange={(e) => setBusinessDetails((prev) => ({ ...prev, businessAddress: e.target.value }))}
             />
-            <p className="text-xs text-gray-500">Complete address where business operations are conducted</p>
+            <p className="text-xs text-gray-500">{t('complete_address_description')}</p>
           </div>
 
           <div className="space-y-2">
             <Label htmlFor="natureOfBusiness">
-              Nature of Business <span className="text-red-500">*</span>
+              {t('nature_of_business')} <span className="text-red-500">*</span>
             </Label>
             <Input
               id="natureOfBusiness"
-              placeholder="e.g., Trading, Manufacturing, Service, Consultancy, etc."
+              placeholder={t('nature_of_business_placeholder')}
               value={businessDetails.natureOfBusiness}
               onChange={(e) => setBusinessDetails((prev) => ({ ...prev, natureOfBusiness: e.target.value }))}
             />
-            <p className="text-xs text-gray-500">Specify the primary nature of your business activities</p>
+            <p className="text-xs text-gray-500">{t('specify_primary_nature_description')}</p>
           </div>
         </CardContent>
       </Card>
@@ -870,15 +872,15 @@ export default function IECRegistration() {
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
               <FileText className="h-5 w-5 text-orange-600" />
-              Business Entity Documents <span className="text-red-500">*</span>
+              {t('business_entity_documents')} <span className="text-red-500">*</span>
             </CardTitle>
-            <CardDescription>Required for {profileData.businessType} business type</CardDescription>
+            <CardDescription>{t('required_for_business_type', { businessType: profileData.businessType })}</CardDescription>
           </CardHeader>
           <CardContent className="space-y-6">
             <DocumentUploadSection
               docType="authorizationLetter"
-              label="Authorization Letter / Board Resolution"
-              description="Authorization letter or board resolution for IEC application"
+              label={t('authorization_letter_board_resolution')}
+              description={t('authorization_letter_description')}
               required={true}
               currentDocState={documents.authorizationLetter || { name: "", file: null, uploaded: false }}
               onFileSelect={(file) => handleDocumentSelect("authorizationLetter", file)}
@@ -889,8 +891,8 @@ export default function IECRegistration() {
             {isDocumentRequired("partnershipDeed") && (
               <DocumentUploadSection
                 docType="partnershipDeed"
-                label="Partnership Deed"
-                description="Registered partnership deed"
+                label={t('partnership_deed')}
+                description={t('partnership_deed_description')}
                 required={true}
                 currentDocState={documents.partnershipDeed || { name: "", file: null, uploaded: false }}
                 onFileSelect={(file) => handleDocumentSelect("partnershipDeed", file)}
@@ -902,8 +904,8 @@ export default function IECRegistration() {
             {isDocumentRequired("llpAgreement") && (
               <DocumentUploadSection
                 docType="llpAgreement"
-                label="LLP Agreement"
-                description="Limited Liability Partnership agreement"
+                label={t('llp_agreement')}
+                description={t('llp_agreement_description')}
                 required={true}
                 currentDocState={documents.llpAgreement || { name: "", file: null, uploaded: false }}
                 onFileSelect={(file) => handleDocumentSelect("llpAgreement", file)}
@@ -915,8 +917,8 @@ export default function IECRegistration() {
             {isDocumentRequired("certificateOfIncorporation") && (
               <DocumentUploadSection
                 docType="certificateOfIncorporation"
-                label="Certificate of Incorporation"
-                description="Company incorporation certificate from ROC"
+                label={t('certificate_of_incorporation')}
+                description={t('certificate_of_incorporation_description')}
                 required={true}
                 currentDocState={documents.certificateOfIncorporation || { name: "", file: null, uploaded: false }}
                 onFileSelect={(file) => handleDocumentSelect("certificateOfIncorporation", file)}
@@ -928,8 +930,8 @@ export default function IECRegistration() {
             {isDocumentRequired("moaAoa") && (
               <DocumentUploadSection
                 docType="moaAoa"
-                label="MOA & AOA"
-                description="Memorandum and Articles of Association documents"
+                label={t('moa_aoa')}
+                description={t('moa_aoa_description')}
                 required={true}
                 currentDocState={documents.moaAoa || { name: "", file: null, uploaded: false }}
                 onFileSelect={(file) => handleDocumentSelect("moaAoa", file)}
@@ -946,53 +948,53 @@ export default function IECRegistration() {
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
             <Building className="h-5 w-5 text-slate-600" />
-            Bank Details (Optional at the time of registration)
+            {t('bank_details_optional')}
           </CardTitle>
-          <CardDescription>You can provide bank details now or add them later</CardDescription>
+          <CardDescription>{t('bank_details_description')}</CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
           <div className="space-y-4 p-4 bg-slate-50 rounded-lg border border-slate-200">
             <h4 className="font-medium text-slate-900 flex items-center gap-2">
               <Building className="h-4 w-4" />
-              Bank Details Include:
+              {t('bank_details_include')}:
             </h4>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="space-y-2">
-                <Label htmlFor="accountNumber">Bank Account Number</Label>
+                <Label htmlFor="accountNumber">{t('bank_account_number')}</Label>
                 <Input
                   id="accountNumber"
-                  placeholder="Enter account number"
+                  placeholder={t('enter_account_number')}
                   value={bankDetails.accountNumber}
                   onChange={(e) => setBankDetails((prev) => ({ ...prev, accountNumber: e.target.value }))}
                 />
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="ifscCode">IFSC Code</Label>
+                <Label htmlFor="ifscCode">{t('ifsc_code')}</Label>
                 <Input
                   id="ifscCode"
-                  placeholder="Enter IFSC code"
+                  placeholder={t('enter_ifsc_code')}
                   value={bankDetails.ifscCode}
                   onChange={(e) => setBankDetails((prev) => ({ ...prev, ifscCode: e.target.value }))}
                 />
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="bankName">Bank Name</Label>
+                <Label htmlFor="bankName">{t('bank_name')}</Label>
                 <Input
                   id="bankName"
-                  placeholder="Enter bank name"
+                  placeholder={t('enter_bank_name')}
                   value={bankDetails.bankName}
                   onChange={(e) => setBankDetails((prev) => ({ ...prev, bankName: e.target.value }))}
                 />
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="branchName">Branch Name</Label>
+                <Label htmlFor="branchName">{t('branch_name')}</Label>
                 <Input
                   id="branchName"
-                  placeholder="Enter branch name"
+                  placeholder={t('enter_branch_name')}
                   value={bankDetails.branchName}
                   onChange={(e) => setBankDetails((prev) => ({ ...prev, branchName: e.target.value }))}
                 />
@@ -1000,9 +1002,9 @@ export default function IECRegistration() {
             </div>
 
             <div className="space-y-2">
-              <Label>Cancelled Cheque, Bank Statement, or Passbook (Front Page)</Label>
+              <Label>{t('cancelled_cheque_bank_statement')}</Label>
               <p className="text-sm text-gray-600 mb-2">
-                Upload a cancelled cheque, bank statement, or the front page of your passbook for account verification.
+                {t('cancelled_cheque_description')}
               </p>
               <div
                 className="border-2 border-dashed border-slate-300 rounded-lg p-6 text-center hover:border-slate-400 transition-colors cursor-pointer"
@@ -1019,7 +1021,7 @@ export default function IECRegistration() {
                   <div className="flex flex-col items-center justify-center gap-2">
                     <div className="flex items-center gap-1 text-green-600 text-xs">
                       <Check className="h-3 w-3" />
-                      <span>Document Selected</span>
+                      <span>{t('document_selected')}</span>
                     </div>
                     {(bankDetails.tempCancelledChequeUrl || bankDetails.cancelledChequeUrl) && (
                       <Button
@@ -1031,7 +1033,7 @@ export default function IECRegistration() {
                           if (url) window.open(url, "_blank")
                         }}
                       >
-                        <Eye className="h-3 w-3 mr-1" /> View
+                        <Eye className="h-3 w-3 mr-1" /> {t('view')}
                       </Button>
                     )}
                     <Button
@@ -1042,16 +1044,16 @@ export default function IECRegistration() {
                         document.getElementById("bankDocument")?.click()
                       }}
                     >
-                      <Upload className="h-3 w-3 mr-1" /> Change / Re-upload
+                      <Upload className="h-3 w-3 mr-1" /> {t('change_re_upload')}
                     </Button>
                   </div>
                 ) : (
                   <div className="space-y-2">
                     <Upload className="h-8 w-8 text-slate-400 mx-auto" />
                     <div className="text-sm text-gray-600">
-                      <span className="text-slate-600">Click to upload</span>
+                      <span className="text-slate-600">{t('click_to_upload')}</span>
                     </div>
-                    <p className="text-xs text-gray-400">Supported formats: .pdf, .jpg, .jpeg, .png</p>
+                    <p className="text-xs text-gray-400">{t('supported_formats')}</p>
                   </div>
                 )}
               </div>
@@ -1065,29 +1067,29 @@ export default function IECRegistration() {
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
             <CreditCard className="h-5 w-5 text-emerald-600" />
-            IEC Information
+            {t('iec_information')}
           </CardTitle>
-          <CardDescription>Important information about Import Export Code</CardDescription>
+          <CardDescription>{t('important_information_about_iec')}</CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
           <div className="bg-emerald-50 p-4 rounded-lg border border-emerald-200">
-            <h4 className="font-medium text-emerald-900 mb-3">🌍 What is IEC?</h4>
+            <h4 className="font-medium text-emerald-900 mb-3">🌍 {t('what_is_iec')}?</h4>
             <ul className="text-emerald-800 text-sm space-y-2">
-              <li>• Import Export Code is a 10-digit code issued by DGFT (Directorate General of Foreign Trade)</li>
-              <li>• Mandatory for importers and exporters in India</li>
-              <li>• Required for customs clearance, foreign exchange transactions, and international trade</li>
-              <li>• Valid for a lifetime, no renewal required</li>
+              <li>• {t('iec_description_1')}</li>
+              <li>• {t('iec_description_2')}</li>
+              <li>• {t('iec_description_3')}</li>
+              <li>• {t('iec_description_4')}</li>
             </ul>
           </div>
 
           <div className="bg-blue-50 p-4 rounded-lg border border-blue-200">
-            <h4 className="font-medium text-blue-900 mb-3">📋 Benefits of IEC Registration:</h4>
+            <h4 className="font-medium text-blue-900 mb-3">📋 {t('benefits_of_iec_registration')}:</h4>
             <ul className="text-blue-800 text-sm space-y-2">
-              <li>• Enables international trade activities (import and export)</li>
-              <li>• Access to export incentives and schemes from DGFT</li>
-              <li>• Simplifies customs procedures and documentation</li>
-              <li>• Enhances business credibility in the global market</li>
-              <li>• No annual compliance or filing requirements</li>
+              <li>• {t('iec_benefit_1')}</li>
+              <li>• {t('iec_benefit_2')}</li>
+              <li>• {t('iec_benefit_3')}</li>
+              <li>• {t('iec_benefit_4')}</li>
+              <li>• {t('iec_benefit_5')}</li>
             </ul>
           </div>
         </CardContent>
@@ -1100,27 +1102,26 @@ export default function IECRegistration() {
             <CardHeader className="pb-2">
               <CardTitle className="text-amber-900 flex items-center gap-2">
                 <Clock className="h-5 w-5" />
-                Application Submitted
+                {t('application_submitted')}
               </CardTitle>
             </CardHeader>
             <CardContent>
               <p className="text-sm">
-                Your IEC registration application has been submitted and is currently being processed. You can track the
-                progress in the Progress section.
+                {t('application_submitted_description')}
               </p>
             </CardContent>
           </Card>
         ) : (
           <>
             <Button variant="outline" asChild>
-              <Link href="/dashboard/registration">Save & Continue Later</Link>
+              <Link href="/dashboard/registration">{t('save_continue_later')}</Link>
             </Button>
             <Button
               className="bg-blue-600 hover:bg-blue-700"
               onClick={handleSubmitApplication}
               disabled={progress < 100}
             >
-              Submit IEC Application ({progress}%)
+              {t('submit_iec_application', { progress })}
             </Button>
           </>
         )}
