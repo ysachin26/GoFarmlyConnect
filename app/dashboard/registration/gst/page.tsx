@@ -3,6 +3,7 @@
 import type React from "react"
 
 import { useState, useEffect, useRef } from "react"
+import { useLanguage } from "@/contexts/LanguageContext"
 import {
   ArrowLeft,
   Check,
@@ -114,6 +115,8 @@ interface StagedFileEntry {
 }
 
 export default function GSTRegistration() {
+  const { t } = useLanguage()
+  
   // Add a new state variable to track if the rejected toast has been shown
   const [hasShownRejectedToast, setHasShownRejectedToast] = useState(false)
 
@@ -410,8 +413,8 @@ export default function GSTRegistration() {
     const currentStatus = getRegistrationStatus()
     if (currentStatus === "rejected" && !hasShownRejectedToast) {
       toast({
-        title: "Document Rejected",
-        description: "One or more documents have been rejected. Please re-upload.",
+        title: t("document_rejected"),
+        description: t("documents_rejected_re_upload"),
         variant: "destructive",
       })
       setHasShownRejectedToast(true) // Mark that the toast has been shown
@@ -517,8 +520,8 @@ export default function GSTRegistration() {
     if (file.size > 1024 * 1024) {
       toast({
         variant: "destructive",
-        title: "❌ File Size Too Large",
-        description: `File size is ${(file.size / (1024 * 1024)).toFixed(2)}MB. Please upload a file smaller than 1MB.`,
+        title: t("file_size_too_large"),
+        description: t("file_size_limit_message", { size: (file.size / (1024 * 1024)).toFixed(2) }),
       })
       return
     }
@@ -551,8 +554,8 @@ export default function GSTRegistration() {
     if (file.size > 1024 * 1024) {
       toast({
         variant: "destructive",
-        title: "❌ File Size Too Large",
-        description: `File size is ${(file.size / (1024 * 1024)).toFixed(2)}MB. Please upload a file smaller than 1MB.`,
+        title: t("file_size_too_large"),
+        description: t("file_size_limit_message", { size: (file.size / (1024 * 1024)).toFixed(2) }),
       })
       return
     }
@@ -572,7 +575,7 @@ export default function GSTRegistration() {
 
   const handleSubmit = async () => {
     if (progress < 100) {
-      alert("Please complete all required fields and upload all necessary documents.")
+      alert(t("complete_all_required_fields"))
       return
     }
 
@@ -641,7 +644,7 @@ export default function GSTRegistration() {
       router.push("/dashboard/progress") // Redirect to progress page
     } else {
       toast({
-        title: "Submission failed",
+        title: t("submission_failed"),
         description: result.message,
         variant: "destructive",
       })
@@ -657,28 +660,28 @@ export default function GSTRegistration() {
         return (
           <div className="flex items-center gap-1 text-amber-600 text-xs">
             <Clock className="h-3 w-3" />
-            <span>Pending Verification</span>
+            <span>{t("pending_verification")}</span>
           </div>
         )
       case "verified":
         return (
           <div className="flex items-center gap-1 text-green-600 text-xs">
             <Check className="h-3 w-3" />
-            <span>Verified</span>
+            <span>{t("verified")}</span>
           </div>
         )
       case "rejected":
         return (
           <div className="flex items-center gap-1 text-red-600 text-xs">
             <XCircle className="h-3 w-3" />
-            <span>Rejected, Re-upload required</span>
+            <span>{t("rejected_re_upload_required")}</span>
           </div>
         )
       default:
         return (
           <div className="flex items-center gap-1 text-gray-500 text-xs">
             <Clock className="h-3 w-3" />
-            <span>Not Uploaded</span>
+            <span>{t("not_uploaded")}</span>
           </div>
         )
     }
@@ -725,8 +728,8 @@ export default function GSTRegistration() {
               const file = e.target.files?.[0]
               if (file && file.size > 1024 * 1024) {
                 toast({
-                  title: "File size too large.",
-                  description: "Please upload a file smaller than 1MB.",
+                  title: t("file_size_too_large"),
+                  description: t("file_size_limit_1mb"),
                 })
                 return
               }
@@ -748,7 +751,7 @@ export default function GSTRegistration() {
                     window.open(stagedFile.previewUrl, "_blank")
                   }}
                 >
-                  <Eye className="h-3 w-3 mr-1" /> Preview
+                  <Eye className="h-3 w-3 mr-1" /> {t("preview")}
                 </Button>
                 <Button
                   variant="link"
@@ -758,10 +761,10 @@ export default function GSTRegistration() {
                     handleRemoveStagedFile(docKey, inputRef)
                   }}
                 >
-                  <XCircle className="h-3 w-3 mr-1" /> Remove
+                  <XCircle className="h-3 w-3 mr-1" /> {t("remove")}
                 </Button>
                 <Button variant="link" className="p-0 h-auto text-blue-600 text-xs" onClick={handleButtonClick}>
-                  <Upload className="h-3 w-3 mr-1" /> Re-upload
+                  <Upload className="h-3 w-3 mr-1" /> {t("re_upload")}
                 </Button>
               </div>
             </div>
@@ -775,12 +778,12 @@ export default function GSTRegistration() {
               <span
                 className={`text-sm font-medium ${currentStatus === "rejected" ? "text-red-600" : "text-green-600"}`}
               >
-                {currentStatus === "rejected" ? "Rejected" : "Uploaded"}
+                {currentStatus === "rejected" ? t("rejected") : t("uploaded")}
               </span>
               {/* 🔥 SHOW "SHARED FROM PREVIOUS REGISTRATION" MESSAGE */}
               <div className="flex items-center gap-1 text-blue-600 text-xs">
                 <Check className="h-3 w-3" />
-                <span>Shared from previous registration</span>
+                <span>{t("shared_from_previous_registration")}</span>
               </div>
               {currentUrl && (
                 <Button
@@ -791,13 +794,13 @@ export default function GSTRegistration() {
                     window.open(currentUrl, "_blank")
                   }}
                 >
-                  <Eye className="h-3 w-3 mr-1" /> View
+                  <Eye className="h-3 w-3 mr-1" /> {t("view")}
                 </Button>
               )}
               {/* Show re-upload button when registration is rejected OR when individual document is rejected */}
               {(registrationStatus === "rejected" || currentStatus === "rejected") && (
                 <Button variant="link" className="p-0 h-auto text-blue-600 text-xs mt-1" onClick={handleButtonClick}>
-                  <Upload className="h-3 w-3 mr-1" /> Re-upload
+                  <Upload className="h-3 w-3 mr-1" /> {t("re_upload")}
                 </Button>
               )}
             </div>
@@ -805,7 +808,7 @@ export default function GSTRegistration() {
             <div className="space-y-2">
               {icon && <icon className="h-8 w-8 text-gray-400 mx-auto" />}
               <div className="text-sm text-gray-600">
-                <span className="text-primary">{isUploading ? "Uploading..." : "Click to upload"}</span>
+                <span className="text-primary">{isUploading ? t("uploading") : t("click_to_upload")}</span>
               </div>
               <p className="text-xs text-gray-500">{hint}</p>
             </div>
@@ -888,7 +891,7 @@ export default function GSTRegistration() {
                     window.open(currentDocState.tempUrl, "_blank")
                   }}
                 >
-                  <Eye className="h-3 w-3 mr-1" /> Preview
+                  <Eye className="h-3 w-3 mr-1" /> {t("preview")}
                 </Button>
                 <Button
                   variant="link"
@@ -901,7 +904,7 @@ export default function GSTRegistration() {
                     }
                   }}
                 >
-                  <XCircle className="h-3 w-3 mr-1" /> Remove
+                  <XCircle className="h-3 w-3 mr-1" /> {t("remove")}
                 </Button>
               </div>
             </div>
@@ -917,12 +920,12 @@ export default function GSTRegistration() {
                   currentDocState.status === "rejected" ? "text-red-600" : "text-green-600"
                 }`}
               >
-                {currentDocState.status === "rejected" ? "Rejected" : "Uploaded"}
+                {currentDocState.status === "rejected" ? t("rejected") : t("uploaded")}
               </span>
               {/* 🔥 SHOW "SHARED FROM PREVIOUS REGISTRATION" MESSAGE */}
               <div className="flex items-center gap-1 text-blue-600 text-xs">
                 <Check className="h-3 w-3" />
-                <span>Shared from previous registration</span>
+                <span>{t("shared_from_previous_registration")}</span>
               </div>
               {currentDocState.url && (
                 <Button
@@ -933,13 +936,13 @@ export default function GSTRegistration() {
                     window.open(currentDocState.url, "_blank")
                   }}
                 >
-                  <Eye className="h-3 w-3 mr-1" /> View
+                  <Eye className="h-3 w-3 mr-1" /> {t("view")}
                 </Button>
               )}
               {/* Show re-upload button when registration is rejected OR when individual document is rejected */}
               {(registrationStatus === "rejected" || currentDocState.status === "rejected") && (
                 <Button variant="link" className="p-0 h-auto text-blue-600 text-xs mt-1" onClick={handleButtonClick}>
-                  <Upload className="h-3 w-3 mr-1" /> Re-upload
+                  <Upload className="h-3 w-3 mr-1" /> {t("re_upload")}
                 </Button>
               )}
             </div>
@@ -947,9 +950,9 @@ export default function GSTRegistration() {
             <div className="space-y-2">
               <Upload className="h-8 w-8 text-gray-400 mx-auto" />
               <div className="text-sm text-gray-600">
-                <span className="text-primary">Click to upload</span>
+                <span className="text-primary">{t("click_to_upload")}</span>
               </div>
-              <p className="text-xs text-gray-500">Supported formats: .pdf, .jpg, .jpeg, .png</p>
+              <p className="text-xs text-gray-500">{t("supported_formats_pdf_jpg_png")}</p>
             </div>
           )}
         </div>
@@ -967,8 +970,8 @@ export default function GSTRegistration() {
           </Button>
         </Link>
         <div>
-          <h1 className="text-3xl font-bold text-gray-900">GST Registration</h1>
-          <p className="text-gray-600 mt-1">Complete all required steps to register for GST</p>
+          <h1 className="text-3xl font-bold text-gray-900">{t("gst_registration_title")}</h1>
+          <p className="text-gray-600 mt-1">{t("gst_registration_description")}</p>
         </div>
       </div>
 
@@ -976,12 +979,12 @@ export default function GSTRegistration() {
       <Card className="bg-teal-50 border-teal-200">
         <CardContent className="p-6">
           <div className="flex items-center justify-between mb-4">
-            <h3 className="font-semibold text-teal-900">Registration Progress</h3>
+            <h3 className="font-semibold text-teal-900">{t("registration_progress")}</h3>
             <span className="text-teal-600 font-bold">{progress}%</span>
           </div>
           <Progress value={progress} className="h-3" />
           <p className="text-teal-700 text-sm mt-2">
-            Complete all required sections below to proceed with your GST registration
+            {t("complete_required_sections_gst")}
           </p>
         </CardContent>
       </Card>
@@ -991,64 +994,64 @@ export default function GSTRegistration() {
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
             <Check className="h-5 w-5 text-green-600" />
-            Basic Details Required <span className="text-red-500">*</span>
+            {t("basic_details_required")} <span className="text-red-500">*</span>
           </CardTitle>
-          <CardDescription>Information fetched from your profile</CardDescription>
+          <CardDescription>{t("information_fetched_from_profile")}</CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
           <div className="bg-green-50 p-4 rounded-lg border border-green-200">
-            <h4 className="font-medium text-green-900 mb-3">✅ Auto-filled from your profile:</h4>
+            <h4 className="font-medium text-green-900 mb-3">{t("auto_filled_from_profile")}</h4>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="space-y-2">
                 <Label>
-                  Full Name <span className="text-red-500">*</span>
+                  {t("full_name")} <span className="text-red-500">*</span>
                 </Label>
                 <Input value={profileData.fullName} disabled className="bg-gray-50" />
                 <div className="flex items-center gap-1 text-green-600 text-xs">
                   <Check className="h-3 w-3" />
-                  <span>Fetched from profile</span>
+                  <span>{t("fetched_from_profile")}</span>
                 </div>
               </div>
               <div className="space-y-2">
                 <Label>
-                  Mobile Number <span className="text-red-500">*</span>
+                  {t("mobile_number")} <span className="text-red-500">*</span>
                 </Label>
                 <Input value={profileData.mobile} disabled className="bg-gray-50" />
                 <div className="flex items-center gap-1 text-green-600 text-xs">
                   <Check className="h-3 w-3" />
-                  <span>Fetched from profile</span>
+                  <span>{t("fetched_from_profile")}</span>
                 </div>
               </div>
               <div className="space-y-2">
                 <Label>
-                  Email Address <span className="text-red-500">*</span>
+                  {t("email_address")} <span className="text-red-500">*</span>
                 </Label>
                 <Input value={profileData.email} disabled className="bg-gray-50" />
                 <div className="flex items-center gap-1 text-green-600 text-xs">
                   <Check className="h-3 w-3" />
-                  <span>Fetched from profile</span>
+                  <span>{t("fetched_from_profile")}</span>
                 </div>
               </div>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mt-4">
               {[
-                { key: "panCardUrl", label: "PAN Card", icon: FileText, completed: !!profileData.panCardUrl },
+                { key: "panCardUrl", label: t("pan_card"), icon: FileText, completed: !!profileData.panCardUrl },
                 {
                   key: "aadharCardUrl",
-                  label: "Aadhaar Card",
+                  label: t("aadhaar_card"),
                   icon: FileText,
                   completed: !!profileData.aadharCardUrl,
                 },
                 {
                   key: "photographUrl",
-                  label: "Photograph",
+                  label: t("photograph"),
                   icon: User,
                   completed: !!profileData.photographUrl,
                 },
                 {
                   key: "proofOfAddressUrl",
-                  label: "Proof of Address",
+                  label: t("proof_of_address"),
                   icon: MapPin,
                   completed: !!profileData.proofOfAddressUrl,
                 },
@@ -1063,7 +1066,7 @@ export default function GSTRegistration() {
                       className={`flex items-center gap-1 text-xs ${doc.completed ? "text-green-600" : "text-gray-500"}`}
                     >
                       {doc.completed ? <Check className="h-3 w-3" /> : <Clock className="h-3 w-3" />}
-                      <span>{doc.completed ? "Uploaded in profile" : "Pending in profile"}</span>
+                      <span>{doc.completed ? t("uploaded_in_profile") : t("pending_in_profile")}</span>
                     </div>
                   </div>
                 </div>
@@ -1078,9 +1081,9 @@ export default function GSTRegistration() {
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
             <Building className="h-5 w-5 text-blue-600" />
-            Business Entity Type
+            {t("business_entity_type")}
           </CardTitle>
-          <CardDescription>Business type from your registration profile</CardDescription>
+          <CardDescription>{t("business_type_from_profile")}</CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
           <div className="bg-blue-50 p-4 rounded-lg border border-blue-200">
@@ -1088,51 +1091,51 @@ export default function GSTRegistration() {
               <Check className="h-5 w-5 text-green-600" />
               <span className="font-medium text-blue-900">
                 {businessType === "individual"
-                  ? "Individual / Sole Proprietor"
+                  ? t("individual_sole_proprietor")
                   : businessType === "partnership"
-                    ? "Partnership Firm"
+                    ? t("partnership_firm")
                     : businessType === "llp"
-                      ? "LLP (Limited Liability Partnership)"
+                      ? t("llp_limited_liability_partnership")
                       : businessType === "pvt_ltd"
-                        ? "Private Limited Company"
-                        : "Loading..."}
+                        ? t("private_limited_company")
+                        : t("loading")}
               </span>
             </div>
             <p className="text-blue-700 text-sm">
-              Fetched from your registration profile. Document requirements are customized based on this business type.
+              {t("document_requirements_customized_by_business_type")}
             </p>
           </div>
 
           <div className="space-y-2">
             <Label htmlFor="natureOfBusiness">
-              Nature of Business <span className="text-red-500">*</span>
+              {t("nature_of_business")} <span className="text-red-500">*</span>
             </Label>
             <Input
               id="natureOfBusiness"
-              placeholder="e.g., Trading, Manufacturing, Service, Consultancy, etc."
+              placeholder={t("nature_of_business_placeholder")}
               value={businessDetails.natureOfBusiness}
               onChange={(e) => setBusinessDetails((prev) => ({ ...prev, natureOfBusiness: e.target.value }))}
             />
-            <p className="text-xs text-gray-500">Specify the primary nature of your business activities</p>
+            <p className="text-xs text-gray-500">{t("specify_primary_business_activities")}</p>
           </div>
 
           <div className="space-y-2">
             <Label htmlFor="businessName">
-              Name of Business / Trade Name <span className="text-red-500">*</span>
+              {t("business_trade_name")} <span className="text-red-500">*</span>
             </Label>
             <Input
               id="businessName"
-              placeholder="Enter your business or trade name"
+              placeholder={t("enter_business_trade_name")}
               value={businessDetails.businessName}
               onChange={(e) => setBusinessDetails((prev) => ({ ...prev, businessName: e.target.value }))}
             />
             {businessDetails.businessName && (
               <div className="flex items-center gap-1 text-green-600 text-xs">
                 <Check className="h-3 w-3" />
-                <span>Pre-filled from your profile</span>
+                <span>{t("pre_filled_from_profile")}</span>
               </div>
             )}
-            <p className="text-xs text-gray-500">This name will appear on your GST certificate</p>
+            <p className="text-xs text-gray-500">{t("name_appears_on_gst_certificate")}</p>
           </div>
         </CardContent>
       </Card>
@@ -1143,34 +1146,34 @@ export default function GSTRegistration() {
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
               <Shield className="h-5 w-5 text-indigo-600" />
-              Business Entity Documents <span className="text-red-500">*</span>
+              {t("business_entity_documents")} <span className="text-red-500">*</span>
             </CardTitle>
             <CardDescription>
-              Upload required documents for{" "}
+              {t("upload_required_documents_for")} {" "}
               {businessType === "partnership"
-                ? "Partnership Firm"
+                ? t("partnership_firm")
                 : businessType === "llp"
-                  ? "LLP"
-                  : "Private Limited Company"}
+                  ? t("llp")
+                  : t("private_limited_company")}
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-6">
             {/* Authorization Letter - Required for all non-individual types */}
             <div className="space-y-4 p-4 bg-indigo-50 rounded-lg border border-indigo-200">
-              <h4 className="font-medium text-indigo-900">📋 Authorization Documents:</h4>
+              <h4 className="font-medium text-indigo-900">{t("authorization_documents")}</h4>
               {getDocumentUploadComponent(
                 "authorizationLetter",
-                "Authorization Letter / Board Resolution",
+                t("authorization_letter_board_resolution"),
                 businessDocuments.authorizationLetterUrl,
                 businessDocuments.authorizationLetterStatus,
                 authorizationLetterRef,
                 handleStageFileUpload,
                 Shield,
                 businessType === "partnership"
-                  ? "Authorization from partners"
+                  ? t("authorization_from_partners")
                   : businessType === "llp"
-                    ? "Authorization from designated partners"
-                    : "Board resolution from directors",
+                    ? t("authorization_from_designated_partners")
+                    : t("board_resolution_from_directors"),
                 ".pdf,.jpg,.jpeg,.png",
               )}
             </div>
@@ -1178,16 +1181,16 @@ export default function GSTRegistration() {
             {/* Partnership Deed - Only for Partnership */}
             {businessType === "partnership" && (
               <div className="space-y-4 p-4 bg-purple-50 rounded-lg border border-purple-200">
-                <h4 className="font-medium text-purple-900">🤝 Partnership Documents:</h4>
+                <h4 className="font-medium text-purple-900">{t("partnership_documents")}</h4>
                 {getDocumentUploadComponent(
                   "partnershipDeed",
-                  "Partnership Deed",
+                  t("partnership_deed"),
                   businessDocuments.partnershipDeedUrl,
                   businessDocuments.partnershipDeedStatus,
                   partnershipDeedRef,
                   handleStageFileUpload,
                   Users,
-                  "Registered partnership deed",
+                  t("registered_partnership_deed"),
                   ".pdf,.jpg,.jpeg,.png",
                 )}
               </div>
@@ -1196,16 +1199,16 @@ export default function GSTRegistration() {
             {/* LLP Agreement - Only for LLP */}
             {businessType === "llp" && (
               <div className="space-y-4 p-4 bg-purple-50 rounded-lg border border-purple-200">
-                <h4 className="font-medium text-purple-900">🤝 LLP Documents:</h4>
+                <h4 className="font-medium text-purple-900">{t("llp_documents")}</h4>
                 {getDocumentUploadComponent(
                   "llpAgreement",
-                  "LLP Agreement",
+                  t("llp_agreement"),
                   businessDocuments.llpAgreementUrl,
                   businessDocuments.llpAgreementStatus,
                   llpAgreementRef, // Use the new ref
                   handleStageFileUpload,
                   Users,
-                  "Limited Liability Partnership agreement",
+                  t("limited_liability_partnership_agreement"),
                   ".pdf,.jpg,.jpeg,.png",
                 )}
               </div>
@@ -1214,31 +1217,31 @@ export default function GSTRegistration() {
             {/* Company Documents - Only for Private Limited Company */}
             {businessType === "pvt_ltd" && (
               <div className="space-y-4 p-4 bg-emerald-50 rounded-lg border border-emerald-200">
-                <h4 className="font-medium text-emerald-900">🏢 Company Documents:</h4>
+                <h4 className="font-medium text-emerald-900">{t("company_documents")}</h4>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   {/* Certificate of Incorporation */}
                   {getDocumentUploadComponent(
                     "certificateOfIncorporation",
-                    "Certificate of Incorporation",
+                    t("certificate_of_incorporation"),
                     businessDocuments.certificateOfIncorporationUrl,
                     businessDocuments.certificateOfIncorporationStatus,
                     certificateOfIncorporationRef,
                     handleStageFileUpload,
                     Award,
-                    "Company incorporation certificate from ROC",
+                    t("company_incorporation_certificate_from_roc"),
                     ".pdf,.jpg,.jpeg,.png",
                   )}
 
                   {/* MOA & AOA */}
                   {getDocumentUploadComponent(
                     "moaAoa",
-                    "MOA & AOA",
+                    t("moa_aoa"),
                     businessDocuments.moaAoaUrl,
                     businessDocuments.moaAoaStatus,
                     moaAoaRef,
                     handleStageFileUpload,
                     FileText,
-                    "Memorandum and Articles of Association documents",
+                    t("memorandum_articles_association_documents"),
                     ".pdf,.jpg,.jpeg,.png",
                   )}
                 </div>
@@ -1253,14 +1256,14 @@ export default function GSTRegistration() {
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
             <Home className="h-5 w-5 text-primary" />
-            Business Premises Proof <span className="text-red-500">*</span>
+            {t("business_premises_proof")} <span className="text-red-500">*</span>
           </CardTitle>
-          <CardDescription>Choose documents based on your business premise situation</CardDescription>
+          <CardDescription>{t("choose_documents_based_on_premise_situation")}</CardDescription>
         </CardHeader>
         <CardContent className="space-y-6">
           <div className="space-y-3">
             <Label>
-              Select your premise type: <span className="text-red-500">*</span>
+              {t("select_premise_type")} <span className="text-red-500">*</span>
             </Label>
             <RadioGroup
               value={premiseType}
@@ -1268,26 +1271,26 @@ export default function GSTRegistration() {
             >
               <div className="flex items-center space-x-2">
                 <RadioGroupItem value="rented" id="rented" />
-                <Label htmlFor="rented">Rented Property</Label>
+                <Label htmlFor="rented">{t("rented_property")}</Label>
               </div>
               <div className="flex items-center space-x-2">
                 <RadioGroupItem value="owned" id="owned" />
-                <Label htmlFor="owned">Owned Property</Label>
+                <Label htmlFor="owned">{t("owned_property")}</Label>
               </div>
               <div className="flex items-center space-x-2">
                 <RadioGroupItem value="other" id="other" />
-                <Label htmlFor="other">Other</Label>
+                <Label htmlFor="other">{t("other")}</Label>
               </div>
             </RadioGroup>
           </div>
 
           {premiseType === "rented" && (
             <div className="space-y-4 p-4 bg-orange-50 rounded-lg border border-orange-200">
-              <h4 className="font-medium text-orange-900">📌 Required for Rented Property:</h4>
+              <h4 className="font-medium text-orange-900">{t("required_for_rented_property")}</h4>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 {getDocumentUploadComponent(
                   "rentAgreement",
-                  "Rent/Lease Agreement (Registered)",
+                  t("rent_lease_agreement_registered"),
                   documents.rentAgreement?.url,
                   documents.rentAgreement?.status,
                   rentAgreementRef,
@@ -1298,7 +1301,7 @@ export default function GSTRegistration() {
                 )}
                 {getDocumentUploadComponent(
                   "electricityBill",
-                  "Electricity Bill (latest)",
+                  t("electricity_bill_latest"),
                   documents.electricityBill?.url,
                   documents.electricityBill?.status,
                   electricityBillRef,
@@ -1309,7 +1312,7 @@ export default function GSTRegistration() {
                 )}
                 {getDocumentUploadComponent(
                   "noc",
-                  "NOC from Property Owner",
+                  t("noc_from_property_owner"),
                   documents.noc?.url,
                   documents.noc?.status,
                   nocRef,
@@ -1324,11 +1327,11 @@ export default function GSTRegistration() {
 
           {premiseType === "owned" && (
             <div className="space-y-4 p-4 bg-green-50 rounded-lg border border-green-200">
-              <h4 className="font-medium text-green-900">📌 Required for Owned Property:</h4>
+              <h4 className="font-medium text-green-900">{t("required_for_owned_property")}</h4>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {getDocumentUploadComponent(
                   "propertyProof",
-                  "Index II / Sale Deed / Property Tax Receipt",
+                  t("index_ii_sale_deed_property_tax_receipt"),
                   documents.propertyProof?.url,
                   documents.propertyProof?.status,
                   propertyProofRef,
@@ -1339,7 +1342,7 @@ export default function GSTRegistration() {
                 )}
                 {getDocumentUploadComponent(
                   "electricityBillOwned",
-                  "Electricity Bill (latest)",
+                  t("electricity_bill_latest"),
                   documents.electricityBillOwned?.url,
                   documents.electricityBillOwned?.status,
                   electricityBillOwnedRef,
@@ -1354,28 +1357,28 @@ export default function GSTRegistration() {
 
           {premiseType === "other" && (
             <div className="space-y-4 p-4 bg-blue-50 rounded-lg border border-blue-200">
-              <h4 className="font-medium text-blue-900">📌 Required for Other Property Type:</h4>
+              <h4 className="font-medium text-blue-900">{t("required_for_other_property_type")}</h4>
               <div className="space-y-2 mb-4">
                 <Label htmlFor="otherPremiseDescription">
-                  Specify Premise Type <span className="text-red-500">*</span>
+                  {t("specify_premise_type")} <span className="text-red-500">*</span>
                 </Label>
                 <Input
                   id="otherPremiseDescription"
-                  placeholder="e.g., Co-working space, Shared office, etc."
+                  placeholder={t("premise_type_placeholder")}
                   value={otherPremiseDescription}
                   onChange={(e) => setOtherPremiseDescription(e.target.value)}
                 />
-                <p className="text-xs text-gray-500">Please describe the type of premise</p>
+                <p className="text-xs text-gray-500">{t("describe_premise_type")}</p>
               </div>
               {getDocumentUploadComponent(
                 "otherProof",
-                "Proof of Premise (e.g., Agreement, Letter)",
+                t("proof_of_premise_agreement_letter"),
                 documents.otherProof?.url,
                 documents.otherProof?.status,
                 otherProofRef,
                 handleStageFileUpload,
                 Upload,
-                "Upload relevant document for your premise type",
+                t("upload_relevant_document_premise_type"),
                 ".pdf,.jpg,.jpeg,.png",
               )}
             </div>
@@ -1388,50 +1391,50 @@ export default function GSTRegistration() {
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
             <CreditCard className="h-5 w-5 text-indigo-600" />
-            Bank Details (Optional at the time of registration)
+            {t("bank_details_optional_at_registration")}
           </CardTitle>
-          <CardDescription>You can provide bank details now or add them later</CardDescription>
+          <CardDescription>{t("provide_bank_details_now_or_later")}</CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
           <div className="space-y-4 p-4 bg-indigo-50 rounded-lg border border-indigo-200">
-            <h4 className="font-medium text-indigo-900">🏦 Bank Details Include:</h4>
+            <h4 className="font-medium text-indigo-900">{t("bank_details_include")}</h4>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="space-y-2">
-                <Label htmlFor="accountNumber">Bank Account Number</Label>
+                <Label htmlFor="accountNumber">{t("bank_account_number")}</Label>
                 <Input
                   id="accountNumber"
-                  placeholder="Enter account number"
+                  placeholder={t("enter_account_number")}
                   value={bankDetails.accountNumber}
                   onChange={(e) => setBankDetails((prev) => ({ ...prev, accountNumber: e.target.value }))}
                 />
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="ifscCode">IFSC Code</Label>
+                <Label htmlFor="ifscCode">{t("ifsc_code")}</Label>
                 <Input
                   id="ifscCode"
-                  placeholder="Enter IFSC code"
+                  placeholder={t("enter_ifsc_code")}
                   value={bankDetails.ifscCode}
                   onChange={(e) => setBankDetails((prev) => ({ ...prev, ifscCode: e.target.value }))}
                 />
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="bankName">Bank Name</Label>
+                <Label htmlFor="bankName">{t("bank_name")}</Label>
                 <Input
                   id="bankName"
-                  placeholder="Enter bank name"
+                  placeholder={t("enter_bank_name")}
                   value={bankDetails.bankName}
                   onChange={(e) => setBankDetails((prev) => ({ ...prev, bankName: e.target.value }))}
                 />
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="branchName">Branch Name</Label>
+                <Label htmlFor="branchName">{t("branch_name")}</Label>
                 <Input
                   id="branchName"
-                  placeholder="Enter branch name"
+                  placeholder={t("enter_branch_name")}
                   value={bankDetails.branchName}
                   onChange={(e) => setBankDetails((prev) => ({ ...prev, branchName: e.target.value }))}
                 />
@@ -1439,9 +1442,9 @@ export default function GSTRegistration() {
             </div>
 
             <div className="space-y-2">
-              <Label>Cancelled Cheque, Bank Statement, or Passbook (Front Page)</Label>
+              <Label>{t("cancelled_cheque_bank_statement_passbook")}</Label>
               <p className="text-sm text-gray-600 mb-2">
-                Upload a cancelled cheque, bank statement, or the front page of your passbook for account verification.
+                {t("upload_cancelled_cheque_bank_statement_verification")}
               </p>
               <div
                 className="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center hover:border-gray-400 transition-colors cursor-pointer"
@@ -1466,7 +1469,7 @@ export default function GSTRegistration() {
                           window.open(bankDetails.tempCancelledChequeUrl, "_blank")
                         }}
                       >
-                        <Eye className="h-3 w-3 mr-1" /> Preview
+                        <Eye className="h-3 w-3 mr-1" /> {t("preview")}
                       </Button>
                       <Button
                         variant="link"
@@ -1484,7 +1487,7 @@ export default function GSTRegistration() {
                           }
                         }}
                       >
-                        <XCircle className="h-3 w-3 mr-1" /> Remove
+                        <XCircle className="h-3 w-3 mr-1" /> {t("remove")}
                       </Button>
                     </div>
                   </div>
@@ -1500,12 +1503,12 @@ export default function GSTRegistration() {
                         bankDetails.cancelledChequeStatus === "rejected" ? "text-red-600" : "text-green-600"
                       }`}
                     >
-                      {bankDetails.cancelledChequeStatus === "rejected" ? "Rejected" : "Uploaded"}
+                      {bankDetails.cancelledChequeStatus === "rejected" ? t("rejected") : t("uploaded")}
                     </span>
                     {/* 🔥 SHOW "SHARED FROM PREVIOUS REGISTRATION" MESSAGE */}
                     <div className="flex items-center gap-1 text-blue-600 text-xs">
                       <Check className="h-3 w-3" />
-                      <span>Shared from previous registration</span>
+                      <span>{t("shared_from_previous_registration")}</span>
                     </div>
                     {bankDetails.cancelledChequeUrl && (
                       <Button
@@ -1516,7 +1519,7 @@ export default function GSTRegistration() {
                           window.open(bankDetails.cancelledChequeUrl, "_blank")
                         }}
                       >
-                        <Eye className="h-3 w-3 mr-1" /> View
+                        <Eye className="h-3 w-3 mr-1" /> {t("view")}
                       </Button>
                     )}
                     {/* Show re-upload button when registration is rejected OR when individual document is rejected */}
@@ -1529,7 +1532,7 @@ export default function GSTRegistration() {
                           cancelledChequeRef.current?.click()
                         }}
                       >
-                        <Upload className="h-3 w-3 mr-1" /> Re-upload
+                        <Upload className="h-3 w-3 mr-1" /> {t("re_upload")}
                       </Button>
                     )}
                   </div>
@@ -1537,9 +1540,9 @@ export default function GSTRegistration() {
                   <div className="space-y-2">
                     <Upload className="h-8 w-8 text-gray-400 mx-auto" />
                     <div className="text-sm text-gray-600">
-                      <span className="text-primary">Click to upload</span>
+                      <span className="text-primary">{t("click_to_upload")}</span>
                     </div>
-                    <p className="text-xs text-gray-500">Supported formats: .pdf, .jpg, .jpeg, .png</p>
+                    <p className="text-xs text-gray-500">{t("supported_formats_pdf_jpg_png")}</p>
                   </div>
                 )}
               </div>
@@ -1553,29 +1556,29 @@ export default function GSTRegistration() {
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
             <CreditCard className="h-5 w-5 text-emerald-600" />
-            GST Information
+            {t("gst_information")}
           </CardTitle>
-          <CardDescription>Important information about Goods and Services Tax</CardDescription>
+          <CardDescription>{t("important_information_gst")}</CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
           <div className="bg-emerald-50 p-4 rounded-lg border border-emerald-200">
-            <h4 className="font-medium text-emerald-900 mb-3">🧾 What is GST?</h4>
+            <h4 className="font-medium text-emerald-900 mb-3">{t("what_is_gst")}</h4>
             <ul className="text-emerald-800 text-sm space-y-2">
-              <li>• Goods and Services Tax is an indirect tax levied on the supply of goods and services</li>
-              <li>• Replaced multiple indirect taxes in India (e.g., VAT, Service Tax, Excise Duty)</li>
-              <li>• Aims to simplify the tax structure and reduce cascading effect of taxes</li>
-              <li>• Mandatory for businesses exceeding a certain turnover threshold</li>
+              <li>• {t("gst_definition")}</li>
+              <li>• {t("gst_replaced_multiple_taxes")}</li>
+              <li>• {t("gst_simplify_tax_structure")}</li>
+              <li>• {t("gst_mandatory_turnover_threshold")}</li>
             </ul>
           </div>
 
           <div className="bg-blue-50 p-4 rounded-lg border border-blue-200">
-            <h4 className="font-medium text-blue-900 mb-3">📋 Benefits of GST Registration:</h4>
+            <h4 className="font-medium text-blue-900 mb-3">{t("benefits_of_gst_registration")}</h4>
             <ul className="text-blue-800 text-sm space-y-2">
-              <li>• Legal recognition as a supplier of goods or services</li>
-              <li>• Eligibility to collect GST from customers and claim Input Tax Credit (ITC)</li>
-              <li>• Improves business credibility and expands market reach</li>
-              <li>• Simplifies tax compliance with a single tax regime</li>
-              <li>• Reduces overall tax burden for eligible businesses</li>
+              <li>• {t("gst_legal_recognition_supplier")}</li>
+              <li>• {t("gst_collect_tax_claim_itc")}</li>
+              <li>• {t("gst_improves_credibility_market_reach")}</li>
+              <li>• {t("gst_simplifies_tax_compliance")}</li>
+              <li>• {t("gst_reduces_overall_tax_burden")}</li>
             </ul>
           </div>
         </CardContent>
@@ -1588,23 +1591,22 @@ export default function GSTRegistration() {
             <CardHeader className="pb-2">
               <CardTitle className="text-amber-900 flex items-center gap-2">
                 <Clock className="h-5 w-5" />
-                Application Submitted
+                {t("application_submitted")}
               </CardTitle>
             </CardHeader>
             <CardContent>
               <p className="text-sm">
-                Your GST registration application has been submitted and is currently being processed. You can track the
-                progress in the Progress section.
+                {t("gst_application_submitted_processing")}
               </p>
             </CardContent>
           </Card>
         ) : (
           <>
             <Button variant="outline" asChild>
-              <Link href="/dashboard/registration">Save & Continue Later</Link>
+              <Link href="/dashboard/registration">{t("save_continue_later")}</Link>
             </Button>
             <Button className="bg-teal-600 hover:bg-teal-700" onClick={handleSubmit} disabled={progress < 100}>
-              Submit GST Application ({progress}%)
+              {t("submit_gst_application", { progress })}
             </Button>
           </>
         )}
