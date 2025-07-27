@@ -428,7 +428,31 @@ const translations: Record<string, Record<string, string>> = {
     "faq_q7": "How do I get technical support?",
     "faq_a7": "We offer 24/7 support through multiple channels - phone (1800-3010-1000), email, live chat, and WhatsApp. Our agricultural experts are always ready to help you with any technical or farming-related queries.",
     "faq_q8": "Can I integrate GoFarmlyConnect with other farming tools?",
-    "faq_a8": "Yes, GoFarmlyConnect integrates with popular farming equipment, weather stations, and financial services. We have APIs available for custom integrations and partnerships with major agricultural technology providers."
+    "faq_a8": "Yes, GoFarmlyConnect integrates with popular farming equipment, weather stations, and financial services. We have APIs available for custom integrations and partnerships with major agricultural technology providers.",
+    
+    // Business Details
+    "business_address": "Enter Complete Business Address",
+    "complete_address_description": "Complete Address Description", 
+    "व्यवसाय_की_प्रकृति": "व्यवसाय की प्रकृति दर्ज करे",
+    "specify_primary_nature_description": "Specify Primary Nature Description",
+    
+    // Business Information
+    "business_type": "Proprietorship",
+    "business_name": "ThirdLayer",
+    
+    // IEC Information
+    "what_is_iec": "What is IEC?",
+    "iec_description_1": "IEC (Import Export Code) is a 10-digit alphanumeric code issued by DGFT.",
+    "iec_description_2": "It is mandatory for individuals/entities engaged in import or export business in India.",
+    "iec_description_3": "Required for customs clearance, foreign exchange transactions, and international trade.",
+    "iec_description_4": "Valid for lifetime, no renewal required.",
+    
+    "benefits_of_iec_registration": "Benefits of IEC Registration:",
+    "iec_benefit_1": "Enables international trade operations (import and export).",
+    "iec_benefit_2": "Access to export incentives and schemes from DGFT.",
+    "iec_benefit_3": "Simplifies customs procedures and documentation.",
+    "iec_benefit_4": "Enhances business credibility in global markets.",
+    "iec_benefit_5": "No annual compliance or filing requirements."
   },
   hi: {
     // Navigation
@@ -830,7 +854,31 @@ const translations: Record<string, Record<string, string>> = {
     "made_with_love": "किसानों के लिए ❤️ के साथ बनाया गया",
     "proudly_indian": "🇮🇳 गर्व से भारतीय",
     "serving_farmers": "पूरे भारत में किसानों की सेवा",
-    "empowering_farmers": "आधुनिक कृषि के लिए अत्याधुनिक डिजिटल समाधानों के साथ किसानों को सशक्त बनाना। आज ही कृषि क्रांति में शामिल हों।"
+    "empowering_farmers": "आधुनिक कृषि के लिए अत्याधुनिक डिजिटल समाधानों के साथ किसानों को सशक्त बनाना। आज ही कृषि क्रांति में शामिल हों।",
+    
+    // Business Details - Hindi
+    "business_address": "संपूर्ण व्यावसायिक पता दर्ज करें",
+    "complete_address_description": "संपूर्ण पता विवरण",
+    "व्यवसाय_की_प्रकृति": "व्यवसाय की प्रकृति दर्ज करे",
+    "specify_primary_nature_description": "प्राथमिक प्रकृति विवरण निर्दिष्ट करें",
+    
+    // Business Information - Hindi
+    "business_type": "स्वामित्व",
+    "business_name": "थर्डलेयर",
+    
+    // IEC Information - Hindi
+    "what_is_iec": "IEC क्या है?",
+    "iec_description_1": "IEC (आयात निर्यात कोड) DGFT द्वारा जारी किया गया 10-अंकीय अल्फानूमेरिक कोड है।",
+    "iec_description_2": "यह भारत में आयात या निर्यात व्यवसाय में लगे व्यक्तियों/संस्थाओं के लिए अनिवार्य है।",
+    "iec_description_3": "सीमा शुल्क निकासी, विदेशी मुद्रा लेनदेन और अंतर्राष्ट्रीय व्यापार के लिए आवश्यक है।",
+    "iec_description_4": "जीवन भर वैध, नवीकरण की आवश्यकता नहीं।",
+    
+    "benefits_of_iec_registration": "IEC पंजीकरण के लाभ:",
+    "iec_benefit_1": "अंतर्राष्ट्रीय व्यापार संचालन (आयात और निर्यात) सक्षम बनाता है।",
+    "iec_benefit_2": "DGFT से निर्यात प्रोत्साहन और योजनाओं तक पहुंच।",
+    "iec_benefit_3": "सीमा शुल्क प्रक्रियाओं और दस्तावेजीकरण को सरल बनाता है।",
+    "iec_benefit_4": "वैश्विक बाजारों में व्यावसायिक विश्वसनीयता बढ़ाता है।",
+    "iec_benefit_5": "कोई वार्षिक अनुपालन या फाइलिंग आवश्यकताएं नहीं।"
   },
   mr: {
     // Navigation
