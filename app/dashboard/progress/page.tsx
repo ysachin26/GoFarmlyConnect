@@ -26,6 +26,7 @@ import {
 import { cn } from "@/lib/utils"
 import Link from "next/link"
 import { format } from "date-fns"
+import { useLanguage } from "@/contexts/LanguageContext" // Import useLanguage
 
 // Map icon names to Lucide React components
 const iconMap: { [key: string]: React.ElementType } = {
@@ -101,6 +102,7 @@ interface DashboardData {
 }
 
 export default function ProgressPage() {
+  const { t } = useLanguage() // Initialize useLanguage hook
   const [dashboardData, setDashboardData] = useState<DashboardData | null>(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
@@ -112,11 +114,11 @@ export default function ProgressPage() {
         if (data) {
           setDashboardData(data as DashboardData)
         } else {
-          setError("Failed to fetch dashboard data.")
+          setError(t("failed_to_fetch_dashboard_data"))
         }
       } catch (err) {
         console.error("Error fetching dashboard data:", err)
-        setError("An error occurred while fetching data.")
+        setError(t("error_fetching_data"))
       } finally {
         setLoading(false)
       }
@@ -134,10 +136,10 @@ export default function ProgressPage() {
           setDashboardData(updatedData as DashboardData)
         }
       } else {
-        setError(result.message || "An unknown error occurred")
+        setError(result.message || t("something_went_wrong"))
       }
     } catch (err: any) {
-      setError(`Failed to update step: ${err.message}`)
+      setError(t("failed_to_update_step", { message: err.message }))
     } finally {
       setLoading(false)
     }
@@ -146,7 +148,7 @@ export default function ProgressPage() {
   if (loading) {
     return (
       <div className="flex items-center justify-center min-h-[calc(100vh-100px)]">
-        <p>Loading progress...</p>
+        <p>{t("loading_progress")}</p>
       </div>
     )
   }
@@ -162,7 +164,7 @@ export default function ProgressPage() {
   if (!dashboardData) {
     return (
       <div className="flex items-center justify-center min-h-[calc(10vh-100px)]">
-        <p>No dashboard data available.</p>
+        <p>{t("no_dashboard_data_available")}</p>
       </div>
     )
   }
@@ -183,14 +185,12 @@ export default function ProgressPage() {
 
   return (
     <div className="container mx-auto px-4 py-8 md:px-6 lg:px-8">
-      <h1 className="text-3xl font-bold mb-2">Registration Progress</h1>
-      <p className="text-gray-500 dark:text-gray-400 mb-8">
-        Complete all the steps below to become an export-ready business
-      </p>
+      <h1 className="text-3xl font-bold mb-2">{t("registration_progress")}</h1>
+      <p className="text-gray-500 dark:text-gray-400 mb-8">{t("complete_all_steps_export_ready")}</p>
 
       <Card className="mb-8">
         <CardHeader>
-          <CardTitle>Overall Progress</CardTitle>
+          <CardTitle>{t("overall_progress")}</CardTitle>
         </CardHeader>
         <CardContent>
           <div className="flex items-center gap-4">
@@ -202,14 +202,14 @@ export default function ProgressPage() {
 
       <Tabs defaultValue="journey" className="w-full">
         <TabsList className="grid w-full grid-cols-3">
-          <TabsTrigger value="journey">Registration Journey</TabsTrigger>
-          <TabsTrigger value="timeline">Timeline</TabsTrigger>
-          <TabsTrigger value="next-steps">Next Steps</TabsTrigger>
+          <TabsTrigger value="journey">{t("registration_journey")}</TabsTrigger>
+          <TabsTrigger value="timeline">{t("timeline")}</TabsTrigger>
+          <TabsTrigger value="next-steps">{t("next_steps")}</TabsTrigger>
         </TabsList>
         <TabsContent value="journey" className="mt-6">
           <Card>
             <CardHeader>
-              <CardTitle>Your Registration Journey</CardTitle>
+              <CardTitle>{t("your_registration_journey")}</CardTitle>
             </CardHeader>
             <CardContent>
               <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
@@ -227,16 +227,14 @@ export default function ProgressPage() {
                           <div
                             className={cn(
                               "flex flex-col items-center p-4 rounded-lg border transition-all duration-200 cursor-pointer",
-                              "border-red-500 bg-red-50 dark:bg-red-950 dark:border-red-700"
+                              "border-red-500 bg-red-50 dark:bg-red-950 dark:border-red-700",
                             )}
                           >
                             <div className="w-12 h-12 rounded-full flex items-center justify-center mb-2 bg-red-100 text-red-600 dark:bg-red-800 dark:text-red-300">
                               <IconComponent className="w-6 h-6" />
                             </div>
                             <p className="font-medium text-center">{step.name}</p>
-                            <p className="text-sm text-red-600 dark:text-red-300">
-                              Rejected - Click to re-upload
-                            </p>
+                            <p className="text-sm text-red-600 dark:text-red-300">{t("rejected_click_to_reupload")}</p>
                           </div>
                         </Link>
                       ) : (
@@ -271,7 +269,7 @@ export default function ProgressPage() {
                                 isPending && "text-gray-500 dark:text-gray-400",
                               )}
                             >
-                              {step.status.charAt(0).toUpperCase() + step.status.slice(1)}
+                              {t(step.status)}
                             </p>
                           </div>
                         </Link>
@@ -286,7 +284,7 @@ export default function ProgressPage() {
         <TabsContent value="timeline" className="mt-6">
           <Card>
             <CardHeader>
-              <CardTitle>Activity Timeline</CardTitle>
+              <CardTitle>{t("activity_timeline")}</CardTitle>
             </CardHeader>
             <CardContent>
               <div className="relative pl-8">
@@ -304,9 +302,11 @@ export default function ProgressPage() {
                         )}
                       </div>
                       <div className="ml-4 flex-1">
-                        <h3 className="font-semibold">{step.name} Completed</h3>
+                        <h3 className="font-semibold">
+                          {step.name} {t("completed")}
+                        </h3>
                         <p className="text-sm text-gray-500 dark:text-gray-400">
-                          {step.completedAt ? format(new Date(step.completedAt), "PPP") : "N/A"}
+                          {step.completedAt ? format(new Date(step.completedAt), "PPP") : t("n_a")}
                         </p>
                       </div>
                     </div>
@@ -314,7 +314,7 @@ export default function ProgressPage() {
                 {notifications.length > 0 && (
                   <>
                     <Separator className="my-4" />
-                    <h3 className="font-semibold mb-4">Notifications</h3>
+                    <h3 className="font-semibold mb-4">{t("notifications")}</h3>
                     {notifications
                       .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
                       .map((notification) => {
@@ -344,7 +344,7 @@ export default function ProgressPage() {
                   </>
                 )}
                 {registrationSteps.filter((step) => step.completedAt).length === 0 && notifications.length === 0 && (
-                  <p className="text-gray-500 dark:text-gray-400">No activity yet.</p>
+                  <p className="text-gray-500 dark:text-gray-400">{t("no_activity_yet")}</p>
                 )}
               </div>
             </CardContent>
@@ -353,19 +353,19 @@ export default function ProgressPage() {
         <TabsContent value="next-steps" className="mt-6">
           <Card>
             <CardHeader>
-              <CardTitle>What's Next?</CardTitle>
+              <CardTitle>{t("whats_next")}</CardTitle>
             </CardHeader>
             <CardContent>
               {nextPendingStep ? (
                 <div className="space-y-4">
                   <p className="text-lg">
-                    Your next step is: <span className="font-semibold">{nextPendingStep.name}</span>
+                    {t("your_next_step_is")} <span className="font-semibold">{nextPendingStep.name}</span>
                   </p>
                   <p className="text-gray-600 dark:text-gray-400">
-                    To continue your registration journey, please proceed with the "{nextPendingStep.name}" process.
+                    {t("continue_registration_journey_description", { stepName: nextPendingStep.name })}
                   </p>
                   <Link href={stepRoutes[nextPendingStep.name] || "#"}>
-                    <Button className="mt-4">Go to {nextPendingStep.name}</Button>
+                    <Button className="mt-4">{t("go_to_step_name", { stepName: nextPendingStep.name })}</Button>
                   </Link>
                   {/* Example of manually marking a step as complete for testing */}
                   {/* <Button
@@ -379,13 +379,9 @@ export default function ProgressPage() {
               ) : (
                 <div className="text-center py-8">
                   <CheckCircle className="h-12 w-12 text-green-500 mx-auto mb-4" />
-                  <h3 className="text-xl font-semibold mb-2">All steps completed!</h3>
-                  <p className="text-gray-600 dark:text-gray-400">
-                    Congratulations! You have completed all the necessary registration steps.
-                  </p>
-                  <p className="text-gray-600 dark:text-gray-400">
-                    You are now an export-ready business with GoFarmlyConnect.
-                  </p>
+                  <h3 className="text-xl font-semibold mb-2">{t("all_steps_completed")}</h3>
+                  <p className="text-gray-600 dark:text-gray-400">{t("congratulations_all_steps_completed")}</p>
+                  <p className="text-gray-600 dark:text-gray-400">{t("export_ready_business_gofarmlyconnect")}</p>
                 </div>
               )}
             </CardContent>

@@ -2,21 +2,7 @@
 
 import { useState, useEffect, useCallback } from "react"
 import type React from "react"
-import {
-  ArrowLeft,
-  Check,
-  Upload,
-  FileText,
-  User,
-  Building,
-  MapPin,
-  Shield,
-  Clock,
-  Eye,
-  XCircle,
-  Award,
-  CreditCard,
-} from "lucide-react"
+import { ArrowLeft, Check, Upload, FileText, User, Building, MapPin, Shield, Clock, Eye, XCircle, Award, CreditCard } from 'lucide-react'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -24,9 +10,10 @@ import { Label } from "@/components/ui/label"
 import { Progress } from "@/components/ui/progress"
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import Link from "next/link"
-import { getDashboardData, submitRegistrationApplication, resubmitRegistrationApplication } from "@/app/actions" // Import submitRegistrationApplication
-import { useRouter } from "next/navigation" // Import useRouter
+import { getDashboardData, submitRegistrationApplication, resubmitRegistrationApplication } from "@/app/actions"
+import { useRouter } from "next/navigation"
 import { useToast } from "@/hooks/use-toast"
+import { useLanguage } from "@/contexts/LanguageContext"
 
 interface DocumentUploadState {
   name: string
@@ -36,12 +23,11 @@ interface DocumentUploadState {
   status?: "pending" | "uploaded" | "verified" | "rejected"
   tempFile?: File | null
   tempUrl?: string
-  
 }
 
 interface ProfileData {
-  id: string // Add user ID
-  dashboardId: string // Add dashboard ID
+  id: string
+  dashboardId: string
   fullName: string
   email: string
   mobile: string
@@ -51,16 +37,13 @@ interface ProfileData {
   aadharCardUrl: string
   photographUrl: string
   proofOfAddressUrl: string
-  // ALL SHARED DOCUMENTS FROM ALL REGISTRATIONS
   authorizationLetterUrl: string
   partnershipDeedUrl: string
   llpAgreementUrl: string
   certificateOfIncorporationUrl: string
   moaAoaUrl: string
   cancelledChequeUrl: string
-  // IEC Registration Documents
   iecCertificate: string
-  // GST Registration Documents
   gstCertificate: string
   rentAgreementUrl: string
   electricityBillUrl: string
@@ -68,9 +51,7 @@ interface ProfileData {
   propertyProofUrl: string
   electricityBillOwnedUrl: string
   otherProofUrl: string
-  // ICEGATE Registration Documents
   bankDocumentUrl: string
-  // AD Code Registration Documents
   adCodeLetterFromBankUrl: string
 }
 
@@ -83,7 +64,8 @@ const DocumentUploadSection = ({
   currentDocState,
   onFileSelect,
   colorClass = "purple",
-  registrationStatus, // Add this prop
+  registrationStatus,
+  t,
 }: {
   docType: string
   label: string
@@ -92,7 +74,8 @@ const DocumentUploadSection = ({
   currentDocState: DocumentUploadState
   onFileSelect: (file: File | null) => void
   colorClass?: "purple" | "orange" | "indigo" | "emerald" | "teal" | "blue"
-  registrationStatus?: string // Add this prop type
+  registrationStatus?: string
+  t: (key: string) => string
 }) => {
   const fileInputId = docType
   const displayUrl = currentDocState.tempUrl || currentDocState.url
@@ -103,28 +86,28 @@ const DocumentUploadSection = ({
       return (
         <div className="flex items-center gap-1 text-red-600 text-xs">
           <XCircle className="h-3 w-3" />
-          <span>Rejected, Re-upload required</span>
+          <span>{t("rejected_re_upload_required")}</span>
         </div>
       )
     } else if (hasTemp) {
       return (
         <div className="flex items-center gap-1 text-amber-600 text-xs">
           <Clock className="h-3 w-3" />
-          <span>Ready for Upload</span>
+          <span>{t("ready_for_upload")}</span>
         </div>
       )
     } else if (status === "uploaded" || status === "verified") {
       return (
         <div className="flex items-center gap-1 text-green-600 text-xs">
           <Check className="h-3 w-3" />
-          <span>Uploaded & Pending Verification</span>
+          <span>{t("uploaded_and_pending_verification")}</span>
         </div>
       )
     } else {
       return (
         <div className="flex items-center gap-1 text-gray-500 text-xs">
           <Clock className="h-3 w-3" />
-          <span>Not Uploaded</span>
+          <span>{t("not_uploaded")}</span>
         </div>
       )
     }
@@ -159,11 +142,10 @@ const DocumentUploadSection = ({
         {displayUrl ? (
           <div className="flex flex-col items-center justify-center gap-2">
             {getStatusDisplay(currentDocState.status, hasTempFile)}
-            {/* Add shared from previous registration message if applicable */}
             {currentDocState.url && !hasTempFile && currentDocState.status !== "rejected" && (
               <div className="flex items-center gap-1 text-blue-600 text-xs">
                 <Check className="h-3 w-3" />
-                <span>Shared from previous registration</span>
+                <span>{t("shared_from_previous_registration")}</span>
               </div>
             )}
             {displayUrl && (
@@ -175,7 +157,7 @@ const DocumentUploadSection = ({
                   window.open(displayUrl, "_blank")
                 }}
               >
-                <Eye className="h-3 w-3 mr-1" /> View
+                <Eye className="h-3 w-3 mr-1" /> {t("view")}
               </Button>
             )}
             {(registrationStatus === "pending" || registrationStatus === "rejected" || currentDocState.status === "rejected" || hasTempFile || !currentDocState.url) && (
@@ -185,7 +167,7 @@ const DocumentUploadSection = ({
                 onClick={handleButtonClick}
               >
                 <Upload className="h-3 w-3 mr-1" /> 
-                {(registrationStatus === "pending" || registrationStatus === "rejected" || currentDocState.status === "rejected") ? "Re-upload" : "Change / Re-upload"}
+                {(registrationStatus === "pending" || registrationStatus === "rejected" || currentDocState.status === "rejected") ? t("re_upload") : t("change_re_upload")}
               </Button>
             )}
           </div>
@@ -193,7 +175,7 @@ const DocumentUploadSection = ({
           <div className="space-y-2">
             <Upload className={`h-8 w-8 text-${colorClass}-400 mx-auto`} />
             <div className="text-sm text-gray-600">
-              <span className={`text-${colorClass}-600`}>Click to upload</span>
+              <span className={`text-${colorClass}-600`}>{t("click_to_upload")}</span>
             </div>
             <p className="text-xs text-gray-500">{description}</p>
           </div>
@@ -204,6 +186,7 @@ const DocumentUploadSection = ({
 }
 
 export default function DSCRegistration() {
+  const { t } = useLanguage()
   const [profileData, setProfileData] = useState<ProfileData>({
     id: "",
     dashboardId: "",
@@ -239,8 +222,8 @@ export default function DSCRegistration() {
     organizationName: "",
   })
   const [documents, setDocuments] = useState<Record<string, DocumentUploadState>>({})
-  const [registrationStatus, setRegistrationStatus] = useState<string>("") // New state for registration status
-  const router = useRouter() // Initialize useRouter
+  const [registrationStatus, setRegistrationStatus] = useState<string>("")
+  const router = useRouter()
   const { toast } = useToast()
 
   // Fetch profile data on component mount
@@ -249,8 +232,8 @@ export default function DSCRegistration() {
       try {
         const data = await getDashboardData()
         setProfileData({
-          id: data.user.id, // Set user ID
-          dashboardId: data.dashboard._id, // Set dashboard ID
+          id: data.user.id,
+          dashboardId: data.dashboard._id,
           fullName: data.user.fullName,
           email: data.user.email,
           mobile: data.user.mobileNo,
@@ -260,16 +243,13 @@ export default function DSCRegistration() {
           aadharCardUrl: data.user.aadharCardUrl,
           photographUrl: data.user.photographUrl,
           proofOfAddressUrl: data.user.proofOfAddressUrl,
-          // 🔥 ALL SHARED DOCUMENTS FROM ALL REGISTRATIONS
           authorizationLetterUrl: data.user.authorizationLetterUrl || "",
           partnershipDeedUrl: data.user.partnershipDeedUrl || "",
           llpAgreementUrl: data.user.llpAgreementUrl || "",
           certificateOfIncorporationUrl: data.user.certificateOfIncorporationUrl || "",
           moaAoaUrl: data.user.moaAoaUrl || "",
           cancelledChequeUrl: data.user.cancelledChequeUrl || "",
-          // IEC Documents
           iecCertificate: data.user.iecCertificate || "",
-          // GST Documents
           gstCertificate: data.user.gstCertificate || "",
           rentAgreementUrl: data.user.rentAgreementUrl || "",
           electricityBillUrl: data.user.electricityBillUrl || "",
@@ -277,28 +257,23 @@ export default function DSCRegistration() {
           propertyProofUrl: data.user.propertyProofUrl || "",
           electricityBillOwnedUrl: data.user.electricityBillOwnedUrl || "",
           otherProofUrl: data.user.otherProofUrl || "",
-          // ICEGATE Documents
           bankDocumentUrl: data.user.bankDocumentUrl || "",
-          // AD Code Documents
           adCodeLetterFromBankUrl: data.user.adCodeLetterFromBankUrl || "",
         })
 
-        // Pre-fill registration-specific documents from dashboard data
-        const dscStep = data.registrationSteps.find((step) => step.id === 4) // Corrected stepId for DSC
+        const dscStep = data.registrationSteps.find((step) => step.id === 4)
         const dscStepDocuments = dscStep?.documents || []
-        const dscStepDetails = dscStep?.details || {} // Get stored details
-        setRegistrationStatus(dscStep?.status || "") // Set registration status
+        const dscStepDetails = dscStep?.details || {}
+        setRegistrationStatus(dscStep?.status || "")
 
-        // Pre-fill text fields from dashboard details
         setDscType(dscStepDetails.dscType || "")
         setBusinessDetails({
           designation: dscStepDetails.designation || "",
-          organizationName: dscStepDetails.organizationName || data.user.businessName || "", // Pre-fill from user business name if not in dashboard details
+          organizationName: dscStepDetails.organizationName || data.user.businessName || "",
         })
 
         const newDocumentsState: Record<string, DocumentUploadState> = {}
 
-        // Helper to get document state, prioritizing profileData
         const getDocState = (docName: string, profileUrl: string | undefined) => {
           const dashboardDoc = dscStepDocuments.find((d) => d.name === docName)
           const finalUrl = profileUrl || dashboardDoc?.url
@@ -314,7 +289,6 @@ export default function DSCRegistration() {
           }
         }
 
-        // Handle Authorization Letter (conditional, shared)
         newDocumentsState.authorizationLetter = getDocState("authorizationLetter", data.user.authorizationLetterUrl)
         setDocuments(newDocumentsState)
       } catch (error) {
@@ -324,7 +298,6 @@ export default function DSCRegistration() {
     fetchProfileData()
   }, [])
 
-  // Cleanup for temporary URLs
   useEffect(() => {
     return () => {
       Object.values(documents).forEach((doc) => {
@@ -333,16 +306,15 @@ export default function DSCRegistration() {
     }
   }, [documents])
 
-  // Check if document is required based on DSC type
   const isDocumentRequired = (docType: string) => {
     switch (docType) {
       case "panCard":
       case "proofOfAddress":
       case "photograph":
       case "aadhaarCard":
-        return true // Required for all DSC types
+        return true
       case "authorizationLetter":
-        return dscType === "organization" // Required only for organization DSC
+        return dscType === "organization"
       default:
         return false
     }
@@ -350,9 +322,8 @@ export default function DSCRegistration() {
 
   const calculateProgress = useCallback(() => {
     let completed = 0
-    let total = 6 // Base requirements: panCard, aadhaarCard, photograph, proofOfAddress, email, mobile
+    let total = 6
 
-    // Basic details (auto-filled from profile)
     if (profileData.panCardUrl) completed++
     if (profileData.aadharCardUrl) completed++
     if (profileData.photographUrl) completed++
@@ -360,20 +331,17 @@ export default function DSCRegistration() {
     if (profileData.email.trim()) completed++
     if (profileData.mobile.trim()) completed++
 
-    // DSC type selection
     if (dscType) {
       total += 1
       completed += 1
     }
 
-    // Organization-specific fields
     if (dscType === "organization") {
-      total += 2 // designation and organizationName
+      total += 2
       if (businessDetails.designation.trim()) completed++
       if (businessDetails.organizationName.trim()) completed++
     }
 
-    // Add conditional document requirements to total
     if (isDocumentRequired("authorizationLetter")) {
       total++
       if (
@@ -394,8 +362,8 @@ export default function DSCRegistration() {
     if (file.size > 1024 * 1024) {
       toast({
         variant: "destructive",
-        title: "❌ File Size Too Large",
-        description: `File size is ${(file.size / (1024 * 1024)).toFixed(2)}MB. Please upload a file smaller than 1MB.`,
+        title: `❌ ${t("file_too_large")}`,
+        description: `${t("file_size_is")} ${(file.size / (1024 * 1024)).toFixed(2)}MB. ${t("file_size_limit")}`,
       })
       return
     }
@@ -419,7 +387,7 @@ export default function DSCRegistration() {
 
   const handleSubmitApplication = async () => {
     if (progress < 100) {
-      alert("Please complete all required fields and upload all necessary documents.")
+      alert(t("complete_all_required_fields"))
       return
     }
 
@@ -440,34 +408,33 @@ export default function DSCRegistration() {
       }
     }
 
-    // Check if this is a re-submission (registration status is rejected)
     const isResubmission = registrationStatus === "rejected"
 
     const result = isResubmission ?
       await resubmitRegistrationApplication({
-        stepId: 4, // DSC step ID
+        stepId: 4,
         details: detailsToSave,
         filesToUpload: documentsToUpload,
         userId: profileData.id,
         dashboardId: profileData.dashboardId,
-        registrationType: "DSC Registration",
+        registrationType: t("dsc_registration"),
         registrationName: profileData.businessName || profileData.fullName,
       }) :
       await submitRegistrationApplication({
-        stepId: 4, // DSC step ID
+        stepId: 4,
         details: detailsToSave,
         filesToUpload: documentsToUpload,
         userId: profileData.id,
         dashboardId: profileData.dashboardId,
-        registrationType: "DSC Registration",
+        registrationType: t("dsc_registration"),
         registrationName: profileData.businessName || profileData.fullName,
       })
 
     if (result.success) {
       alert(result.message)
-      router.push("/dashboard/progress") // Redirect to progress page
+      router.push("/dashboard/progress")
     } else {
-      alert(`Submission failed: ${result.message}`)
+      alert(`${t("submission_failed")}: ${result.message}`)
     }
   }
 
@@ -483,8 +450,8 @@ export default function DSCRegistration() {
           </Button>
         </Link>
         <div>
-          <h1 className="text-3xl font-bold text-gray-900">DSC Registration</h1>
-          <p className="text-gray-600 mt-1">Digital Signature Certificate registration</p>
+          <h1 className="text-3xl font-bold text-gray-900">{t("dsc_registration_title")}</h1>
+          <p className="text-gray-600 mt-1">{t("dsc_registration_description")}</p>
         </div>
       </div>
 
@@ -492,12 +459,12 @@ export default function DSCRegistration() {
       <Card className="bg-blue-50 border-blue-200">
         <CardContent className="p-6">
           <div className="flex items-center justify-between mb-4">
-            <h3 className="font-semibold text-blue-900">Registration Progress</h3>
+            <h3 className="font-semibold text-blue-900">{t("registration_progress")}</h3>
             <span className="text-blue-600 font-bold">{progress}%</span>
           </div>
           <Progress value={progress} className="h-3" />
           <p className="text-blue-700 text-sm mt-2">
-            Complete all required sections below to proceed with your DSC registration
+            {t("complete_required_sections_dsc")}
           </p>
         </CardContent>
       </Card>
@@ -507,19 +474,19 @@ export default function DSCRegistration() {
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
             <Building className="h-5 w-5 text-blue-600" />
-            Business Information
+            {t("business_information")}
           </CardTitle>
-          <CardDescription>Information from your profile</CardDescription>
+          <CardDescription>{t("information_from_your_profile")}</CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
           <div className="bg-blue-50 p-4 rounded-lg border border-blue-200">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="space-y-2">
-                <Label>Business Type</Label>
+                <Label>{t("business_type")}</Label>
                 <Input value={profileData.businessType} disabled className="bg-gray-50" />
               </div>
               <div className="space-y-2">
-                <Label>Business Name</Label>
+                <Label>{t("business_name")}</Label>
                 <Input value={profileData.businessName} disabled className="bg-gray-50" />
               </div>
             </div>
@@ -533,29 +500,29 @@ export default function DSCRegistration() {
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
               <Award className="h-5 w-5 text-emerald-600" />
-              Available Certificates from Other Registrations
+              {t("available_certificates_from_other_registrations")}
             </CardTitle>
-            <CardDescription>Certificates you've obtained from other registration processes</CardDescription>
+            <CardDescription>{t("certificates_obtained_from_other_registrations")}</CardDescription>
           </CardHeader>
           <CardContent className="space-y-4">
             <div className="bg-emerald-50 p-4 rounded-lg border border-emerald-200">
-              <h4 className="font-medium text-emerald-900 mb-3">📜 Available Certificates:</h4>
+              <h4 className="font-medium text-emerald-900 mb-3">📜 {t("available_certificates")}:</h4>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                 {profileData.gstCertificate && (
                   <div className="flex items-center gap-3 p-3 bg-white rounded-lg border">
                     <Award className="h-4 w-4 text-green-600" />
                     <div className="flex-1">
-                      <div className="text-sm font-medium">GST Certificate</div>
+                      <div className="text-sm font-medium">{t("gst_certificate")}</div>
                       <div className="flex items-center gap-1 text-green-600 text-xs">
                         <Check className="h-3 w-3" />
-                        <span>From GST Registration</span>
+                        <span>{t("from_gst_registration")}</span>
                       </div>
                       <Button
                         variant="link"
                         className="p-0 h-auto text-primary text-xs mt-1"
                         onClick={() => window.open(profileData.gstCertificate, "_blank")}
                       >
-                        <Eye className="h-3 w-3 mr-1" /> View
+                        <Eye className="h-3 w-3 mr-1" /> {t("view")}
                       </Button>
                     </div>
                   </div>
@@ -565,17 +532,17 @@ export default function DSCRegistration() {
                   <div className="flex items-center gap-3 p-3 bg-white rounded-lg border">
                     <Award className="h-4 w-4 text-emerald-600" />
                     <div className="flex-1">
-                      <div className="text-sm font-medium">IEC Certificate</div>
+                      <div className="text-sm font-medium">{t("iec_certificate")}</div>
                       <div className="flex items-center gap-1 text-emerald-600 text-xs">
                         <Check className="h-3 w-3" />
-                        <span>From IEC Registration</span>
+                        <span>{t("from_iec_registration")}</span>
                       </div>
                       <Button
                         variant="link"
                         className="p-0 h-auto text-primary text-xs mt-1"
                         onClick={() => window.open(profileData.iecCertificate, "_blank")}
                       >
-                        <Eye className="h-3 w-3 mr-1" /> View
+                        <Eye className="h-3 w-3 mr-1" /> {t("view")}
                       </Button>
                     </div>
                   </div>
@@ -585,17 +552,17 @@ export default function DSCRegistration() {
                   <div className="flex items-center gap-3 p-3 bg-white rounded-lg border">
                     <CreditCard className="h-4 w-4 text-blue-600" />
                     <div className="flex-1">
-                      <div className="text-sm font-medium">AD Code Letter</div>
+                      <div className="text-sm font-medium">{t("ad_code_letter")}</div>
                       <div className="flex items-center gap-1 text-blue-600 text-xs">
                         <Check className="h-3 w-3" />
-                        <span>From AD Code Registration</span>
+                        <span>{t("from_ad_code_registration")}</span>
                       </div>
                       <Button
                         variant="link"
                         className="p-0 h-auto text-primary text-xs mt-1"
                         onClick={() => window.open(profileData.adCodeLetterFromBankUrl, "_blank")}
                       >
-                        <Eye className="h-3 w-3 mr-1" /> View
+                        <Eye className="h-3 w-3 mr-1" /> {t("view")}
                       </Button>
                     </div>
                   </div>
@@ -611,54 +578,54 @@ export default function DSCRegistration() {
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
             <Check className="h-5 w-5 text-green-600" />
-            Basic Details Required <span className="text-red-500">*</span>
+            {t("basic_details_required")} <span className="text-red-500">*</span>
           </CardTitle>
-          <CardDescription>Information fetched from your profile</CardDescription>
+          <CardDescription>{t("information_fetched_from_profile")}</CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
           <div className="bg-green-50 p-4 rounded-lg border border-green-200">
-            <h4 className="font-medium text-green-900 mb-3">✅ Auto-filled from your profile:</h4>
+            <h4 className="font-medium text-green-900 mb-3">✅ {t("auto_filled_from_profile")}:</h4>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="space-y-2">
                 <Label>
-                  Full Name <span className="text-red-500">*</span>
+                  {t("full_name")} <span className="text-red-500">*</span>
                 </Label>
                 <Input value={profileData.fullName} disabled className="bg-gray-50" />
                 <div className="flex items-center gap-1 text-green-600 text-xs">
                   <Check className="h-3 w-3" />
-                  <span>Fetched from profile</span>
+                  <span>{t("fetched_from_profile")}</span>
                 </div>
               </div>
               <div className="space-y-2">
                 <Label>
-                  Mobile Number <span className="text-red-500">*</span>
+                  {t("mobile_number")} <span className="text-red-500">*</span>
                 </Label>
                 <Input value={profileData.mobile} disabled className="bg-gray-50" />
                 <div className="flex items-center gap-1 text-green-600 text-xs">
                   <Check className="h-3 w-3" />
-                  <span>Fetched from profile</span>
+                  <span>{t("fetched_from_profile")}</span>
                 </div>
               </div>
               <div className="space-y-2">
                 <Label>
-                  Email Address <span className="text-red-500">*</span>
+                  {t("email_address")} <span className="text-red-500">*</span>
                 </Label>
                 <Input value={profileData.email} disabled className="bg-gray-50" />
                 <div className="flex items-center gap-1 text-green-600 text-xs">
                   <Check className="h-3 w-3" />
-                  <span>Fetched from profile</span>
+                  <span>{t("fetched_from_profile")}</span>
                 </div>
               </div>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mt-4">
               {[
-                { key: "panCardUrl", label: "PAN Card", icon: FileText, completed: !!profileData.panCardUrl },
-                { key: "aadharCardUrl", label: "Aadhaar Card", icon: FileText, completed: !!profileData.aadharCardUrl },
-                { key: "photographUrl", label: "Photograph", icon: User, completed: !!profileData.photographUrl },
+                { key: "panCardUrl", label: t("pan_card"), icon: FileText, completed: !!profileData.panCardUrl },
+                { key: "aadharCardUrl", label: t("aadhaar_card"), icon: FileText, completed: !!profileData.aadharCardUrl },
+                { key: "photographUrl", label: t("photograph"), icon: User, completed: !!profileData.photographUrl },
                 {
                   key: "proofOfAddressUrl",
-                  label: "Proof of Address",
+                  label: t("proof_of_address"),
                   icon: MapPin,
                   completed: !!profileData.proofOfAddressUrl,
                 },
@@ -673,7 +640,7 @@ export default function DSCRegistration() {
                       className={`flex items-center gap-1 text-xs ${doc.completed ? "text-green-600" : "text-gray-500"}`}
                     >
                       {doc.completed ? <Check className="h-3 w-3" /> : <Clock className="h-3 w-3" />}
-                      <span>{doc.completed ? "Uploaded in profile" : "Pending in profile"}</span>
+                      <span>{doc.completed ? t("uploaded_in_profile") : t("pending_in_profile")}</span>
                     </div>
                   </div>
                 </div>
@@ -688,68 +655,68 @@ export default function DSCRegistration() {
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
             <Shield className="h-5 w-5 text-purple-600" />
-            DSC Type Selection <span className="text-red-500">*</span>
+            {t("dsc_type_selection")} <span className="text-red-500">*</span>
           </CardTitle>
-          <CardDescription>Choose the type of Digital Signature Certificate you need</CardDescription>
+          <CardDescription>{t("choose_dsc_type_description")}</CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
           <div className="space-y-3">
             <Label>
-              Select DSC Type: <span className="text-red-500">*</span>
+              {t("select_dsc_type")} <span className="text-red-500">*</span>
             </Label>
             <RadioGroup value={dscType} onValueChange={(value) => setDscType(value as "individual" | "organization")}>
               <div className="flex items-center space-x-2">
                 <RadioGroupItem value="individual" id="individual" />
-                <Label htmlFor="individual">Individual DSC</Label>
+                <Label htmlFor="individual">{t("individual_dsc")}</Label>
               </div>
               <div className="flex items-center space-x-2">
                 <RadioGroupItem value="organization" id="organization" />
-                <Label htmlFor="organization">Organization DSC</Label>
+                <Label htmlFor="organization">{t("organization_dsc")}</Label>
               </div>
             </RadioGroup>
           </div>
 
           {dscType === "individual" && (
             <div className="bg-green-50 p-4 rounded-lg border border-green-200">
-              <h4 className="font-medium text-green-900 mb-2">Individual DSC Selected</h4>
+              <h4 className="font-medium text-green-900 mb-2">{t("individual_dsc_selected")}</h4>
               <p className="text-green-800 text-sm">
-                This DSC will be issued in your personal name and can be used for personal digital signatures.
+                {t("individual_dsc_description")}
               </p>
             </div>
           )}
 
           {dscType === "organization" && (
             <div className="bg-purple-50 p-4 rounded-lg border border-purple-200">
-              <h4 className="font-medium text-purple-900 mb-3">Organization DSC Selected</h4>
+              <h4 className="font-medium text-purple-900 mb-3">{t("organization_dsc_selected")}</h4>
               <p className="text-purple-800 text-sm mb-4">
-                This DSC will be issued for your organization and requires additional details.
+                {t("organization_dsc_description")}
               </p>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="space-y-2">
                   <Label htmlFor="designation">
-                    Your Designation <span className="text-red-500">*</span>
+                    {t("your_designation")} <span className="text-red-500">*</span>
                   </Label>
                   <Input
                     id="designation"
-                    placeholder="e.g., Director, Partner, Proprietor"
+                    placeholder={t("designation_placeholder")}
                     value={businessDetails.designation}
                     onChange={(e) => setBusinessDetails((prev) => ({ ...prev, designation: e.target.value }))}
                   />
-                  <p className="text-xs text-gray-500">Your role/position in the organization</p>
+                  <p className="text-xs text-gray-500">{t("designation_help_text")}</p>
                 </div>
 
                 <div className="space-y-2">
                   <Label htmlFor="organizationName">
-                    Organization Name <span className="text-red-500">*</span>
+                    {t("organization_name")} <span className="text-red-500">*</span>
                   </Label>
                   <Input
                     id="organizationName"
-                    placeholder="Enter organization name"
+                    placeholder={t("organization_name_placeholder")}
                     value={businessDetails.organizationName}
                     onChange={(e) => setBusinessDetails((prev) => ({ ...prev, organizationName: e.target.value }))}
                   />
-                  <p className="text-xs text-gray-500">Legal name of your organization</p>
+                  <p className="text-xs text-gray-500">{t("organization_name_help_text")}</p>
                 </div>
               </div>
             </div>
@@ -757,26 +724,27 @@ export default function DSCRegistration() {
         </CardContent>
       </Card>
 
-      {/* Conditional Documents Based on DSC Type - HIDE for individual DSC */}
+      {/* Conditional Documents Based on DSC Type */}
       {isDocumentRequired("authorizationLetter") && (
         <Card>
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
               <FileText className="h-5 w-5 text-orange-600" />
-              Authorization Letter <span className="text-red-500">*</span>
+              {t("authorization_letter")} <span className="text-red-500">*</span>
             </CardTitle>
-            <CardDescription>Required for Organization DSC</CardDescription>
+            <CardDescription>{t("required_for_organization_dsc")}</CardDescription>
           </CardHeader>
           <CardContent>
             <DocumentUploadSection
               docType="authorizationLetter"
-              label="Authorization Letter / Board Resolution"
-              description="Authorization letter or board resolution for DSC application on behalf of the organization"
+              label={t("authorization_letter_board_resolution")}
+              description={t("authorization_letter_description")}
               required={true}
               currentDocState={documents.authorizationLetter || { name: "", file: null, uploaded: false }}
               onFileSelect={(file) => handleDocumentSelect("authorizationLetter", file)}
               colorClass="orange"
-               registrationStatus={registrationStatus}
+              registrationStatus={registrationStatus}
+              t={t}
             />
           </CardContent>
         </Card>
@@ -787,40 +755,40 @@ export default function DSCRegistration() {
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
             <Shield className="h-5 w-5 text-emerald-600" />
-            DSC Information
+            {t("dsc_information")}
           </CardTitle>
-          <CardDescription>Important information about Digital Signature Certificate</CardDescription>
+          <CardDescription>{t("important_information_dsc")}</CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
           <div className="bg-emerald-50 p-4 rounded-lg border border-emerald-200">
-            <h4 className="font-medium text-emerald-900 mb-3">🔐 What is DSC?</h4>
+            <h4 className="font-medium text-emerald-900 mb-3">🔐 {t("what_is_dsc")}</h4>
             <ul className="text-emerald-800 text-sm space-y-2">
-              <li>• Digital Signature Certificate is a secure digital key</li>
-              <li>• Used to authenticate your identity in digital transactions</li>
-              <li>• Required for filing various government forms and documents</li>
-              <li>• Provides legal validity to electronic documents</li>
-              <li>• Essential for GST returns, income tax filings, and more</li>
+              <li>• {t("dsc_definition_1")}</li>
+              <li>• {t("dsc_definition_2")}</li>
+              <li>• {t("dsc_definition_3")}</li>
+              <li>• {t("dsc_definition_4")}</li>
+              <li>• {t("dsc_definition_5")}</li>
             </ul>
           </div>
 
           <div className="bg-blue-50 p-4 rounded-lg border border-blue-200">
-            <h4 className="font-medium text-blue-900 mb-3">📋 Uses of DSC:</h4>
+            <h4 className="font-medium text-blue-900 mb-3">📋 {t("uses_of_dsc")}</h4>
             <ul className="text-blue-800 text-sm space-y-2">
-              <li>• Filing GST returns and other tax documents</li>
-              <li>• E-tendering and government procurement</li>
-              <li>• Company registration and compliance filings</li>
-              <li>• Banking and financial transactions</li>
-              <li>• Legal document authentication</li>
+              <li>• {t("dsc_use_1")}</li>
+              <li>• {t("dsc_use_2")}</li>
+              <li>• {t("dsc_use_3")}</li>
+              <li>• {t("dsc_use_4")}</li>
+              <li>• {t("dsc_use_5")}</li>
             </ul>
           </div>
 
           <div className="bg-amber-50 p-4 rounded-lg border border-amber-200">
-            <h4 className="font-medium text-amber-900 mb-3">⚠️ Important Notes:</h4>
+            <h4 className="font-medium text-amber-900 mb-3">⚠️ {t("important_notes")}</h4>
             <ul className="text-amber-800 text-sm space-y-2">
-              <li>• DSC is typically valid for 1-3 years from the date of issue</li>
-              <li>• You will receive the DSC on a USB token or as a software certificate</li>
-              <li>• Keep your DSC password secure and confidential</li>
-              <li>• Renewal is required before expiry for continued use</li>
+              <li>• {t("dsc_note_1")}</li>
+              <li>• {t("dsc_note_2")}</li>
+              <li>• {t("dsc_note_3")}</li>
+              <li>• {t("dsc_note_4")}</li>
             </ul>
           </div>
         </CardContent>
@@ -833,27 +801,26 @@ export default function DSCRegistration() {
             <CardHeader className="pb-2">
               <CardTitle className="text-amber-900 flex items-center gap-2">
                 <Clock className="h-5 w-5" />
-                Application Submitted
+                {t("application_submitted")}
               </CardTitle>
             </CardHeader>
             <CardContent>
               <p className="text-sm">
-                Your DSC registration application has been submitted and is currently being processed. You can track the
-                progress in the Progress section.
+                {t("dsc_application_submitted_processing")}
               </p>
             </CardContent>
           </Card>
         ) : (
           <>
             <Button variant="outline" asChild>
-              <Link href="/dashboard/registration">Save & Continue Later</Link>
+              <Link href="/dashboard/registration">{t("save_continue_later")}</Link>
             </Button>
             <Button
               className="bg-blue-600 hover:bg-blue-700"
               onClick={handleSubmitApplication}
               disabled={progress < 100}
             >
-              Submit DSC Application ({progress}%)
+              {t("submit_dsc_application").replace("{{progress}}", progress.toString())}
             </Button>
           </>
         )}
