@@ -45,7 +45,7 @@ export default function HeroContentSection() {
 
               <Button
                 variant="outline"
-                className="border-2 border-emerald-400 text-emerald-600 hover:bg-emerald-400 hover:text-emerald-900 px-8 py-4 rounded-xl font-semibold text-lg transform hover:scale-105 transition-all duration-300 group"
+                className="bg-gradient-to-r from-black/10 to-white/30 hover:from-black/20 hover:to-white/40 border-2 border-emerald-400 text-emerald-600 hover:text-emerald-900 px-8 py-4 rounded-xl font-semibold text-lg transform hover:scale-105 transition-all duration-300 group backdrop-blur-sm"
               >
                 <Play className="w-5 h-5 mr-2 group-hover:scale-110 transition-transform duration-300" />
                 {t('watch_demo')}

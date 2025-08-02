@@ -8,7 +8,7 @@ import { useLanguage } from '@/contexts/LanguageContext'
 export default function HeroSection() {
   const { t } = useLanguage()
   return (
-    <section className="relative min-h-screen bg-gradient-to-br from-emerald-900 via-teal-800 to-emerald-900 overflow-hidden flex items-center justify-center">
+    <section className="relative min-h-screen pt-16 bg-gradient-to-br from-emerald-900 via-teal-800 to-emerald-900 overflow-hidden flex items-center justify-center">
       {/* Full Screen Background Video */}
       <div className="absolute inset-0 w-full h-full">
         <video className="absolute inset-0 w-full h-full object-cover" autoPlay muted loop playsInline preload="auto">
@@ -62,8 +62,8 @@ export default function HeroSection() {
             </Button>
 
             <Button
-              variant="outline"
-              className="border-2 border-white/40 text-white hover:bg-white/10 backdrop-blur-sm px-10 py-4 rounded-xl font-semibold text-lg transform hover:scale-105 transition-all duration-300 group"
+              variant="ghost"
+              className="bg-gradient-to-r from-black/20 to-white/10 hover:from-black/30 hover:to-white/20 border border-white/20 text-white backdrop-blur-sm px-10 py-4 rounded-xl font-semibold text-lg transform hover:scale-105 transition-all duration-300 group"
             >
               <Play className="w-5 h-5 mr-2 group-hover:scale-110 transition-transform duration-300" />
               {t('watch_demo')}

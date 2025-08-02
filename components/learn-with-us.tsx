@@ -66,22 +66,28 @@ export default function LearnWithUs() {
       </div>
 
       <div className="container mx-auto px-4 relative z-10">
-        <div className="text-center mb-16">
-          {/* Tag moved to top */}
-          <div className="inline-block mb-4">
+        <div className="flex flex-col items-center text-center mb-16 space-y-6">
+          {/* Learning Resources Tag */}
+          <div className="animate-fadeInUp">
             <span className="bg-gradient-to-r from-emerald-500 to-teal-600 text-white px-4 py-2 rounded-full text-sm font-medium">
               {t('learning_resources')}
             </span>
           </div>
-          <div className="inline-block">
-            <h2 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-emerald-800 via-teal-700 to-emerald-800 bg-clip-text text-transparent mb-8 animate-fadeInUp hover:scale-105 transition-transform duration-500">
+          
+          {/* Learn With GoFarmlyConnect Title */}
+          <div className="flex flex-col items-center animate-fadeInUp animation-delay-200">
+            <h2 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-emerald-800 via-teal-700 to-emerald-800 bg-clip-text text-transparent hover:scale-105 transition-transform duration-500">
               {t('learn_with_gofarmly')}
             </h2>
-            <div className="h-1 bg-gradient-to-r from-emerald-400 to-teal-400 rounded-full transform scale-x-0 animate-scaleX animation-delay-500"></div>
+            <div className="h-1 w-32 bg-gradient-to-r from-emerald-400 to-teal-400 rounded-full transform scale-x-0 animate-scaleX animation-delay-500 mt-2"></div>
           </div>
-          <p className="text-gray-600 max-w-3xl mx-auto text-lg leading-relaxed animate-fadeInUp animation-delay-300 hover:text-gray-800 transition-colors duration-300 mt-6">
-            {t('learn_description')}
-          </p>
+          
+          {/* Description */}
+          <div className="animate-fadeInUp animation-delay-400">
+            <p className="text-gray-600 max-w-3xl mx-auto text-lg leading-relaxed hover:text-gray-800 transition-colors duration-300">
+              {t('learn_description')}
+            </p>
+          </div>
         </div>
 
         <div className="relative">

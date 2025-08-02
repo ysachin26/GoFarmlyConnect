@@ -25,7 +25,7 @@ export default function Navbar() {
   ]
 
   return (
-    <nav className="bg-gradient-to-r from-emerald-900 via-teal-800 to-emerald-900 shadow-2xl sticky top-0 z-50 backdrop-blur-sm border-b border-emerald-700/30 overflow-x-hidden">
+    <nav className="bg-gradient-to-r from-emerald-900 via-teal-800 to-emerald-900 shadow-2xl fixed top-0 left-0 right-0 z-50 backdrop-blur-sm border-b border-emerald-700/30 overflow-x-hidden">
       <div className="container mx-auto px-4">
         <div className="flex justify-between items-center h-16 max-w-full">
           {/* Logo */}
