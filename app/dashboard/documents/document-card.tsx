@@ -36,15 +36,15 @@ export default function DocumentCard({ title, registrationNumber, certificateUrl
   const getStatusIcon = (status: string) => {
     switch (status) {
       case "verified":
-        return <CheckCircle className="w-4 h-4" />
+        return <CheckCircle className="w-3 h-3 sm:w-4 sm:h-4" />
       case "uploaded":
-        return <Clock className="w-4 h-4" />
+        return <Clock className="w-3 h-3 sm:w-4 sm:h-4" />
       case "pending":
-        return <Clock className="w-4 h-4" />
+        return <Clock className="w-3 h-3 sm:w-4 sm:h-4" />
       case "rejected":
-        return <AlertCircle className="w-4 h-4" />
+        return <AlertCircle className="w-3 h-3 sm:w-4 sm:h-4" />
       default:
-        return <FileText className="w-4 h-4" />
+        return <FileText className="w-3 h-3 sm:w-4 sm:h-4" />
     }
   }
 
@@ -82,15 +82,15 @@ export default function DocumentCard({ title, registrationNumber, certificateUrl
         </Badge>
       </div>
 
-      <CardContent className="p-4 text-center space-y-3">
+      <CardContent className="p-3 sm:p-4 text-center space-y-2 sm:space-y-3">
         {/* 1. Document Preview Photo - Top */}
         {hasDocument ? (
           <DocumentPreview url={certificateUrl} title={title} />
         ) : (
-          <div className="relative aspect-[4/3] w-full max-w-[180px] mx-auto">
+          <div className="relative aspect-[4/3] w-full max-w-[160px] sm:max-w-[180px] mx-auto">
             <div className="w-full h-full bg-gray-100 rounded-lg flex items-center justify-center border border-gray-200">
               <div className="text-center">
-                <FileText className="w-8 h-8 mx-auto text-gray-400 mb-2" />
+                <FileText className="w-6 h-6 sm:w-8 sm:h-8 mx-auto text-gray-400 mb-1 sm:mb-2" />
                 <p className="text-xs text-gray-500">No Document</p>
               </div>
             </div>
@@ -99,43 +99,43 @@ export default function DocumentCard({ title, registrationNumber, certificateUrl
         
         {/* 2. Document Name - Below photo */}
         <div className="space-y-1">
-          <h3 className="font-semibold text-lg text-gray-900">{title}</h3>
+          <h3 className="font-semibold text-base sm:text-lg text-gray-900">{title}</h3>
         </div>
         
         {/* 3. Registration Number - Below name */}
         {hasRegistrationNumber ? (
           <div className="space-y-1">
-            <p className="text-sm text-gray-600">Registration Number</p>
-            <div className="bg-gray-50 px-3 py-2 rounded-md border">
-              <p className="text-sm text-gray-900 font-mono font-semibold break-all">
+            <p className="text-xs sm:text-sm text-gray-600">Registration Number</p>
+            <div className="bg-gray-50 px-2 sm:px-3 py-1.5 sm:py-2 rounded-md border">
+              <p className="text-xs sm:text-sm text-gray-900 font-mono font-semibold break-all">
                 {registrationNumber}
               </p>
             </div>
           </div>
         ) : (
           <div className="space-y-1">
-            <p className="text-sm text-gray-500">No Registration Number</p>
+            <p className="text-xs sm:text-sm text-gray-500">No Registration Number</p>
           </div>
         )}
         
         {/* 4. Download Button - Bottom */}
-        <div className="pt-2">
+        <div className="pt-1 sm:pt-2">
           {hasDocument ? (
             <Link 
               href={certificateUrl} 
               target="_blank" 
               rel="noopener noreferrer"
-              className="w-full inline-flex items-center justify-center gap-2 bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition-colors text-sm font-medium"
+              className="w-full inline-flex items-center justify-center gap-1 sm:gap-2 bg-blue-600 text-white px-3 sm:px-4 py-1.5 sm:py-2 rounded-md hover:bg-blue-700 transition-colors text-xs sm:text-sm font-medium"
             >
-              <ExternalLink className="w-4 h-4" />
+              <ExternalLink className="w-3 h-3 sm:w-4 sm:h-4" />
               Download Document
             </Link>
           ) : (
             <button 
               disabled
-              className="w-full inline-flex items-center justify-center gap-2 bg-gray-300 text-gray-500 px-4 py-2 rounded-md text-sm font-medium cursor-not-allowed"
+              className="w-full inline-flex items-center justify-center gap-1 sm:gap-2 bg-gray-300 text-gray-500 px-3 sm:px-4 py-1.5 sm:py-2 rounded-md text-xs sm:text-sm font-medium cursor-not-allowed"
             >
-              <FileText className="w-4 h-4" />
+              <FileText className="w-3 h-3 sm:w-4 sm:h-4" />
               No Document Available
             </button>
           )}
@@ -144,10 +144,10 @@ export default function DocumentCard({ title, registrationNumber, certificateUrl
           {hasRegistrationNumber && (
             <button 
               onClick={handleCopyRegistrationNumber}
-              className="w-full mt-2 inline-flex items-center justify-center gap-2 bg-gray-100 text-gray-700 px-4 py-1.5 rounded-md hover:bg-gray-200 transition-colors text-xs font-medium"
+              className="w-full mt-1.5 sm:mt-2 inline-flex items-center justify-center gap-1 sm:gap-2 bg-gray-100 text-gray-700 px-2 sm:px-3 py-1 sm:py-1.5 rounded-md hover:bg-gray-200 transition-colors text-xs font-medium"
               title="Copy registration number"
             >
-              <Copy className="w-3 h-3" />
+              <Copy className="w-2.5 h-2.5 sm:w-3 sm:h-3" />
               Copy Number
             </button>
           )}

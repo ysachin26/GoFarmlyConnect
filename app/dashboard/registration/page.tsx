@@ -142,28 +142,28 @@ export default function Registration() {
   // Prevent hydration mismatch by not rendering until mounted
   if (!mounted) {
     return (
-      <div className="p-6 space-y-6">
-        <div className="flex items-center justify-between">
+      <div className="p-4 sm:p-6 space-y-4 sm:space-y-6">
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 sm:gap-4">
           <div>
-            <h1 className="text-3xl font-bold text-gray-900">Registration Applications</h1>
-            <p className="text-gray-600 mt-1">Manage and track your registration applications</p>
+            <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">{t("registration_applications")}</h1>
+            <p className="text-gray-600 mt-1 text-sm sm:text-base">{t("manage_track_applications")}</p>
           </div>
-          <Button className="bg-blue-600 hover:bg-blue-700">Get Started</Button>
+          <Button className="bg-blue-600 hover:bg-blue-700 w-full sm:w-auto text-sm sm:text-base">{t("get_started")}</Button>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
           {[1, 2, 3, 4, 5].map((i) => (
             <Card key={i} className="animate-pulse">
               <CardHeader>
                 <div className="flex items-start justify-between">
-                  <div className="flex-1 h-6 bg-gray-200 rounded w-3/4"></div>
-                  <div className="h-6 w-20 bg-gray-200 rounded"></div>
+                  <div className="flex-1 h-5 sm:h-6 bg-gray-200 rounded w-3/4"></div>
+                  <div className="h-5 sm:h-6 w-16 sm:w-20 bg-gray-200 rounded"></div>
                 </div>
-                <div className="h-4 bg-gray-200 rounded w-1/2 mt-2"></div>
+                <div className="h-3 sm:h-4 bg-gray-200 rounded w-1/2 mt-2"></div>
               </CardHeader>
               <CardContent>
                 <div className="flex items-center justify-between">
-                  <div className="h-4 bg-gray-200 rounded w-1/3"></div>
-                  <div className="h-10 w-32 bg-gray-200 rounded"></div>
+                  <div className="h-3 sm:h-4 bg-gray-200 rounded w-1/3"></div>
+                  <div className="h-8 sm:h-10 w-24 sm:w-32 bg-gray-200 rounded"></div>
                 </div>
               </CardContent>
             </Card>
@@ -222,28 +222,28 @@ export default function Registration() {
 
   if (loading) {
     return (
-      <div className="p-6 space-y-6">
-        <div className="flex items-center justify-between">
+      <div className="p-4 sm:p-6 space-y-4 sm:space-y-6">
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 sm:gap-4">
           <div>
-            <h1 className="text-3xl font-bold text-gray-900">{t("registration_applications")}</h1>
-            <p className="text-gray-600 mt-1">{t("manage_track_applications")}</p>
+            <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">{t("registration_applications")}</h1>
+            <p className="text-gray-600 mt-1 text-sm sm:text-base">{t("manage_track_applications")}</p>
           </div>
-          <Button className="bg-blue-600 hover:bg-blue-700">{t("get_started")}</Button>
+          <Button className="bg-blue-600 hover:bg-blue-700 w-full sm:w-auto text-sm sm:text-base">{t("get_started")}</Button>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
           {registrations.map((_, index) => (
             <Card key={index} className="animate-pulse">
               <CardHeader>
                 <div className="flex items-start justify-between">
-                  <div className="flex-1 h-6 bg-gray-200 rounded w-3/4"></div>
-                  <div className="h-6 w-20 bg-gray-200 rounded"></div>
+                  <div className="flex-1 h-5 sm:h-6 bg-gray-200 rounded w-3/4"></div>
+                  <div className="h-5 sm:h-6 w-16 sm:w-20 bg-gray-200 rounded"></div>
                 </div>
-                <div className="h-4 bg-gray-200 rounded w-1/2 mt-2"></div>
+                <div className="h-3 sm:h-4 bg-gray-200 rounded w-1/2 mt-2"></div>
               </CardHeader>
               <CardContent>
                 <div className="flex items-center justify-between">
-                  <div className="h-4 bg-gray-200 rounded w-1/3"></div>
-                  <div className="h-10 w-32 bg-gray-200 rounded"></div>
+                  <div className="h-3 sm:h-4 bg-gray-200 rounded w-1/3"></div>
+                  <div className="h-8 sm:h-10 w-24 sm:w-32 bg-gray-200 rounded"></div>
                 </div>
               </CardContent>
             </Card>
@@ -254,39 +254,37 @@ export default function Registration() {
   }
 
   return (
-    <div className="p-6 space-y-6">
-      <div className="flex items-center justify-between">
+    <div className="p-4 sm:p-6 space-y-4 sm:space-y-6">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 sm:gap-4">
         <div>
-          <h1 className="text-3xl font-bold text-gray-900">{t("registration_applications")}</h1>
-          <p className="text-gray-600 mt-1">{t("manage_track_applications")}</p>
+          <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">{t("registration_applications")}</h1>
+          <p className="text-gray-600 mt-1 text-sm sm:text-base">{t("manage_track_applications")}</p>
         </div>
-        <Button className="bg-blue-600 hover:bg-blue-700">{t("get_started")}</Button>
+        <Button className="bg-blue-600 hover:bg-blue-700 w-full sm:w-auto text-sm sm:text-base">{t("get_started")}</Button>
       </div>
 
       {/* Profile Completion Check */}
       {!dashboardData || dashboardData.profileCompletion < 100 ? (
         <>
           <Card className="bg-orange-50 border-orange-200">
-            <CardContent className="p-6">
-              <div className="flex items-center gap-4">
-                <div className="h-12 w-12 bg-orange-500 rounded-lg flex items-center justify-center">
-                  <Lock className="h-6 w-6 text-white" />
+            <CardContent className="p-4 sm:p-6">
+              <div className="flex flex-col sm:flex-row sm:items-center gap-4">
+                <div className="h-10 w-10 sm:h-12 sm:w-12 bg-orange-500 rounded-lg flex items-center justify-center flex-shrink-0">
+                  <Lock className="h-5 w-5 sm:h-6 sm:w-6 text-white" />
                 </div>
-                <div className="flex-1">
-                  <h3 className="font-semibold text-orange-900 flex items-center gap-2">
-                    <AlertCircle className="h-5 w-5" />
+                <div className="flex-1 space-y-2 sm:space-y-3">
+                  <h3 className="font-semibold text-orange-900 flex items-center gap-2 text-sm sm:text-base">
+                    <AlertCircle className="h-4 w-4 sm:h-5 sm:w-5" />
                     Registration Services Locked
                   </h3>
-                  <p className="text-orange-700 text-sm mt-1">
+                  <p className="text-orange-700 text-xs sm:text-sm">
                     Complete your profile to unlock all registration services. Your profile is currently {dashboardData?.profileCompletion || 0}% complete.
                   </p>
-                  <div className="mt-3">
+                  <div className="space-y-2">
                     <Progress value={dashboardData?.profileCompletion || 0} className="h-2" />
-                  </div>
-                  <div className="mt-3">
                     <Button 
                       onClick={() => setShowProfileModal(true)}
-                      className="bg-orange-500 hover:bg-orange-600"
+                      className="bg-orange-500 hover:bg-orange-600 text-xs sm:text-sm w-full sm:w-auto"
                     >
                       Complete Profile
                     </Button>
@@ -297,28 +295,28 @@ export default function Registration() {
           </Card>
           
           {/* Show locked registration cards */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
             {registrations.map((registration) => (
               <Card key={registration.id} className="opacity-50 cursor-not-allowed">
                 <CardHeader>
                   <div className="flex items-start justify-between">
                     <div className="flex-1">
-                      <CardTitle className="text-lg text-gray-500">{registration.title}</CardTitle>
-                      <CardDescription className="mt-1">{registration.description}</CardDescription>
+                      <CardTitle className="text-base sm:text-lg text-gray-500">{registration.title}</CardTitle>
+                      <CardDescription className="mt-1 text-xs sm:text-sm">{registration.description}</CardDescription>
                     </div>
-                    <Badge variant="secondary" className="bg-gray-100 text-gray-500">
+                    <Badge variant="secondary" className="bg-gray-100 text-gray-500 text-xs sm:text-sm">
                       <Lock className="h-3 w-3 mr-1" />
                       Locked
                     </Badge>
                   </div>
                 </CardHeader>
                 <CardContent>
-                  <div className="flex items-center justify-between">
+                  <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
                     <div className="flex items-center gap-2">
                       <FileText className="h-4 w-4 text-gray-400" />
-                      <span className="text-sm text-gray-500">Complete profile to access</span>
+                      <span className="text-xs sm:text-sm text-gray-500">Complete profile to access</span>
                     </div>
-                    <Button variant="outline" size="sm" disabled className="flex items-center gap-2">
+                    <Button variant="outline" size="sm" disabled className="flex items-center gap-2 text-xs sm:text-sm w-full sm:w-auto">
                       <Lock className="h-3 w-3" />
                       Locked
                     </Button>
@@ -331,14 +329,14 @@ export default function Registration() {
       ) : (
         <>
           <Card className="bg-green-50 border-green-200">
-            <CardContent className="p-6">
-              <div className="flex items-center gap-4">
-                <div className="h-12 w-12 bg-green-600 rounded-lg flex items-center justify-center">
-                  <FileText className="h-6 w-6 text-white" />
+            <CardContent className="p-4 sm:p-6">
+              <div className="flex flex-col sm:flex-row sm:items-center gap-4">
+                <div className="h-10 w-10 sm:h-12 sm:w-12 bg-green-600 rounded-lg flex items-center justify-center flex-shrink-0">
+                  <FileText className="h-5 w-5 sm:h-6 sm:w-6 text-white" />
                 </div>
                 <div className="flex-1">
-                  <h3 className="font-semibold text-green-900">{t("required_registrations_title")}</h3>
-                  <p className="text-green-700 text-sm mt-1">
+                  <h3 className="font-semibold text-green-900 text-sm sm:text-base">{t("required_registrations_title")}</h3>
+                  <p className="text-green-700 text-xs sm:text-sm mt-1">
                     {t("required_registrations_description")}
                   </p>
                 </div>
@@ -346,7 +344,7 @@ export default function Registration() {
             </CardContent>
           </Card>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
         {registrations.map((registration) => {
           const { status, statusText, badgeVariant, badgeColorClass } = getRegistrationStatus(registration.stepId)
           return (
@@ -354,28 +352,28 @@ export default function Registration() {
               <CardHeader>
                 <div className="flex items-start justify-between">
                   <div className="flex-1">
-                    <CardTitle className="text-lg">{registration.title}</CardTitle>
-                    <CardDescription className="mt-1">{registration.description}</CardDescription>
+                    <CardTitle className="text-base sm:text-lg">{registration.title}</CardTitle>
+                    <CardDescription className="mt-1 text-xs sm:text-sm">{registration.description}</CardDescription>
                   </div>
-                  <Badge variant={badgeVariant} className={badgeColorClass}>
+                  <Badge variant={badgeVariant} className={`${badgeColorClass} text-xs sm:text-sm`}>
                     {status}
                   </Badge>
                 </div>
               </CardHeader>
               <CardContent>
-                <div className="flex items-center justify-between">
+                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
                   <div className="flex items-center gap-2">
                     <FileText className="h-4 w-4 text-gray-400" />
-                    <span className="text-sm text-gray-600">{statusText}</span>
+                    <span className="text-xs sm:text-sm text-gray-600">{statusText}</span>
                   </div>
-                  <Button variant="outline" size="sm" className="flex items-center gap-2 bg-transparent" asChild>
+                  <Button variant="outline" size="sm" className="flex items-center gap-2 bg-transparent text-xs sm:text-sm w-full sm:w-auto" asChild>
                     <Link href={registration.href}>
                       {status === t("completed")
                         ? t("view_application")
                         : status === t("in_progress")
                           ? t("view_application")
                           : t("start_application")}
-                      <ArrowRight className="h-4 w-4" />
+                      <ArrowRight className="h-3 w-3 sm:h-4 sm:w-4" />
                     </Link>
                   </Button>
                 </div>

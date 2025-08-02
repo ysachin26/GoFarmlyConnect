@@ -110,24 +110,24 @@ export default function Support() {
   }
 
   return (
-    <div className="p-6">
-      <div className="mb-6">
-        <h1 className="text-3xl font-bold text-gray-900 mb-2">Help & Support</h1>
-        <p className="text-gray-600">Get assistance with your export registration process</p>
+    <div className="p-4 sm:p-6">
+      <div className="mb-4 sm:mb-6">
+        <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-2">Help & Support</h1>
+        <p className="text-gray-600 text-sm sm:text-base">Get assistance with your export registration process</p>
       </div>
 
-      <Tabs value={activeTab} onValueChange={setActiveTab} className="mb-8">
-        <TabsList className="mb-6">
-          <TabsTrigger value="faq" className="flex items-center gap-2">
-            <HelpCircle className="h-4 w-4" />
+      <Tabs value={activeTab} onValueChange={setActiveTab} className="mb-6 sm:mb-8">
+        <TabsList className="mb-4 sm:mb-6 grid grid-cols-1 sm:grid-cols-3">
+          <TabsTrigger value="faq" className="flex items-center gap-1 sm:gap-2 text-xs sm:text-sm">
+            <HelpCircle className="h-3 w-3 sm:h-4 sm:w-4" />
             FAQs
           </TabsTrigger>
-          <TabsTrigger value="contact" className="flex items-center gap-2">
-            <MessageSquare className="h-4 w-4" />
+          <TabsTrigger value="contact" className="flex items-center gap-1 sm:gap-2 text-xs sm:text-sm">
+            <MessageSquare className="h-3 w-3 sm:h-4 sm:w-4" />
             Contact Us
           </TabsTrigger>
-          <TabsTrigger value="resources" className="flex items-center gap-2">
-            <FileText className="h-4 w-4" />
+          <TabsTrigger value="resources" className="flex items-center gap-1 sm:gap-2 text-xs sm:text-sm">
+            <FileText className="h-3 w-3 sm:h-4 sm:w-4" />
             Resources
           </TabsTrigger>
         </TabsList>
@@ -136,22 +136,22 @@ export default function Support() {
         <TabsContent value="faq">
           <Card>
             <CardHeader>
-              <CardTitle>Frequently Asked Questions</CardTitle>
-              <CardDescription>Find answers to common questions about GoFarmlyConnect</CardDescription>
+              <CardTitle className="text-base sm:text-lg md:text-xl">Frequently Asked Questions</CardTitle>
+              <CardDescription className="text-sm sm:text-base">Find answers to common questions about GoFarmlyConnect</CardDescription>
             </CardHeader>
             <CardContent>
               <Accordion type="single" collapsible className="w-full">
                 {faqData.map((faq, index) => (
                   <AccordionItem key={index} value={`item-${index}`}>
-                    <AccordionTrigger className="text-left">{faq.question}</AccordionTrigger>
-                    <AccordionContent className="text-gray-600">{faq.answer}</AccordionContent>
+                    <AccordionTrigger className="text-left text-sm sm:text-base">{faq.question}</AccordionTrigger>
+                    <AccordionContent className="text-gray-600 text-sm sm:text-base">{faq.answer}</AccordionContent>
                   </AccordionItem>
                 ))}
               </Accordion>
             </CardContent>
-            <CardFooter className="flex justify-between">
-              <p className="text-sm text-gray-600">{"Didn't find what you're looking for?"}</p>
-              <Button variant="outline" className="text-primary" onClick={() => setActiveTab("contact")}>
+            <CardFooter className="flex flex-col sm:flex-row sm:justify-between gap-3">
+              <p className="text-xs sm:text-sm text-gray-600">{"Didn't find what you're looking for?"}</p>
+              <Button variant="outline" className="text-primary text-xs sm:text-sm w-full sm:w-auto" onClick={() => setActiveTab("contact")}>
                 Contact Support
               </Button>
             </CardFooter>
@@ -160,17 +160,17 @@ export default function Support() {
 
         {/* Contact Us Section */}
         <TabsContent value="contact">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="md:col-span-2">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-6">
+            <div className="lg:col-span-2">
               {isSuccess ? (
                 <Card>
                   <CardContent className="pt-6">
-                    <div className="text-center py-8">
-                      <div className="mx-auto w-12 h-12 flex items-center justify-center rounded-full bg-green-100 mb-4">
-                        <Check className="h-6 w-6 text-green-600" />
+                    <div className="text-center py-6 sm:py-8">
+                      <div className="mx-auto w-10 h-10 sm:w-12 sm:h-12 flex items-center justify-center rounded-full bg-green-100 mb-3 sm:mb-4">
+                        <Check className="h-5 w-5 sm:h-6 sm:w-6 text-green-600" />
                       </div>
-                      <h2 className="text-xl font-semibold mb-2">Support Request Received</h2>
-                      <p className="text-gray-600 mb-4">
+                      <h2 className="text-lg sm:text-xl font-semibold mb-2">Support Request Received</h2>
+                      <p className="text-gray-600 mb-4 text-sm sm:text-base">
                         Thank you for contacting us. Our support team will get back to you within 24 hours.
                       </p>
                       <Button
@@ -179,6 +179,7 @@ export default function Support() {
                           setIsSuccess(false)
                           form.reset()
                         }}
+                        className="text-sm sm:text-base"
                       >
                         Submit Another Request
                       </Button>
@@ -188,22 +189,22 @@ export default function Support() {
               ) : (
                 <Card>
                   <CardHeader>
-                    <CardTitle>Contact Support</CardTitle>
-                    <CardDescription>
+                    <CardTitle className="text-base sm:text-lg md:text-xl">Contact Support</CardTitle>
+                    <CardDescription className="text-sm sm:text-base">
                       Fill out the form below and we'll get back to you as soon as possible
                     </CardDescription>
                   </CardHeader>
                   <CardContent>
                     <Form {...form}>
-                      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+                      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-3 sm:space-y-4">
                         <FormField
                           control={form.control}
                           name="subject"
                           render={({ field }) => (
                             <FormItem>
-                              <FormLabel>Subject</FormLabel>
+                              <FormLabel className="text-sm sm:text-base">Subject</FormLabel>
                               <FormControl>
-                                <Input placeholder="Brief description of your issue" {...field} />
+                                <Input placeholder="Brief description of your issue" {...field} className="text-sm sm:text-base" />
                               </FormControl>
                               <FormMessage />
                             </FormItem>
@@ -214,10 +215,10 @@ export default function Support() {
                           name="category"
                           render={({ field }) => (
                             <FormItem>
-                              <FormLabel>Category</FormLabel>
+                              <FormLabel className="text-sm sm:text-base">Category</FormLabel>
                               <Select onValueChange={field.onChange} defaultValue={field.value}>
                                 <FormControl>
-                                  <SelectTrigger>
+                                  <SelectTrigger className="text-sm sm:text-base">
                                     <SelectValue placeholder="Select a category" />
                                   </SelectTrigger>
                                 </FormControl>
@@ -242,11 +243,11 @@ export default function Support() {
                           name="message"
                           render={({ field }) => (
                             <FormItem>
-                              <FormLabel>Message</FormLabel>
+                              <FormLabel className="text-sm sm:text-base">Message</FormLabel>
                               <FormControl>
                                 <Textarea
                                   placeholder="Please describe your issue in detail"
-                                  className="min-h-32"
+                                  className="min-h-24 sm:min-h-32 text-sm sm:text-base"
                                   {...field}
                                 />
                               </FormControl>
@@ -259,18 +260,18 @@ export default function Support() {
                           name="attachments"
                           render={({ field }) => (
                             <FormItem>
-                              <FormLabel>Attachments (Optional)</FormLabel>
+                              <FormLabel className="text-sm sm:text-base">Attachments (Optional)</FormLabel>
                               <FormControl>
-                                <Input type="file" className="cursor-pointer" />
+                                <Input type="file" className="cursor-pointer text-sm sm:text-base" />
                               </FormControl>
-                              <FormDescription>
+                              <FormDescription className="text-xs sm:text-sm">
                                 Upload screenshots or relevant documents (.png, .jpg, .pdf)
                               </FormDescription>
                               <FormMessage />
                             </FormItem>
                           )}
                         />
-                        <Button type="submit" className="w-full mt-4" disabled={isSubmitting}>
+                        <Button type="submit" className="w-full mt-4 text-sm sm:text-base" disabled={isSubmitting}>
                           {isSubmitting ? "Submitting..." : "Submit Support Request"}
                         </Button>
                       </form>
@@ -283,31 +284,31 @@ export default function Support() {
             <div>
               <Card>
                 <CardHeader>
-                  <CardTitle>Contact Information</CardTitle>
-                  <CardDescription>Alternative ways to reach our support team</CardDescription>
+                  <CardTitle className="text-base sm:text-lg md:text-xl">Contact Information</CardTitle>
+                  <CardDescription className="text-sm sm:text-base">Alternative ways to reach our support team</CardDescription>
                 </CardHeader>
-                <CardContent className="space-y-4">
-                  <div className="flex items-start space-x-3">
-                    <Mail className="h-5 w-5 text-primary mt-0.5" />
+                <CardContent className="space-y-3 sm:space-y-4">
+                  <div className="flex items-start space-x-2 sm:space-x-3">
+                    <Mail className="h-4 w-4 sm:h-5 sm:w-5 text-primary mt-0.5 flex-shrink-0" />
                     <div>
-                      <h3 className="font-medium">Email Support</h3>
-                      <p className="text-sm text-gray-600">support@gofarmlyconnect.com</p>
+                      <h3 className="font-medium text-sm sm:text-base">Email Support</h3>
+                      <p className="text-xs sm:text-sm text-gray-600">support@gofarmlyconnect.com</p>
                       <p className="text-xs text-gray-500 mt-1">Response within 24 hours</p>
                     </div>
                   </div>
 
-                  <div className="flex items-start space-x-3">
-                    <Phone className="h-5 w-5 text-primary mt-0.5" />
+                  <div className="flex items-start space-x-2 sm:space-x-3">
+                    <Phone className="h-4 w-4 sm:h-5 sm:w-5 text-primary mt-0.5 flex-shrink-0" />
                     <div>
-                      <h3 className="font-medium">Phone Support</h3>
-                      <p className="text-sm text-gray-600">+91 98765 43210</p>
+                      <h3 className="font-medium text-sm sm:text-base">Phone Support</h3>
+                      <p className="text-xs sm:text-sm text-gray-600">+91 98765 43210</p>
                       <p className="text-xs text-gray-500 mt-1">Mon-Fri, 9:00 AM - 6:00 PM IST</p>
                     </div>
                   </div>
 
-                  <div className="mt-6 pt-6 border-t border-gray-200">
-                    <h3 className="font-medium mb-2">Business Hours</h3>
-                    <div className="space-y-1 text-sm">
+                  <div className="mt-4 sm:mt-6 pt-4 sm:pt-6 border-t border-gray-200">
+                    <h3 className="font-medium mb-2 text-sm sm:text-base">Business Hours</h3>
+                    <div className="space-y-1 text-xs sm:text-sm">
                       <p className="flex justify-between">
                         <span className="text-gray-600">Monday - Friday</span>
                         <span>9:00 AM - 6:00 PM</span>
@@ -330,19 +331,19 @@ export default function Support() {
 
         {/* Resources Section */}
         <TabsContent value="resources">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
             <Card className="hover:shadow-md transition-shadow">
               <CardHeader>
-                <CardTitle className="flex items-center">
-                  <FileText className="h-5 w-5 mr-2 text-primary" />
+                <CardTitle className="flex items-center text-sm sm:text-base">
+                  <FileText className="h-4 w-4 sm:h-5 sm:w-5 mr-2 text-primary" />
                   User Guide
                 </CardTitle>
               </CardHeader>
               <CardContent>
-                <p className="text-gray-600 mb-4">Comprehensive guide to using the GoFarmlyConnect platform</p>
+                <p className="text-gray-600 mb-4 text-xs sm:text-sm">Comprehensive guide to using the GoFarmlyConnect platform</p>
               </CardContent>
               <CardFooter>
-                <Button variant="outline" className="w-full">
+                <Button variant="outline" className="w-full text-xs sm:text-sm">
                   Download PDF
                 </Button>
               </CardFooter>
@@ -350,16 +351,16 @@ export default function Support() {
 
             <Card className="hover:shadow-md transition-shadow">
               <CardHeader>
-                <CardTitle className="flex items-center">
-                  <FileText className="h-5 w-5 mr-2 text-primary" />
+                <CardTitle className="flex items-center text-sm sm:text-base">
+                  <FileText className="h-4 w-4 sm:h-5 sm:w-5 mr-2 text-primary" />
                   Document Checklist
                 </CardTitle>
               </CardHeader>
               <CardContent>
-                <p className="text-gray-600 mb-4">Complete list of documents required for different registrations</p>
+                <p className="text-gray-600 mb-4 text-xs sm:text-sm">Complete list of documents required for different registrations</p>
               </CardContent>
               <CardFooter>
-                <Button variant="outline" className="w-full">
+                <Button variant="outline" className="w-full text-xs sm:text-sm">
                   Download PDF
                 </Button>
               </CardFooter>
@@ -367,16 +368,16 @@ export default function Support() {
 
             <Card className="hover:shadow-md transition-shadow">
               <CardHeader>
-                <CardTitle className="flex items-center">
-                  <FileText className="h-5 w-5 mr-2 text-primary" />
+                <CardTitle className="flex items-center text-sm sm:text-base">
+                  <FileText className="h-4 w-4 sm:h-5 sm:w-5 mr-2 text-primary" />
                   GST Guide
                 </CardTitle>
               </CardHeader>
               <CardContent>
-                <p className="text-gray-600 mb-4">Step-by-step guide to GST registration for exporters</p>
+                <p className="text-gray-600 mb-4 text-xs sm:text-sm">Step-by-step guide to GST registration for exporters</p>
               </CardContent>
               <CardFooter>
-                <Button variant="outline" className="w-full">
+                <Button variant="outline" className="w-full text-xs sm:text-sm">
                   Download PDF
                 </Button>
               </CardFooter>
@@ -384,16 +385,16 @@ export default function Support() {
 
             <Card className="hover:shadow-md transition-shadow">
               <CardHeader>
-                <CardTitle className="flex items-center">
-                  <FileText className="h-5 w-5 mr-2 text-primary" />
+                <CardTitle className="flex items-center text-sm sm:text-base">
+                  <FileText className="h-4 w-4 sm:h-5 sm:w-5 mr-2 text-primary" />
                   IEC Guide
                 </CardTitle>
               </CardHeader>
               <CardContent>
-                <p className="text-gray-600 mb-4">Detailed instructions for Import Export Code registration</p>
+                <p className="text-gray-600 mb-4 text-xs sm:text-sm">Detailed instructions for Import Export Code registration</p>
               </CardContent>
               <CardFooter>
-                <Button variant="outline" className="w-full">
+                <Button variant="outline" className="w-full text-xs sm:text-sm">
                   Download PDF
                 </Button>
               </CardFooter>
@@ -401,16 +402,16 @@ export default function Support() {
 
             <Card className="hover:shadow-md transition-shadow">
               <CardHeader>
-                <CardTitle className="flex items-center">
-                  <FileText className="h-5 w-5 mr-2 text-primary" />
+                <CardTitle className="flex items-center text-sm sm:text-base">
+                  <FileText className="h-4 w-4 sm:h-5 sm:w-5 mr-2 text-primary" />
                   ICEGATE Guide
                 </CardTitle>
               </CardHeader>
               <CardContent>
-                <p className="text-gray-600 mb-4">Complete guide to ICEGATE registration and usage</p>
+                <p className="text-gray-600 mb-4 text-xs sm:text-sm">Complete guide to ICEGATE registration and usage</p>
               </CardContent>
               <CardFooter>
-                <Button variant="outline" className="w-full">
+                <Button variant="outline" className="w-full text-xs sm:text-sm">
                   Download PDF
                 </Button>
               </CardFooter>
@@ -418,16 +419,16 @@ export default function Support() {
 
             <Card className="hover:shadow-md transition-shadow">
               <CardHeader>
-                <CardTitle className="flex items-center">
-                  <FileText className="h-5 w-5 mr-2 text-primary" />
+                <CardTitle className="flex items-center text-sm sm:text-base">
+                  <FileText className="h-4 w-4 sm:h-5 sm:w-5 mr-2 text-primary" />
                   AD Code Guide
                 </CardTitle>
               </CardHeader>
               <CardContent>
-                <p className="text-gray-600 mb-4">Tutorial on Authorized Dealer Code registration process</p>
+                <p className="text-gray-600 mb-4 text-xs sm:text-sm">Tutorial on Authorized Dealer Code registration process</p>
               </CardContent>
               <CardFooter>
-                <Button variant="outline" className="w-full">
+                <Button variant="outline" className="w-full text-xs sm:text-sm">
                   Download PDF
                 </Button>
               </CardFooter>
@@ -435,16 +436,16 @@ export default function Support() {
 
             <Card className="hover:shadow-md transition-shadow">
               <CardHeader>
-                <CardTitle className="flex items-center">
-                  <FileText className="h-5 w-5 mr-2 text-primary" />
+                <CardTitle className="flex items-center text-sm sm:text-base">
+                  <FileText className="h-4 w-4 sm:h-5 sm:w-5 mr-2 text-primary" />
                   DSC Guide
                 </CardTitle>
               </CardHeader>
               <CardContent>
-                <p className="text-gray-600 mb-4">Digital Signature Certificate registration and usage guide</p>
+                <p className="text-gray-600 mb-4 text-xs sm:text-sm">Digital Signature Certificate registration and usage guide</p>
               </CardContent>
               <CardFooter>
-                <Button variant="outline" className="w-full">
+                <Button variant="outline" className="w-full text-xs sm:text-sm">
                   Download PDF
                 </Button>
               </CardFooter>
@@ -452,16 +453,16 @@ export default function Support() {
 
             <Card className="hover:shadow-md transition-shadow">
               <CardHeader>
-                <CardTitle className="flex items-center">
-                  <FileText className="h-5 w-5 mr-2 text-primary" />
+                <CardTitle className="flex items-center text-sm sm:text-base">
+                  <FileText className="h-4 w-4 sm:h-5 sm:w-5 mr-2 text-primary" />
                   Video Tutorials
                 </CardTitle>
               </CardHeader>
               <CardContent>
-                <p className="text-gray-600 mb-4">Collection of video guides for using GoFarmlyConnect</p>
+                <p className="text-gray-600 mb-4 text-xs sm:text-sm">Collection of video guides for using GoFarmlyConnect</p>
               </CardContent>
               <CardFooter>
-                <Button variant="outline" className="w-full">
+                <Button variant="outline" className="w-full text-xs sm:text-sm">
                   View Videos
                 </Button>
               </CardFooter>

@@ -147,24 +147,24 @@ export default function ProgressPage() {
 
   if (loading) {
     return (
-      <div className="flex items-center justify-center min-h-[calc(100vh-100px)]">
-        <p>{t("loading_progress")}</p>
+      <div className="flex items-center justify-center min-h-[calc(100vh-100px)] p-4">
+        <p className="text-sm sm:text-base">{t("loading_progress")}</p>
       </div>
     )
   }
 
   if (error) {
     return (
-      <div className="flex items-center justify-center min-h-[calc(100vh-100px)]">
-        <p className="text-red-500">{error}</p>
+      <div className="flex items-center justify-center min-h-[calc(100vh-100px)] p-4">
+        <p className="text-red-500 text-sm sm:text-base">{error}</p>
       </div>
     )
   }
 
   if (!dashboardData) {
     return (
-      <div className="flex items-center justify-center min-h-[calc(10vh-100px)]">
-        <p>{t("no_dashboard_data_available")}</p>
+      <div className="flex items-center justify-center min-h-[calc(10vh-100px)] p-4">
+        <p className="text-sm sm:text-base">{t("no_dashboard_data_available")}</p>
       </div>
     )
   }
@@ -184,35 +184,35 @@ export default function ProgressPage() {
   }
 
   return (
-    <div className="container mx-auto px-4 py-8 md:px-6 lg:px-8">
-      <h1 className="text-3xl font-bold mb-2">{t("registration_progress")}</h1>
-      <p className="text-gray-500 dark:text-gray-400 mb-8">{t("complete_all_steps_export_ready")}</p>
+    <div className="container mx-auto px-3 sm:px-4 py-6 sm:py-8 md:px-6 lg:px-8">
+      <h1 className="text-2xl sm:text-3xl font-bold mb-2">{t("registration_progress")}</h1>
+      <p className="text-gray-500 dark:text-gray-400 mb-6 sm:mb-8 text-sm sm:text-base">{t("complete_all_steps_export_ready")}</p>
 
-      <Card className="mb-8">
+      <Card className="mb-6 sm:mb-8">
         <CardHeader>
-          <CardTitle>{t("overall_progress")}</CardTitle>
+          <CardTitle className="text-base sm:text-lg md:text-xl">{t("overall_progress")}</CardTitle>
         </CardHeader>
         <CardContent>
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-3 sm:gap-4">
             <Progress value={overallProgress} className="flex-1" />
-            <span className="text-lg font-semibold">{overallProgress}%</span>
+            <span className="text-base sm:text-lg font-semibold">{overallProgress}%</span>
           </div>
         </CardContent>
       </Card>
 
       <Tabs defaultValue="journey" className="w-full">
-        <TabsList className="grid w-full grid-cols-3">
-          <TabsTrigger value="journey">{t("registration_journey")}</TabsTrigger>
-          <TabsTrigger value="timeline">{t("timeline")}</TabsTrigger>
-          <TabsTrigger value="next-steps">{t("next_steps")}</TabsTrigger>
+        <TabsList className="grid w-full grid-cols-1 sm:grid-cols-3 mb-4 sm:mb-6">
+          <TabsTrigger value="journey" className="text-xs sm:text-sm">{t("registration_journey")}</TabsTrigger>
+          <TabsTrigger value="timeline" className="text-xs sm:text-sm">{t("timeline")}</TabsTrigger>
+          <TabsTrigger value="next-steps" className="text-xs sm:text-sm">{t("next_steps")}</TabsTrigger>
         </TabsList>
-        <TabsContent value="journey" className="mt-6">
+        <TabsContent value="journey" className="mt-4 sm:mt-6">
           <Card>
             <CardHeader>
-              <CardTitle>{t("your_registration_journey")}</CardTitle>
+              <CardTitle className="text-base sm:text-lg md:text-xl">{t("your_registration_journey")}</CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3 sm:gap-4 md:gap-6">
                 {registrationSteps.map((step) => {
                   const IconComponent = iconMap[step.icon] || AlertCircle
                   const isCompleted = step.status === "completed"
@@ -226,22 +226,22 @@ export default function ProgressPage() {
                         <Link href={stepRoutes[step.name] || "#"}>
                           <div
                             className={cn(
-                              "flex flex-col items-center p-4 rounded-lg border transition-all duration-200 cursor-pointer",
+                              "flex flex-col items-center p-3 sm:p-4 rounded-lg border transition-all duration-200 cursor-pointer",
                               "border-red-500 bg-red-50 dark:bg-red-950 dark:border-red-700",
                             )}
                           >
-                            <div className="w-12 h-12 rounded-full flex items-center justify-center mb-2 bg-red-100 text-red-600 dark:bg-red-800 dark:text-red-300">
-                              <IconComponent className="w-6 h-6" />
+                            <div className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 rounded-full flex items-center justify-center mb-2 bg-red-100 text-red-600 dark:bg-red-800 dark:text-red-300">
+                              <IconComponent className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6" />
                             </div>
-                            <p className="font-medium text-center">{step.name}</p>
-                            <p className="text-sm text-red-600 dark:text-red-300">{t("rejected_click_to_reupload")}</p>
+                            <p className="font-medium text-center text-xs sm:text-sm md:text-base">{step.name}</p>
+                            <p className="text-xs text-red-600 dark:text-red-300">{t("rejected_click_to_reupload")}</p>
                           </div>
                         </Link>
                       ) : (
                         <Link href={stepRoutes[step.name] || "#"}>
                           <div
                             className={cn(
-                              "flex flex-col items-center p-4 rounded-lg border transition-all duration-200",
+                              "flex flex-col items-center p-3 sm:p-4 rounded-lg border transition-all duration-200",
                               isCompleted && "border-green-500 bg-green-50",
                               isInProgress && "border-blue-500 bg-blue-50",
                               isPending && "border-gray-200 bg-gray-50 hover:border-gray-300",
@@ -252,18 +252,18 @@ export default function ProgressPage() {
                           >
                             <div
                               className={cn(
-                                "w-12 h-12 rounded-full flex items-center justify-center mb-2",
+                                "w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 rounded-full flex items-center justify-center mb-2",
                                 isCompleted && "bg-green-100 text-green-600 dark:bg-green-800 dark:text-green-300",
                                 isInProgress && "bg-blue-100 text-blue-600 dark:bg-blue-800 dark:text-blue-300",
                                 isPending && "bg-gray-100 text-gray-600 dark:bg-gray-700 dark:text-gray-300",
                               )}
                             >
-                              <IconComponent className="w-6 h-6" />
+                              <IconComponent className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6" />
                             </div>
-                            <p className="font-medium text-center">{step.name}</p>
+                            <p className="font-medium text-center text-xs sm:text-sm md:text-base">{step.name}</p>
                             <p
                               className={cn(
-                                "text-sm",
+                                "text-xs sm:text-sm",
                                 isCompleted && "text-green-600 dark:text-green-300",
                                 isInProgress && "text-blue-600 dark:text-blue-300",
                                 isPending && "text-gray-500 dark:text-gray-400",
@@ -281,31 +281,31 @@ export default function ProgressPage() {
             </CardContent>
           </Card>
         </TabsContent>
-        <TabsContent value="timeline" className="mt-6">
+        <TabsContent value="timeline" className="mt-4 sm:mt-6">
           <Card>
             <CardHeader>
-              <CardTitle>{t("activity_timeline")}</CardTitle>
+              <CardTitle className="text-base sm:text-lg md:text-xl">{t("activity_timeline")}</CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="relative pl-8">
+              <div className="relative pl-6 sm:pl-8">
                 {registrationSteps
                   .filter((step) => step.completedAt)
                   .sort((a, b) => new Date(b.completedAt!).getTime() - new Date(a.completedAt!).getTime())
                   .map((step, index) => (
-                    <div key={step.id} className="mb-6 flex items-start">
+                    <div key={step.id} className="mb-4 sm:mb-6 flex items-start">
                       <div className="absolute left-0 flex h-full flex-col items-center">
-                        <div className="flex h-8 w-8 items-center justify-center rounded-full bg-green-500 text-white">
-                          <CheckCircle className="h-4 w-4" />
+                        <div className="flex h-6 w-6 sm:h-8 sm:w-8 items-center justify-center rounded-full bg-green-500 text-white">
+                          <CheckCircle className="h-3 w-3 sm:h-4 sm:w-4" />
                         </div>
                         {index < registrationSteps.filter((s) => s.completedAt).length - 1 && (
                           <div className="h-full w-px bg-gray-200 dark:bg-gray-700" />
                         )}
                       </div>
-                      <div className="ml-4 flex-1">
-                        <h3 className="font-semibold">
+                      <div className="ml-3 sm:ml-4 flex-1">
+                        <h3 className="font-semibold text-sm sm:text-base">
                           {step.name} {t("completed")}
                         </h3>
-                        <p className="text-sm text-gray-500 dark:text-gray-400">
+                        <p className="text-xs sm:text-sm text-gray-500 dark:text-gray-400">
                           {step.completedAt ? format(new Date(step.completedAt), "PPP") : t("n_a")}
                         </p>
                       </div>
@@ -314,7 +314,7 @@ export default function ProgressPage() {
                 {notifications.length > 0 && (
                   <>
                     <Separator className="my-4" />
-                    <h3 className="font-semibold mb-4">{t("notifications")}</h3>
+                    <h3 className="font-semibold mb-4 text-sm sm:text-base">{t("notifications")}</h3>
                     {notifications
                       .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
                       .map((notification) => {
@@ -328,12 +328,12 @@ export default function ProgressPage() {
                           ] || Bell
                         return (
                           <div key={notification.id} className="mb-4 flex items-start">
-                            <div className="flex h-8 w-8 items-center justify-center rounded-full bg-gray-100 text-gray-600 dark:bg-gray-700 dark:text-gray-300">
-                              <NotificationIcon className="h-4 w-4" />
+                            <div className="flex h-6 w-6 sm:h-8 sm:w-8 items-center justify-center rounded-full bg-gray-100 text-gray-600 dark:bg-gray-700 dark:text-gray-300">
+                              <NotificationIcon className="h-3 w-3 sm:h-4 sm:w-4" />
                             </div>
-                            <div className="ml-4 flex-1">
-                              <h4 className="font-medium">{notification.title}</h4>
-                              <p className="text-sm text-gray-700 dark:text-gray-300">{notification.message}</p>
+                            <div className="ml-3 sm:ml-4 flex-1">
+                              <h4 className="font-medium text-sm sm:text-base">{notification.title}</h4>
+                              <p className="text-xs sm:text-sm text-gray-700 dark:text-gray-300">{notification.message}</p>
                               <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
                                 {format(new Date(notification.createdAt), "PPP p")}
                               </p>
@@ -344,28 +344,28 @@ export default function ProgressPage() {
                   </>
                 )}
                 {registrationSteps.filter((step) => step.completedAt).length === 0 && notifications.length === 0 && (
-                  <p className="text-gray-500 dark:text-gray-400">{t("no_activity_yet")}</p>
+                  <p className="text-gray-500 dark:text-gray-400 text-sm sm:text-base">{t("no_activity_yet")}</p>
                 )}
               </div>
             </CardContent>
           </Card>
         </TabsContent>
-        <TabsContent value="next-steps" className="mt-6">
+        <TabsContent value="next-steps" className="mt-4 sm:mt-6">
           <Card>
             <CardHeader>
-              <CardTitle>{t("whats_next")}</CardTitle>
+              <CardTitle className="text-base sm:text-lg md:text-xl">{t("whats_next")}</CardTitle>
             </CardHeader>
             <CardContent>
               {nextPendingStep ? (
-                <div className="space-y-4">
-                  <p className="text-lg">
+                <div className="space-y-3 sm:space-y-4">
+                  <p className="text-base sm:text-lg">
                     {t("your_next_step_is")} <span className="font-semibold">{nextPendingStep.name}</span>
                   </p>
-                  <p className="text-gray-600 dark:text-gray-400">
+                  <p className="text-gray-600 dark:text-gray-400 text-sm sm:text-base">
                     {t("continue_registration_journey_description", { stepName: nextPendingStep.name })}
                   </p>
                   <Link href={stepRoutes[nextPendingStep.name] || "#"}>
-                    <Button className="mt-4">{t("go_to_step_name", { stepName: nextPendingStep.name })}</Button>
+                    <Button className="mt-4 text-sm sm:text-base">{t("go_to_step_name", { stepName: nextPendingStep.name })}</Button>
                   </Link>
                   {/* Example of manually marking a step as complete for testing */}
                   {/* <Button
@@ -377,11 +377,11 @@ export default function ProgressPage() {
                   </Button> */}
                 </div>
               ) : (
-                <div className="text-center py-8">
-                  <CheckCircle className="h-12 w-12 text-green-500 mx-auto mb-4" />
-                  <h3 className="text-xl font-semibold mb-2">{t("all_steps_completed")}</h3>
-                  <p className="text-gray-600 dark:text-gray-400">{t("congratulations_all_steps_completed")}</p>
-                  <p className="text-gray-600 dark:text-gray-400">{t("export_ready_business_gofarmlyconnect")}</p>
+                <div className="text-center py-6 sm:py-8">
+                  <CheckCircle className="h-10 w-10 sm:h-12 sm:w-12 text-green-500 mx-auto mb-3 sm:mb-4" />
+                  <h3 className="text-lg sm:text-xl font-semibold mb-2">{t("all_steps_completed")}</h3>
+                  <p className="text-gray-600 dark:text-gray-400 text-sm sm:text-base">{t("congratulations_all_steps_completed")}</p>
+                  <p className="text-gray-600 dark:text-gray-400 text-sm sm:text-base">{t("export_ready_business_gofarmlyconnect")}</p>
                 </div>
               )}
             </CardContent>
