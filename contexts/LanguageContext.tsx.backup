@@ -1,0 +1,1299 @@
+"use client"
+
+import { createContext, useContext, useState, useEffect, type ReactNode } from "react"
+import { additionalTranslations } from "../additional-translations"
+
+interface LanguageContextType {
+  language: string
+  setLanguage: (lang: string) => void
+  t: (key: string, replacements?: Record<string, string>) => string
+}
+
+const LanguageContext = createContext<LanguageContextType | undefined>(undefined)
+
+// Translation dictionary
+const translations: Record<string, Record<string, string>> = {
+  en: {
+    // Navigation
+    about_us: "About Us",
+    services: "Services",
+    video_tutorial: "Video Tutorial",
+    support: "Support",
+    login_register: "Login / Register",
+    english: "English",
+    hindi: "हिन्दी",
+    marathi: "मराठी",
+
+    // Hero Section
+    revolutionizing_agriculture: "🌾 Revolutionizing Agriculture",
+    welcome_to: "Welcome to",
+    gofarmlyconnect: "GoFarmlyConnect",
+    hero_description:
+      "Transform your farming operations with our comprehensive digital platform. Join thousands of farmers who have increased their productivity by 40% using our innovative solutions.",
+    get_started_free: "Get Started Free",
+    watch_demo: "Watch Demo",
+    active_farmers: "Active Farmers",
+    trade_volume: "Trade Volume",
+    uptime: "Uptime",
+    latest_updates: "🚀 Latest Updates",
+    ai_crop_prediction: "🌾 New AI crop prediction system - Increase yield by 40%",
+    mobile_app_launched: "📱 Mobile app launched - Manage your farm anywhere",
+    special_financing: "💰 Special financing for small farmers - Apply now",
+
+    // Services
+    our_services: "Our Services",
+    comprehensive_solutions: "Comprehensive Import Export Solutions",
+    services_description: "Everything you need to streamline your international trade operations and ensure compliance",
+    gst_filing: "GST Filing",
+    gst_description: "Simplify your Goods and Services Tax (GST) compliance with easy online filing.",
+    automated_gst_returns: "Automated GST Returns",
+    input_tax_credit: "Input Tax Credit Management",
+    reconciliation_tools: "Reconciliation Tools",
+    audit_support: "Audit Support",
+    iec_registration: "IEC Registration",
+    iec_description: "Obtain your Import Export Code (IEC) quickly and hassle-free for international trade.",
+    new_iec_application: "New IEC Application",
+    iec_modification: "IEC Modification",
+    iec_renewal: "IEC Renewal",
+    consultation_services: "Consultation Services",
+    dsc_procurement: "DSC Procurement",
+    dsc_description: "Secure your Digital Signature Certificate (DSC) for online document authentication.",
+    class3_dsc: "Class 3 DSC",
+    organization_dsc: "Organization DSC",
+    individual_dsc: "Individual DSC",
+    renewal_services: "Renewal Services",
+    icegate_services: "ICEGATE Services",
+    icegate_description: "Seamlessly interact with ICEGATE for customs clearance and trade-related services.",
+    bill_of_entry: "Bill of Entry Filing",
+    shipping_bill: "Shipping Bill Processing",
+    duty_payment: "Duty Payment",
+    status_tracking: "Status Tracking",
+    adcode_registration: "AD Code Registration",
+    adcode_description: "Register your Authorized Dealer (AD) Code for smooth export transactions.",
+    adcode_reg: "AD Code Registration",
+    bank_linkage: "Bank Linkage",
+    export_incentives: "Export Incentives",
+    compliance_checks: "Compliance Checks",
+    other_documents: "Other Document Filing",
+    other_documents_description: "Comprehensive support for various other import-export related document filings.",
+    rcmc_application: "RCMC Application",
+    meis_seis_claims: "MEIS/SEIS Claims",
+    epcg_license: "EPCG License",
+    advance_authorization: "Advance Authorization",
+    learn_more: "Learn More",
+    ready_to_streamline: "Ready to Streamline Your Trade Operations?",
+    join_thousands:
+      "Join thousands of importers and exporters who have digitized their operations with GoFarmlyConnect",
+    get_started_today: "Get Started Today",
+
+    // Features
+    why_choose: "Why Choose GoFarmlyConnect",
+    built_for_modern: "Built for Modern",
+    farmers: "Farmers",
+    features_description:
+      "We understand the unique challenges farmers face. That's why we've built a platform that combines cutting-edge technology with deep agricultural expertise.",
+    lightning_fast: "Lightning Fast Processing",
+    lightning_description: "Process documents and applications in minutes, not hours or days",
+    bank_grade_security: "Bank-Grade Security",
+    security_description: "Your data is protected with enterprise-level encryption",
+    expert_support: "Expert Support",
+    expert_description: "24/7 customer support from agricultural experts",
+    proven_results: "Proven Results",
+    results_description: "Average 40% increase in productivity for our users",
+    save_time: "Save Time",
+    time_description: "Reduce paperwork time by up to 80% with automation",
+    compliance_100: "100% Compliance",
+    compliance_description: "Stay compliant with all regulatory requirements",
+    happy_farmers: "Happy Farmers",
+
+    // Dashboard
+    dashboard: "Dashboard",
+    profile: "My Profile",
+    progress: "Progress",
+    documents: "Documents",
+    settings: "Settings",
+    registration: "Registration",
+    logout: "Logout",
+    welcome: "Welcome",
+    complete_profile: "Complete your profile to get started",
+    upload_document: "Upload Document",
+    document_uploaded: "Document uploaded successfully",
+    document_verified: "Document verified",
+    document_rejected: "Document rejected",
+    pending_verification: "Pending Verification",
+    re_upload_required: "Re-upload Required",
+    profile_completion: "Profile Completion",
+    basic_information: "Basic Information",
+    required_documents: "Required Documents",
+    email_verified: "Email verified",
+    mobile_verified: "Mobile verified",
+    upload_successful: "Upload Successful",
+    upload_failed: "Upload Failed",
+    email_required: "Email Required",
+    enter_email: "Please enter an email address",
+    file_too_large: "File Too Large",
+    file_size_limit: "Please upload a file smaller than 1MB",
+    supported_formats: "Supported: PDF, JPG, PNG (max 1MB)",
+    loading: "Loading...",
+    error: "Error",
+    failed_to_load: "Failed to load profile data",
+    try_again: "Try Again",
+
+    // Dashboard specific
+    notifications: "Notifications",
+    tutorials: "Tutorials",
+    video_tutorials: "Video Tutorials",
+    track_progress_description: "Track your export registration progress",
+    get_started_title: "Get Started with Export Registration",
+    get_started_description:
+      "Begin your journey to become an export-ready business. Complete your profile and required documentation to start trading internationally.",
+    start_registration_process: "Start Registration Process",
+    export_ready_journey: "Your journey to becoming an export-ready business",
+    learn_exporter_title: "Learn How to Become an Exporter",
+    tutorial_description: "Watch our step-by-step tutorials to understand the export registration process",
+    no_dashboard_data: "No dashboard data available.",
+
+    // Registration page specific
+    registration_applications: "Registration Applications",
+    manage_track_applications: "Manage and track all your export-related registration applications",
+    get_started: "Get Started",
+    required_registrations_title: "Required Registrations to Become an Exporter",
+    required_registrations_description:
+      "Complete all 5 registrations below to become export-ready. Start with any registration that suits your business needs.",
+    gst_registration: "GST Registration",
+    dsc_registration: "DSC Registration",
+    icegate_registration: "ICE Gate Registration",
+    not_started: "Not Started",
+    not_started_text: "Not started yet",
+    in_progress: "In Progress",
+    in_progress_text: "Application in progress",
+    completed: "Completed",
+    completed_text: "Application completed",
+    pending_review: "Pending Review",
+    pending_review_text: "Awaiting document verification",
+    rejected: "Rejected",
+    rejected_text: "Application rejected",
+    view_application: "View Application",
+    start_application: "Start Application",
+
+    // GST Registration specific
+    documents_rejected_re_upload: "Your documents have been rejected. Please re-upload the required documents.",
+    file_size_too_large: "File size too large",
+    file_size_limit_message: "Please upload a file smaller than {{size}}MB",
+    complete_all_required_fields: "Please complete all required fields and upload necessary documents.",
+    submission_failed: "Failed to submit application. Please try again.",
+    verified: "Verified",
+    rejected_re_upload_required: "Rejected - Re-upload Required",
+    not_uploaded: "Not Uploaded",
+    file_size_limit_1mb: "File size should be less than 1MB",
+    preview: "Preview",
+    remove: "Remove",
+    re_upload: "Re-upload",
+    uploaded: "Uploaded",
+    shared_from_previous_registration: "Shared from previous registration",
+    view: "View",
+    uploading: "Uploading...",
+    click_to_upload: "Click to upload",
+    supported_formats_pdf_jpg_png: "Supported formats: PDF, JPG, PNG",
+    saving: "Saving...",
+    save_preferences: "Save Preferences",
+    deleting: "Deleting...",
+    yes_delete_my_account: "Yes, delete my account",
+    re_upload_document: "Re-upload Document",
+    gst_registration_title: "GST Registration",
+    gst_registration_description: "Complete your GST registration to become eligible for export business",
+    registration_progress: "Registration Progress",
+    complete_required_sections_gst: "Complete the required sections below to submit your GST registration application",
+    basic_details_required: "Basic Details (Required)",
+    information_fetched_from_profile: "Information fetched from your profile",
+    auto_filled_from_profile: "Auto-filled from profile",
+    full_name: "Full Name",
+    fetched_from_profile: "Fetched from profile",
+    mobile_number: "Mobile Number",
+    pan_card: "PAN Card",
+    aadhaar_card: "Aadhaar Card",
+    photograph: "Photograph",
+    proof_of_address: "Proof of Address",
+    uploaded_in_profile: "Uploaded in profile",
+    pending_in_profile: "Pending in profile",
+    business_entity_type: "Business Entity Type",
+    business_type_from_profile: "Business type from profile",
+    individual_sole_proprietor: "Individual/Sole Proprietor",
+    partnership_firm: "Partnership Firm",
+    llp_limited_liability_partnership: "LLP (Limited Liability Partnership)",
+    private_limited_company: "Private Limited Company",
+    document_requirements_customized_by_business_type:
+      "Document requirements will be customized based on your business type",
+    nature_of_business: "Nature of Business",
+    nature_of_business_placeholder: "Enter nature of business",
+    specify_primary_business_activities: "Specify your primary business activities and services",
+    business_trade_name: "Business/Trade Name",
+    enter_business_trade_name: "Enter business/trade name",
+    pre_filled_from_profile: "Pre-filled from profile",
+    name_appears_on_gst_certificate: "This name will appear on your GST certificate",
+    business_entity_documents: "Business Entity Documents",
+    upload_required_documents_for: "Upload the required documents for {{businessType}}",
+    authorization_documents: "Authorization Documents",
+    authorization_letter_board_resolution: "Authorization Letter/Board Resolution",
+    authorization_from_partners: "Authorization from partners",
+    authorization_from_designated_partners: "Authorization from designated partners",
+    board_resolution_from_directors: "Board resolution from directors",
+    partnership_documents: "Partnership Documents",
+    partnership_deed: "Partnership Deed",
+    registered_partnership_deed: "Registered partnership deed",
+    llp_documents: "LLP Documents",
+    llp_agreement: "LLP Agreement",
+    limited_liability_partnership_agreement: "Limited Liability Partnership Agreement",
+    company_documents: "Company Documents",
+    certificate_of_incorporation: "Certificate of Incorporation",
+    company_incorporation_certificate_from_roc: "Company incorporation certificate from ROC",
+    moa_aoa: "MOA & AOA",
+    memorandum_articles_association_documents: "Memorandum and Articles of Association documents",
+    business_premises_proof: "Business Premises Proof",
+    choose_documents_based_on_premise_situation:
+      "Choose the documents to upload based on your business premise situation",
+    select_premise_type: "Select Premise Type",
+    rented_property: "Rented Property",
+    owned_property: "Owned Property",
+    other: "Other",
+    required_for_rented_property: "Required documents for rented property:",
+    rent_lease_agreement_registered: "Rent/Lease Agreement (Registered)",
+    electricity_bill_latest: "Electricity Bill (Latest)",
+    noc_from_property_owner: "NOC from Property Owner",
+    required_for_owned_property: "Required documents for owned property:",
+    index_ii_sale_deed_property_tax_receipt: "Index II/Sale Deed/Property Tax Receipt",
+    required_for_other_property_type: "Required documents for other property type:",
+    specify_premise_type: "Specify Premise Type",
+    premise_type_placeholder: "Enter premise type",
+    describe_premise_type: "Describe your premise type",
+    proof_of_premise_agreement_letter: "Proof of Premise/Agreement Letter",
+    upload_relevant_document_premise_type: "Upload relevant document for your premise type",
+    bank_details_optional_at_registration: "Bank Details (Optional at registration)",
+    provide_bank_details_now_or_later: "You can provide bank details now or add them later to your GST account",
+    bank_details_include: "Bank details include:",
+    bank_account_number: "Bank Account Number",
+    enter_account_number: "Enter account number",
+    ifsc_code: "IFSC Code",
+    enter_ifsc_code: "Enter IFSC code",
+    bank_name: "Bank Name",
+    enter_bank_name: "Enter bank name",
+    branch_name: "Branch Name",
+    enter_branch_name: "Enter branch name",
+    cancelled_cheque_bank_statement_passbook: "Cancelled Cheque/Bank Statement/Passbook",
+    upload_cancelled_cheque_bank_statement_verification:
+      "Upload cancelled cheque or bank statement for bank account verification",
+    gst_information: "GST Information",
+    important_information_gst: "Important Information about GST",
+    what_is_gst: "What is GST?",
+    gst_definition: "GST (Goods and Services Tax) is a comprehensive indirect tax on the supply of goods and services.",
+    gst_replaced_multiple_taxes: "It has replaced multiple taxes like VAT, service tax, excise duty, etc.",
+    gst_simplify_tax_structure: "GST simplifies the tax structure and makes compliance easier for businesses.",
+    gst_mandatory_turnover_threshold:
+      "GST registration is mandatory for businesses with annual turnover exceeding ₹40 lakhs (₹10 lakhs for special category states).",
+    benefits_of_gst_registration: "Benefits of GST Registration:",
+    gst_legal_recognition_supplier: "Legal recognition as a supplier of goods or services",
+    gst_collect_tax_claim_itc: "Ability to collect tax from customers and claim Input Tax Credit (ITC)",
+    gst_improves_credibility_market_reach: "Improves business credibility and expands market reach",
+    gst_simplifies_tax_compliance: "Simplifies tax compliance and reduces paperwork",
+    gst_reduces_overall_tax_burden: "Reduces the overall tax burden through ITC benefits",
+    application_submitted: "Application Submitted!",
+    gst_application_submitted_processing:
+      "Your GST registration application has been submitted successfully and is now being processed.",
+    save_continue_later: "Save & Continue Later",
+    submit_gst_application: "Submit GST Application ({{progress}}% Complete)",
+    simplify_import_export: "Simplify Your Import Export",
+    import_export_solutions: "Import Export Solutions",
+    simplify_your: "Simplify Your",
+    import_export: "Import & Export",
+    hero_content_description:
+      "Complete digital platform for import-export documentation, customs clearance, and trade compliance. Process your shipments 70% faster with our automated filing system.",
+    // Partners & Integrations
+    trusted_partners: "Trusted Partners",
+    our_partners_integrations: "Our Partners & Integrations",
+    partners_description:
+      "Working with leading government bodies, financial institutions, and technology partners to create a comprehensive agricultural ecosystem",
+    government_partners: "Government Partners",
+    banking_partners: "Banking Partners",
+    tech_integrations: "Tech Integrations",
+    compliance_rate: "Compliance Rate",
+
+    // Testimonials
+    success_stories: "Success Stories",
+    what_farmers_say: "What Farmers Say About Us",
+    testimonials_description:
+      "Join thousands of satisfied farmers who have transformed their agricultural operations with GoFarmlyConnect",
+    average_rating: "Average Rating",
+    happy_farmers_count: "Happy Farmers",
+    satisfaction_rate: "Satisfaction Rate",
+    support_available: "Support Available",
+
+    // Learn with us
+    learning_resources: "Learning Resources",
+    learn_with_gofarmly: "Learn With GoFarmlyConnect",
+    learn_description:
+      "Master modern agricultural techniques and digital farming solutions with our comprehensive video tutorials and expert guidance",
+    view_all_tutorials: "View All Tutorials",
+    watch_now: "Watch Now",
+    views: "views",
+
+    // Tutorial titles
+    farm_registration_title: "Complete Farm Registration Process",
+    crop_management_title: "Advanced Crop Management Techniques",
+    financial_planning_title: "Financial Planning for Farmers",
+    market_analysis_title: "Market Analysis and Price Trends",
+    digital_transformation_title: "Digital Transformation in Agriculture",
+
+    // Export Registration Tutorial
+    overall_registration_progress: "Overall Registration Progress",
+    journey_to_export_ready: "Your journey to becoming an export-ready business",
+    overall_progress: "Overall Progress",
+    track_your_progress: "Track Your Progress",
+    learn_how_to_become_exporter: "Learn How to Become an Exporter",
+    watch_step_by_step_tutorials: "Watch our step-by-step tutorials to understand the export registration process",
+    getting_started: "Getting Started",
+    introduction_export_basics: "Introduction to export business basics",
+    min_watch: "min watch",
+    complete_registration_guide: "Complete Registration Guide",
+    step_by_step_registration: "Step-by-step registration process walkthrough",
+    featured: "Featured",
+    document_preparation: "Document Preparation",
+    required_documents_preparation: "Required documents and how to prepare them",
+    view_all_video_tutorials: "View All Video Tutorials",
+    progress_remaining: "remaining to complete your export registration",
+    registration_complete: "🎉 Registration complete! Ready to start exporting.",
+
+    // Tutorial categories
+    getting_started_category: "Getting Started",
+    management_category: "Management",
+    analytics_category: "Analytics",
+    finance_category: "Finance",
+    logistics_category: "Logistics",
+
+    // FAQ
+    got_questions: "Got Questions?",
+    frequently_asked_questions: "Frequently Asked Questions",
+    faq_description:
+      "Find answers to common questions about GoFarmlyConnect's features, pricing, and how to get started",
+    still_have_questions: "Still have questions?",
+    support_team_help: "Can't find the answer you're looking for? Our support team is here to help you 24/7",
+    contact_support: "Contact Support",
+    schedule_call: "Schedule a Call",
+
+    // Contact Us
+    get_in_touch: "Get In Touch",
+    contact_us: "Contact Us",
+    contact_description:
+      "Ready to transform your farming operations? Get in touch with our agricultural experts for personalized guidance",
+    helpdesk_24x7: "24x7 Helpdesk",
+    toll_free: "(Toll Free)",
+    available_round_clock: "Available round the clock",
+    email_support: "Email Support",
+    response_within_2hours: "Response within 2 hours",
+    whatsapp_support: "WhatsApp Support",
+    quick_assistance_chat: "Quick assistance via chat",
+    head_office: "Head Office",
+    support_hours: "Support Hours",
+    always_here: "Always here when you need us",
+    send_message: "Send us a Message",
+    first_name: "First Name",
+    last_name: "Last Name",
+    enter_first_name: "Enter your first name",
+    enter_last_name: "Enter your last name",
+    email_address: "Email Address",
+    enter_email_address: "Enter your email address",
+    phone_number: "Phone Number",
+    enter_phone_number: "Enter your phone number",
+    subject: "Subject",
+    what_can_we_help: "What can we help you with?",
+    message: "Message",
+    tell_us_requirements: "Tell us more about your requirements...",
+    send_message_button: "Send Message",
+
+    // Footer
+    legal: "Legal",
+    terms_conditions: "Terms & Conditions",
+    privacy_policy: "Privacy Policy",
+    contact_us_footer: "Contact Us",
+    follow_us: "Follow Us",
+    facebook: "Facebook",
+    twitter: "Twitter",
+    instagram: "Instagram",
+    linkedin: "LinkedIn",
+    copyright_text: "© 2025 GoFarmlyConnect - Transforming Agriculture Through Technology. All rights reserved.",
+    made_with_love: "Made with ❤️ for Farmers",
+    proudly_indian: "🇮🇳 Proudly Indian",
+    serving_farmers: "Serving farmers across India",
+    empowering_farmers:
+      "Empowering farmers with cutting-edge digital solutions for modern agriculture. Join the farming revolution today.",
+
+    // FAQ Questions and Answers
+    faq_q1: "How do I register my farm on GoFarmlyConnect?",
+    faq_a1:
+      "Registration is simple and free. Click on 'Get Started', fill in your basic farm details, upload required documents, and verify your mobile number. Our team will review and activate your account within 24 hours.",
+    faq_q2: "What documents can I file through the platform?",
+    faq_a2:
+      "You can file all major agricultural documents including crop insurance applications, subsidy forms, loan applications, land records, soil health cards, and compliance certificates. Our system supports over 50+ document types.",
+    faq_q3: "Is my data secure on GoFarmlyConnect?",
+    faq_a3:
+      "Absolutely. We use bank-grade encryption and follow strict data protection protocols. Your information is stored securely and never shared with third parties without your consent. We're also compliant with all government data protection regulations.",
+    faq_q4: "How accurate are the crop yield predictions?",
+    faq_a4:
+      "Our AI-powered predictions have an accuracy rate of 85-90%. We use satellite imagery, weather data, soil conditions, and historical patterns to provide reliable forecasts. However, predictions should be used as guidance alongside your farming expertise.",
+    faq_q5: "Can I access GoFarmlyConnect offline?",
+    faq_a5:
+      "Yes, our mobile app has offline capabilities. You can view your data, fill forms, and access tutorials without internet. Once you're back online, all changes sync automatically to the cloud.",
+    faq_q6: "What are the costs involved?",
+    faq_a6:
+      "Basic features are completely free for all farmers. Premium features like advanced analytics, priority support, and additional storage are available through affordable subscription plans starting at ₹99/month.",
+    faq_q7: "How do I get technical support?",
+    faq_a7:
+      "We offer 24/7 support through multiple channels - phone (1800-3010-1000), email, live chat, and WhatsApp. Our agricultural experts are always ready to help you with any technical or farming-related queries.",
+    faq_q8: "Can I integrate GoFarmlyConnect with other farming tools?",
+    faq_a8:
+      "Yes, GoFarmlyConnect integrates with popular farming equipment, weather stations, and financial services. We have APIs available for custom integrations and partnerships with major agricultural technology providers.",
+
+    // Business Details
+    business_address: "Enter Complete Business Address",
+    complete_address_description: "Complete Address Description",
+    व्यवसाय_की_प्रकृति: "व्यवसाय की प्रकृति दर्ज करे",
+    specify_primary_nature_description: "Specify Primary Nature Description",
+
+    // Business Information
+    business_type: "Proprietorship",
+    business_name: "ThirdLayer",
+
+    // IEC Information
+    what_is_iec: "What is IEC?",
+    iec_description_1: "IEC (Import Export Code) is a 10-digit alphanumeric code issued by DGFT.",
+    iec_description_2: "It is mandatory for individuals/entities engaged in import or export business in India.",
+    iec_description_3: "Required for customs clearance, foreign exchange transactions, and international trade.",
+    iec_description_4: "Valid for lifetime, no renewal required.",
+
+    benefits_of_iec_registration: "Benefits of IEC Registration:",
+    iec_benefit_1: "Enables international trade operations (import and export).",
+    iec_benefit_2: "Access to export incentives and schemes from DGFT.",
+    iec_benefit_3: "Simplifies customs procedures and documentation.",
+    iec_benefit_4: "Enhances business credibility in global markets.",
+    iec_benefit_5: "No annual compliance or filing requirements.",
+    dsc_definition_1: "Digital Signature Certificate is a secure digital key",
+    dsc_definition_2: "Used to authenticate your identity in digital transactions",
+    dsc_definition_3: "Required for filing various government forms and documents",
+    dsc_definition_4: "Provides legal validity to electronic documents",
+    dsc_definition_5: "Essential for GST returns, income tax filings, and more",
+    uses_of_dsc: "Uses of DSC:",
+    dsc_use_1: "Filing GST returns and other tax documents",
+    dsc_use_2: "E-tendering and government procurement",
+    dsc_use_3: "Company registration and compliance filings",
+    dsc_use_4: "Banking and financial transactions",
+    dsc_use_5: "Legal document authentication",
+    important_notes: "Important Notes:",
+    dsc_note_1: "DSC is typically valid for 1-3 years from the date of issue",
+    dsc_note_2: "You will receive the DSC on a USB token or as a software certificate",
+    dsc_note_3: "Keep your DSC password secure and confidential",
+    dsc_note_4: "Renewal is required before expiry for continued use",
+    dsc_application_submitted_processing:
+      "Your DSC registration application has been submitted and is currently being processed. You can track the progress in the Progress section.",
+    submit_dsc_application: "Submit DSC Application ({{progress}}% Complete)",
+    file_size_is: "File size is",
+    iec_certificate: "IEC Certificate",
+    from_iec_registration: "From IEC Registration",
+    what_is_icegate: "🌐 What is ICEGATE?",
+    icegate_definition_1: "• Indian Customs Electronic Gateway is a portal for trade and customs clearance",
+    icegate_definition_2:
+      "• Provides e-filing services for various customs documents (e.g., Bill of Entry, Shipping Bill)",
+    icegate_definition_3: "• Facilitates online payment of customs duties and other charges",
+    icegate_definition_4: "• Essential for importers and exporters to interact with Indian Customs",
+    benefits_of_icegate: "📋 Benefits of ICEGATE Registration:",
+    icegate_benefit_1: "• Streamlined customs clearance process",
+    icegate_benefit_2: "• Faster processing of import and export consignments",
+    icegate_benefit_3: "• Online access to customs data and status updates",
+    icegate_benefit_4: "• Reduced paperwork and manual intervention",
+    icegate_benefit_5: "• Enhanced transparency and efficiency in trade operations",
+    icegate_application_submitted_processing:
+      "Your ICEGATE registration application has been submitted and is currently being processed. You can track the progress in the Progress section.",
+    submit_icegate_application: "Submit ICEGATE Application ({{progress}}%)",
+    rejected_reupload_required: "Rejected, Re-upload required",
+    ready_for_upload: "Ready for Upload",
+    uploaded_pending_verification: "Uploaded & Pending Verification",
+    reupload: "Re-upload",
+    document_selected: "Document Selected",
+    change_reupload: "Change / Re-upload",
+    our_employee_development_programs_offered: "Our Employee Development Programs Offered",
+    our_employee_learning_resources_provided: "Our Employee Learning Resources Provided",
+    our_employee_mentoring_programs_available: "Our Employee Mentoring Programs Available",
+    our_employee_coaching_programs_offered: "Our Employee Coaching Programs Offered",
+    our_employee_feedback_systems_implemented: "Our Employee Feedback Systems Implemented",
+    our_employee_performance_management_processes: "Our Employee Performance Management Processes",
+    our_employee_recognition_events_organized: "Our Employee Recognition Events Organized",
+    our_employee_engagement_surveys_conducted: "Our Employee Engagement Surveys Conducted",
+    our_employee_satisfaction_ratings_achieved: "Our Employee Satisfaction Ratings Achieved",
+    our_employee_retention_targets_met: "Our Employee Retention Targets Met",
+    our_employee_diversity_targets_achieved: "Our Employee Diversity Targets Achieved",
+    our_employee_inclusion_goals_reached: "Our Employee Inclusion Goals Reached",
+    our_employee_equity_objectives_accomplished: "Our Employee Equity Objectives Accomplished",
+    our_employee_belonging_initiatives_successful: "Our Employee Belonging Initiatives Successful",
+    our_employee_wellbeing_strategies_effective: "Our Employee Wellbeing Strategies Effective",
+    // DSC Registration specific
+    dsc_registration_title: "DSC Registration",
+    dsc_registration_description: "Digital Signature Certificate registration",
+    complete_required_sections_dsc: "Complete all required sections below to proceed with your DSC registration",
+    dsc_type_selection: "DSC Type Selection",
+    choose_dsc_type_description: "Choose the type of Digital Signature Certificate you need",
+    select_dsc_type: "Select DSC Type:",
+    individual_dsc_selected: "Individual DSC Selected",
+    individual_dsc_description:
+      "This DSC will be issued in your personal name and can be used for personal digital signatures.",
+    organization_dsc_selected: "Organization DSC Selected",
+    organization_dsc_description: "This DSC will be issued for your organization and requires additional details.",
+    your_designation: "Your Designation",
+    designation_placeholder: "e.g., Director, Partner, Proprietor",
+    designation_help_text: "Your role/position in the organization",
+    organization_name: "Organization Name",
+    organization_name_placeholder: "Enter organization name",
+    organization_name_help_text: "Legal name of your organization",
+    required_for_organization_dsc: "Required for Organization DSC",
+    authorization_letter_description:
+      "Authorization letter or board resolution for DSC application on behalf of the organization",
+    dsc_information: "DSC Information",
+    important_information_dsc: "Important information about Digital Signature Certificate",
+    what_is_dsc: "What is DSC?",
+
+    // ICEGATE Registration specific
+    icegate_registration_title: "ICEGATE Registration",
+    icegate_registration_description: "Indian Customs Electronic Gateway registration",
+    complete_required_sections_icegate:
+      "Complete all required sections below to proceed with your ICEGATE registration",
+    available_certificates_from_other_registrations: "Available Certificates from Other Registrations",
+    certificates_from_other_registrations_description: "Certificates you've obtained from other registration processes",
+    available_certificates: "📜 Available Certificates:",
+    gst_certificate: "GST Certificate",
+    from_gst_registration: "From GST Registration",
+    dsc_certificate: "DSC Certificate",
+    from_dsc_registration: "From DSC Registration",
+    business_details: "Business Details",
+    provide_business_information_icegate: "Provide your business information for ICEGATE registration",
+    iec_number: "IEC Number",
+    enter_iec_number: "Enter your 10-digit IEC number",
+    your_import_export_code: "Your Import Export Code number",
+    upload_iec_certificate: "Upload your IEC certificate copy",
+    gstin_number: "GSTIN Number",
+    enter_gstin_number: "Enter your 15-digit GSTIN",
+    your_gstin_help: "Your Goods and Services Tax Identification Number",
+    upload_gst_certificate: "Upload your GST certificate copy",
+    dsc_number: "DSC Number",
+    enter_dsc_number: "Enter your DSC number",
+    your_dsc_number_help: "Your Digital Signature Certificate number",
+    upload_dsc_certificate: "Upload your DSC certificate copy",
+    bank_document_cancelled_cheque: "Bank Document (Cancelled Cheque / Bank Statement)",
+    bank_document_description: "Upload a cancelled cheque or bank statement for bank details verification",
+
+    authorization_letter_icegate_description: "Authorization letter or board resolution for ICEGATE application",
+    bank_details_optional: "Bank Details (Optional at the time of registration)",
+    bank_details_description: "You can provide bank details now or add them later",
+
+    cancelled_cheque_bank_statement: "Cancelled Cheque, Bank Statement, or Passbook (Front Page)",
+    cancelled_cheque_description:
+      "Upload a cancelled cheque, bank statement, or the front page of your passbook for account verification.",
+    submit: "Submit",
+    cancel: "Cancel",
+    next: "Next",
+    back: "Back",
+    confirm: "Confirm",
+    edit: "Edit",
+    delete: "Delete",
+    success: "Success",
+    warning: "Warning",
+    information: "Information",
+    validation_error: "Validation Error",
+    server_error: "Server Error",
+    no_data_available: "No data available",
+    search: "Search",
+    clear: "Clear",
+    apply: "Apply",
+    done: "Done",
+    select: "Select",
+    options: "Options",
+    all: "All",
+    date: "Date",
+    time: "Time",
+    today: "Today",
+    yesterday: "Yesterday",
+    this_week: "This Week",
+    last_week: "Last Week",
+    this_month: "This Month",
+    last_month: "Last Month",
+    this_year: "This Year",
+    last_year: "Last Year",
+    custom_range: "Custom Range",
+    january: "January",
+    february: "February",
+    march: "March",
+    april: "April",
+    may: "May",
+    june: "June",
+    july: "July",
+    august: "August",
+    september: "September",
+    october: "October",
+    november: "November",
+    december: "December",
+    sunday: "Sunday",
+    monday: "Monday",
+    tuesday: "Tuesday",
+    wednesday: "Wednesday",
+    thursday: "Thursday",
+    friday: "Friday",
+    saturday: "Saturday",
+    sun: "Sun",
+    mon: "Mon",
+    tue: "Tue",
+    wed: "Wed",
+    thu: "Thu",
+    fri: "Fri",
+    sat: "Sat",
+    items_per_page: "Items per page",
+    showing: "Showing",
+    to: "to",
+    of: "of",
+    results: "results",
+    no_records_found: "No records found",
+    create: "Create",
+    update: "Update",
+    details: "Details",
+    name: "Name",
+    description: "Description",
+    status: "Status",
+    active: "Active",
+    inactive: "Inactive",
+    pending: "Pending",
+    new: "New",
+    open: "Open",
+    closed: "Closed",
+    save: "Save",
+    reset: "Reset",
+    actions: "Actions",
+    id: "ID",
+    createdAt: "Created At",
+    updatedAt: "Updated At",
+    are_you_sure: "Are you sure?",
+    you_wont_be_able_to_revert_this: "You won't be able to revert this!",
+    yes_delete_it: "Yes, delete it!",
+    cancel_delete: "Cancel",
+    deleted: "Deleted!",
+    your_record_has_been_deleted: "Your record has been deleted.",
+    ok: "OK",
+    something_went_wrong: "Something went wrong!",
+    field_required: "This field is required",
+    invalid_email: "Invalid email address",
+    min_length: "Minimum length is {{length}} characters",
+    max_length: "Maximum length is {{length}} characters",
+    must_be_a_number: "Must be a number",
+    must_be_a_valid_number: "Must be a valid number",
+    must_be_a_valid_url: "Must be a valid URL",
+    must_be_a_valid_date: "Must be a valid date",
+    must_be_a_valid_time: "Must be a valid time",
+    must_be_a_valid_date_and_time: "Must be a valid date and time",
+    password: "Password",
+    confirm_password: "Confirm Password",
+    passwords_must_match: "Passwords must match",
+    email: "Email",
+    phone: "Phone",
+    address: "Address",
+    city: "City",
+    state: "State",
+    zip: "Zip",
+    country: "Country",
+    please_wait: "Please wait...",
+    no: "No",
+    yes: "Yes",
+    home: "Home",
+    about: "About",
+    contact: "Contact",
+    our_products: "Our Products",
+    our_team: "Our Team",
+    our_clients: "Our Clients",
+    testimonials: "Testimonials",
+    blog: "Blog",
+    news: "News",
+    events: "Events",
+    careers: "Careers",
+    faq: "FAQ",
+    terms_of_service: "Terms of Service",
+    copyright: "Copyright",
+    all_rights_reserved: "All Rights Reserved",
+    powered_by: "Powered by",
+    version: "Version",
+    close: "Close",
+    menu: "Menu",
+    filter: "Filter",
+    reset_filters: "Reset Filters",
+    apply_filters: "Apply Filters",
+    export: "Export",
+    import: "Import",
+    print: "Print",
+    download: "Download",
+    upload: "Upload",
+    choose_file: "Choose File",
+    no_file_chosen: "No File Chosen",
+    drag_and_drop_files_here_or_click_to_upload: "Drag and drop files here or click to upload",
+    file_uploaded_successfully: "File uploaded successfully",
+    file_upload_failed: "File upload failed",
+    file_size_exceeded: "File size exceeded",
+    invalid_file_type: "Invalid file type",
+    are_you_sure_you_want_to_discard_changes: "Are you sure you want to discard changes?",
+    discard_changes: "Discard Changes",
+    continue_editing: "Continue Editing",
+    discard: "Discard",
+    continue: "Continue",
+    are_you_sure_you_want_to_leave_this_page: "Are you sure you want to leave this page?",
+    leave_page: "Leave Page",
+    stay_on_page: "Stay on Page",
+    page_not_found: "Page Not Found",
+    go_back_home: "Go Back Home",
+    unauthorized: "Unauthorized",
+    forbidden: "Forbidden",
+    internal_server_error: "Internal Server Error",
+    bad_request: "Bad Request",
+    service_unavailable: "Service Unavailable",
+    gateway_timeout: "Gateway Timeout",
+    no_internet_connection: "No Internet Connection",
+    please_check_your_internet_connection: "Please check your internet connection",
+    try_again_later: "Try again later",
+    something_went_wrong_please_try_again_later: "Something went wrong, please try again later",
+    session_expired: "Session Expired",
+    please_login_again: "Please login again",
+    login: "Login",
+    register: "Register",
+    forgot_password: "Forgot Password",
+    reset_your_password: "Reset Your Password",
+    send_reset_link: "Send Reset Link",
+    remember_me: "Remember Me",
+    dont_have_an_account: "Don't have an account?",
+    already_have_an_account: "Already have an account?",
+    create_an_account: "Create an account",
+    reset_password: "Reset Password",
+    new_password: "New Password",
+    confirm_new_password: "Confirm New Password",
+    reset_password_successful: "Reset Password Successful",
+    password_reset_link_sent: "Password reset link sent to your email address.",
+    invalid_reset_link: "Invalid reset link",
+    reset_password_failed: "Reset password failed",
+    registration_successful: "Registration Successful",
+    registration_failed: "Registration Failed",
+    login_successful: "Login Successful",
+    login_failed: "Login Failed",
+    invalid_credentials: "Invalid credentials",
+    account_not_verified: "Account not verified",
+    please_verify_your_email_address: "Please verify your email address",
+    verification_email_sent: "Verification email sent to your email address.",
+    verification_successful: "Verification Successful",
+    verification_failed: "Verification Failed",
+    invalid_verification_link: "Invalid verification link",
+    resend_verification_email: "Resend Verification Email",
+    verification_email_resent: "Verification email resent",
+    profile_updated_successfully: "Profile updated successfully",
+    profile_update_failed: "Profile update failed",
+    password_changed_successfully: "Password changed successfully",
+    password_change_failed: "Password change failed",
+    current_password: "Current Password",
+    new_password_is_same_as_current_password: "New password is same as current password",
+    current_password_is_incorrect: "Current password is incorrect",
+    change_password: "Change Password",
+    update_profile: "Update Profile",
+    my_profile: "My Profile",
+    mark_all_as_read: "Mark all as read",
+    no_notifications: "No notifications",
+    new_notification: "New notification",
+    view_all: "View All",
+    clear_all: "Clear All",
+    notification_settings: "Notification Settings",
+    email_notifications: "Email Notifications",
+    push_notifications: "Push Notifications",
+    sms_notifications: "SMS Notifications",
+    notification_preferences_updated: "Notification preferences updated",
+    notification_preferences_update_failed: "Notification preferences update failed",
+    security: "Security",
+    two_factor_authentication: "Two-Factor Authentication",
+    enable_two_factor_authentication: "Enable Two-Factor Authentication",
+    disable_two_factor_authentication: "Disable Two-Factor Authentication",
+    two_factor_authentication_enabled: "Two-Factor Authentication Enabled",
+    two_factor_authentication_disabled: "Two-Factor Authentication Disabled",
+    backup_codes: "Backup Codes",
+    generate_backup_codes: "Generate Backup Codes",
+    backup_codes_generated: "Backup codes generated",
+    backup_codes_regenerated: "Backup codes regenerated",
+    download_backup_codes: "Download Backup Codes",
+    recovery_code: "Recovery Code",
+    enter_recovery_code: "Enter Recovery Code",
+    verify: "Verify",
+    invalid_recovery_code: "Invalid recovery code",
+    two_factor_authentication_setup_successful: "Two-Factor Authentication setup successful",
+    two_factor_authentication_setup_failed: "Two-Factor Authentication setup failed",
+    two_factor_authentication_verification_successful: "Two-Factor Authentication verification successful",
+    two_factor_authentication_verification_failed: "Two-Factor Authentication verification failed",
+    enter_verification_code: "Enter Verification Code",
+    send_code: "Send Code",
+    resend_code: "Resend Code",
+    verification_code_sent: "Verification code sent",
+    invalid_verification_code: "Invalid verification code",
+    remember_this_browser: "Remember this browser",
+    trust_this_browser: "Trust this browser",
+    browser_trusted: "Browser trusted",
+    browser_untrusted: "Browser untrusted",
+    untrust_browser: "Untrust Browser",
+    are_you_sure_you_want_to_untrust_this_browser: "Are you sure you want to untrust this browser?",
+    untrust: "Untrust",
+    trusted_browsers: "Trusted Browsers",
+    no_trusted_browsers: "No trusted browsers",
+
+    are_you_sure_you_want_to_remove_this_trusted_browser: "Are you sure you want to remove this trusted browser?",
+    trusted_browser_removed: "Trusted browser removed",
+    security_settings: "Security Settings",
+    account_settings: "Account Settings",
+    general_settings: "General Settings",
+    language: "Language",
+    theme: "Theme",
+    light: "Light",
+    dark: "Dark",
+    system: "System",
+    theme_updated: "Theme updated",
+    language_updated: "Language updated",
+    general: "General",
+    appearance: "Appearance",
+    privacy: "Privacy",
+    help: "Help",
+
+    feedback: "Feedback",
+    report_a_bug: "Report a Bug",
+    suggest_a_feature: "Suggest a Feature",
+
+    our_mission: "Our Mission",
+    our_vision: "Our Vision",
+    our_values: "Our Values",
+    our_team_members: "Our Team Members",
+    our_clients_and_partners: "Our Clients and Partners",
+    our_success_stories: "Our Success Stories",
+    our_awards_and_recognition: "Our Awards and Recognition",
+    our_press_and_media_coverage: "Our Press and Media Coverage",
+    our_social_responsibility: "Our Social Responsibility",
+    our_environmental_impact: "Our Environmental Impact",
+    our_community_involvement: "Our Community Involvement",
+    our_diversity_and_inclusion: "Our Diversity and Inclusion",
+    our_corporate_governance: "Our Corporate Governance",
+    our_investor_relations: "Our Investor Relations",
+    our_financial_performance: "Our Financial Performance",
+    our_annual_reports: "Our Annual Reports",
+    our_stock_information: "Our Stock Information",
+    our_shareholder_information: "Our Shareholder Information",
+    our_careers_and_opportunities: "Our Careers and Opportunities",
+    our_job_openings: "Our Job Openings",
+    our_employee_benefits: "Our Employee Benefits",
+    our_employee_testimonials: "Our Employee Testimonials",
+    our_internship_programs: "Our Internship Programs",
+    our_training_and_development: "Our Training and Development",
+    our_culture_and_values: "Our Culture and Values",
+    our_work_life_balance: "Our Work-Life Balance",
+    our_health_and_wellness: "Our Health and Wellness",
+    our_employee_recognition: "Our Employee Recognition",
+    our_employee_engagement: "Our Employee Engagement",
+    our_employee_satisfaction: "Our Employee Satisfaction",
+    our_employee_retention: "Our Employee Retention",
+    our_employee_diversity: "Our Employee Diversity",
+    our_employee_inclusion: "Our Employee Inclusion",
+    our_employee_equity: "Our Employee Equity",
+    our_employee_belonging: "Our Employee Belonging",
+    our_employee_wellbeing: "Our Employee Wellbeing",
+    our_employee_growth: "Our Employee Growth",
+    our_employee_development: "Our Employee Development",
+    our_employee_learning: "Our Employee Learning",
+    our_employee_mentoring: "Our Employee Mentoring",
+    our_employee_coaching: "Our Employee Coaching",
+    our_employee_feedback: "Our Employee Feedback",
+    our_employee_performance: "Our Employee Performance",
+    our_employee_recognition_programs: "Our Employee Recognition Programs",
+    our_employee_engagement_activities: "Our Employee Engagement Activities",
+    our_employee_satisfaction_surveys: "Our Employee Satisfaction Surveys",
+    our_employee_retention_strategies: "Our Employee Retention Strategies",
+    our_employee_diversity_initiatives: "Our Employee Diversity Initiatives",
+    our_employee_inclusion_programs: "Our Employee Inclusion Programs",
+    our_employee_equity_policies: "Our Employee Equity Policies",
+    our_employee_belonging_practices: "Our Employee Belonging Practices",
+    our_employee_wellbeing_programs: "Our Employee Wellbeing Programs",
+    our_employee_growth_opportunities: "Our Employee Growth Opportunities",
+    adcode_registration_title: "AD Code Registration",
+    adcode_registration_description: "Authorized Dealer Code registration for foreign exchange transactions",
+    complete_required_sections_adcode: "Complete all required sections below to proceed with your AD Code registration",
+    business_information: "Business Information",
+    information_from_your_profile: "Information from your profile",
+    enter_complete_business_address: "Enter complete business address",
+    complete_address_help: "Complete address where business operations are conducted",
+    dont_have_iec_certificate: "Don't have IEC Certificate?",
+    get_it_made_from_us: "Get it made from us",
+    dont_have_dsc_certificate: "Don't have DSC Certificate?",
+    ad_code_letter_from_bank: "AD Code Letter from Bank",
+    upload_ad_code_authorization: "Upload AD Code authorization letter from your bank",
+    required_for_business_type: "Required for {{businessType}} business type",
+    authorization_letter_adcode_description: "Authorization letter or board resolution for AD Code application",
+    bank_details_optional_registration: "Bank Details (Optional at the time of registration)",
+    bank_details_later_description: "You can provide bank details now or add them later",
+    cancelled_cheque_passbook: "Cancelled Cheque, Bank Statement, or Passbook (Front Page)",
+    cancelled_cheque_verification:
+      "Upload a cancelled cheque, bank statement, or the front page of your passbook for account verification.",
+    what_is_adcode: "💰 What is AD Code?",
+    adcode_definition_1: "• Authorized Dealer Code is a unique identification number",
+    adcode_definition_2: "• Issued by authorized dealer banks for foreign exchange transactions",
+    adcode_definition_3: "• Required for import/export transactions and foreign remittances",
+    adcode_definition_4: "• Links your business with the bank for FOREX compliance",
+    adcode_definition_5: "• Essential for customs clearance and RBI reporting",
+    benefits_of_adcode: "📋 Benefits of AD Code:",
+    adcode_benefit_1: "• Enables foreign exchange transactions for import/export",
+    adcode_benefit_2: "• Facilitates customs clearance processes",
+    adcode_benefit_3: "• Required for opening Letter of Credit (LC)",
+    adcode_benefit_4: "• Enables bank guarantee and other trade finance facilities",
+    adcode_benefit_5: "• Ensures compliance with RBI regulations",
+    adcode_application_submitted_processing:
+      "Your AD Code registration application has been submitted and is currently being processed. You can track the progress in the Progress section.",
+    submit_adcode_application: "Submit AD Code Application ({{progress}}%)",
+    ad_code_letter: "AD Code Letter",
+    from_ad_code_registration: "From AD Code Registration",
+    complete_all_steps_export_ready: "Complete all the steps below to become an export-ready business",
+    your_registration_journey: "Your Registration Journey",
+    rejected_click_to_reupload: "Rejected - Click to re-upload",
+    activity_timeline: "Activity Timeline",
+    n_a: "N/A",
+    no_activity_yet: "No activity yet.",
+    whats_next: "What's Next?",
+    your_next_step_is: "Your next step is:",
+    continue_registration_journey_description:
+      'To continue your registration journey, please proceed with the "{{stepName}}" process.',
+    go_to_step_name: "Go to {{stepName}}",
+    all_steps_completed: "All steps completed!",
+    congratulations_all_steps_completed: "Congratulations! You have completed all the necessary registration steps.",
+    export_ready_business_gofarmlyconnect: "You are now an export-ready business with GoFarmlyConnect.",
+    loading_progress: "Loading progress...",
+    failed_to_fetch_dashboard_data: "Failed to fetch dashboard data.",
+    error_fetching_data: "An error occurred while fetching data.",
+    registration_journey: "Registration Journey",
+    timeline: "Timeline",
+    next_steps: "Next Steps",
+  },
+  //start of hindi
+  hi: {
+    // Navigation
+
+    // Hero Section
+    hero_description:
+      "अपने कृषि संचालन को हमारे व्यापक डिजिटल प्लेटफॉर्म के साथ बदलें। हजारों किसानों से जुड़ें जिन्होंने हमारे नवाचार समाधानों का उपयोग करके अपनी उत्पादकता 40% बढ़ाई है।",
+
+    // Services
+    join_thousands: "हजारों आयातकों और निर्यातकों से जुड़ें जिन्होंने गोफार्मलीकनेक्ट के साथ अपने संचालन को डिजिटल बनाया है",
+
+    // Features
+    features_description:
+      "हम समझते हैं कि किसानों को किन अनूठी चुनौतियों का सामना करना पड़ता है। इसीलिए हमने एक प्लेटफॉर्म बनाया है जो अत्याधुनिक तकनीक को गहरी कृषि विशेषज्ञता के साथ जोड़ता है।",
+
+    // Dashboard
+
+    // Dashboard specific
+    get_started_description:
+      "निर्यात-तैयार व्यवसाय बनने की अपनी यात्रा शुरू करें। अंतर्राष्ट्रीय व्यापार शुरू करने के लिए अपनी प्रोफाइल और आवश्यक दस्तावेज़ीकरण पूरा करें।",
+
+    // Registration page specific
+    required_registrations_description:
+      "निर्यात-तैयार बनने के लिए नीचे दिए गए सभी 5 पंजीकरण पूरे करें। अपनी व्यावसायिक आवश्यकताओं के अनुसार किसी भी पंजीकरण से शुरुआत करें।",
+
+    // GST Registration specific - Hindi
+    document_requirements_customized_by_business_type: "दस्तावेज़ आवश्यकताएं आपके व्यवसाय प्रकार के अनुसार अनुकूलित की जाएंगी",
+    choose_documents_based_on_premise_situation: "अपनी व्यावसायिक परिसर स्थिति के आधार पर अपलोड करने वाले दस्तावेज़ चुनें",
+    upload_cancelled_cheque_bank_statement_verification: "बैंक खाता सत्यापन के लिए रद्द किया गया चेक या बैंक स्टेटमेंट अपलोड करें",
+    gst_mandatory_turnover_threshold:
+      "वार्षिक टर्नओवर ₹40 लाख से अधिक (विशेष श्रेणी राज्यों के लिए ₹10 लाख) वाले व्यवसायों के लिए GST पंजीकरण अनिवार्य है।",
+    gst_application_submitted_processing:
+      "आपका GST पंजीकरण आवेदन सफलतापूर्वक जमा किया गया है और अब इसकी प्रक्रिया की जा रही है।",
+
+    // Services/Import Export
+    hero_content_description:
+      "आयात-निर्यात दस्तावेज़ीकरण, सीमा शुल्क निकासी और व्यापार अनुपालन के लिए एक संपूर्ण डिजिटल प्लेटफ़ॉर्म। हमारे स्वचालित फ़ाइलिंग सिस्टम से अपने शिपमेंट को 70% तेज़ी से प्रोसेस करें।",
+
+    // Partners & Integrations
+    partners_description:
+      "एक व्यापक कृषि पारिस्थितिकी तंत्र बनाने के लिए प्रमुख सरकारी निकायों, वित्तीय संस्थानों और प्रौद्योगिकी भागीदारों के साथ काम करना",
+
+    // Testimonials
+    testimonials_description: "हजारों संतुष्ट किसानों से जुड़ें जिन्होंने गोफार्मलीकनेक्ट के साथ अपने कृषि संचालन को बदल दिया है",
+
+    // Learn with us
+    learn_description:
+      "हमारे व्यापक वीडियो ट्यूटोरियल और विशेषज्ञ मार्गदर्शन के साथ आधुनिक कृषि तकनीकों और डिजिटल कृषि समाधानों में महारत हासिल करें",
+
+    // Tutorial titles
+
+    // Export Registration Tutorial - Hindi
+
+    // Tutorial categories
+
+    // FAQ
+    faq_description: "गोफार्मलीकनेक्ट की सुविधाओं, मूल्य निर्धारण और शुरुआत करने के तरीके के बारे में सामान्य प्रश्नों के उत्तर खोजें",
+
+    // Contact Us
+    contact_description: "अपने कृषि संचालन को बदलने के लिए तैयार? व्यक्तिगत मार्गदर्शन के लिए हमारे कृषि विशेषज्ञों से संपर्क करें",
+
+    // Footer
+    empowering_farmers:
+      "आधुनिक कृषि के लिए अत्याधुनिक डिजिटल समाधानों के साथ किसानों को सशक्त बनाना। आज ही कृषि क्रांति में शामिल हों।",
+
+    // Business Details - Hindi
+    व्यवसाय_की_प्रकृति: "व्यवसाय की प्रकृति दर्ज करे",
+
+    // Business Information - Hindi
+
+    // IEC Information - Hindi
+
+    // DSC Registration specific - Hindi
+    individual_dsc_description:
+      "यह DSC आपके व्यक्तिगत नाम पर जारी किया जाएगा और व्यक्तिगत डिजिटल हस्ताक्षर के लिए उपयोग किया जा सकता है।",
+    authorization_letter_description: "संगठन की ओर से DSC आवेदन के लिए प्राधिकरण पत्र या बोर्ड संकल्प",
+    dsc_application_submitted_processing:
+      "आपका DSC पंजीकरण आवेदन जमा कर दिया गया है और वर्तमान में इसकी प्रक्रिया की जा रही है। आप प्रगति अनुभाग में प्रगति को ट्रैक कर सकते हैं।",
+    // DSC Registration specific - Hindi
+    individual_dsc_description:
+      "यह DSC आपके व्यक्तिगत नाम पर जारी किया जाएगा और व्यक्तिगत डिजिटल हस्ताक्षर के लिए उपयोग किया जा सकता है।",
+    // ICEGATE Registration specific - Hindi
+    complete_required_sections_icegate: "अपने ICEGATE पंजीकरण के साथ आगे बढ़ने के लिए नीचे दिए गए सभी आवश्यक अनुभागों को पूरा करें",
+    cancelled_cheque_description: "खाता सत्यापन के लिए रद्द चेक, बैंक स्टेटमेंट, या अपनी पासबुक का पहला पृष्ठ अपलोड करें।",
+    icegate_definition_2: "• विभिन्न सीमा शुल्क दस्तावेजों के लिए ई-फाइलिंग सेवाएं प्रदान करता है (जैसे, बिल ऑफ एंट्री, शिपिंग बिल)",
+    icegate_application_submitted_processing:
+      "आपका ICEGATE पंजीकरण आवेदन जमा कर दिया गया है और वर्तमान में इसकी प्रक्रिया की जा रही है। आप प्रगति अनुभाग में प्रगति को ट्रैक कर सकते हैं।",
+    // AD Code Registration specific - Hindi
+    cancelled_cheque_verification: "खाता सत्यापन के लिए रद्द चेक, बैंक स्टेटमेंट, या अपनी पासबुक का पहला पृष्ठ अपलोड करें।",
+    adcode_application_submitted_processing:
+      "आपका AD कोड पंजीकरण आवेदन जमा कर दिया गया है और वर्तमान में इसकी प्रक्रिया की जा रही है। आप प्रगति अनुभाग में प्रगति को ट्रैक कर सकते हैं।",
+    continue_registration_journey_description:
+      'अपनी पंजीकरण यात्रा जारी रखने के लिए, कृपया "{{stepName}}" प्रक्रिया के साथ आगे बढ़ें।',
+  },
+  //start of marathi
+  mr: {
+    // Navigation
+
+    // Hero Section
+    hero_description:
+      "आमच्या व्यापक डिजिटल प्लॅटफॉर्मसह तुमच्या शेती ऑपरेशन्सचे रूपांतर करा। हजारो शेतकऱ्यांना सामील व्हा ज्यांनी आमच्या नाविन्यपूर्ण उपायांचा वापर करून त्यांची उत्पादकता 40% वाढवली आहे.",
+
+    // Services
+    services_description:
+      "तुमच्या आंतरराष्ट्रीय व्यापार ऑपरेशन्स सुव्यवस्थित करण्यासाठी आणि अनुपालन सुनिश्चित करण्यासाठी आवश्यक असलेली प्रत्येक गोष्ट",
+
+    // Features
+    features_description:
+      "शेतकऱ्यांना कोणत्या अनन्य आव्हानांना सामोरे जावे लागते हे आम्हाला समजते. म्हणूनच आम्ही एक प्लॅटफॉर्म तयार केले आहे जे अत्याधुनिक तंत्रज्ञानाला खोल कृषी तज्ञतेसह जोडते.",
+
+    // Dashboard
+
+    // Dashboard specific
+    get_started_description:
+      "निर्यात-तयार व्यवसाय बनण्याचा तुमचा प्रवास सुरू करा। आंतरराष्ट्रीय व्यापार सुरू करण्यासाठी तुमची प्रोफाइल आणि आवश्यक दस्तऐवजीकरण पूर्ण करा।",
+
+    // Registration page specific
+    required_registrations_description:
+      "निर्यात-तयार बनण्यासाठी खाली दिलेल्या सर्व 5 नोंदणी पूर्ण करा. तुमच्या व्यावसायिक गरजांनुसार कोणत्याही नोंदणीपासून सुरुवात करा.",
+
+    // Services/Import Export
+    hero_content_description:
+      "आयात-निर्यात दस्तऐवजीकरण, सीमाशुल्क मंजुरी आणि व्यापार अनुपालनासाठी संपूर्ण डिजिटल प्लॅटफॉर्म. आमच्या स्वयंचलित फाइलिंग सिस्टमसह तुमच्या शिपमेंटची प्रक्रिया ७०% जलद करा.",
+
+    // Partners & Integrations
+    partners_description:
+      "व्यापक कृषी इकोसिस्टम तयार करण्यासाठी आघाडीच्या सरकारी संस्था, वित्तीय संस्था आणि तंत्रज्ञान भागीदारांसह काम करणे",
+
+    // Testimonials
+
+    // Learn with us
+    learn_description:
+      "आमच्या व्यापक व्हिडिओ ट्यूटोरियल आणि तज्ञ मार्गदर्शनासह आधुनिक कृषी तंत्रे आणि डिजिटल कृषी उपायांवर प्रभुत्व मिळवा",
+
+    // Tutorial titles
+
+    // Export Registration Tutorial - Marathi
+
+    // Tutorial categories
+
+    // FAQ
+
+    // Contact Us
+
+    // IEC Registration specific - Marathi
+    iec_registration_title: "IEC नोंदणी",
+    iec_registration_description: "आंतरराष्ट्रीय व्यापारासाठी तुमचा IEC नोंदणी पूर्ण करा",
+    personal_details: "वैयक्तिक तपशील",
+    basic_details: "मूलभूत तपशील",
+    document_upload: "दस्तऐवज अपलोड",
+    review_submit: "पुनरावलोकन आणि सबमिट",
+    director_partner_details: "संचालक/भागीदार तपशील",
+    applicant_name: "अर्जदाराचे नाव",
+    applicant_name_placeholder: "अर्जदाराचे नाव प्रविष्ट करा",
+    date_of_birth: "जन्मतारीख",
+    date_of_birth_placeholder: "दिनांक निवडा",
+    father_name: "वडिलांचे नाव",
+    father_name_placeholder: "वडिलांचे नाव प्रविष्ट करा",
+    address_placeholder: "पूर्ण पत्ता प्रविष्ट करा",
+    business_name_placeholder: "व्यवसायाचे नाव प्रविष्ट करा",
+    business_address_placeholder: "व्यावसायिक पत्ता प्रविष्ट करा",
+    pin_code: "पिन कोड",
+    pin_code_placeholder: "पिन कोड प्रविष्ट करा",
+    state_placeholder: "राज्य निवडा",
+    city_placeholder: "शहर प्रविष्ट करा",
+    telephone: "टेलिफोन",
+    telephone_placeholder: "टेलिफोन नंबर प्रविष्ट करा",
+    email_placeholder: "ईमेल पत्ता प्रविष्ट करा",
+    website: "वेबसाइट",
+    website_placeholder: "वेबसाइट URL प्रविष्ट करा",
+    company_incorporation_date: "कंपनी स्थापना तारीख",
+    company_incorporation_date_placeholder: "स्थापना तारीख निवडा",
+    business_commencement_date: "व्यवसाय आरंभ तारीख",
+    business_commencement_date_placeholder: "व्यवसाय आरंभ तारीख निवडा",
+    expected_import_export_turnover: "अपेक्षित आयात/निर्यात उलाढाल",
+    expected_import_export_turnover_placeholder: "अपेक्षित वार्षिक उलाढाल प्रविष्ट करा",
+    nature_of_items: "वस्तूंचे स्वरूप",
+    nature_of_items_placeholder: "आयात/निर्यातीच्या वस्तूंचे वर्णन करा",
+    countries_dealing: "व्यवहार करणारे देश",
+    countries_dealing_placeholder: "व्यवहारातील मुख्य देश सूचीबद्ध करा",
+    director_partner_name: "संचालक/भागीदाराचे नाव",
+    director_partner_name_placeholder: "संचालक/भागीदाराचे नाव प्रविष्ट करा",
+    designation: "पदनाम",
+    director_address: "संचालकाचा पत्ता",
+    director_address_placeholder: "संचालकाचा पत्ता प्रविष्ट करा",
+    din_number: "DIN नंबर",
+    din_number_placeholder: "संचालक ओळख नंबर प्रविष्ट करा",
+    aadhar_card_iec: "आधार कार्ड",
+    aadhar_card_iec_description: "अर्जदाराचे आधार कार्ड",
+    pan_card_iec: "पॅन कार्ड",
+    pan_card_iec_description: "अर्जदाराचे पॅन कार्ड",
+    photograph_iec: "फोटो",
+    photograph_iec_description: "अर्जदाराचा पासपोर्ट आकाराचा फोटो",
+    address_proof_iec: "पत्ता पुरावा",
+    address_proof_iec_description: "वैध पत्ता पुरावा दस्तऐवज",
+    bank_certificate_iec: "बँक प्रमाणपत्र",
+    bank_certificate_iec_description: "अधिकृत डीलरकडून बँक प्रमाणपत्र",
+    moa_partnership_deed_iec: "MOA/भागीदारी करार",
+    moa_partnership_deed_iec_description: "कंपनीसाठी MOA किंवा भागीदारीसाठी करार",
+    cancelled_cheque_iec: "रद्द झालेला चेक",
+    cancelled_cheque_iec_description: "बँक खाता तपशीलांसाठी रद्द झालेला चेक",
+    digital_signature_iec: "डिजिटल स्वाक्षरी",
+    digital_signature_iec_description: "वैध डिजिटल स्वाक्षरी प्रमाणपत्र",
+    save_draft: "मसुदा जतन करा",
+    submit_application: "अर्ज सबमिट करा",
+    iec_information: "IEC माहिती",
+    iec_definition:
+      "IEC (आयात निर्यात कोड) भारतातून आयात किंवा निर्यात व्यवसाय करणाऱ्या व्यक्ती/संस्थांसाठी DGFT द्वारे जारी केलेला 10 अंकी अल्फान्यूमेरिक कोड आहे.",
+    iec_mandatory_for: "IEC खालील गोष्टीसाठी अनिवार्य आहे:",
+    iec_mandatory_import_export: "कोणतीही आयात किंवा निर्यात व्यवहार",
+    iec_mandatory_foreign_trade: "परकीय व्यापार धोरणाचे लाभ घेणे",
+    iec_mandatory_customs_clearance: "सीमाशुल्क मंजुरी प्रक्रिया",
+    iec_mandatory_export_incentives: "निर्यात प्रोत्साहन योजनांचे लाभ",
+    iec_benefits: "IEC नोंदणीचे फायदे:",
+    iec_benefit_legal_authorization: "आयात/निर्यातीसाठी कायदेशीर अधिकार",
+    iec_benefit_government_schemes: "सरकारी योजना आणि प्रोत्साहनांमध्ये प्रवेश",
+    iec_benefit_customs_procedures: "सुलभ सीमाशुल्क प्रक्रिया",
+    iec_benefit_banking_facilities: "निर्यात वित्तपुरवठा आणि बँकिंग सुविधा",
+    iec_benefit_global_trade: "जागतिक बाजारपेठेत व्यापार करण्याची क्षमता",
+    iec_benefit_credibility: "आंतरराष्ट्रीय खरेदीदार आणि पुरवठादारांसमोर विश्वसनीयता",
+
+    // GST Registration specific - Marathi
+    gst_mandatory_turnover_threshold:
+      "वार्षिक उलाढाल ₹40 लाख पेक्षा जास्त (विशेष श्रेणी राज्यांसाठी ₹10 लाख) असलेल्या व्यवसायांसाठी GST नोंदणी अनिवार्य आहे.",
+    gst_application_submitted_processing:
+      "तुमचा GST नोंदणी अर्ज यशस्वीरित्या सबमिट झाला आहे आणि आता त्यावर प्रक्रिया केली जात आहे.",
+
+    // IEC Registration specific - Marathi
+    uploaded_and_pending_verification: "अपलोड केले आणि पडताळणी प्रलंबित",
+    change_re_upload: "बदला/पुन्हा अपलोड करा",
+    certificates_obtained_from_other_registrations: "इतर नोंदणी प्रक्रियांमधून मिळवलेली प्रमाणपत्रे",
+    complete_address_where_business_operations_are_conducted: "व्यवसाय चालवल्या जाणार्‍या संपूर्ण पत्ता",
+    required_for_partnership_firm: "भागीदारी फर्मसाठी आवश्यक",
+    required_for_llp: "LLP साठी आवश्यक",
+    required_for_private_limited_company: "प्रायव्हेट लिमिटेड कंपनीसाठी आवश्यक",
+    iec_definition: "IEC (आयात निर्यात कोड) हा DGFT (डायरेक्टरेट जनरल ऑफ फॉरेन ट्रेड) द्वारे जारी केलेला 10-अंकी कोड आहे.",
+    iec_mandatory_for_importers_exporters: "भारतातील आयातदार आणि निर्यातदारांसाठी अनिवार्य आहे.",
+    iec_required_for_customs_clearance: "सीमाशुल्क मंजुरी, परकीय चलन व्यवहार आणि आंतरराष्ट्रीय व्यापारासाठी आवश्यक आहे.",
+    iec_valid_for_lifetime: "आयुष्यभर वैध, नूतनीकरणाची आवश्यकता नाही.",
+
+    // GST Registration specific - Marathi
+    gst_mandatory_turnover_threshold:
+      "वार्षिक उलाढाल ₹40 लाख पेक्षा जास्त (विशेष श्रेणी राज्यांसाठी ₹10 लाख) असलेल्या व्यवसायांसाठी GST नोंदणी अनिवार्य आहे.",
+    gst_application_submitted_processing:
+      "तुमचा GST नोंदणी अर्ज यशस्वीरित्या सबमिट झाला आहे आणि आता त्यावर प्रक्रिया केली जात आहे.",
+
+    // IEC Registration specific - Marathi
+    iec_enables_international_trade: "आंतरराष्ट्रीय व्यापार उपक्रम (आयात आणि निर्यात) सक्षम करते.",
+    iec_access_to_export_incentives: "DGFT कडून निर्यात प्रोत्साहन आणि योजनांमध्ये प्रवेश.",
+    iec_simplifies_customs_procedures: "सुलभ सीमाशुल्क प्रक्रिया",
+
+    // IEC Registration specific - Marathi
+    empowering_farmers: "आधुनिक कृषीसाठी अत्याधुनिक डिजिटल समाधानांसह शेतकऱ्यांना सक्षम बनवणे. आजच शेती क्रांतीत सामील व्हा.",
+    are_you_sure_you_want_to_remove_this_trusted_browser:
+      "तुम्ही निश्चित आहात कि तुम्ही हे विश्वासनीय ब्राउज़र काढून टाकू इच्छिता?",
+    // DSC Registration specific - Marathi
+    complete_required_sections_dsc:
+      "तुम्ही या पृष्ठात दिलेल्या सभी आवश्यक अनुभागांमध्ये आपले DSC पंजीकरण अधिकारिक करण्यासाठी करण्यासाठी जास्तीत जास्त विवरण दर्ज करा",
+    individual_dsc_description:
+      "या DSC तुमच्या व्यक्तिगत नावाने जारी केले जाते आणि तुम्ही ते व्यक्तिगत डिजिटल हस्ताक्षर करण्यासाठी वापरू शकता.",
+    dsc_application_submitted_processing:
+      "तुमचे DSC पंजीकरण आवेदन जमा करून दिले आहे आणि ते वर्तमानात इसकी प्रक्रिया झाली आहे. तुम्ही ते प्रगति अनुभागात ट्रैक करू शकता.",
+    // ICEGATE Registration specific - Marathi
+    icegate_application_submitted_processing:
+      "तुमचा ICEGATE नोंदणी अर्ज सबमिट झाला आहे आणि सध्या त्यावर प्रक्रिया केली जात आहे. तुम्ही प्रगती विभागात प्रगतीचा मागोवा घेऊ शकता.",
+    // AD Code Registration specific - Hindi
+    adcode_application_submitted_processing:
+      "आपका AD कोड पंजीकरण आवेदन जमा कर दिया गया है और वर्तमान में इसकी प्रक्रिया की जा रही है। आप प्रगति अनुभाग में प्रगति को ट्रैक कर सकते हैं।",
+  },
+}
+
+interface LanguageProviderProps {
+  children: ReactNode
+}
+
+// Merge additional translations into the main translations object
+Object.keys(additionalTranslations).forEach(lang => {
+  if (translations[lang]) {
+    translations[lang] = { ...translations[lang], ...additionalTranslations[lang] };
+  } else {
+    translations[lang] = additionalTranslations[lang];
+  }
+});
+
+export function LanguageProvider({ children }: LanguageProviderProps) {
+  const [language, setLanguage] = useState<string>("en")
+
+  useEffect(() => {
+    // Load saved language preference
+    const savedLanguage = localStorage.getItem("preferredLanguage") || "en"
+    setLanguage(savedLanguage)
+  }, [])
+
+  const changeLanguage = (lang: string) => {
+    setLanguage(lang)
+    localStorage.setItem("preferredLanguage", lang)
+  }
+
+  const t = (key: string, replacements?: Record<string, string>): string => {
+    let translated = translations[language]?.[key] || translations["en"]?.[key] || key
+    if (replacements) {
+      for (const placeholder in replacements) {
+        translated = translated.replace(`{{${placeholder}}}`, replacements[placeholder])
+      }
+    }
+    return translated
+  }
+
+  return (
+    <LanguageContext.Provider value={{ language, setLanguage: changeLanguage, t }}>{children}</LanguageContext.Provider>
+  )
+}
+
+export function useLanguage() {
+  const context = useContext(LanguageContext)
+  if (context === undefined) {
+    throw new Error("useLanguage must be used within a LanguageProvider")
+  }
+  return context
+}

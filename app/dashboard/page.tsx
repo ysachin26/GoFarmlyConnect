@@ -1,6 +1,7 @@
 "use client"
 
 import { useEffect, useState } from "react"
+import { useLanguage } from '@/contexts/LanguageContext'
 import { CheckCircle, Clock, AlertCircle, FileText, TrendingUp, Bell, type LucideIcon } from "lucide-react"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
@@ -9,7 +10,6 @@ import { Badge } from "@/components/ui/badge"
 import { ProfileCompletionModal } from "@/components/profile-completion-modal"
 import { getDashboardData, markNotificationAsRead } from "@/app/actions"
 import Link from "next/link"
-import { useLanguage } from '@/contexts/LanguageContext'
 import dynamic from "next/dynamic"
 import {
   Carousel,
@@ -96,13 +96,15 @@ interface DashboardData {
 }
 
 export default function Dashboard() {
-  const { t } = useLanguage()
   const [showProfileModal, setShowProfileModal] = useState(false)
   const [dashboardData, setDashboardData] = useState<DashboardData | null>(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
   const [hasMounted, setHasMounted] = useState(false)
   const [lastRefresh, setLastRefresh] = useState(Date.now())
+  
+  // Get translation function
+  const { t } = useLanguage()
 
   // Carousel state
   const [api, setApi] = useState<CarouselApi>()
@@ -117,7 +119,7 @@ export default function Dashboard() {
     })
   }, [api])
 
-  const videos = [
+  const videos = hasMounted ? [
     {
       title: t('getting_started'),
       description: t('introduction_export_basics'),
@@ -159,7 +161,7 @@ export default function Dashboard() {
       poster: "/placeholder.svg?height=225&width=400",
       category: "Advanced Topics",
     },
-  ]
+  ] : []
 
   const fetchDashboardData = async () => {
     try {

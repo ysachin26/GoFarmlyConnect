@@ -14,7 +14,17 @@ import { useLanguage } from "@/contexts/LanguageContext"
 const languages = [
   { code: "en", name: "English", flag: "🇺🇸" },
   { code: "hi", name: "हिंदी", flag: "🇮🇳" },
+  { code: "bn", name: "বাংলা", flag: "🇮🇳" },
+  { code: "te", name: "తెలుగు", flag: "🇮🇳" },
   { code: "mr", name: "मराठी", flag: "🇮🇳" },
+  { code: "ta", name: "தமிழ்", flag: "🇮🇳" },
+  { code: "gu", name: "ગુજરાતી", flag: "🇮🇳" },
+  { code: "kn", name: "ಕನ್ನಡ", flag: "🇮🇳" },
+  { code: "ml", name: "മലയാളം", flag: "🇮🇳" },
+  { code: "pa", name: "ਪੰਜਾਬੀ", flag: "🇮🇳" },
+  { code: "or", name: "ଓଡ଼ିଆ", flag: "🇮🇳" },
+  { code: "as", name: "অসমীয়া", flag: "🇮🇳" },
+  { code: "ur", name: "اردو", flag: "🇮🇳" },
 ]
 
 interface Notification {
@@ -162,9 +172,9 @@ export function TopNavbar() {
             className="w-80 max-h-[400px] overflow-y-auto dropdown-scroll"
           >
             {loading ? (
-              <div className="p-4 text-center text-gray-500">Loading notifications...</div>
+              <div className="p-4 text-center text-gray-500">{t('loading')}...</div>
             ) : notifications.length === 0 ? (
-              <div className="p-4 text-center text-gray-500">No notifications</div>
+              <div className="p-4 text-center text-gray-500">{t('no_notifications')}</div>
             ) : (
               notifications
                 .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
@@ -191,7 +201,7 @@ export function TopNavbar() {
                     </div>
                     {!notification.read && (
                       <Badge variant="secondary" className="text-xs">
-                        New
+                        {t('new')}
                       </Badge>
                     )}
                   </div>

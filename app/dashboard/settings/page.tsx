@@ -166,7 +166,7 @@ export default function SettingsPage() {
     return (
       <div className="container mx-auto p-6 max-w-4xl">
         <div className="flex items-center justify-center min-h-[400px]">
-          <p>Loading settings...</p>
+          <p>{t('loading')}...</p>
         </div>
       </div>
     )
@@ -398,7 +398,7 @@ export default function SettingsPage() {
 
               <Button onClick={handleNotificationSave} disabled={loading} className="flex items-center gap-2">
                 <Save className="h-4 w-4" />
-                {loading ? "Saving..." : "Save Preferences"}
+                {loading ? t('saving') : t('save_preferences')}
               </Button>
             </CardContent>
           </Card>
@@ -474,7 +474,7 @@ export default function SettingsPage() {
                 <h3 className="text-lg font-medium text-red-600">Danger Zone</h3>
                 <div className="border border-red-200 rounded-lg p-4">
                   <div>
-                    <h4 className="font-medium text-red-600">Delete Account</h4>
+                    <h4 className="font-medium text-red-600">{t('delete_account')}</h4>
                     <p className="text-sm text-gray-500 mb-3">
                       Permanently delete your account and all associated data. This action cannot be undone.
                     </p>
@@ -501,13 +501,13 @@ export default function SettingsPage() {
                           </AlertDialogDescription>
                         </AlertDialogHeader>
                         <AlertDialogFooter>
-                          <AlertDialogCancel>Cancel</AlertDialogCancel>
+                          <AlertDialogCancel>{t('cancel')}</AlertDialogCancel>
                           <AlertDialogAction
                             onClick={handleDeleteAccount}
                             disabled={deleteLoading}
                             className="bg-red-600 hover:bg-red-700"
                           >
-                            {deleteLoading ? "Deleting..." : "Yes, delete my account"}
+                            {deleteLoading ? t('deleting') : t('yes_delete_my_account')}
                           </AlertDialogAction>
                         </AlertDialogFooter>
                       </AlertDialogContent>
@@ -518,7 +518,7 @@ export default function SettingsPage() {
 
               <Button onClick={handlePreferencesSave} disabled={loading} className="flex items-center gap-2">
                 <Save className="h-4 w-4" />
-                {loading ? "Saving..." : "Save Preferences"}
+                {loading ? t('saving') : t('save_preferences')}
               </Button>
             </CardContent>
           </Card>

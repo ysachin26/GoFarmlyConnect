@@ -251,7 +251,7 @@ export default function Profile() {
                 disabled={isUploading}
                 className="w-full"
               >
-                {isUploading ? "Uploading..." : needsReupload ? "Re-upload Document" : "Upload Document"}
+                {isUploading ? t('uploading') : needsReupload ? t('re_upload_document') : t('upload_document')}
               </Button>
               <p className="text-xs text-gray-500">Supported: PDF, JPG, PNG (max 1MB)</p>
             </div>
@@ -264,7 +264,7 @@ export default function Profile() {
   if (loading) {
     return (
       <div className="flex items-center justify-center min-h-[calc(100vh-200px)]">
-        <p>Loading profile...</p>
+        <p>{t('loading')}...</p>
       </div>
     )
   }

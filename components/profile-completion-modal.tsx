@@ -22,6 +22,7 @@ import { Progress } from "@/components/ui/progress"
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog"
 import { getDashboardData, updateProfileCompletion, uploadDocument, verifyEmail } from "@/app/actions"
 import { useToast } from "@/hooks/use-toast"
+import { useLanguage } from "@/contexts/LanguageContext"
 
 interface ProfileCompletionModalProps {
   isOpen: boolean
@@ -92,6 +93,7 @@ export function ProfileCompletionModal({ isOpen, onClose, onUpdate }: ProfileCom
   const proofOfAddressInputRef = useRef<HTMLInputElement>(null)
 
   const { toast } = useToast()
+  const { t } = useLanguage()
 
   // Define profile fields configuration
   const profileFieldsConfig = [
@@ -621,7 +623,7 @@ export function ProfileCompletionModal({ isOpen, onClose, onUpdate }: ProfileCom
                           <field.icon className="h-8 w-8 text-gray-400 mx-auto" />
                           <div className="text-sm text-gray-600">
                             <span className="text-primary">
-                              {uploadingStates[field.type] ? "Uploading..." : "Click to upload"}
+                              {uploadingStates[field.type] ? t('uploading') : t('click_to_upload')}
                             </span>
                           </div>
                           <p className="text-xs text-gray-500">{field.uploadHint}</p>
