@@ -150,7 +150,7 @@ export default function Registration() {
           </div>
           <Button className="bg-blue-600 hover:bg-blue-700 w-full sm:w-auto text-sm sm:text-base">{t("get_started")}</Button>
         </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
           {[1, 2, 3, 4, 5].map((i) => (
             <Card key={i} className="animate-pulse">
               <CardHeader>
@@ -230,7 +230,7 @@ export default function Registration() {
           </div>
           <Button className="bg-blue-600 hover:bg-blue-700 w-full sm:w-auto text-sm sm:text-base">{t("get_started")}</Button>
         </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
           {registrations.map((_, index) => (
             <Card key={index} className="animate-pulse">
               <CardHeader>
@@ -295,7 +295,7 @@ export default function Registration() {
           </Card>
           
           {/* Show locked registration cards */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
             {registrations.map((registration) => (
               <Card key={registration.id} className="opacity-50 cursor-not-allowed">
                 <CardHeader>
@@ -344,7 +344,7 @@ export default function Registration() {
             </CardContent>
           </Card>
           
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
         {registrations.map((registration) => {
           const { status, statusText, badgeVariant, badgeColorClass } = getRegistrationStatus(registration.stepId)
           return (
@@ -381,7 +381,7 @@ export default function Registration() {
             </Card>
           )
         })}
-          </div>
+      </div>
         </>
       )}
       

@@ -110,25 +110,37 @@ export default function Support() {
   }
 
   return (
-    <div className="p-4 sm:p-6">
+    <div className="p-4 sm:p-6 max-w-6xl mx-auto">
       <div className="mb-4 sm:mb-6">
         <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-2">Help & Support</h1>
         <p className="text-gray-600 text-sm sm:text-base">Get assistance with your export registration process</p>
       </div>
 
       <Tabs value={activeTab} onValueChange={setActiveTab} className="mb-6 sm:mb-8">
-        <TabsList className="mb-4 sm:mb-6 grid grid-cols-1 sm:grid-cols-3">
-          <TabsTrigger value="faq" className="flex items-center gap-1 sm:gap-2 text-xs sm:text-sm">
-            <HelpCircle className="h-3 w-3 sm:h-4 sm:w-4" />
-            FAQs
+        <TabsList className="mb-4 sm:mb-6 grid grid-cols-3 w-full h-auto p-1">
+          <TabsTrigger 
+            value="faq" 
+            className="flex flex-col items-center gap-1 sm:gap-2 text-xs sm:text-sm h-auto py-2 sm:py-3 px-2 sm:px-4 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground"
+          >
+            <HelpCircle className="h-4 w-4 sm:h-5 sm:w-5" />
+            <span className="hidden sm:inline">FAQs</span>
+            <span className="sm:hidden">FAQ</span>
           </TabsTrigger>
-          <TabsTrigger value="contact" className="flex items-center gap-1 sm:gap-2 text-xs sm:text-sm">
-            <MessageSquare className="h-3 w-3 sm:h-4 sm:w-4" />
-            Contact Us
+          <TabsTrigger 
+            value="contact" 
+            className="flex flex-col items-center gap-1 sm:gap-2 text-xs sm:text-sm h-auto py-2 sm:py-3 px-2 sm:px-4 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground"
+          >
+            <MessageSquare className="h-4 w-4 sm:h-5 sm:w-5" />
+            <span className="hidden sm:inline">Contact Us</span>
+            <span className="sm:hidden">Contact</span>
           </TabsTrigger>
-          <TabsTrigger value="resources" className="flex items-center gap-1 sm:gap-2 text-xs sm:text-sm">
-            <FileText className="h-3 w-3 sm:h-4 sm:w-4" />
-            Resources
+          <TabsTrigger 
+            value="resources" 
+            className="flex flex-col items-center gap-1 sm:gap-2 text-xs sm:text-sm h-auto py-2 sm:py-3 px-2 sm:px-4 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground"
+          >
+            <FileText className="h-4 w-4 sm:h-5 sm:w-5" />
+            <span className="hidden sm:inline">Resources</span>
+            <span className="sm:hidden">Resources</span>
           </TabsTrigger>
         </TabsList>
 
@@ -149,7 +161,7 @@ export default function Support() {
                 ))}
               </Accordion>
             </CardContent>
-            <CardFooter className="flex flex-col sm:flex-row sm:justify-between gap-3">
+            <CardFooter className="flex flex-col sm:flex-row sm:justify-between gap-3 sm:gap-4">
               <p className="text-xs sm:text-sm text-gray-600">{"Didn't find what you're looking for?"}</p>
               <Button variant="outline" className="text-primary text-xs sm:text-sm w-full sm:w-auto" onClick={() => setActiveTab("contact")}>
                 Contact Support
@@ -271,7 +283,7 @@ export default function Support() {
                             </FormItem>
                           )}
                         />
-                        <Button type="submit" className="w-full mt-4 text-sm sm:text-base" disabled={isSubmitting}>
+                        <Button type="submit" className="w-full mt-4 sm:mt-6 text-sm sm:text-base" disabled={isSubmitting}>
                           {isSubmitting ? "Submitting..." : "Submit Support Request"}
                         </Button>
                       </form>
@@ -281,7 +293,7 @@ export default function Support() {
               )}
             </div>
 
-            <div>
+            <div className="lg:col-span-1">
               <Card>
                 <CardHeader>
                   <CardTitle className="text-base sm:text-lg md:text-xl">Contact Information</CardTitle>

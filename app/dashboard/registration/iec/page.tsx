@@ -619,29 +619,29 @@ export default function IECRegistration() {
   const progress = calculateProgress()
 
   return (
-    <div className="p-6 max-w-4xl mx-auto space-y-6">
+    <div className="p-4 sm:p-6 max-w-4xl mx-auto space-y-4 sm:space-y-6">
       {/* Header */}
-      <div className="flex items-center gap-4">
+      <div className="flex flex-col sm:flex-row sm:items-center gap-4">
         <Link href="/dashboard/registration">
           <Button variant="ghost" size="icon">
             <ArrowLeft className="h-4 w-4" />
           </Button>
         </Link>
         <div>
-          <h1 className="text-3xl font-bold text-gray-900">{t('iec_registration')}</h1>
-          <p className="text-gray-600 mt-1">{t('import_export_code_registration')}</p>
+          <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">{t('iec_registration')}</h1>
+          <p className="text-gray-600 mt-1 text-sm sm:text-base">{t('import_export_code_registration')}</p>
         </div>
       </div>
 
       {/* Progress Overview */}
       <Card className="bg-blue-50 border-blue-200">
-        <CardContent className="p-6">
-          <div className="flex items-center justify-between mb-4">
-            <h3 className="font-semibold text-blue-900">{t('registration_progress')}</h3>
-            <span className="text-blue-600 font-bold">{progress}%</span>
+        <CardContent className="p-4 sm:p-6">
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 sm:gap-0 mb-4">
+            <h3 className="font-semibold text-blue-900 text-sm sm:text-base">{t('registration_progress')}</h3>
+            <span className="text-blue-600 font-bold text-lg sm:text-xl">{progress}%</span>
           </div>
-          <Progress value={progress} className="h-3" />
-          <p className="text-blue-700 text-sm mt-2">
+          <Progress value={progress} className="h-2 sm:h-3" />
+          <p className="text-blue-700 text-xs sm:text-sm mt-2">
             {t('complete_all_required_sections')}
           </p>
         </CardContent>
@@ -657,8 +657,8 @@ export default function IECRegistration() {
           <CardDescription>{t('information_from_your_profile')}</CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
-          <div className="bg-blue-50 p-4 rounded-lg border border-blue-200">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="bg-blue-50 p-3 sm:p-4 rounded-lg border border-blue-200">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-3 sm:gap-4">
               <div className="space-y-2">
                 <Label>{t('business_type')}</Label>
                 <Input value={profileData.businessType} disabled className="bg-gray-50" />
@@ -683,14 +683,14 @@ export default function IECRegistration() {
             <CardDescription>{t('certificates_from_other_processes')}</CardDescription>
           </CardHeader>
           <CardContent className="space-y-4">
-            <div className="bg-emerald-50 p-4 rounded-lg border border-emerald-200">
-              <h4 className="font-medium text-emerald-900 mb-3">📜 {t('available_certificates')}:</h4>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            <div className="bg-emerald-50 p-3 sm:p-4 rounded-lg border border-emerald-200">
+              <h4 className="font-medium text-emerald-900 mb-3 text-sm sm:text-base">📜 {t('available_certificates')}:</h4>
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
                 {profileData.gstCertificate && (
-                  <div className="flex items-center gap-3 p-3 bg-white rounded-lg border">
-                    <Award className="h-4 w-4 text-green-600" />
+                  <div className="flex items-center gap-2 sm:gap-3 p-2 sm:p-3 bg-white rounded-lg border">
+                    <Award className="h-3 w-3 sm:h-4 sm:w-4 text-green-600" />
                     <div className="flex-1">
-                      <div className="text-sm font-medium">{t('gst_certificate')}</div>
+                      <div className="text-xs sm:text-sm font-medium">{t('gst_certificate')}</div>
                       <div className="flex items-center gap-1 text-green-600 text-xs">
                         <Check className="h-3 w-3" />
                         <span>{t('from_gst_registration')}</span>
@@ -707,10 +707,10 @@ export default function IECRegistration() {
                 )}
 
                 {profileData.dscCertificate && (
-                  <div className="flex items-center gap-3 p-3 bg-white rounded-lg border">
-                    <Shield className="h-4 w-4 text-indigo-600" />
+                  <div className="flex items-center gap-2 sm:gap-3 p-2 sm:p-3 bg-white rounded-lg border">
+                    <Shield className="h-3 w-3 sm:h-4 sm:w-4 text-indigo-600" />
                     <div className="flex-1">
-                      <div className="text-sm font-medium">{t('dsc_certificate')}</div>
+                      <div className="text-xs sm:text-sm font-medium">{t('dsc_certificate')}</div>
                       <div className="flex items-center gap-1 text-indigo-600 text-xs">
                         <Check className="h-3 w-3" />
                         <span>{t('from_dsc_registration')}</span>
@@ -727,10 +727,10 @@ export default function IECRegistration() {
                 )}
 
                 {profileData.adCodeLetterFromBankUrl && (
-                  <div className="flex items-center gap-3 p-3 bg-white rounded-lg border">
-                    <CreditCard className="h-4 w-4 text-blue-600" />
+                  <div className="flex items-center gap-2 sm:gap-3 p-2 sm:p-3 bg-white rounded-lg border">
+                    <CreditCard className="h-3 w-3 sm:h-4 sm:w-4 text-blue-600" />
                     <div className="flex-1">
-                      <div className="text-sm font-medium">{t('ad_code_letter')}</div>
+                      <div className="text-xs sm:text-sm font-medium">{t('ad_code_letter')}</div>
                       <div className="flex items-center gap-1 text-blue-600 text-xs">
                         <Check className="h-3 w-3" />
                         <span>{t('from_ad_code_registration')}</span>
@@ -761,9 +761,9 @@ export default function IECRegistration() {
           <CardDescription>{t('information_fetched_from_profile')}</CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
-          <div className="bg-green-50 p-4 rounded-lg border border-green-200">
-            <h4 className="font-medium text-green-900 mb-3">✅ {t('auto_filled_from_profile')}:</h4>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="bg-green-50 p-3 sm:p-4 rounded-lg border border-green-200">
+            <h4 className="font-medium text-green-900 mb-3 text-sm sm:text-base">✅ {t('auto_filled_from_profile')}:</h4>
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-3 sm:gap-4">
               <div className="space-y-2">
                 <Label>
                   {t('full_name')} <span className="text-red-500">*</span>
@@ -796,7 +796,7 @@ export default function IECRegistration() {
               </div>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mt-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 mt-4">
               {[
                 { key: "panCardUrl", label: t('pan_card'), icon: FileText, completed: !!profileData.panCardUrl },
                 { key: "aadharCardUrl", label: t('aadhaar_card'), icon: FileText, completed: !!profileData.aadharCardUrl },
@@ -808,10 +808,10 @@ export default function IECRegistration() {
                   completed: !!profileData.proofOfAddressUrl,
                 },
               ].map((doc) => (
-                <div key={doc.key} className="flex items-center gap-3 p-3 bg-white rounded-lg border">
-                  <doc.icon className={`h-4 w-4 ${doc.completed ? "text-green-600" : "text-gray-400"}`} />
+                <div key={doc.key} className="flex items-center gap-2 sm:gap-3 p-2 sm:p-3 bg-white rounded-lg border">
+                  <doc.icon className={`h-3 w-3 sm:h-4 sm:w-4 ${doc.completed ? "text-green-600" : "text-gray-400"}`} />
                   <div className="flex-1">
-                    <div className="text-sm font-medium">
+                    <div className="text-xs sm:text-sm font-medium">
                       {doc.label} <span className="text-red-500">*</span>
                     </div>
                     <div
@@ -1072,9 +1072,9 @@ export default function IECRegistration() {
           <CardDescription>{t('important_information_about_iec')}</CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
-          <div className="bg-emerald-50 p-4 rounded-lg border border-emerald-200">
-            <h4 className="font-medium text-emerald-900 mb-3">🌍 {t('what_is_iec')}?</h4>
-            <ul className="text-emerald-800 text-sm space-y-2">
+          <div className="bg-emerald-50 p-3 sm:p-4 rounded-lg border border-emerald-200">
+            <h4 className="font-medium text-emerald-900 mb-3 text-sm sm:text-base">🌍 {t('what_is_iec')}?</h4>
+            <ul className="text-emerald-800 text-xs sm:text-sm space-y-2">
               <li>• {t('iec_description_1')}</li>
               <li>• {t('iec_description_2')}</li>
               <li>• {t('iec_description_3')}</li>
@@ -1082,9 +1082,9 @@ export default function IECRegistration() {
             </ul>
           </div>
 
-          <div className="bg-blue-50 p-4 rounded-lg border border-blue-200">
-            <h4 className="font-medium text-blue-900 mb-3">📋 {t('benefits_of_iec_registration')}:</h4>
-            <ul className="text-blue-800 text-sm space-y-2">
+          <div className="bg-blue-50 p-3 sm:p-4 rounded-lg border border-blue-200">
+            <h4 className="font-medium text-blue-900 mb-3 text-sm sm:text-base">📋 {t('benefits_of_iec_registration')}:</h4>
+            <ul className="text-blue-800 text-xs sm:text-sm space-y-2">
               <li>• {t('iec_benefit_1')}</li>
               <li>• {t('iec_benefit_2')}</li>
               <li>• {t('iec_benefit_3')}</li>
@@ -1096,28 +1096,28 @@ export default function IECRegistration() {
       </Card>
 
       {/* Action Buttons */}
-      <div className="flex justify-between pt-6 border-t">
+      <div className="flex flex-col sm:flex-row sm:justify-between gap-4 pt-6 border-t">
         {registrationStatus === "in-progress" ? (
           <Card className="w-full bg-amber-50 border-amber-200 text-amber-800">
             <CardHeader className="pb-2">
-              <CardTitle className="text-amber-900 flex items-center gap-2">
-                <Clock className="h-5 w-5" />
+              <CardTitle className="text-amber-900 flex items-center gap-2 text-sm sm:text-base">
+                <Clock className="h-4 w-4 sm:h-5 sm:w-5" />
                 {t('application_submitted')}
               </CardTitle>
             </CardHeader>
             <CardContent>
-              <p className="text-sm">
+              <p className="text-xs sm:text-sm">
                 {t('application_submitted_description')}
               </p>
             </CardContent>
           </Card>
         ) : (
           <>
-            <Button variant="outline" asChild>
+            <Button variant="outline" asChild className="w-full sm:w-auto">
               <Link href="/dashboard/registration">{t('save_continue_later')}</Link>
             </Button>
             <Button
-              className="bg-blue-600 hover:bg-blue-700"
+              className="bg-blue-600 hover:bg-blue-700 w-full sm:w-auto"
               onClick={handleSubmitApplication}
               disabled={progress < 100}
             >

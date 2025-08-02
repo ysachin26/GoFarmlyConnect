@@ -989,35 +989,35 @@ export default function GSTRegistration() {
   // If profile is not complete, show locked message
   if (!isProfileComplete) {
     return (
-      <div className="p-6 max-w-4xl mx-auto space-y-6">
-        <div className="flex items-center gap-4">
+      <div className="p-4 sm:p-6 max-w-4xl mx-auto space-y-4 sm:space-y-6">
+        <div className="flex flex-col sm:flex-row sm:items-center gap-4">
           <Link href="/dashboard/registration">
             <Button variant="ghost" size="icon">
               <ArrowLeft className="h-4 w-4" />
             </Button>
           </Link>
           <div>
-            <h1 className="text-3xl font-bold text-gray-900">{t("gst_registration_title")}</h1>
-            <p className="text-gray-600 mt-1">{t("gst_registration_description")}</p>
+            <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">{t("gst_registration_title")}</h1>
+            <p className="text-gray-600 mt-1 text-sm sm:text-base">{t("gst_registration_description")}</p>
           </div>
         </div>
 
         <Card className="bg-teal-50 border-teal-200">
-          <CardContent className="p-6">
-            <div className="flex items-center gap-4">
-              <div className="h-12 w-12 bg-teal-600 rounded-lg flex items-center justify-center">
-                <Lock className="h-6 w-6 text-white" />
+          <CardContent className="p-4 sm:p-6">
+            <div className="flex flex-col sm:flex-row sm:items-center gap-4">
+              <div className="h-10 w-10 sm:h-12 sm:w-12 bg-teal-600 rounded-lg flex items-center justify-center">
+                <Lock className="h-5 w-5 sm:h-6 sm:w-6 text-white" />
               </div>
               <div className="flex-1">
-                <h3 className="font-semibold text-teal-900 flex items-center gap-2">
-                  <AlertCircle className="h-5 w-5" />
+                <h3 className="font-semibold text-teal-900 flex items-center gap-2 text-sm sm:text-base">
+                  <AlertCircle className="h-4 w-4 sm:h-5 sm:w-5" />
                   Registration Service Locked
                 </h3>
-                <p className="text-teal-700 text-sm mt-1">
+                <p className="text-teal-700 text-xs sm:text-sm mt-1">
                   Complete your profile to access GST registration services. Your profile completion is required to proceed.
                 </p>
                 <div className="mt-3">
-                  <Button onClick={() => setIsProfileModalOpen(true)} className="bg-teal-600 hover:bg-teal-700">
+                  <Button onClick={() => setIsProfileModalOpen(true)} className="bg-teal-600 hover:bg-teal-700 w-full sm:w-auto">
                     Complete Profile
                   </Button>
                 </div>
@@ -1051,29 +1051,29 @@ export default function GSTRegistration() {
   }
 
   return (
-    <div className="p-6 max-w-4xl mx-auto space-y-6">
+    <div className="p-4 sm:p-6 max-w-4xl mx-auto space-y-4 sm:space-y-6">
       {/* Header */}
-      <div className="flex items-center gap-4">
+      <div className="flex flex-col sm:flex-row sm:items-center gap-4">
         <Link href="/dashboard/registration">
           <Button variant="ghost" size="icon">
             <ArrowLeft className="h-4 w-4" />
           </Button>
         </Link>
         <div>
-          <h1 className="text-3xl font-bold text-gray-900">{t("gst_registration_title")}</h1>
-          <p className="text-gray-600 mt-1">{t("gst_registration_description")}</p>
+          <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">{t("gst_registration_title")}</h1>
+          <p className="text-gray-600 mt-1 text-sm sm:text-base">{t("gst_registration_description")}</p>
         </div>
       </div>
 
       {/* Progress Overview */}
       <Card className="bg-teal-50 border-teal-200">
-        <CardContent className="p-6">
-          <div className="flex items-center justify-between mb-4">
-            <h3 className="font-semibold text-teal-900">{t("registration_progress")}</h3>
-            <span className="text-teal-600 font-bold">{progress}%</span>
+        <CardContent className="p-4 sm:p-6">
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 sm:gap-0 mb-4">
+            <h3 className="font-semibold text-teal-900 text-sm sm:text-base">{t("registration_progress")}</h3>
+            <span className="text-teal-600 font-bold text-lg sm:text-xl">{progress}%</span>
           </div>
-          <Progress value={progress} className="h-3" />
-          <p className="text-teal-700 text-sm mt-2">
+          <Progress value={progress} className="h-2 sm:h-3" />
+          <p className="text-teal-700 text-xs sm:text-sm mt-2">
             {t("complete_required_sections_gst")}
           </p>
         </CardContent>
@@ -1089,9 +1089,9 @@ export default function GSTRegistration() {
           <CardDescription>{t("information_fetched_from_profile")}</CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
-          <div className="bg-green-50 p-4 rounded-lg border border-green-200">
-            <h4 className="font-medium text-green-900 mb-3">{t("auto_filled_from_profile")}</h4>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="bg-green-50 p-3 sm:p-4 rounded-lg border border-green-200">
+            <h4 className="font-medium text-green-900 mb-3 text-sm sm:text-base">{t("auto_filled_from_profile")}</h4>
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-3 sm:gap-4">
               <div className="space-y-2">
                 <Label>
                   {t("full_name")} <span className="text-red-500">*</span>
@@ -1124,7 +1124,7 @@ export default function GSTRegistration() {
               </div>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mt-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 mt-4">
               {[
                 { key: "panCardUrl", label: t("pan_card"), icon: FileText, completed: !!profileData.panCardUrl },
                 {
@@ -1146,10 +1146,10 @@ export default function GSTRegistration() {
                   completed: !!profileData.proofOfAddressUrl,
                 },
               ].map((doc) => (
-                <div key={doc.key} className="flex items-center gap-3 p-3 bg-white rounded-lg border">
-                  <doc.icon className={`h-4 w-4 ${doc.completed ? "text-green-600" : "text-gray-400"}`} />
+                <div key={doc.key} className="flex items-center gap-2 sm:gap-3 p-2 sm:p-3 bg-white rounded-lg border">
+                  <doc.icon className={`h-3 w-3 sm:h-4 sm:w-4 ${doc.completed ? "text-green-600" : "text-gray-400"}`} />
                   <div className="flex-1">
-                    <div className="text-sm font-medium">
+                    <div className="text-xs sm:text-sm font-medium">
                       {doc.label} <span className="text-red-500">*</span>
                     </div>
                     <div
@@ -1176,10 +1176,10 @@ export default function GSTRegistration() {
           <CardDescription>{t("business_type_from_profile")}</CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
-          <div className="bg-blue-50 p-4 rounded-lg border border-blue-200">
+          <div className="bg-blue-50 p-3 sm:p-4 rounded-lg border border-blue-200">
             <div className="flex items-center gap-2 mb-2">
-              <Check className="h-5 w-5 text-green-600" />
-              <span className="font-medium text-blue-900">
+              <Check className="h-4 w-4 sm:h-5 sm:w-5 text-green-600" />
+              <span className="font-medium text-blue-900 text-sm sm:text-base">
                 {businessType === "individual"
                   ? t("individual_sole_proprietor")
                   : businessType === "partnership"
@@ -1191,7 +1191,7 @@ export default function GSTRegistration() {
                         : t("loading")}
               </span>
             </div>
-            <p className="text-blue-700 text-sm">
+            <p className="text-blue-700 text-xs sm:text-sm">
               {t("document_requirements_customized_by_business_type")}
             </p>
           </div>
@@ -1247,10 +1247,10 @@ export default function GSTRegistration() {
                   : t("private_limited_company")}
             </CardDescription>
           </CardHeader>
-          <CardContent className="space-y-6">
+          <CardContent className="space-y-4 sm:space-y-6">
             {/* Authorization Letter - Required for all non-individual types */}
-            <div className="space-y-4 p-4 bg-indigo-50 rounded-lg border border-indigo-200">
-              <h4 className="font-medium text-indigo-900">{t("authorization_documents")}</h4>
+            <div className="space-y-4 p-3 sm:p-4 bg-indigo-50 rounded-lg border border-indigo-200">
+              <h4 className="font-medium text-indigo-900 text-sm sm:text-base">{t("authorization_documents")}</h4>
               {getDocumentUploadComponent(
                 "authorizationLetter",
                 t("authorization_letter_board_resolution"),
@@ -1270,8 +1270,8 @@ export default function GSTRegistration() {
 
             {/* Partnership Deed - Only for Partnership */}
             {businessType === "partnership" && (
-              <div className="space-y-4 p-4 bg-purple-50 rounded-lg border border-purple-200">
-                <h4 className="font-medium text-purple-900">{t("partnership_documents")}</h4>
+              <div className="space-y-4 p-3 sm:p-4 bg-purple-50 rounded-lg border border-purple-200">
+                <h4 className="font-medium text-purple-900 text-sm sm:text-base">{t("partnership_documents")}</h4>
                 {getDocumentUploadComponent(
                   "partnershipDeed",
                   t("partnership_deed"),
@@ -1288,8 +1288,8 @@ export default function GSTRegistration() {
 
             {/* LLP Agreement - Only for LLP */}
             {businessType === "llp" && (
-              <div className="space-y-4 p-4 bg-purple-50 rounded-lg border border-purple-200">
-                <h4 className="font-medium text-purple-900">{t("llp_documents")}</h4>
+              <div className="space-y-4 p-3 sm:p-4 bg-purple-50 rounded-lg border border-purple-200">
+                <h4 className="font-medium text-purple-900 text-sm sm:text-base">{t("llp_documents")}</h4>
                 {getDocumentUploadComponent(
                   "llpAgreement",
                   t("llp_agreement"),
@@ -1306,9 +1306,9 @@ export default function GSTRegistration() {
 
             {/* Company Documents - Only for Private Limited Company */}
             {businessType === "pvt_ltd" && (
-              <div className="space-y-4 p-4 bg-emerald-50 rounded-lg border border-emerald-200">
-                <h4 className="font-medium text-emerald-900">{t("company_documents")}</h4>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="space-y-4 p-3 sm:p-4 bg-emerald-50 rounded-lg border border-emerald-200">
+                <h4 className="font-medium text-emerald-900 text-sm sm:text-base">{t("company_documents")}</h4>
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-3 sm:gap-4">
                   {/* Certificate of Incorporation */}
                   {getDocumentUploadComponent(
                     "certificateOfIncorporation",
@@ -1350,9 +1350,9 @@ export default function GSTRegistration() {
           </CardTitle>
           <CardDescription>{t("choose_documents_based_on_premise_situation")}</CardDescription>
         </CardHeader>
-        <CardContent className="space-y-6">
+        <CardContent className="space-y-4 sm:space-y-6">
           <div className="space-y-3">
-            <Label>
+            <Label className="text-sm sm:text-base">
               {t("select_premise_type")} <span className="text-red-500">*</span>
             </Label>
             <RadioGroup
@@ -1361,23 +1361,23 @@ export default function GSTRegistration() {
             >
               <div className="flex items-center space-x-2">
                 <RadioGroupItem value="rented" id="rented" />
-                <Label htmlFor="rented">{t("rented_property")}</Label>
+                <Label htmlFor="rented" className="text-sm sm:text-base">{t("rented_property")}</Label>
               </div>
               <div className="flex items-center space-x-2">
                 <RadioGroupItem value="owned" id="owned" />
-                <Label htmlFor="owned">{t("owned_property")}</Label>
+                <Label htmlFor="owned" className="text-sm sm:text-base">{t("owned_property")}</Label>
               </div>
               <div className="flex items-center space-x-2">
                 <RadioGroupItem value="other" id="other" />
-                <Label htmlFor="other">{t("other")}</Label>
+                <Label htmlFor="other" className="text-sm sm:text-base">{t("other")}</Label>
               </div>
             </RadioGroup>
           </div>
 
           {premiseType === "rented" && (
-            <div className="space-y-4 p-4 bg-orange-50 rounded-lg border border-orange-200">
-              <h4 className="font-medium text-orange-900">{t("required_for_rented_property")}</h4>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div className="space-y-4 p-3 sm:p-4 bg-orange-50 rounded-lg border border-orange-200">
+              <h4 className="font-medium text-orange-900 text-sm sm:text-base">{t("required_for_rented_property")}</h4>
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
                 {getDocumentUploadComponent(
                   "rentAgreement",
                   t("rent_lease_agreement_registered"),
@@ -1416,9 +1416,9 @@ export default function GSTRegistration() {
           )}
 
           {premiseType === "owned" && (
-            <div className="space-y-4 p-4 bg-green-50 rounded-lg border border-green-200">
-              <h4 className="font-medium text-green-900">{t("required_for_owned_property")}</h4>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="space-y-4 p-3 sm:p-4 bg-green-50 rounded-lg border border-green-200">
+              <h4 className="font-medium text-green-900 text-sm sm:text-base">{t("required_for_owned_property")}</h4>
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-3 sm:gap-4">
                 {getDocumentUploadComponent(
                   "propertyProof",
                   t("index_ii_sale_deed_property_tax_receipt"),
@@ -1446,10 +1446,10 @@ export default function GSTRegistration() {
           )}
 
           {premiseType === "other" && (
-            <div className="space-y-4 p-4 bg-blue-50 rounded-lg border border-blue-200">
-              <h4 className="font-medium text-blue-900">{t("required_for_other_property_type")}</h4>
+            <div className="space-y-4 p-3 sm:p-4 bg-blue-50 rounded-lg border border-blue-200">
+              <h4 className="font-medium text-blue-900 text-sm sm:text-base">{t("required_for_other_property_type")}</h4>
               <div className="space-y-2 mb-4">
-                <Label htmlFor="otherPremiseDescription">
+                <Label htmlFor="otherPremiseDescription" className="text-sm sm:text-base">
                   {t("specify_premise_type")} <span className="text-red-500">*</span>
                 </Label>
                 <Input
@@ -1486,10 +1486,10 @@ export default function GSTRegistration() {
           <CardDescription>{t("provide_bank_details_now_or_later")}</CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
-          <div className="space-y-4 p-4 bg-indigo-50 rounded-lg border border-indigo-200">
-            <h4 className="font-medium text-indigo-900">{t("bank_details_include")}</h4>
+          <div className="space-y-4 p-3 sm:p-4 bg-indigo-50 rounded-lg border border-indigo-200">
+            <h4 className="font-medium text-indigo-900 text-sm sm:text-base">{t("bank_details_include")}</h4>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-3 sm:gap-4">
               <div className="space-y-2">
                 <Label htmlFor="accountNumber">{t("bank_account_number")}</Label>
                 <Input
@@ -1532,12 +1532,12 @@ export default function GSTRegistration() {
             </div>
 
             <div className="space-y-2">
-              <Label>{t("cancelled_cheque_bank_statement_passbook")}</Label>
-              <p className="text-sm text-gray-600 mb-2">
+              <Label className="text-sm sm:text-base">{t("cancelled_cheque_bank_statement_passbook")}</Label>
+              <p className="text-xs sm:text-sm text-gray-600 mb-2">
                 {t("upload_cancelled_cheque_bank_statement_verification")}
               </p>
               <div
-                className="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center hover:border-gray-400 transition-colors cursor-pointer"
+                className="border-2 border-dashed border-gray-300 rounded-lg p-4 sm:p-6 text-center hover:border-gray-400 transition-colors cursor-pointer"
                 onClick={() => cancelledChequeRef.current?.click()}
               >
                 <input
@@ -1651,9 +1651,9 @@ export default function GSTRegistration() {
           <CardDescription>{t("important_information_gst")}</CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
-          <div className="bg-emerald-50 p-4 rounded-lg border border-emerald-200">
-            <h4 className="font-medium text-emerald-900 mb-3">{t("what_is_gst")}</h4>
-            <ul className="text-emerald-800 text-sm space-y-2">
+          <div className="bg-emerald-50 p-3 sm:p-4 rounded-lg border border-emerald-200">
+            <h4 className="font-medium text-emerald-900 mb-3 text-sm sm:text-base">{t("what_is_gst")}</h4>
+            <ul className="text-emerald-800 text-xs sm:text-sm space-y-2">
               <li>• {t("gst_definition")}</li>
               <li>• {t("gst_replaced_multiple_taxes")}</li>
               <li>• {t("gst_simplify_tax_structure")}</li>
@@ -1661,9 +1661,9 @@ export default function GSTRegistration() {
             </ul>
           </div>
 
-          <div className="bg-blue-50 p-4 rounded-lg border border-blue-200">
-            <h4 className="font-medium text-blue-900 mb-3">{t("benefits_of_gst_registration")}</h4>
-            <ul className="text-blue-800 text-sm space-y-2">
+          <div className="bg-blue-50 p-3 sm:p-4 rounded-lg border border-blue-200">
+            <h4 className="font-medium text-blue-900 mb-3 text-sm sm:text-base">{t("benefits_of_gst_registration")}</h4>
+            <ul className="text-blue-800 text-xs sm:text-sm space-y-2">
               <li>• {t("gst_legal_recognition_supplier")}</li>
               <li>• {t("gst_collect_tax_claim_itc")}</li>
               <li>• {t("gst_improves_credibility_market_reach")}</li>
@@ -1675,27 +1675,27 @@ export default function GSTRegistration() {
       </Card>
 
       {/* Action Buttons */}
-      <div className="flex justify-between pt-6 border-t">
+      <div className="flex flex-col sm:flex-row sm:justify-between gap-4 pt-6 border-t">
         {getRegistrationStatus() === "in-progress" ? (
           <Card className="w-full bg-amber-50 border-amber-200 text-amber-800">
             <CardHeader className="pb-2">
-              <CardTitle className="text-amber-900 flex items-center gap-2">
-                <Clock className="h-5 w-5" />
+              <CardTitle className="text-amber-900 flex items-center gap-2 text-sm sm:text-base">
+                <Clock className="h-4 w-4 sm:h-5 sm:w-5" />
                 {t("application_submitted")}
               </CardTitle>
             </CardHeader>
             <CardContent>
-              <p className="text-sm">
+              <p className="text-xs sm:text-sm">
                 {t("gst_application_submitted_processing")}
               </p>
             </CardContent>
           </Card>
         ) : (
           <>
-            <Button variant="outline" asChild>
+            <Button variant="outline" asChild className="w-full sm:w-auto">
               <Link href="/dashboard/registration">{t("save_continue_later")}</Link>
             </Button>
-            <Button className="bg-teal-600 hover:bg-teal-700" onClick={handleSubmit} disabled={progress < 100}>
+            <Button className="bg-teal-600 hover:bg-teal-700 w-full sm:w-auto" onClick={handleSubmit} disabled={progress < 100}>
               {t("submit_gst_application", { progress })}
             </Button>
           </>

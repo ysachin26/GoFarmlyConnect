@@ -11,6 +11,7 @@ import {
   HelpCircle,
   Settings,
   LogOut,
+  X,
 } from "lucide-react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
@@ -27,15 +28,18 @@ import {
   SidebarMenuItem,
 } from "@/components/ui/sidebar"
 import { Progress } from "@/components/ui/progress"
+import { Button } from "@/components/ui/button"
 import { ProfileCompletionModal } from "./profile-completion-modal"
 import { getDashboardData, logout } from "@/app/actions"
 import { useLanguage } from '@/contexts/LanguageContext'
+import { useSidebar } from '@/components/ui/sidebar'
 
 
 
 export function AppSidebar() {
   const { t } = useLanguage()
   const pathname = usePathname()
+  const { isMobile, setOpenMobile } = useSidebar()
   const [isProfileModalOpen, setIsProfileModalOpen] = useState(false)
   const [profileCompletion, setProfileCompletion] = useState(0)
 
@@ -102,8 +106,16 @@ export function AppSidebar() {
     }
   }
 
+  // Function to handle navigation link clicks on mobile
+  const handleNavigationClick = (e: React.MouseEvent) => {
+    if (isMobile) {
+      setOpenMobile(false)
+    }
+    // Don't prevent default - let the link navigation happen normally
+  }
+
   return (
-    <Sidebar className="border-r">
+    <Sidebar className="border-r bg-white">
       <SidebarHeader className="p-6">
         <div className="flex items-center gap-2">
           <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary">
@@ -142,7 +154,7 @@ export function AppSidebar() {
               {menuItems.map((item) => (
                 <SidebarMenuItem key={item.title}>
                   <SidebarMenuButton asChild isActive={pathname === item.url}>
-                    <Link href={item.url}>
+                    <Link href={item.url} onClick={handleNavigationClick}>
                       <item.icon className="h-4 w-4" />
                       <span>{item.title}</span>
                     </Link>
@@ -159,7 +171,7 @@ export function AppSidebar() {
           {footerItems.map((item) => (
             <SidebarMenuItem key={item.title}>
               <SidebarMenuButton asChild>
-                <Link href={item.url}>
+                <Link href={item.url} onClick={handleNavigationClick}>
                   <item.icon className="h-4 w-4" />
                   <span>{item.title}</span>
                 </Link>
