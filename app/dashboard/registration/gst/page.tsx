@@ -20,6 +20,8 @@ import {
   Clock,
   Eye,
   XCircle,
+  Lock,
+  AlertCircle,
 } from "lucide-react"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
@@ -31,6 +33,7 @@ import Link from "next/link"
 import { getDashboardData, submitRegistrationApplication, resubmitRegistrationApplication } from "@/app/actions"
 import { useRouter } from "next/navigation" // Import useRouter for navigation
 import { useToast } from "@/hooks/use-toast"
+import { ProfileCompletionModal } from "@/components/profile-completion-modal"
 
 interface DocumentUploadState {
   name: string
@@ -219,6 +222,8 @@ export default function GSTRegistration() {
 
   const [isSaving, setIsSaving] = useState(false) // Declare isSaving state
   const [dashboardData, setDashboardData] = useState<any>(null) // Add dashboard data state
+  const [isProfileComplete, setIsProfileComplete] = useState<boolean | null>(null) // Add profile completion state
+  const [isProfileModalOpen, setIsProfileModalOpen] = useState(false) // Add profile modal state
 
   // Refs for file inputs
   const rentAgreementRef = useRef<HTMLInputElement>(null)
@@ -250,6 +255,13 @@ export default function GSTRegistration() {
         }
 
         setDashboardData(data) // Store dashboard data
+        setIsProfileComplete(data.profileCompletion === 100) // Check profile completion
+        
+        // If profile is not complete, show locked message without redirect
+        if (data.profileCompletion < 100) {
+          // Don't redirect, just set the state to show locked UI
+          return
+        }
 
         // Map business type from database to form values
         let mappedBusinessType: "individual" | "partnership" | "llp" | "pvt_ltd" = "individual"
@@ -956,6 +968,84 @@ export default function GSTRegistration() {
             </div>
           )}
         </div>
+      </div>
+    )
+  }
+
+  // Show loading state while checking profile completion
+  if (isProfileComplete === null) {
+    return (
+      <div className="p-6 max-w-4xl mx-auto space-y-6">
+        <div className="flex items-center justify-center min-h-[400px]">
+          <div className="text-center">
+            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600 mx-auto mb-4"></div>
+            <p className="text-gray-600">Checking profile completion...</p>
+          </div>
+        </div>
+      </div>
+    )
+  }
+
+  // If profile is not complete, show locked message
+  if (!isProfileComplete) {
+    return (
+      <div className="p-6 max-w-4xl mx-auto space-y-6">
+        <div className="flex items-center gap-4">
+          <Link href="/dashboard/registration">
+            <Button variant="ghost" size="icon">
+              <ArrowLeft className="h-4 w-4" />
+            </Button>
+          </Link>
+          <div>
+            <h1 className="text-3xl font-bold text-gray-900">{t("gst_registration_title")}</h1>
+            <p className="text-gray-600 mt-1">{t("gst_registration_description")}</p>
+          </div>
+        </div>
+
+        <Card className="bg-teal-50 border-teal-200">
+          <CardContent className="p-6">
+            <div className="flex items-center gap-4">
+              <div className="h-12 w-12 bg-teal-600 rounded-lg flex items-center justify-center">
+                <Lock className="h-6 w-6 text-white" />
+              </div>
+              <div className="flex-1">
+                <h3 className="font-semibold text-teal-900 flex items-center gap-2">
+                  <AlertCircle className="h-5 w-5" />
+                  Registration Service Locked
+                </h3>
+                <p className="text-teal-700 text-sm mt-1">
+                  Complete your profile to access GST registration services. Your profile completion is required to proceed.
+                </p>
+                <div className="mt-3">
+                  <Button onClick={() => setIsProfileModalOpen(true)} className="bg-teal-600 hover:bg-teal-700">
+                    Complete Profile
+                  </Button>
+                </div>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+        
+        {/* Profile Completion Modal */}
+        <ProfileCompletionModal
+          isOpen={isProfileModalOpen}
+          onClose={() => setIsProfileModalOpen(false)}
+          onUpdate={() => {
+            // Refresh dashboard data when profile is updated
+            const fetchInitialData = async () => {
+              try {
+                const data = await getDashboardData()
+                if (data.user && data.dashboard) {
+                  setDashboardData(data)
+                  setIsProfileComplete(data.profileCompletion === 100)
+                }
+              } catch (error) {
+                console.error("Failed to refresh data after profile update:", error)
+              }
+            }
+            fetchInitialData()
+          }}
+        />
       </div>
     )
   }

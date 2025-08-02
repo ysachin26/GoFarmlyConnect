@@ -1,13 +1,15 @@
 "use client"
 
-import { ArrowRight, FileText } from "lucide-react"
+import { ArrowRight, FileText, Lock, AlertCircle } from "lucide-react"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import { Progress } from "@/components/ui/progress"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import Link from "next/link"
 import { useEffect, useState } from "react"
 import { getDashboardData } from "@/app/actions"
 import { useLanguage } from "@/contexts/LanguageContext"
+import { ProfileCompletionModal } from "@/components/profile-completion-modal"
 
 interface RegistrationStep {
   id: number
@@ -118,20 +120,58 @@ export default function Registration() {
   const { t } = useLanguage()
   const [dashboardData, setDashboardData] = useState<DashboardData | null>(null)
   const [loading, setLoading] = useState(true)
+  const [showProfileModal, setShowProfileModal] = useState(false)
+  const [mounted, setMounted] = useState(false)
+
+  const fetchDashboardData = async () => {
+    try {
+      const data = await getDashboardData()
+      setDashboardData(data)
+    } catch (error) {
+      console.error("Failed to fetch dashboard data:", error)
+    } finally {
+      setLoading(false)
+    }
+  }
 
   useEffect(() => {
-    const fetchDashboardData = async () => {
-      try {
-        const data = await getDashboardData()
-        setDashboardData(data)
-      } catch (error) {
-        console.error("Failed to fetch dashboard data:", error)
-      } finally {
-        setLoading(false)
-      }
-    }
+    setMounted(true)
     fetchDashboardData()
   }, [])
+
+  // Prevent hydration mismatch by not rendering until mounted
+  if (!mounted) {
+    return (
+      <div className="p-6 space-y-6">
+        <div className="flex items-center justify-between">
+          <div>
+            <h1 className="text-3xl font-bold text-gray-900">Registration Applications</h1>
+            <p className="text-gray-600 mt-1">Manage and track your registration applications</p>
+          </div>
+          <Button className="bg-blue-600 hover:bg-blue-700">Get Started</Button>
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {[1, 2, 3, 4, 5].map((i) => (
+            <Card key={i} className="animate-pulse">
+              <CardHeader>
+                <div className="flex items-start justify-between">
+                  <div className="flex-1 h-6 bg-gray-200 rounded w-3/4"></div>
+                  <div className="h-6 w-20 bg-gray-200 rounded"></div>
+                </div>
+                <div className="h-4 bg-gray-200 rounded w-1/2 mt-2"></div>
+              </CardHeader>
+              <CardContent>
+                <div className="flex items-center justify-between">
+                  <div className="h-4 bg-gray-200 rounded w-1/3"></div>
+                  <div className="h-10 w-32 bg-gray-200 rounded"></div>
+                </div>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+      </div>
+    )
+  }
 
   const getRegistrationStatus = (stepId: number) => {
     const step = dashboardData?.registrationSteps?.find((s) => s.id === stepId)
@@ -223,23 +263,90 @@ export default function Registration() {
         <Button className="bg-blue-600 hover:bg-blue-700">{t("get_started")}</Button>
       </div>
 
-      <Card className="bg-blue-50 border-blue-200">
-        <CardContent className="p-6">
-          <div className="flex items-center gap-4">
-            <div className="h-12 w-12 bg-blue-600 rounded-lg flex items-center justify-center">
-              <FileText className="h-6 w-6 text-white" />
-            </div>
-            <div className="flex-1">
-              <h3 className="font-semibold text-blue-900">{t("required_registrations_title")}</h3>
-              <p className="text-blue-700 text-sm mt-1">
-                {t("required_registrations_description")}
-              </p>
-            </div>
+      {/* Profile Completion Check */}
+      {!dashboardData || dashboardData.profileCompletion < 100 ? (
+        <>
+          <Card className="bg-orange-50 border-orange-200">
+            <CardContent className="p-6">
+              <div className="flex items-center gap-4">
+                <div className="h-12 w-12 bg-orange-500 rounded-lg flex items-center justify-center">
+                  <Lock className="h-6 w-6 text-white" />
+                </div>
+                <div className="flex-1">
+                  <h3 className="font-semibold text-orange-900 flex items-center gap-2">
+                    <AlertCircle className="h-5 w-5" />
+                    Registration Services Locked
+                  </h3>
+                  <p className="text-orange-700 text-sm mt-1">
+                    Complete your profile to unlock all registration services. Your profile is currently {dashboardData?.profileCompletion || 0}% complete.
+                  </p>
+                  <div className="mt-3">
+                    <Progress value={dashboardData?.profileCompletion || 0} className="h-2" />
+                  </div>
+                  <div className="mt-3">
+                    <Button 
+                      onClick={() => setShowProfileModal(true)}
+                      className="bg-orange-500 hover:bg-orange-600"
+                    >
+                      Complete Profile
+                    </Button>
+                  </div>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+          
+          {/* Show locked registration cards */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {registrations.map((registration) => (
+              <Card key={registration.id} className="opacity-50 cursor-not-allowed">
+                <CardHeader>
+                  <div className="flex items-start justify-between">
+                    <div className="flex-1">
+                      <CardTitle className="text-lg text-gray-500">{registration.title}</CardTitle>
+                      <CardDescription className="mt-1">{registration.description}</CardDescription>
+                    </div>
+                    <Badge variant="secondary" className="bg-gray-100 text-gray-500">
+                      <Lock className="h-3 w-3 mr-1" />
+                      Locked
+                    </Badge>
+                  </div>
+                </CardHeader>
+                <CardContent>
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-2">
+                      <FileText className="h-4 w-4 text-gray-400" />
+                      <span className="text-sm text-gray-500">Complete profile to access</span>
+                    </div>
+                    <Button variant="outline" size="sm" disabled className="flex items-center gap-2">
+                      <Lock className="h-3 w-3" />
+                      Locked
+                    </Button>
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
           </div>
-        </CardContent>
-      </Card>
-
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        </>
+      ) : (
+        <>
+          <Card className="bg-green-50 border-green-200">
+            <CardContent className="p-6">
+              <div className="flex items-center gap-4">
+                <div className="h-12 w-12 bg-green-600 rounded-lg flex items-center justify-center">
+                  <FileText className="h-6 w-6 text-white" />
+                </div>
+                <div className="flex-1">
+                  <h3 className="font-semibold text-green-900">{t("required_registrations_title")}</h3>
+                  <p className="text-green-700 text-sm mt-1">
+                    {t("required_registrations_description")}
+                  </p>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {registrations.map((registration) => {
           const { status, statusText, badgeVariant, badgeColorClass } = getRegistrationStatus(registration.stepId)
           return (
@@ -276,7 +383,15 @@ export default function Registration() {
             </Card>
           )
         })}
-      </div>
+          </div>
+        </>
+      )}
+      
+      <ProfileCompletionModal
+        isOpen={showProfileModal}
+        onClose={() => setShowProfileModal(false)}
+        onUpdate={fetchDashboardData}
+      />
     </div>
   )
 }
