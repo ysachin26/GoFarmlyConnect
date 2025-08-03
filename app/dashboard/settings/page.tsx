@@ -16,6 +16,7 @@ import { toast } from "@/hooks/use-toast"
 import { getDashboardData, deleteUserAccount } from "@/app/actions"
 import { User, Bell, Globe, Mail, Phone, MapPin, Building, Save, Trash2 } from "lucide-react"
 import { useRouter } from "next/navigation"
+import { useLanguage } from "@/contexts/LanguageContext"
 
 interface UserData {
   id: string
@@ -30,6 +31,7 @@ interface UserData {
 }
 
 export default function SettingsPage() {
+    const { t } = useLanguage()
   const [loading, setLoading] = useState(true)
   const [userData, setUserData] = useState<UserData | null>(null)
   const [deleteLoading, setDeleteLoading] = useState(false)
