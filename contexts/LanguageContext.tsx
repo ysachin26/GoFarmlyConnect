@@ -11690,7 +11690,7 @@ as:{
     "this_week": "اس ہفتے",
     "last_week": "پچھلا ہفتہ",
     "this_month": "اس مہینے",
-    "last Noi: "اس مہینے",
+    "last Noi": "اس مہینے",
     "last_month": "پچھلا مہینہ",
     "this_year": "اس سال",
     "last_year": "پچھلا سال",
