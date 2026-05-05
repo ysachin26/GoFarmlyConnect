@@ -1,9 +1,10 @@
 "use server"
 
 import { connectDB } from "@/lib/db"
-import User from "@/models/User"
+import User, { UserStatus } from "@/models/User"
 import Dashboard from "@/models/Dashboard"
 import PurchasedService from "@/models/PurchasedService"
+import Otp from "@/models/Otp"
 import bcrypt from "bcryptjs"
 import mongoose from "mongoose"
 import { v2 as cloudinary } from "cloudinary"
@@ -16,24 +17,108 @@ cloudinary.config({
   api_secret: process.env.CLOUDINARY_API_SECRET,
 })
 
-// This is a placeholder for a real OTP service.
-// In a production environment, you would integrate with an SMS gateway (e.g., Twilio, MSG91).
-const otpStore: Record<string, string> = {} // Stores OTPs by mobile number
+// OTP Service - Secure implementation with database storage
+// This integrates with MongoDB for persistent OTP storage with TTL
 
 export async function generateOtp(mobileNo: string) {
-  // Simulate OTP generation
-  const otp = Math.floor(100000 + Math.random() * 900000).toString() // 6-digit OTP
-  otpStore[mobileNo] = otp
-  console.log(`Generated OTP for ${mobileNo}: ${otp}`) // For demonstration purposes
-  return { success: true, message: "OTP sent to your mobile number." }
+  try {
+    await connectDB()
+
+    // Validate mobile number format (Indian format: 10 digits)
+    const cleanNumber = mobileNo.replace(/\D/g, '')
+    if (cleanNumber.length !== 10) {
+      return {
+        success: false,
+        message: "Please enter a valid 10-digit mobile number.",
+      }
+    }
+
+    // Delete any existing OTP for this number
+    await Otp.deleteMany({ mobileNo: cleanNumber })
+
+    // Generate 6-digit OTP
+    const otp = Math.floor(100000 + Math.random() * 900000).toString()
+
+    // Save to database with 10-minute expiration
+    const expiresAt = new Date(Date.now() + 10 * 60 * 1000) // 10 minutes
+    await new Otp({
+      mobileNo: cleanNumber,
+      otp,
+      expiresAt,
+    }).save()
+
+    // TODO: Send via SMS service (Twilio, MSG91, AWS SNS, etc.)
+    // Example with Twilio:
+    // const twilio = require('twilio')
+    // const client = twilio(process.env.TWILIO_ACCOUNT_SID, process.env.TWILIO_AUTH_TOKEN)
+    // await client.messages.create({
+    //   body: `Your GoFarmlyConnect OTP is ${otp}. Valid for 10 minutes.`,
+    //   from: process.env.TWILIO_PHONE_NUMBER,
+    //   to: '+91' + cleanNumber
+    // })
+
+    // For development only - DO NOT include in production
+    if (process.env.NODE_ENV === 'development') {
+      console.log(`✅ OTP for ${cleanNumber}: ${otp}`)
+    }
+
+    return {
+      success: true,
+      message: "OTP sent successfully to your mobile number. Valid for 10 minutes.",
+      // REMOVE THIS LINE IN PRODUCTION - Only for testing in development
+      ...(process.env.NODE_ENV === 'development' && { testOtp: otp }),
+    }
+  } catch (error: any) {
+    console.error("OTP generation error:", error)
+    return {
+      success: false,
+      message: "Failed to send OTP. Please try again.",
+    }
+  }
 }
 
 export async function verifyOtp(mobileNo: string, otp: string) {
-  if ("123456" === otp) {
-    delete otpStore[mobileNo] // OTP consumed
-    return { success: true, message: "OTP verified successfully." }
+  try {
+    await connectDB()
+
+    // Validate inputs
+    if (!mobileNo || !otp) {
+      return {
+        success: false,
+        message: "Mobile number and OTP are required.",
+      }
+    }
+
+    const cleanNumber = mobileNo.replace(/\D/g, '')
+
+    // Find OTP record - only valid if not expired
+    const otpRecord = await Otp.findOne({
+      mobileNo: cleanNumber,
+      otp: otp.trim(),
+      expiresAt: { $gt: new Date() }, // Only valid if not expired
+    })
+
+    if (!otpRecord) {
+      return {
+        success: false,
+        message: "Invalid or expired OTP. Please request a new one.",
+      }
+    }
+
+    // Delete OTP after successful verification (one-time use)
+    await Otp.deleteOne({ _id: otpRecord._id })
+
+    return {
+      success: true,
+      message: "OTP verified successfully.",
+    }
+  } catch (error: any) {
+    console.error("OTP verification error:", error)
+    return {
+      success: false,
+      message: "OTP verification failed. Please try again.",
+    }
   }
-  return { success: false, message: "Invalid OTP." }
 }
 
 export async function signup(prevState: any, formData: FormData) {
@@ -133,7 +218,7 @@ export async function login(prevState: any, formData: FormData) {
 
     // Update login tracking
     user.updateLastLogin()
-    user.status = user.status === "pending_verification" ? "active" : user.status
+    user.status = user.status === UserStatus.PENDING_VERIFICATION ? UserStatus.ACTIVE : user.status
     await user.save()
 
     console.log(`✅ User ${user.fullName} logged in successfully`)

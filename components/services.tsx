@@ -2,7 +2,7 @@
 
 import { useState } from "react"
 import { Button } from "@/components/ui/button"
-import { ReceiptText, FileText, Fingerprint, Globe, Banknote, ArrowRight, CheckCircle } from "lucide-react"
+import { FileText, Fingerprint, Globe, DollarSign, ArrowRight, CheckCircle, CreditCard } from "lucide-react"
 import { useLanguage } from '@/contexts/LanguageContext'
 
 export default function Services() {
@@ -11,7 +11,7 @@ export default function Services() {
 
   const services = [
     {
-      icon: ReceiptText,
+      icon: CreditCard,
       title: t('gst_filing'),
       description: t('gst_description'),
       features: [t('automated_gst_returns'), t('input_tax_credit'), t('reconciliation_tools'), t('audit_support')],
@@ -47,7 +47,7 @@ export default function Services() {
       textColor: "text-blue-600",
     },
     {
-      icon: Banknote,
+      icon: DollarSign,
       title: t('adcode_registration'),
       description: t('adcode_description'),
       features: [t('adcode_reg'), t('bank_linkage'), t('export_incentives'), t('compliance_checks')],

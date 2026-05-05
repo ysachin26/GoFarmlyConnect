@@ -79,12 +79,54 @@ export interface IUser extends Document {
   businessDescription?: string
   businessAddress?: string
   
+  // Document URLs
+  aadharCardUrl?: string
+  panCardUrl?: string
+  photographUrl?: string
+  proofOfAddressUrl?: string
+  
+  // Document Status
+  aadharCardStatus?: string
+  panCardStatus?: string
+  photographStatus?: string
+  proofOfAddressStatus?: string
+  
+  // Certification Numbers & Documents
+  gstNumber?: string
+  gstCertificate?: string
+  iecNumber?: string
+  iecCertificate?: string
+  dscNumber?: string
+  dscCertificate?: string
+  icegateNumber?: string
+  icegateCertificate?: string
+  adcodeNumber?: string
+  adcodeCertificate?: string
+  
+  // Proof Documents
+  rentAgreementUrl?: string
+  electricityBillUrl?: string
+  nocUrl?: string
+  propertyProofUrl?: string
+  electricityBillOwnedUrl?: string
+  otherProofUrl?: string
+  authorizationLetterUrl?: string
+  partnershipDeedUrl?: string
+  llpAgreementUrl?: string
+  certificateOfIncorporationUrl?: string
+  moaAoaUrl?: string
+  cancelledChequeUrl?: string
+  adCodeLetterFromBankUrl?: string
+  bankDocumentUrl?: string
+  
   // User preferences
   preferences: UserPreferences
   
   // Metadata
   lastLoginAt?: Date
   loginCount: number
+  createdAt?: Date
+  updatedAt?: Date
   
   // Methods
   calculateProfileCompletion(): number
