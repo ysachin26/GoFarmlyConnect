@@ -67,103 +67,76 @@ export default function Services() {
   ]
 
   return (
-    <section className="py-20 bg-gradient-to-br from-white via-gray-50 to-emerald-50 relative overflow-hidden">
-      {/* Background Elements */}
-      <div className="absolute inset-0">
-        <div className="absolute top-20 left-10 w-40 h-40 bg-gradient-to-r from-emerald-200/30 to-teal-200/30 rounded-full animate-float blur-3xl"></div>
-        <div className="absolute bottom-20 right-20 w-32 h-32 bg-gradient-to-r from-blue-200/30 to-purple-200/30 rounded-full animate-float-delayed blur-2xl"></div>
-      </div>
+    <section id="services" className="relative overflow-hidden border-y border-slate-200 bg-slate-50 py-20">
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,_rgba(16,185,129,0.09),_transparent_28%),linear-gradient(180deg,_rgba(255,255,255,0.65),_rgba(248,250,248,1))]" />
 
-      <div className="container mx-auto px-4 relative z-10">
-        <div className="text-center mb-16">
-          <div className="inline-block mb-4">
-            <span className="bg-gradient-to-r from-emerald-500 to-teal-600 text-white px-4 py-2 rounded-full text-sm font-medium">
-              {t('our_services')}
-            </span>
+      <div className="container relative z-10 mx-auto px-4">
+        <div className="mx-auto mb-14 max-w-3xl text-center">
+          <div className="inline-flex items-center rounded-full border border-emerald-200 bg-white px-4 py-2 text-sm font-medium text-emerald-800 shadow-sm">
+            {t('our_services')}
           </div>
-          <h2 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-emerald-800 to-teal-700 bg-clip-text text-transparent mb-6 animate-fadeInUp">
+          <h2 className="mt-6 text-3xl font-semibold tracking-tight text-slate-900 md:text-4xl lg:text-5xl">
             {t('comprehensive_solutions')}
           </h2>
-          <p className="text-gray-600 max-w-3xl mx-auto text-lg leading-relaxed animate-fadeInUp animation-delay-200">
+          <p className="mt-4 text-base leading-8 text-slate-600 md:text-lg">
             {t('services_description')}
           </p>
         </div>
 
-        <div className="grid lg:grid-cols-3 gap-8">
+        <div className="grid gap-6 lg:grid-cols-3">
           {services.map((service, index) => {
             const IconComponent = service.icon
+            const isActive = activeService === index
+
             return (
               <div
                 key={index}
-                className={`group cursor-pointer transition-all duration-500 transform hover:scale-105 hover:-translate-y-2 animate-fadeInUp`}
-                style={{ animationDelay: `${index * 0.1}s` }}
+                className="group cursor-pointer"
+                style={{ animationDelay: `${index * 0.08}s` }}
                 onMouseEnter={() => setActiveService(index)}
               >
                 <div
-                  className={`bg-white rounded-2xl p-8 shadow-lg hover:shadow-2xl transition-all duration-500 border border-gray-100 group-hover:border-emerald-200 relative overflow-hidden ${activeService === index ? "ring-2 ring-emerald-400 ring-opacity-50" : ""}`}
+                  className={`relative h-full overflow-hidden rounded-[1.75rem] border bg-white p-7 shadow-[0_14px_35px_rgba(15,23,42,0.06)] transition-all duration-300 ${isActive ? "border-emerald-200 shadow-[0_18px_45px_rgba(16,185,129,0.08)]" : "border-slate-200"}`}
                 >
-                  {/* Background Gradient */}
-                  <div
-                    className={`absolute inset-0 bg-gradient-to-br ${service.color} opacity-0 group-hover:opacity-5 transition-opacity duration-500`}
-                  ></div>
+                  <div className="absolute inset-x-0 top-0 h-px bg-slate-200" />
 
-                  {/* Icon */}
-                  <div
-                    className={`w-16 h-16 ${service.bgColor} rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300`}
-                  >
-                    <IconComponent className={`w-8 h-8 ${service.textColor}`} />
+                  <div className="mb-6 flex h-14 w-14 items-center justify-center rounded-2xl border border-slate-200 bg-slate-50 text-slate-700">
+                    <IconComponent className="h-7 w-7 text-emerald-700" />
                   </div>
 
-                  {/* Content */}
-                  <h3 className="text-xl font-bold text-gray-800 mb-4 group-hover:text-emerald-600 transition-colors duration-300">
-                    {service.title}
-                  </h3>
+                  <h3 className="text-xl font-semibold text-slate-900">{service.title}</h3>
+                  <p className="mt-3 text-sm leading-7 text-slate-600">{service.description}</p>
 
-                  <p className="text-gray-600 mb-6 leading-relaxed">{service.description}</p>
-
-                  {/* Features */}
-                  <ul className="space-y-2 mb-6">
+                  <ul className="mt-6 space-y-3">
                     {service.features.map((feature, featureIndex) => (
-                      <li key={featureIndex} className="flex items-center space-x-2 text-sm text-gray-600">
-                        <CheckCircle className="w-4 h-4 text-emerald-500 flex-shrink-0" />
+                      <li key={featureIndex} className="flex items-start gap-3 text-sm text-slate-600">
+                        <CheckCircle className="mt-0.5 h-4 w-4 flex-shrink-0 text-emerald-600" />
                         <span>{feature}</span>
                       </li>
                     ))}
                   </ul>
 
-                  {/* CTA Button */}
                   <Button
-                    className={`w-full bg-gradient-to-r ${service.color} hover:shadow-lg transform hover:scale-105 transition-all duration-300 group`}
+                    className={`mt-7 w-full rounded-full border border-slate-200 bg-slate-900 text-white transition-all duration-300 hover:bg-slate-800 ${isActive ? "shadow-md" : "shadow-none"}`}
                   >
                     {t('learn_more')}
-                    <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform duration-300" />
+                    <ArrowRight className="ml-2 h-4 w-4" />
                   </Button>
-
-                  {/* Hover Glow Effect */}
-                  <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none">
-                    <div
-                      className={`absolute inset-0 rounded-2xl bg-gradient-to-r ${service.color} opacity-10 blur-xl`}
-                    ></div>
-                  </div>
                 </div>
               </div>
             )
           })}
         </div>
 
-        {/* CTA Section */}
-        <div className="text-center mt-16">
-          <div className="bg-gradient-to-r from-emerald-500 to-teal-600 rounded-2xl p-8 text-white relative overflow-hidden">
-            <div className="absolute inset-0 bg-black/10"></div>
-            <div className="relative z-10">
-              <h3 className="text-2xl font-bold mb-4">{t('ready_to_streamline')}</h3>
-              <p className="text-emerald-100 mb-6 max-w-2xl mx-auto">
-                {t('join_thousands')}
-              </p>
-              <Button className="bg-white text-emerald-600 hover:bg-gray-100 px-8 py-3 rounded-xl font-semibold transform hover:scale-105 transition-all duration-300">
-                {t('get_started_today')}
-              </Button>
+        <div className="mt-16 rounded-[2rem] border border-slate-200 bg-white px-6 py-8 shadow-[0_14px_35px_rgba(15,23,42,0.05)] md:px-8">
+          <div className="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
+            <div>
+              <h3 className="text-2xl font-semibold text-slate-900">{t('ready_to_streamline')}</h3>
+              <p className="mt-2 max-w-2xl text-slate-600">{t('join_thousands')}</p>
             </div>
+            <Button className="rounded-full bg-emerald-600 px-8 py-6 text-base font-semibold text-white transition-all duration-300 hover:bg-emerald-700">
+              {t('get_started_today')}
+            </Button>
           </div>
         </div>
       </div>

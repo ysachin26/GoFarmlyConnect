@@ -1,101 +1,95 @@
 "use client"
 
 import Link from "next/link"
-import { Facebook, Twitter, Instagram, Linkedin, Phone, Mail, FileText, Shield, MapPin } from "lucide-react"
+import { Facebook, Twitter, Instagram, Linkedin, Phone, Mail, FileText, Shield, MapPin, Sprout } from "lucide-react"
 import { useLanguage } from "../contexts/LanguageContext"
 
 export default function Footer() {
   const { t } = useLanguage()
   
   return (
-    <footer className="bg-black text-white relative overflow-hidden">
-      {/* Animated background elements */}
-      <div className="absolute inset-0">
-        <div className="absolute top-10 left-10 w-20 h-20 bg-emerald-400/5 rounded-full animate-float"></div>
-        <div className="absolute bottom-10 right-10 w-16 h-16 bg-teal-400/5 rounded-full animate-float-delayed"></div>
-      </div>
-
+    <footer className="relative overflow-hidden border-t border-slate-200 bg-slate-950 text-slate-200">
       <div className="container mx-auto px-4 py-16 relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
           {/* Logo and Description */}
           <div className="md:col-span-1 animate-fadeInUp">
             <div className="flex items-center space-x-3 mb-6">
-              <div className="w-12 h-12 bg-gradient-to-br from-emerald-400 to-teal-500 rounded-xl flex items-center justify-center">
-                <span className="text-white font-bold text-xl">🌾</span>
+              <div className="flex h-12 w-12 items-center justify-center rounded-xl border border-white/10 bg-white/5 text-emerald-300">
+                <Sprout className="h-6 w-6" />
               </div>
-              <div className="text-3xl font-bold text-emerald-400 transform hover:scale-105 transition-transform duration-300">
+              <div className="text-3xl font-semibold text-white transition-transform duration-300 hover:scale-105">
                 GoFarmlyConnect
               </div>
             </div>
-            <p className="text-gray-400 text-sm mb-6 leading-relaxed">
+            <p className="mb-6 text-sm leading-relaxed text-slate-400">
               {t('footer.description')}
             </p>
-            <div className="flex items-center space-x-2 text-gray-400 text-sm">
-              <MapPin className="w-4 h-4 text-emerald-400" />
+            <div className="flex items-center space-x-2 text-sm text-slate-400">
+              <MapPin className="w-4 h-4 text-emerald-300" />
               <span>{t('footer.location')}</span>
             </div>
           </div>
 
           {/* Legal */}
           <div className="space-y-4 animate-fadeInUp animation-delay-200">
-            <h3 className="font-bold text-emerald-400 text-lg mb-6">{t('footer.legal')}</h3>
+            <h3 className="mb-6 text-lg font-semibold text-white">{t('footer.legal')}</h3>
             <Link
               href="#"
-              className="flex items-center space-x-3 text-gray-400 hover:text-white hover:bg-white/5 transition-all duration-300 p-3 rounded-xl group transform hover:scale-105 hover:shadow-lg"
+              className="group flex items-center space-x-3 rounded-2xl p-3 text-slate-400 transition-all duration-300 hover:bg-white/5 hover:text-white"
             >
-              <FileText className="w-5 h-5 text-emerald-400 group-hover:scale-110 transition-transform duration-300" />
+              <FileText className="w-5 h-5 text-emerald-300 transition-transform duration-300 group-hover:scale-110" />
               <span className="group-hover:translate-x-1 transition-transform duration-300">{t('footer.terms')}</span>
             </Link>
             <Link
               href="#"
-              className="flex items-center space-x-3 text-gray-400 hover:text-white hover:bg-white/5 transition-all duration-300 p-3 rounded-xl group transform hover:scale-105 hover:shadow-lg"
+              className="group flex items-center space-x-3 rounded-2xl p-3 text-slate-400 transition-all duration-300 hover:bg-white/5 hover:text-white"
             >
-              <Shield className="w-5 h-5 text-emerald-400 group-hover:scale-110 transition-transform duration-300" />
+              <Shield className="w-5 h-5 text-emerald-300 transition-transform duration-300 group-hover:scale-110" />
               <span className="group-hover:translate-x-1 transition-transform duration-300">{t('footer.privacy')}</span>
             </Link>
           </div>
 
           {/* Contact Us */}
           <div className="space-y-4 animate-fadeInUp animation-delay-400">
-            <h3 className="font-bold text-emerald-400 text-lg mb-6">{t('footer.contactUs')}</h3>
-            <div className="flex items-center space-x-3 text-gray-400 hover:text-white transition-colors duration-300 p-3 rounded-xl hover:bg-white/5 group transform hover:scale-105">
-              <Phone className="w-5 h-5 text-emerald-400 group-hover:scale-110 transition-transform duration-300" />
+            <h3 className="mb-6 text-lg font-semibold text-white">{t('footer.contactUs')}</h3>
+            <div className="group flex items-center space-x-3 rounded-2xl p-3 text-slate-400 transition-colors duration-300 hover:bg-white/5 hover:text-white">
+              <Phone className="w-5 h-5 text-emerald-300 transition-transform duration-300 group-hover:scale-110" />
               <span>1800-3010-1000</span>
             </div>
-            <div className="flex items-center space-x-3 text-gray-400 hover:text-white transition-colors duration-300 p-3 rounded-xl hover:bg-white/5 group transform hover:scale-105">
-              <Mail className="w-5 h-5 text-emerald-400 group-hover:scale-110 transition-transform duration-300" />
+            <div className="group flex items-center space-x-3 rounded-2xl p-3 text-slate-400 transition-colors duration-300 hover:bg-white/5 hover:text-white">
+              <Mail className="w-5 h-5 text-emerald-300 transition-transform duration-300 group-hover:scale-110" />
               <span>help@gofarmlyconnect.com</span>
             </div>
           </div>
 
           {/* Follow Us */}
           <div className="space-y-4 animate-fadeInUp animation-delay-600">
-            <h3 className="font-bold text-emerald-400 text-lg mb-6">{t('footer.followUs')}</h3>
+            <h3 className="mb-6 text-lg font-semibold text-white">{t('footer.followUs')}</h3>
             <div className="flex flex-col space-y-3">
               <Link
                 href="#"
-                className="flex items-center space-x-3 text-gray-400 hover:text-blue-400 transition-all duration-300 p-3 rounded-xl hover:bg-white/5 group transform hover:scale-105 hover:shadow-lg"
+                className="group flex items-center space-x-3 rounded-2xl p-3 text-slate-400 transition-all duration-300 hover:bg-white/5 hover:text-white"
               >
                 <Facebook className="w-5 h-5 group-hover:scale-110 transition-transform duration-300" />
                 <span className="group-hover:translate-x-1 transition-transform duration-300">{t('footer.facebook')}</span>
               </Link>
               <Link
                 href="#"
-                className="flex items-center space-x-3 text-gray-400 hover:text-blue-400 transition-all duration-300 p-3 rounded-xl hover:bg-white/5 group transform hover:scale-105 hover:shadow-lg"
+                className="group flex items-center space-x-3 rounded-2xl p-3 text-slate-400 transition-all duration-300 hover:bg-white/5 hover:text-white"
               >
                 <Twitter className="w-5 h-5 group-hover:scale-110 transition-transform duration-300" />
                 <span className="group-hover:translate-x-1 transition-transform duration-300">{t('footer.twitter')}</span>
               </Link>
               <Link
                 href="#"
-                className="flex items-center space-x-3 text-gray-400 hover:text-pink-400 transition-all duration-300 p-3 rounded-xl hover:bg-white/5 group transform hover:scale-105 hover:shadow-lg"
+                className="group flex items-center space-x-3 rounded-2xl p-3 text-slate-400 transition-all duration-300 hover:bg-white/5 hover:text-white"
               >
                 <Instagram className="w-5 h-5 group-hover:scale-110 transition-transform duration-300" />
                 <span className="group-hover:translate-x-1 transition-transform duration-300">{t('footer.instagram')}</span>
               </Link>
               <Link
                 href="#"
-                className="flex items-center space-x-3 text-gray-400 hover:text-blue-600 transition-all duration-300 p-3 rounded-xl hover:bg-white/5 group transform hover:scale-105 hover:shadow-lg"
+                className="group flex items-center space-x-3 rounded-2xl p-3 text-slate-400 transition-all duration-300 hover:bg-white/5 hover:text-white"
               >
                 <Linkedin className="w-5 h-5 group-hover:scale-110 transition-transform duration-300" />
                 <span className="group-hover:translate-x-1 transition-transform duration-300">{t('footer.linkedin')}</span>
@@ -104,12 +98,12 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="border-t border-gray-800 mt-16 pt-8">
+        <div className="mt-16 border-t border-white/10 pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
-            <div className="text-gray-400 text-sm animate-fadeInUp">
+            <div className="text-sm text-slate-400 animate-fadeInUp">
               {t('footer.copyright')}
             </div>
-            <div className="flex items-center space-x-6 text-sm text-gray-400 animate-fadeInUp animation-delay-200">
+            <div className="flex items-center space-x-6 text-sm text-slate-400 animate-fadeInUp animation-delay-200">
               <span>{t('footer.madeWithLove')}</span>
               <span>|</span>
               <span>{t('footer.proudlyIndian')}</span>

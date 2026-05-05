@@ -57,34 +57,29 @@ export default function LearnWithUs() {
   }
 
   return (
-    <section className="py-20 bg-gradient-to-br from-white via-gray-50 to-emerald-50 relative overflow-hidden">
-      {/* Background Elements */}
-      <div className="absolute inset-0">
-        <div className="absolute top-20 left-10 w-32 h-32 bg-gradient-to-r from-emerald-200 to-teal-200 rounded-full opacity-20 animate-float blur-xl"></div>
-        <div className="absolute bottom-32 right-16 w-24 h-24 bg-gradient-to-r from-blue-200 to-purple-200 rounded-full opacity-20 animate-float-delayed blur-xl"></div>
-        <div className="absolute top-1/2 left-1/4 w-16 h-16 bg-gradient-to-r from-orange-200 to-yellow-200 rounded-full opacity-15 animate-pulse blur-lg"></div>
-      </div>
+    <section className="relative overflow-hidden border-y border-slate-200 bg-white py-20">
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,_rgba(16,185,129,0.05),_transparent_28%)]" />
 
-      <div className="container mx-auto px-4 relative z-10">
+      <div className="container mx-auto max-w-6xl px-4 relative z-10">
         <div className="flex flex-col items-center text-center mb-16 space-y-6">
           {/* Learning Resources Tag */}
           <div className="animate-fadeInUp">
-            <span className="bg-gradient-to-r from-emerald-500 to-teal-600 text-white px-4 py-2 rounded-full text-sm font-medium">
+            <span className="inline-flex items-center rounded-full border border-emerald-200 bg-emerald-50 px-4 py-2 text-sm font-medium text-emerald-800">
               {t('learning_resources')}
             </span>
           </div>
           
           {/* Learn With GoFarmlyConnect Title */}
           <div className="flex flex-col items-center animate-fadeInUp animation-delay-200">
-            <h2 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-emerald-800 via-teal-700 to-emerald-800 bg-clip-text text-transparent hover:scale-105 transition-transform duration-500">
+            <h2 className="text-4xl md:text-5xl font-semibold text-slate-900 transition-transform duration-300 hover:scale-105">
               {t('learn_with_gofarmly')}
             </h2>
-            <div className="h-1 w-32 bg-gradient-to-r from-emerald-400 to-teal-400 rounded-full transform scale-x-0 animate-scaleX animation-delay-500 mt-2"></div>
+            <div className="mt-2 h-1 w-32 rounded-full bg-emerald-400 transform scale-x-0 animate-scaleX animation-delay-500"></div>
           </div>
           
           {/* Description */}
           <div className="animate-fadeInUp animation-delay-400">
-            <p className="text-gray-600 max-w-3xl mx-auto text-lg leading-relaxed hover:text-gray-800 transition-colors duration-300">
+            <p className="max-w-3xl mx-auto text-lg leading-relaxed text-slate-600 transition-colors duration-300 hover:text-slate-800">
               {t('learn_description')}
             </p>
           </div>
@@ -96,16 +91,16 @@ export default function LearnWithUs() {
               variant="outline"
               size="icon"
               onClick={prevSlide}
-              className="rounded-full border-2 border-emerald-200 hover:border-emerald-400 hover:bg-emerald-50 transition-all duration-300 transform hover:scale-110 hover:shadow-xl bg-white/80 backdrop-blur-sm group"
+              className="rounded-full border border-slate-200 bg-white transition-all duration-300 hover:border-emerald-300 hover:bg-emerald-50 group"
             >
-              <ChevronLeft className="w-5 h-5 text-emerald-600 group-hover:text-emerald-700 transition-colors duration-300" />
+              <ChevronLeft className="w-5 h-5 text-slate-700 transition-colors duration-300 group-hover:text-emerald-700" />
             </Button>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl">
               {tutorials.slice(currentSlide, currentSlide + 3).map((tutorial, index) => (
                 <div
                   key={index}
-                  className="group cursor-pointer bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden border border-gray-100 transform hover:scale-105 hover:-translate-y-2 animate-fadeInUp"
+                  className="group cursor-pointer overflow-hidden rounded-[1.5rem] border border-slate-200 bg-slate-50 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg animate-fadeInUp"
                   style={{ animationDelay: `${index * 0.2}s` }}
                 >
                   <div className="relative overflow-hidden">
@@ -118,38 +113,38 @@ export default function LearnWithUs() {
                     />
 
                     {/* Overlay */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                    <div className="absolute inset-0 bg-gradient-to-t from-slate-950/55 via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100"></div>
 
                     {/* Play Button */}
                     <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-500">
-                      <div className="bg-emerald-500 rounded-full p-4 transform scale-75 group-hover:scale-100 transition-transform duration-300 shadow-2xl hover:bg-emerald-600">
+                      <div className="rounded-full bg-emerald-600 p-4 text-white shadow-xl transition-transform duration-300 group-hover:scale-100">
                         <Play className="w-8 h-8 text-white fill-white" />
                       </div>
                     </div>
 
                     {/* Category Badge */}
-                    <div className="absolute top-4 left-4 bg-gradient-to-r from-emerald-500 to-teal-600 text-white text-xs px-3 py-1 rounded-full font-medium shadow-lg transform -translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
+                    <div className="absolute top-4 left-4 rounded-full border border-white/10 bg-white/90 px-3 py-1 text-xs font-medium text-slate-700 shadow-sm transition-transform duration-300 transform -translate-y-2 group-hover:translate-y-0">
                       {tutorial.category}
                     </div>
 
                     {/* Duration */}
-                    <div className="absolute bottom-4 right-4 bg-black/70 backdrop-blur-sm text-white text-xs px-2 py-1 rounded-lg flex items-center space-x-1">
+                    <div className="absolute bottom-4 right-4 flex items-center space-x-1 rounded-lg bg-slate-950/75 px-2 py-1 text-xs text-white backdrop-blur-sm">
                       <Clock className="w-3 h-3" />
                       <span>{tutorial.duration}</span>
                     </div>
                   </div>
 
                   <div className="p-6">
-                    <h3 className="font-bold text-lg text-slate-800 group-hover:text-emerald-600 transition-colors duration-300 mb-3 line-clamp-2">
+                    <h3 className="mb-3 text-lg font-semibold text-slate-900 transition-colors duration-300 line-clamp-2 group-hover:text-emerald-700">
                       {tutorial.title}
                     </h3>
 
-                    <div className="flex items-center justify-between text-sm text-gray-500">
+                    <div className="flex items-center justify-between text-sm text-slate-500">
                       <div className="flex items-center space-x-1">
                         <Users className="w-4 h-4" />
                         <span>{tutorial.views} {t('views')}</span>
                       </div>
-                      <div className="text-emerald-500 font-medium group-hover:text-emerald-600 transition-colors duration-300">
+                      <div className="font-medium text-emerald-700 transition-colors duration-300 group-hover:text-emerald-800">
                         {t('watch_now')} →
                       </div>
                     </div>
@@ -157,7 +152,7 @@ export default function LearnWithUs() {
 
                   {/* Hover Glow Effect */}
                   <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none">
-                    <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-emerald-400/20 to-teal-400/20 blur-xl"></div>
+                    <div className="absolute inset-0 rounded-2xl bg-emerald-500/5 blur-xl"></div>
                   </div>
                 </div>
               ))}
@@ -167,14 +162,14 @@ export default function LearnWithUs() {
               variant="outline"
               size="icon"
               onClick={nextSlide}
-              className="rounded-full border-2 border-emerald-200 hover:border-emerald-400 hover:bg-emerald-50 transition-all duration-300 transform hover:scale-110 hover:shadow-xl bg-white/80 backdrop-blur-sm group"
+              className="rounded-full border border-slate-200 bg-white transition-all duration-300 hover:border-emerald-300 hover:bg-emerald-50 group"
             >
-              <ChevronRight className="w-5 h-5 text-emerald-600 group-hover:text-emerald-700 transition-colors duration-300" />
+              <ChevronRight className="w-5 h-5 text-slate-700 transition-colors duration-300 group-hover:text-emerald-700" />
             </Button>
           </div>
 
           <div className="flex justify-center mt-12">
-            <Button className="bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-white px-8 py-3 rounded-xl font-semibold transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-2xl group">
+            <Button className="rounded-full bg-slate-900 px-8 py-3 font-semibold text-white transition-all duration-300 hover:bg-emerald-700">
               <span className="mr-2">{t('view_all_tutorials')}</span>
               <Play className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
             </Button>
