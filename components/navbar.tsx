@@ -3,7 +3,7 @@
 import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
-import { Menu, X, ChevronDown, Users, Headphones, Play, Info, Globe } from "lucide-react"
+import { Menu, X, ChevronDown, Users, Headphones, Play, Info, Globe, Sprout } from "lucide-react"
 import Link from "next/link"
 import { useLanguage } from "@/contexts/LanguageContext"
 
@@ -35,15 +35,15 @@ export default function Navbar() {
   ]
 
   return (
-    <nav className="bg-gradient-to-r from-emerald-900 via-teal-800 to-emerald-900 shadow-2xl fixed top-0 left-0 right-0 z-50 backdrop-blur-sm border-b border-emerald-700/30 overflow-x-hidden">
+    <nav className="fixed top-0 left-0 right-0 z-50 overflow-x-hidden border-b border-slate-200/80 bg-white/85 shadow-[0_8px_30px_rgba(15,23,42,0.06)] backdrop-blur-xl">
       <div className="container mx-auto px-4">
         <div className="flex justify-between items-center h-16 max-w-full">
           {/* Logo */}
           <Link href="/" className="flex items-center space-x-2 group flex-shrink-0 min-w-0">
-            <div className="w-8 h-8 sm:w-10 sm:h-10 bg-gradient-to-br from-emerald-400 to-teal-500 rounded-xl flex items-center justify-center transform group-hover:scale-110 transition-all duration-300 shadow-lg">
-              <span className="text-white font-bold text-sm sm:text-lg">🌾</span>
+            <div className="flex h-8 w-8 items-center justify-center rounded-xl border border-emerald-200 bg-emerald-50 text-emerald-700 shadow-sm transition-all duration-300 group-hover:scale-105 sm:h-10 sm:w-10">
+              <Sprout className="h-4 w-4 sm:h-5 sm:w-5" />
             </div>
-            <div className="text-sm sm:text-xl lg:text-2xl font-bold text-white group-hover:text-emerald-300 transition-all duration-500 transform group-hover:scale-105 truncate">
+            <div className="truncate text-sm font-semibold text-slate-900 transition-all duration-300 group-hover:text-emerald-700 sm:text-xl lg:text-2xl">
               <span className="hidden sm:inline">GoFarmlyConnect</span>
               <span className="sm:hidden">GoFarmly</span>
             </div>
@@ -57,15 +57,14 @@ export default function Navbar() {
                 <div key={item.name} className="relative group">
                   <Link
                     href={item.href}
-                    className="flex items-center space-x-2 px-4 py-2 text-white hover:text-emerald-300 hover:bg-white/10 rounded-xl transition-all duration-300 group transform hover:scale-105 hover:shadow-lg"
+                    className="group flex items-center space-x-2 rounded-full px-4 py-2 text-sm font-medium text-slate-600 transition-all duration-300 hover:bg-emerald-50 hover:text-emerald-700"
                   >
-                    <IconComponent className="w-4 h-4 group-hover:scale-125 transition-transform duration-300" />
+                    <IconComponent className="h-4 w-4 transition-transform duration-300 group-hover:scale-110" />
                     <span className="font-medium">{item.name}</span>
                     {item.hasDropdown && (
-                      <ChevronDown className="w-4 h-4 group-hover:rotate-180 transition-transform duration-300" />
+                      <ChevronDown className="h-4 w-4 transition-transform duration-300 group-hover:rotate-180" />
                     )}
                   </Link>
-                  <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-emerald-400 to-teal-400 group-hover:w-full transition-all duration-500 rounded-full"></div>
                 </div>
               )
             })}
@@ -74,7 +73,7 @@ export default function Navbar() {
           {/* Desktop Login Button and Language Selector */}
           <div className="hidden lg:flex items-center space-x-4 flex-shrink-0 min-w-fit">
             <Link href="/login" passHref>
-              <Button className="bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-white px-6 py-2 rounded-xl font-medium transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl">
+              <Button className="rounded-full bg-slate-900 px-6 py-2 font-medium text-white shadow-sm transition-all duration-300 hover:bg-emerald-700 hover:shadow-md">
               {t('login_register')}
             </Button>
             </Link>
@@ -84,7 +83,7 @@ export default function Navbar() {
               <DropdownMenuTrigger asChild>
                 <Button
                   variant="ghost"
-                  className="text-white hover:text-emerald-300 hover:bg-white/10 rounded-xl transition-all duration-300 flex items-center space-x-2 transform hover:scale-105"
+                  className="flex items-center space-x-2 rounded-full text-slate-700 transition-all duration-300 hover:bg-slate-100 hover:text-emerald-700"
                 >
                   <Globe className="w-4 h-4" />
                   <span className="hidden sm:inline">
@@ -111,12 +110,12 @@ export default function Navbar() {
                 sideOffset={8}
                 avoidCollisions={true}
                 collisionPadding={10}
-                className="w-48 max-h-[300px] overflow-y-auto dropdown-scroll bg-white rounded-xl shadow-2xl border border-gray-200"
+                className="w-48 max-h-[300px] overflow-y-auto dropdown-scroll rounded-2xl border border-slate-200 bg-white shadow-xl"
               >
                 {languages.map((lang) => (
                   <DropdownMenuItem
                     key={lang.code}
-                    className="px-4 py-2 text-gray-700 hover:bg-emerald-50 hover:text-emerald-600 transition-all duration-200 cursor-pointer"
+                    className="cursor-pointer px-4 py-2 text-slate-700 transition-all duration-200 hover:bg-emerald-50 hover:text-emerald-700"
                     onClick={() => setLanguage(lang.code)}
                   >
                     <span>{lang.name}</span>
@@ -134,7 +133,7 @@ export default function Navbar() {
                 <Button
                   variant="ghost"
                   size="sm"
-                  className="text-white hover:text-emerald-300 hover:bg-white/10 rounded-xl transition-all duration-300 flex items-center space-x-1 transform hover:scale-105"
+                  className="flex items-center space-x-1 rounded-full text-slate-700 transition-all duration-300 hover:bg-slate-100 hover:text-emerald-700"
                 >
                   <Globe className="w-4 h-4" />
                   <span className="text-xs">
@@ -161,12 +160,12 @@ export default function Navbar() {
                 sideOffset={8}
                 avoidCollisions={true}
                 collisionPadding={10}
-                className="w-40 max-h-[300px] overflow-y-auto dropdown-scroll bg-white rounded-xl shadow-2xl border border-gray-200"
+                className="w-40 max-h-[300px] overflow-y-auto dropdown-scroll rounded-2xl border border-slate-200 bg-white shadow-xl"
               >
                 {languages.map((lang) => (
                   <DropdownMenuItem
                     key={lang.code}
-                    className="px-3 py-2 text-gray-700 hover:bg-emerald-50 hover:text-emerald-600 transition-all duration-200 cursor-pointer text-sm"
+                    className="cursor-pointer px-3 py-2 text-sm text-slate-700 transition-all duration-200 hover:bg-emerald-50 hover:text-emerald-700"
                     onClick={() => setLanguage(lang.code)}
                   >
                     <span>{lang.name}</span>
@@ -179,7 +178,7 @@ export default function Navbar() {
             <Button
               variant="ghost"
               size="sm"
-              className="text-white hover:text-emerald-300 hover:bg-white/10 rounded-xl transition-all duration-300 transform hover:scale-105"
+              className="rounded-full text-slate-700 transition-all duration-300 hover:bg-slate-100 hover:text-emerald-700"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
             >
               {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -189,7 +188,7 @@ export default function Navbar() {
 
         {/* Mobile Navigation */}
         {isMenuOpen && (
-          <div className="lg:hidden bg-emerald-800/95 backdrop-blur-sm border-t border-emerald-700 rounded-b-xl animate-slideDown">
+          <div className="animate-slideDown border-t border-slate-200 bg-white/95 backdrop-blur-xl lg:hidden">
             <div className="px-4 py-4 space-y-2">
               {navItems.map((item) => {
                 const IconComponent = item.icon
@@ -197,7 +196,7 @@ export default function Navbar() {
                   <Link
                     key={item.name}
                     href={item.href}
-                    className="flex items-center space-x-3 text-white hover:text-emerald-300 hover:bg-white/10 transition-all duration-300 py-3 px-4 rounded-xl group transform hover:scale-105"
+                    className="group flex items-center space-x-3 rounded-2xl px-4 py-3 text-slate-700 transition-all duration-300 hover:bg-emerald-50 hover:text-emerald-700"
                     onClick={() => setIsMenuOpen(false)}
                   >
                     <IconComponent className="w-5 h-5 group-hover:scale-110 transition-transform duration-300" />
@@ -210,7 +209,7 @@ export default function Navbar() {
               <div className="pt-4 border-t border-emerald-700">
                 <Link href="/login" passHref>
                   <Button 
-                    className="w-full bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-white px-6 py-3 rounded-xl font-medium transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl"
+                    className="w-full rounded-full bg-slate-900 px-6 py-3 font-medium text-white transition-all duration-300 hover:bg-emerald-700"
                     onClick={() => setIsMenuOpen(false)}
                   >
                     {t('login_register')}

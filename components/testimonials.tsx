@@ -62,24 +62,20 @@ export default function Testimonials() {
   }
 
   return (
-    <section className="py-20 bg-gradient-to-br from-gray-50 via-white to-emerald-50 relative overflow-hidden">
-      {/* Background Elements */}
-      <div className="absolute inset-0">
-        <div className="absolute top-20 left-10 w-40 h-40 bg-gradient-to-r from-emerald-200/20 to-teal-200/20 rounded-full animate-float blur-3xl"></div>
-        <div className="absolute bottom-20 right-20 w-32 h-32 bg-gradient-to-r from-blue-200/20 to-purple-200/20 rounded-full animate-float-delayed blur-2xl"></div>
-      </div>
+    <section className="relative overflow-hidden border-y border-slate-200 bg-slate-50 py-20">
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,_rgba(16,185,129,0.05),_transparent_28%)]" />
 
-      <div className="container mx-auto px-4 relative z-10">
+      <div className="container mx-auto max-w-6xl px-4 relative z-10">
         <div className="text-center mb-16">
           <div className="inline-block mb-4">
-            <span className="bg-gradient-to-r from-emerald-500 to-teal-600 text-white px-4 py-2 rounded-full text-sm font-medium">
+            <span className="inline-flex items-center rounded-full border border-emerald-200 bg-white px-4 py-2 text-sm font-medium text-emerald-800 shadow-sm">
               {t('success_stories')}
             </span>
           </div>
-          <h2 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-emerald-800 to-teal-700 bg-clip-text text-transparent mb-6 animate-fadeInUp">
+          <h2 className="text-4xl md:text-5xl font-semibold text-slate-900 mb-6 animate-fadeInUp">
             {t('what_farmers_say')}
           </h2>
-          <p className="text-gray-600 max-w-3xl mx-auto text-lg leading-relaxed animate-fadeInUp animation-delay-200">
+          <p className="text-slate-600 max-w-3xl mx-auto text-lg leading-relaxed animate-fadeInUp animation-delay-200">
             {t('testimonials_description')}
           </p>
         </div>
@@ -87,22 +83,22 @@ export default function Testimonials() {
         <div className="max-w-4xl mx-auto">
           <div className="relative">
             {/* Main Testimonial */}
-            <div className="bg-white rounded-3xl p-8 md:p-12 shadow-2xl border border-gray-100 relative overflow-hidden animate-fadeInUp">
+            <div className="relative overflow-hidden rounded-[2rem] border border-slate-200 bg-white p-8 md:p-12 shadow-[0_16px_40px_rgba(15,23,42,0.06)] animate-fadeInUp">
               {/* Quote Icon */}
               <div className="absolute top-6 right-6 opacity-10">
-                <Quote className="w-16 h-16 text-emerald-600" />
+                <Quote className="w-16 h-16 text-slate-400" />
               </div>
 
               <div className="relative z-10">
                 {/* Stars */}
-                <div className="flex items-center space-x-1 mb-6">
+                <div className="mb-6 flex items-center space-x-1">
                   {[...Array(testimonials[currentTestimonial].rating)].map((_, i) => (
-                    <Star key={i} className="w-5 h-5 text-yellow-400 fill-current" />
+                    <Star key={i} className="w-5 h-5 fill-current text-amber-400" />
                   ))}
                 </div>
 
                 {/* Testimonial Text */}
-                <blockquote className="text-xl md:text-2xl text-gray-800 leading-relaxed mb-8 font-medium">
+                <blockquote className="mb-8 text-xl md:text-2xl font-medium leading-relaxed text-slate-800">
                   {testimonials[currentTestimonial].text}
                 </blockquote>
 
@@ -113,18 +109,18 @@ export default function Testimonials() {
                     alt={testimonials[currentTestimonial].name}
                     width={80}
                     height={80}
-                    className="rounded-full border-4 border-emerald-100"
+                    className="rounded-full border-4 border-slate-100"
                   />
                   <div>
-                    <div className="font-bold text-lg text-gray-800">{testimonials[currentTestimonial].name}</div>
-                    <div className="text-emerald-600 font-medium">{testimonials[currentTestimonial].role}</div>
-                    <div className="text-gray-500 text-sm">📍 {testimonials[currentTestimonial].location}</div>
+                    <div className="text-lg font-semibold text-slate-900">{testimonials[currentTestimonial].name}</div>
+                    <div className="font-medium text-emerald-700">{testimonials[currentTestimonial].role}</div>
+                    <div className="text-sm text-slate-500">{testimonials[currentTestimonial].location}</div>
                   </div>
                 </div>
               </div>
 
               {/* Background Gradient */}
-              <div className="absolute inset-0 bg-gradient-to-br from-emerald-50/50 to-teal-50/50 opacity-50"></div>
+              <div className="absolute inset-0 bg-gradient-to-br from-white/50 to-slate-50/80 opacity-70"></div>
             </div>
 
             {/* Navigation */}
@@ -133,9 +129,9 @@ export default function Testimonials() {
                 variant="outline"
                 size="icon"
                 onClick={prevTestimonial}
-                className="rounded-full border-2 border-emerald-200 hover:border-emerald-400 hover:bg-emerald-50 transition-all duration-300 transform hover:scale-110"
+                className="rounded-full border border-slate-200 bg-white transition-all duration-300 hover:border-emerald-300 hover:bg-emerald-50"
               >
-                <ChevronLeft className="w-5 h-5 text-emerald-600" />
+                <ChevronLeft className="w-5 h-5 text-slate-700" />
               </Button>
 
               {/* Dots */}
@@ -145,7 +141,7 @@ export default function Testimonials() {
                     key={index}
                     onClick={() => setCurrentTestimonial(index)}
                     className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                      index === currentTestimonial ? "bg-emerald-500 scale-125" : "bg-gray-300 hover:bg-emerald-300"
+                      index === currentTestimonial ? "bg-emerald-600 scale-125" : "bg-slate-300 hover:bg-emerald-300"
                     }`}
                   />
                 ))}
@@ -155,9 +151,9 @@ export default function Testimonials() {
                 variant="outline"
                 size="icon"
                 onClick={nextTestimonial}
-                className="rounded-full border-2 border-emerald-200 hover:border-emerald-400 hover:bg-emerald-50 transition-all duration-300 transform hover:scale-110"
+                className="rounded-full border border-slate-200 bg-white transition-all duration-300 hover:border-emerald-300 hover:bg-emerald-50"
               >
-                <ChevronRight className="w-5 h-5 text-emerald-600" />
+                <ChevronRight className="w-5 h-5 text-slate-700" />
               </Button>
             </div>
           </div>
@@ -165,28 +161,28 @@ export default function Testimonials() {
           {/* Stats */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mt-16">
             <div className="text-center group">
-              <div className="text-3xl font-bold text-emerald-600 group-hover:scale-110 transition-transform duration-300">
+              <div className="text-3xl font-semibold text-emerald-700 group-hover:scale-110 transition-transform duration-300">
                 4.9/5
               </div>
-              <div className="text-gray-600 font-medium">{t('average_rating')}</div>
+              <div className="font-medium text-slate-600">{t('average_rating')}</div>
             </div>
             <div className="text-center group">
-              <div className="text-3xl font-bold text-emerald-600 group-hover:scale-110 transition-transform duration-300">
+              <div className="text-3xl font-semibold text-emerald-700 group-hover:scale-110 transition-transform duration-300">
                 50K+
               </div>
-              <div className="text-gray-600 font-medium">{t('happy_farmers_count')}</div>
+              <div className="font-medium text-slate-600">{t('happy_farmers_count')}</div>
             </div>
             <div className="text-center group">
-              <div className="text-3xl font-bold text-emerald-600 group-hover:scale-110 transition-transform duration-300">
+              <div className="text-3xl font-semibold text-emerald-700 group-hover:scale-110 transition-transform duration-300">
                 98%
               </div>
-              <div className="text-gray-600 font-medium">{t('satisfaction_rate')}</div>
+              <div className="font-medium text-slate-600">{t('satisfaction_rate')}</div>
             </div>
             <div className="text-center group">
-              <div className="text-3xl font-bold text-emerald-600 group-hover:scale-110 transition-transform duration-300">
+              <div className="text-3xl font-semibold text-emerald-700 group-hover:scale-110 transition-transform duration-300">
                 24/7
               </div>
-              <div className="text-gray-600 font-medium">{t('support_available')}</div>
+              <div className="font-medium text-slate-600">{t('support_available')}</div>
             </div>
           </div>
         </div>

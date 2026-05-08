@@ -9,22 +9,18 @@ import { useLanguage } from '@/contexts/LanguageContext'
 export default function ContactUs() {
   const { t } = useLanguage()
   return (
-    <section className="py-20 bg-gradient-to-br from-emerald-800 via-teal-700 to-emerald-800 text-white relative overflow-hidden">
-      {/* Animated background elements */}
-      <div className="absolute inset-0">
-        <div className="absolute top-10 right-10 w-32 h-32 bg-emerald-400/10 rounded-full animate-float"></div>
-        <div className="absolute bottom-20 left-20 w-24 h-24 bg-teal-400/10 rounded-full animate-float-delayed"></div>
-      </div>
+    <section className="relative overflow-hidden border-t border-slate-200 bg-slate-50 py-20 text-slate-900">
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,_rgba(16,185,129,0.05),_transparent_28%)]" />
 
-      <div className="container mx-auto px-4 relative z-10">
+      <div className="container mx-auto max-w-6xl px-4 relative z-10">
         <div className="text-center mb-16">
           <div className="inline-block mb-4">
-            <span className="bg-emerald-500/20 text-emerald-300 px-4 py-2 rounded-full text-sm font-medium border border-emerald-400/30">
+            <span className="inline-flex items-center rounded-full border border-emerald-200 bg-white px-4 py-2 text-sm font-medium text-emerald-800 shadow-sm">
               {t('get_in_touch')}
             </span>
           </div>
-          <h2 className="text-4xl md:text-5xl font-bold mb-6 animate-fadeInUp">{t('contact_us')}</h2>
-          <p className="text-emerald-100 max-w-3xl mx-auto text-lg leading-relaxed animate-fadeInUp animation-delay-200">
+          <h2 className="text-4xl md:text-5xl font-semibold mb-6 animate-fadeInUp text-slate-900">{t('contact_us')}</h2>
+          <p className="text-slate-600 max-w-3xl mx-auto text-lg leading-relaxed animate-fadeInUp animation-delay-200">
             {t('contact_description')}
           </p>
         </div>
@@ -33,48 +29,48 @@ export default function ContactUs() {
           {/* Contact Information */}
           <div className="space-y-8 animate-fadeInLeft">
             <div>
-              <h3 className="text-2xl font-bold mb-8 text-emerald-300">{t('get_in_touch')}</h3>
+              <h3 className="text-2xl font-semibold mb-8 text-slate-900">{t('get_in_touch')}</h3>
               <div className="space-y-6">
                 <div className="flex items-start space-x-4 group">
-                  <div className="bg-emerald-500/20 p-4 rounded-2xl group-hover:bg-emerald-500/30 transition-all duration-300 transform group-hover:scale-110 border border-emerald-400/30">
-                    <Phone className="w-6 h-6 text-emerald-400" />
+                  <div className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm transition-all duration-300 group-hover:scale-105 group-hover:border-emerald-200">
+                    <Phone className="w-6 h-6 text-emerald-700" />
                   </div>
                   <div>
-                    <p className="font-semibold text-lg text-emerald-300">{t('helpdesk_24x7')}</p>
-                    <p className="text-emerald-100">1800-3010-1000 {t('toll_free')}</p>
-                    <p className="text-emerald-200 text-sm">{t('available_round_clock')}</p>
+                    <p className="font-semibold text-lg text-slate-900">{t('helpdesk_24x7')}</p>
+                    <p className="text-slate-600">1800-3010-1000 {t('toll_free')}</p>
+                    <p className="text-slate-500 text-sm">{t('available_round_clock')}</p>
                   </div>
                 </div>
 
                 <div className="flex items-start space-x-4 group">
-                  <div className="bg-emerald-500/20 p-4 rounded-2xl group-hover:bg-emerald-500/30 transition-all duration-300 transform group-hover:scale-110 border border-emerald-400/30">
-                    <Mail className="w-6 h-6 text-emerald-400" />
+                  <div className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm transition-all duration-300 group-hover:scale-105 group-hover:border-emerald-200">
+                    <Mail className="w-6 h-6 text-emerald-700" />
                   </div>
                   <div>
-                    <p className="font-semibold text-lg text-emerald-300">Email Support</p>
-                    <p className="text-emerald-100">help@gofarmlyconnect.com</p>
-                    <p className="text-emerald-200 text-sm">Response within 2 hours</p>
+                    <p className="font-semibold text-lg text-slate-900">Email Support</p>
+                    <p className="text-slate-600">help@gofarmlyconnect.com</p>
+                    <p className="text-slate-500 text-sm">Response within 2 hours</p>
                   </div>
                 </div>
 
                 <div className="flex items-start space-x-4 group">
-                  <div className="bg-emerald-500/20 p-4 rounded-2xl group-hover:bg-emerald-500/30 transition-all duration-300 transform group-hover:scale-110 border border-emerald-400/30">
-                    <MessageCircle className="w-6 h-6 text-emerald-400" />
+                  <div className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm transition-all duration-300 group-hover:scale-105 group-hover:border-emerald-200">
+                    <MessageCircle className="w-6 h-6 text-emerald-700" />
                   </div>
                   <div>
-                    <p className="font-semibold text-lg text-emerald-300">WhatsApp Support</p>
-                    <p className="text-emerald-100">+91 98765 43210</p>
-                    <p className="text-emerald-200 text-sm">Quick assistance via chat</p>
+                    <p className="font-semibold text-lg text-slate-900">WhatsApp Support</p>
+                    <p className="text-slate-600">+91 98765 43210</p>
+                    <p className="text-slate-500 text-sm">Quick assistance via chat</p>
                   </div>
                 </div>
 
                 <div className="flex items-start space-x-4 group">
-                  <div className="bg-emerald-500/20 p-4 rounded-2xl group-hover:bg-emerald-500/30 transition-all duration-300 transform group-hover:scale-110 border border-emerald-400/30">
-                    <MapPin className="w-6 h-6 text-emerald-400" />
+                  <div className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm transition-all duration-300 group-hover:scale-105 group-hover:border-emerald-200">
+                    <MapPin className="w-6 h-6 text-emerald-700" />
                   </div>
                   <div>
-                    <p className="font-semibold text-lg text-emerald-300">Head Office</p>
-                    <p className="text-emerald-100">
+                    <p className="font-semibold text-lg text-slate-900">Head Office</p>
+                    <p className="text-slate-600">
                       GoFarmlyConnect Technologies Pvt Ltd
                       <br />
                       Agricultural Innovation Hub
@@ -85,13 +81,13 @@ export default function ContactUs() {
                 </div>
 
                 <div className="flex items-start space-x-4 group">
-                  <div className="bg-emerald-500/20 p-4 rounded-2xl group-hover:bg-emerald-500/30 transition-all duration-300 transform group-hover:scale-110 border border-emerald-400/30">
-                    <Clock className="w-6 h-6 text-emerald-400" />
+                  <div className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm transition-all duration-300 group-hover:scale-105 group-hover:border-emerald-200">
+                    <Clock className="w-6 h-6 text-emerald-700" />
                   </div>
                   <div>
-                    <p className="font-semibold text-lg text-emerald-300">Support Hours</p>
-                    <p className="text-emerald-100">24/7 Available</p>
-                    <p className="text-emerald-200 text-sm">Always here when you need us</p>
+                    <p className="font-semibold text-lg text-slate-900">Support Hours</p>
+                    <p className="text-slate-600">24/7 Available</p>
+                    <p className="text-slate-500 text-sm">Always here when you need us</p>
                   </div>
                 </div>
               </div>
@@ -99,62 +95,62 @@ export default function ContactUs() {
           </div>
 
           {/* Contact Form */}
-          <div className="bg-white/10 rounded-3xl p-8 backdrop-blur-sm border border-white/20 shadow-2xl animate-fadeInRight">
-            <h3 className="text-2xl font-bold mb-8 text-emerald-300">Send us a Message</h3>
+          <div className="rounded-[2rem] border border-slate-200 bg-white p-8 shadow-[0_16px_40px_rgba(15,23,42,0.06)] animate-fadeInRight">
+            <h3 className="mb-8 text-2xl font-semibold text-slate-900">Send us a Message</h3>
             <form className="space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
-                  <label className="block text-emerald-300 text-sm font-medium mb-2">First Name</label>
+                  <label className="mb-2 block text-sm font-medium text-slate-700">First Name</label>
                   <Input
                     placeholder="Enter your first name"
-                    className="bg-white/20 border-white/30 text-white placeholder:text-white/60 focus:border-emerald-400 transition-all duration-300 hover:shadow-lg rounded-xl"
+                    className="rounded-xl border-slate-300 bg-white text-slate-900 placeholder:text-slate-400 focus:border-emerald-400"
                   />
                 </div>
                 <div>
-                  <label className="block text-emerald-300 text-sm font-medium mb-2">Last Name</label>
+                  <label className="mb-2 block text-sm font-medium text-slate-700">Last Name</label>
                   <Input
                     placeholder="Enter your last name"
-                    className="bg-white/20 border-white/30 text-white placeholder:text-white/60 focus:border-emerald-400 transition-all duration-300 hover:shadow-lg rounded-xl"
+                    className="rounded-xl border-slate-300 bg-white text-slate-900 placeholder:text-slate-400 focus:border-emerald-400"
                   />
                 </div>
               </div>
 
               <div>
-                <label className="block text-emerald-300 text-sm font-medium mb-2">Email Address</label>
+                <label className="mb-2 block text-sm font-medium text-slate-700">Email Address</label>
                 <Input
                   type="email"
                   placeholder="Enter your email address"
-                  className="bg-white/20 border-white/30 text-white placeholder:text-white/60 focus:border-emerald-400 transition-all duration-300 hover:shadow-lg rounded-xl"
+                  className="rounded-xl border-slate-300 bg-white text-slate-900 placeholder:text-slate-400 focus:border-emerald-400"
                 />
               </div>
 
               <div>
-                <label className="block text-emerald-300 text-sm font-medium mb-2">Phone Number</label>
+                <label className="mb-2 block text-sm font-medium text-slate-700">Phone Number</label>
                 <Input
                   type="tel"
                   placeholder="Enter your phone number"
-                  className="bg-white/20 border-white/30 text-white placeholder:text-white/60 focus:border-emerald-400 transition-all duration-300 hover:shadow-lg rounded-xl"
+                  className="rounded-xl border-slate-300 bg-white text-slate-900 placeholder:text-slate-400 focus:border-emerald-400"
                 />
               </div>
 
               <div>
-                <label className="block text-emerald-300 text-sm font-medium mb-2">Subject</label>
+                <label className="mb-2 block text-sm font-medium text-slate-700">Subject</label>
                 <Input
                   placeholder="What can we help you with?"
-                  className="bg-white/20 border-white/30 text-white placeholder:text-white/60 focus:border-emerald-400 transition-all duration-300 hover:shadow-lg rounded-xl"
+                  className="rounded-xl border-slate-300 bg-white text-slate-900 placeholder:text-slate-400 focus:border-emerald-400"
                 />
               </div>
 
               <div>
-                <label className="block text-emerald-300 text-sm font-medium mb-2">Message</label>
+                <label className="mb-2 block text-sm font-medium text-slate-700">Message</label>
                 <Textarea
                   placeholder="Tell us more about your requirements..."
                   rows={5}
-                  className="bg-white/20 border-white/30 text-white placeholder:text-white/60 focus:border-emerald-400 transition-all duration-300 hover:shadow-lg resize-none rounded-xl"
+                  className="resize-none rounded-xl border-slate-300 bg-white text-slate-900 placeholder:text-slate-400 focus:border-emerald-400"
                 />
               </div>
 
-              <Button className="w-full bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-white py-4 rounded-xl font-semibold text-lg transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl">
+              <Button className="w-full rounded-full bg-slate-900 py-4 text-lg font-semibold text-white transition-all duration-300 hover:bg-emerald-700">
                 Send Message
               </Button>
             </form>

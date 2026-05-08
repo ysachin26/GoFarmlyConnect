@@ -1,83 +1,86 @@
 "use client"
 
 import { Button } from "@/components/ui/button"
-import { ArrowRight, Play, TrendingUp } from "lucide-react"
+import { ArrowRight, Play, TrendingUp, Sparkles, ShieldCheck, FileText } from "lucide-react"
 import Image from "next/image"
 import { useLanguage } from '@/contexts/LanguageContext'
 
 export default function HeroContentSection() {
   const { t } = useLanguage()
   return (
-    <section className="py-20 bg-gradient-to-br from-gray-50 via-white to-emerald-50 relative overflow-hidden">
-      {/* Animated Elements */}
-      <div className="absolute inset-0">
-        <div className="absolute top-10 right-10 w-32 h-32 bg-gradient-to-r from-emerald-100/20 to-teal-100/20 rounded-full animate-float blur-xl"></div>
-        <div className="absolute bottom-20 left-20 w-24 h-24 bg-gradient-to-r from-teal-100/20 to-emerald-100/20 rounded-full animate-float-delayed blur-xl"></div>
-      </div>
+    <section className="relative overflow-hidden border-y border-slate-200 bg-white/80 py-20">
+      <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(248,250,248,0.9),rgba(255,255,255,1))]" />
 
-      {/* Content */}
-      <div className="relative container mx-auto px-4 py-10 flex items-center">
-        <div className="grid lg:grid-cols-2 gap-12 items-center w-full">
-          <div className="space-y-8 animate-fadeInLeft">
-            <div className="space-y-6">
-              <div className="inline-flex items-center space-x-2 bg-emerald-500/20 backdrop-blur-sm px-4 py-2 rounded-full border border-emerald-400/30">
-                <TrendingUp className="w-4 h-4 text-emerald-600" />
-                <span className="text-emerald-700 text-sm font-medium">{t('revolutionizing_agriculture')}</span>
-              </div>
-
-              <h1 className="text-3xl md:text-5xl lg:text-7xl font-bold text-gray-800 leading-tight">
-                {t('simplify_your')}{" "}
-                <span className="bg-gradient-to-r from-emerald-600 to-teal-700 bg-clip-text text-transparent">
-                  {t('import_export')}
-                </span>
-              </h1>
-
-              <p className="text-lg md:text-xl text-gray-600 leading-relaxed max-w-2xl">
-                {t('hero_content_description')}
-              </p>
-            </div>
-
-            <div className="flex flex-col sm:flex-row gap-4">
-              <Button className="bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-white px-8 py-4 rounded-xl font-semibold text-lg transform hover:scale-105 transition-all duration-300 shadow-xl hover:shadow-2xl group">
-                {t('get_started_free')}
-                <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform duration-300" />
-              </Button>
-
-              <Button
-                variant="outline"
-                className="bg-gradient-to-r from-black/10 to-white/30 hover:from-black/20 hover:to-white/40 border-2 border-emerald-400 text-emerald-600 hover:text-emerald-900 px-8 py-4 rounded-xl font-semibold text-lg transform hover:scale-105 transition-all duration-300 group backdrop-blur-sm"
-              >
-                <Play className="w-5 h-5 mr-2 group-hover:scale-110 transition-transform duration-300" />
-                {t('watch_demo')}
-              </Button>
-            </div>
-
-            <div className="flex flex-wrap items-center justify-center sm:justify-start gap-4 sm:gap-8 pt-4">
-              <div className="text-center">
-                <div className="text-2xl md:text-3xl font-bold text-emerald-600">50K+</div>
-                <div className="text-gray-600 text-xs md:text-sm">{t('active_farmers')}</div>
-              </div>
-              <div className="text-center">
-                <div className="text-2xl md:text-3xl font-bold text-emerald-600">₹500Cr+</div>
-                <div className="text-gray-600 text-xs md:text-sm">{t('trade_volume')}</div>
-              </div>
-              <div className="text-center">
-                <div className="text-2xl md:text-3xl font-bold text-emerald-600">99.9%</div>
-                <div className="text-gray-600 text-xs md:text-sm">{t('uptime')}</div>
-              </div>
-            </div>
+      <div className="relative mx-auto grid max-w-7xl gap-10 px-6 lg:grid-cols-[0.95fr_1.05fr] lg:items-center">
+        <div className="space-y-7 animate-fadeInLeft">
+          <div className="inline-flex items-center gap-2 rounded-full border border-emerald-200 bg-emerald-50 px-4 py-2 text-sm font-medium text-emerald-800">
+            <TrendingUp className="h-4 w-4" />
+            <span>{t('revolutionizing_agriculture')}</span>
           </div>
 
-          <div className="relative animate-fadeInRight">
-            <div className="relative">
-              <Image
-                src="/modern-farming.png"
-                alt="Digital farming dashboard"
-                width={600}
-                height={500}
-                className="rounded-2xl shadow-2xl transform hover:scale-105 transition-transform duration-500"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-gray-50/20 to-transparent rounded-2xl"></div>
+          <div className="space-y-5">
+            <h2 className="max-w-2xl text-3xl font-semibold leading-tight tracking-tight text-slate-900 sm:text-4xl lg:text-5xl">
+              {t('simplify_your')} <span className="text-emerald-700">{t('import_export')}</span>
+            </h2>
+            <p className="max-w-2xl text-base leading-8 text-slate-600 sm:text-lg">
+              {t('hero_content_description')}
+            </p>
+          </div>
+
+          <div className="flex flex-col gap-4 sm:flex-row">
+            <Button className="rounded-full bg-emerald-600 px-8 py-6 text-base font-semibold text-white shadow-sm transition-all duration-300 hover:bg-emerald-700">
+              {t('get_started_free')}
+              <ArrowRight className="ml-2 h-5 w-5" />
+            </Button>
+
+            <Button
+              variant="outline"
+              className="rounded-full border-slate-300 bg-white px-8 py-6 text-base font-semibold text-slate-700 transition-all duration-300 hover:border-emerald-300 hover:text-emerald-800"
+            >
+              <Play className="mr-2 h-5 w-5" />
+              {t('watch_demo')}
+            </Button>
+          </div>
+
+          <div className="grid gap-3 pt-2 sm:grid-cols-3">
+            <div className="rounded-2xl border border-slate-200 bg-slate-50 p-4">
+              <ShieldCheck className="h-5 w-5 text-emerald-700" />
+              <p className="mt-3 text-sm font-medium text-slate-900">Secure filing flow</p>
+            </div>
+            <div className="rounded-2xl border border-slate-200 bg-slate-50 p-4">
+              <FileText className="h-5 w-5 text-emerald-700" />
+              <p className="mt-3 text-sm font-medium text-slate-900">Document tracking</p>
+            </div>
+            <div className="rounded-2xl border border-slate-200 bg-slate-50 p-4">
+              <Sparkles className="h-5 w-5 text-emerald-700" />
+              <p className="mt-3 text-sm font-medium text-slate-900">Guided onboarding</p>
+            </div>
+          </div>
+        </div>
+
+        <div className="relative animate-fadeInRight">
+          <div className="overflow-hidden rounded-[2rem] border border-slate-200 bg-white shadow-[0_24px_80px_rgba(15,23,42,0.12)]">
+            <Image
+              src="/modern-farming.png"
+              alt="Digital export management workspace"
+              width={960}
+              height={760}
+              className="h-auto w-full object-cover"
+            />
+          </div>
+
+          <div className="-mt-8 grid gap-3 px-5 sm:grid-cols-3">
+            <div className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
+              <p className="text-xs font-medium uppercase tracking-[0.2em] text-slate-500">Profiles</p>
+              <p className="mt-2 text-lg font-semibold text-slate-900">Fast onboarding</p>
+            </div>
+            <div className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
+              <p className="text-xs font-medium uppercase tracking-[0.2em] text-slate-500">Files</p>
+              <p className="mt-2 text-lg font-semibold text-slate-900">Centralized docs</p>
+            </div>
+            <div className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
+              <p className="text-xs font-medium uppercase tracking-[0.2em] text-slate-500">Help</p>
+              <p className="mt-2 text-lg font-semibold text-slate-900">Live support</p>
             </div>
           </div>
         </div>
