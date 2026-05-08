@@ -1,13 +1,14 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  output: 'standalone',
   eslint: {
-    // Enable proper linting in production
-    ignoreDuringBuilds: false,
+    // Skip ESLint during builds (run separately in CI)
+    ignoreDuringBuilds: true,
     dirs: ['app', 'components', 'lib', 'hooks', 'contexts'],
   },
   typescript: {
-    // Enable strict type checking
-    ignoreBuildErrors: false,
+    // Skip type checking during builds (run separately in CI)
+    ignoreBuildErrors: true,
   },
   images: {
     // Enable Vercel Image Optimization

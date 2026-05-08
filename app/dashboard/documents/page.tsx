@@ -3,6 +3,9 @@ import { FileText } from "lucide-react"
 import Link from "next/link"
 import DocumentCard from "./document-card"
 
+// Prevent static generation at build time — this page requires a DB connection
+export const dynamic = 'force-dynamic'
+
 export default async function Documents() {
   const data = await getDashboardData()
   const user = data.user

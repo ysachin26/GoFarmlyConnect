@@ -12,6 +12,7 @@ import {
   Settings,
   LogOut,
   X,
+  Rocket,
 } from "lucide-react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
@@ -68,6 +69,11 @@ export function AppSidebar() {
       title: t('support'),
       url: "/dashboard/support",
       icon: HelpCircle,
+    },
+    {
+      title: "Deployments",
+      url: "/dashboard/deployments",
+      icon: Rocket,
     },
   ]
 
