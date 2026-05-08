@@ -55,4 +55,3 @@ LICENSE
 coverage
 .nyc_output
 __tests__
-test-page.tsx
